@@ -20,7 +20,8 @@
     "react-transition-group": "^4.4.5",
     "tailwind-scrollbar": "^3.0.5",
     "web-vitals": "^2.1.4",
-    "yarn": "^1.22.19"
+    "yarn": "^1.22.19",
+    "yup": "^1.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,5 +49,17 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.3.3"
-  }
+  },
+  "description": "Personal website of Julien Guinot : www.julienguinot.com",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pliploop/neo_portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pliploop/neo_portfolio/issues"
+  },
+  "homepage": "https://github.com/Pliploop/neo_portfolio#readme"
 }
