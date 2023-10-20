@@ -14,7 +14,6 @@ import { BsGrid3X3 } from "react-icons/bs";
 import { CiWavePulse1 } from "react-icons/ci";
 import { BiLogoAws } from "react-icons/bi";
 
-import anime from "animejs";
 
 const educationData = [
   {

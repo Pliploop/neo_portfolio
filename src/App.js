@@ -10,7 +10,7 @@ import MusicSection from './components/Music';
 import Blog from './components/Blog';
 import ScrollToTop from './components/subcomponents/scrolltotop';
 
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 
 const pageVariants = {
   initial: {

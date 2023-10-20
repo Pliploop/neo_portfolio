@@ -1,36 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import AllHeader from "./subcomponents/header";
 import ContactFooter from "./subcomponents/contactfooter";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
-import { SiPython, SiPytorch } from "react-icons/si";
-import { GiPencil, GiNotebook } from "react-icons/gi";
 import { default as EducationExperience } from "./About/EducationExperience";
 
-import anime from "animejs";
-import { Notebook, Pytorch, Research } from "./icons";
 import { default as Infinitescroll } from "./About/infinitescroll";
 
 import image from "../content/images/propic.jpg";
 
 import { useNavigate } from "react-router-dom";
 import ContactForm from "./About/ContactForm";
-
-const KEY_CODES = {
-  ARROW_LEFT: "ArrowLeft",
-  ARROW_LEFT_IE11: "Left",
-  ARROW_RIGHT: "ArrowRight",
-  ARROW_RIGHT_IE11: "Right",
-  ARROW_UP: "ArrowUp",
-  ARROW_UP_IE11: "Up",
-  ARROW_DOWN: "ArrowDown",
-  ARROW_DOWN_IE11: "Down",
-  ESCAPE: "Escape",
-  ESCAPE_IE11: "Esc",
-  TAB: "Tab",
-  SPACE: " ",
-  SPACE_IE11: "Spacebar",
-  ENTER: "Enter",
-};
 
 const scrollto = (id) => {
   console.log("scrolling to " + id);
@@ -40,22 +19,10 @@ const scrollto = (id) => {
 
 const About = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const playref = React.useRef(null);
-  const nav = useNavigate();
+  
 
   const animate = () => {
-    var timeline = anime
-      .timeline({
-        autoplay: true,
-        complete: () => null,
-      })
-      .add({
-        targets: "#all",
-        delay: 0,
-        duration: 600,
-        easing: "easeInOutQuart",
-        opacity: [0, 1],
-      });
+    
   };
 
   useEffect(() => {
@@ -108,7 +75,6 @@ const Separator = () => {
 };
 
 const AboutSection = () => {
-  const nav = useNavigate();
   return (
     <div className="lg:px-14 lg:mt-2 w-full h-auto flex flex-col dark:text-rose-50 justify-start">
       <div className="flex flex-row w-full justify-between space-x-10">

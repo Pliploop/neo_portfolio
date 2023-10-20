@@ -4,7 +4,6 @@ import {
   Timelinedot2,
   FillerBar,
   Academiatag,
-  Tocitem,
   ShowMore,
   DeployGradient,
 } from "./UnitComponents";

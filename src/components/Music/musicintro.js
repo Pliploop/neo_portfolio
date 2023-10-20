@@ -1,7 +1,3 @@
-import { svg1, svg2, svg3 } from "../svg/svg";
-import disc from "../../content/images/Disc.png";
-import guitar from "../../content/images/Guitar.png";
-import pc from "../../content/images/PC.png";
 
 const MusicIntro = () => {
   return (

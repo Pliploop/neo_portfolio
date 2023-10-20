@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import AllHeader from "./subcomponents/header";
-import ContactFooter from "./subcomponents/contactfooter";
-
 import { GrDown } from "react-icons/gr";
-import { SiSpotify, SiInstagram } from "react-icons/si";
+import { SiSpotify } from "react-icons/si";
 import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
 import { BiLogoInstagramAlt } from "react-icons/bi";
 import ReactPlayer from "react-player";
@@ -11,22 +9,10 @@ import { MusicIntro } from "../components/Music/musicintro";
 import { MusicArranged } from "../components/Music/musicarranged";
 import { MusicMixMaster } from "../components/Music/musicmixmaster";
 import image from "../content/images/logo_countour.png";
-import anime from "animejs";
 
 const MusicSection = () => {
   const animate = () => {
-    var timeline = anime
-      .timeline({
-        autoplay: true,
-        complete: () => null,
-      })
-      .add({
-        targets: "#all",
-        delay: 0,
-        duration: 600,
-        easing: "easeInOutQuart",
-        opacity: [0, 1],
-      });
+    
   };
 
   const [isMounted, setIsMounted] = useState(false);
@@ -237,6 +223,8 @@ const MusicFeatured = () => {
 
   const geturl = () => {
     switch (activeTabFonkey) {
+      default :
+        return ""
       case 0:
         return "https://youtu.be/bPJmExJGmmU?si=fmyTaD-uRQMCqCqc";
       case 1:

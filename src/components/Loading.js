@@ -295,8 +295,6 @@ const Loader = () => {
     setlike();
   }
 
-  const [replieschanged, setReplieschanged] = useState(false);
-  const [replyswitch, setRepliesSwitch] = useState(false);
 
   useEffect(() => {
     replies();

@@ -1,10 +1,9 @@
-import { GrLinkNext } from "react-icons/gr";
+
 import { IoIosMusicalNotes, IoIosMusicalNote } from "react-icons/io";
 import { MdGraphicEq } from "react-icons/md";
 import { FaPenNib } from "react-icons/fa";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import Commuz_Titre from "../svg/Commuz_Titre.svg";
-import { commuzsvg2 } from "../svg/svg";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import { useSwipeable } from "react-swipeable";
@@ -23,6 +22,7 @@ const MusicMixMaster = () => {
             </span>
             <img
               src={Commuz_Titre}
+              alt="commuz"
               className="scale-90 hover:scale-95 active:scale-90 cursor-pointer transition-all duration-200 lg:w-1/2 dark:invert"
               onClick={() => window.open("https://commuz.fr", "_blank")}
             ></img>

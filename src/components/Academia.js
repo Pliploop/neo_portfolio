@@ -17,7 +17,6 @@ import {
 } from "../components/academiacomponents/assignments";
 
 import AllHeader from "./subcomponents/header";
-import anime from "animejs";
 
 import { HeroSection } from "./academiacomponents/academiaHero";
 
@@ -117,80 +116,67 @@ const AcademiaSection = () => {
 
   const [isMounted, setIsMounted] = useState(false);
 
-  const animate = () => {
-    var timeline = anime
-      .timeline({
-        autoplay: true,
-        complete: () => null,
-      })
-      .add({
-        targets: "#all",
-        delay: 0,
-        duration: 600,
-        easing: "easeInOutQuart",
-        opacity: [0, 1],
-      });
-  };
+  const animate = () => {};
 
   return (
     <div className="relative  dark:text-blue-100 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-none bg-blur-xl lg:bg-[url('AcademiaGradient.png')] bg-opacity-75 lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
-      
       <AllHeader
         pagename={"Academia"}
         hoveraccent={"emerald-200"}
         clickaccent={"sky-300"}
       />
-     
+
       <div id="all">
-      <div className="absolute top-0 left-0 bg-[url('AcademiaGradient.png')] bg-contain blur-3xl w-full h-full lg:hidden"></div>
-      <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-50 opacity-0 transition-opacity duration-200 bg-black show" />
+        <div className="absolute top-0 left-0 bg-[url('AcademiaGradient.png')] bg-contain blur-3xl w-full h-full lg:hidden"></div>
+        <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-50 opacity-0 transition-opacity duration-200 bg-black show" />
         <div className="relative">
-        <AcademiaHeader text={"My Research"} />
-        <HeroSection />
-        <AcademiaHeader text={"Writing samples"} />
+          <AcademiaHeader text={"My Research"} />
+          <HeroSection />
+          <AcademiaHeader text={"Writing samples"} />
 
-        <AcademiaNav />
-        <div className="lg:px-10 w-full mb-0 lg:text-sm lg:text-base text-sm text-black dark:text-violet-200 font-inter">
-          <div className="w-full mb-3 text-justify">
-            Here you'll find some of the papers I wrote in an academic context.
-            Though I do not have any published articles at the moment, I used my
-            writing skills many times over the course of my studies. My most
-            recent of course being my masters' thesis, or final dissertation.
-          </div>
+          <AcademiaNav />
+          <div className="lg:px-10 w-full mb-0 lg:text-sm lg:text-base text-sm text-black dark:text-violet-200 font-inter">
+            <div className="w-full mb-3 text-justify">
+              Here you'll find some of the papers I wrote in an academic
+              context. Though I do not have any published articles at the
+              moment, I used my writing skills many times over the course of my
+              studies. My most recent of course being my masters' thesis, or
+              final dissertation.
+            </div>
 
-          <div className="w-full  mb-20 text-justify">
-            Some of the other papers included in this section comprise{" "}
-            <b>
-              Research internships and project reports, assignments and
-              practicals for classes in both France and Australia.
-            </b>
-            Unfortunately, some of the papers, specifically both of my research
-            internship reports on{" "}
-            <b>
-              "Active control of the first vibrational modes of a cello" and
-              "Impedance-based acoustic diode effect"{" "}
-            </b>
-            are in French. I've included translated abstracts for your
-            convenience but have yet to translate the 120 pages. I hope to get
-            to that soon. I've elected to include them in chronological order as
-            it is also order of relevance to my research interests.
-          </div>
+            <div className="w-full  mb-20 text-justify">
+              Some of the other papers included in this section comprise{" "}
+              <b>
+                Research internships and project reports, assignments and
+                practicals for classes in both France and Australia.
+              </b>
+              Unfortunately, some of the papers, specifically both of my
+              research internship reports on{" "}
+              <b>
+                "Active control of the first vibrational modes of a cello" and
+                "Impedance-based acoustic diode effect"{" "}
+              </b>
+              are in French. I've included translated abstracts for your
+              convenience but have yet to translate the 120 pages. I hope to get
+              to that soon. I've elected to include them in chronological order
+              as it is also order of relevance to my research interests.
+            </div>
 
-          <div className="justify-center items-center lg:flex flex-col hidden">
-            <ThesisSection />
-            <SpectrogramSection />
-            <IRCAMSection />
-            <AssignmentSection />
-          </div>
+            <div className="justify-center items-center lg:flex flex-col hidden">
+              <ThesisSection />
+              <SpectrogramSection />
+              <IRCAMSection />
+              <AssignmentSection />
+            </div>
 
-          <div className="justify-center items-center lg:hidden flex flex-col">
-            {/* <ThesisSectionSmall /> */}
-            <ThesisSectionSmall />
-            <SpectrogramSectionSmall />
-            <IRCAMSectionSmall />
-            <AssignmentSectionSmall />
-          </div>
-          {/* <div className="justify-center items-center align-middle content-center lg:flex hidden">
+            <div className="justify-center items-center lg:hidden flex flex-col">
+              {/* <ThesisSectionSmall /> */}
+              <ThesisSectionSmall />
+              <SpectrogramSectionSmall />
+              <IRCAMSectionSmall />
+              <AssignmentSectionSmall />
+            </div>
+            {/* <div className="justify-center items-center align-middle content-center lg:flex hidden">
           <div className=" flex flex-col content-center items-center justify-evenly w-6">
             <Timelinedot section={<ThesisSection />} />
             <FillerBar height={"500px"} />
@@ -201,7 +187,7 @@ const AcademiaSection = () => {
             <Timelinedot section={<></>} />
           </div>
         </div> */}
-        </div>
+          </div>
         </div>
       </div>
     </div>

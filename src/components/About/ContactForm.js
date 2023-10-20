@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {IoSend, IoSendSharp} from 'react-icons/io5'
+import { IoSendSharp} from 'react-icons/io5'
 
 import emailjs from 'emailjs-com';
 
