@@ -55,7 +55,7 @@ const App = () => {
       
       <Routes >
         <Route element={<AnimationLayout/>}>
-        <Route path="/Pliploop/neo_portfoli" element={Loader} />
+        <Route path="/" element={Loader} />
         <Route path="/about" element={About} />
         <Route path="/projects" element={Projects} />
         <Route path="/academia" element={AcademiaSection} />
