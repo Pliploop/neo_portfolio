@@ -54,12 +54,14 @@ const App = () => {
       <ScrollToTop />
       
       <Routes >
-        <Route path="" element={Loader} />
+        <Route element={<AnimationLayout/>}>
+        <Route path="/Pliploop/neo_portfoli" element={Loader} />
         <Route path="/about" element={About} />
         <Route path="/projects" element={Projects} />
         <Route path="/academia" element={AcademiaSection} />
         <Route path="/music" element={MusicSection} />
         <Route path="/blog" element={Blog} />
+        </Route>
       </Routes>
     </Router>
   );
