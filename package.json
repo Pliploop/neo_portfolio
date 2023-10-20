@@ -1,5 +1,4 @@
 {
-  "name": "neo_portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -54,14 +53,8 @@
   },
   "description": "Personal website of Julien Guinot : www.julienguinot.com",
   "main": "tailwind.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pliploop/neo_portfolio.git"
-  },
+
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Pliploop/neo_portfolio/issues"
-  },
-  "homepage": "https://github.com/Pliploop/neo_portfolio#readme"
+  "license": "ISC"
+  
 }
