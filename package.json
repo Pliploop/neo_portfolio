@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "animejs": "^3.2.1",
     "emailjs": "^4.0.3",
+    "emailjs-com": "^3.2.0",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.4",
     "prop-types": "^15.8.1",
