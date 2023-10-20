@@ -1,13 +1,123 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "mowera";
+  src: url("fonts/mowera.regular.otf");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+
+
+@font-face {
+  font-family: "grande";
+  src: url("fonts/grande.otf");
+}
+
+@font-face {
+  font-family: "gothic";
+  src: url("fonts/old-english-five.regular.ttf");
+}
+@font-face {
+  font-family: "poker";
+  src: url("fonts/PokerInOctoberDemo-Dxm3.otf");
+}
+
+@font-face {
+  font-family: "saint";
+  src: url("fonts/Saint\ Regular.ttf");
+}
+@font-face {
+  font-family: "poker";
+  src: url("fonts/PokerInOctoberDemo-Dxm3.otf");
+}
+@font-face {
+  font-family: "swomun";
+  src: url("fonts/swomun-serif.otf");
+}
+@font-face {
+  font-family: "zighead";
+  src: url("fonts/Zighead.otf");
+}
+
+@font-face {
+  font-family: "helvetica";
+  src: url("fonts/Helvetica.ttf");
+}
+
+@layer components {
+  .pressable {
+    @apply hover:scale-105 transition-all duration-100 active:scale-95 hover:cursor-pointer;
+  }
+
+  .home-accent-bg {
+    @apply bg-rose-300;
+  }
+
+  .home-accent-text {
+    @apply text-rose-300;
+  }
+
+  .block-shadow {
+    @apply drop-shadow-[3px_3px_0_rgba(0,0,0,1)];
+  }
+
+  .white-block-shadow {
+    @apply drop-shadow-[3px_3px_0_rgba(30,30,30,1)];
+  }
+
+  .block-shadow-md {
+    @apply drop-shadow-[6px_6px_0_rgba(0,0,0,1)];
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* For IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  /* ... */
+
+  .tab {
+    @apply lg:h-8 hover:cursor-pointer w-[100px] lg:w-auto lg:rounded-r-lg active:bg-rose-100 hover:bg-white flex flex-col text-start justify-center lg:px-4 py-6 text-sm;
+  }
+
+  .commuzpinkdate {
+    @apply absolute font-mono lg:mt-28 lg:ml-0 ml-28 mt-20 text-lg transition-all dark:text-white;
+  }
+
+  .commuzpinkrole {
+    @apply ml-[230px] dark:text-emerald-100 absolute text-gray-600 lg:mt-[-100px] lg:ml-0 lg:items-center text-sm transition-all lg:w-72 w-40 justify-end flex flex-col items-start;
+  }
+
+  .featured-tag {
+    @apply border-[1px] border-b-2 border-white bg-gradient-to-tr from-emerald-300 to-emerald-500 shadow-md text-white font-bold rounded-full px-5 p-2 font-mono text-[10px] cursor-default hover:scale-[101%] hover:from-teal-500 hover:shadow-gray-400 hover:to-emerald-400 transition-all duration-75;
+  }
+
+  .scrollskill {
+    @apply text-lg flex flex-col space-y-2 lg:scale-100 scale-75  dark:text-orange-300  text-rose-900 hover:scale-105 transition-transform duration-150 text-center content-center items-center
+  }
+
+  .show {
+    @apply border-2 border-black
+  }
+
+  .border-1 {
+    @apply border-[1px]
+  }
+
+}
+
+.open {
+  max-height: 2000px; /* Adjust to a value higher than the expected maximum height */
+  transition: max-height 0.5s ease-in-out;
+}
+
+.closed {
+  max-height: 500px;
+  transition: max-height 0.5s ease-in-out;
 }

@@ -1,0 +1,21 @@
+.row {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scroll-row {
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+    width: 200%; /* Double the width to create a seamless loop */
+  }
+  
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%); /* Half of the width to create a seamless loop */
+    }
+  }
+  
