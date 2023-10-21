@@ -17,14 +17,14 @@ function ThesisSection() {
       <div className="absolute show -mt-40 h-10 w-10 invisible" id="thesis" />
       <div className="w-1/2 flex flex-col justify-start content-end items-center mb-20">
         <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
-          <div className="h-px grow bg-violet-500"></div>
-          <div className="font-inter font-bold text-lg text-gray-800">
+          <div className="h-px grow bg-violet-500 dark:bg-violet-200"></div>
+          <div className="font-inter font-bold text-lg dark:text-violet-300">
             Abstract
           </div>
-          <div className="h-px grow bg-violet-500"></div>
+          <div className="h-px grow bg-violet-500 dark:bg-violet-200"></div>
         </div>
         <div
-          className={`relative font-inter text-sm text-justify flex flex-col gap-3 text-gray-800 overflow-hidden transition-transform duration-200 ease-linear ${
+          className={`relative font-inter text-sm text-justify flex flex-col gap-3  -800 overflow-hidden transition-transform duration-200 ease-linear ${
             abstractdeployed ? "h-32" : "h-auto"
           }`}
         >
@@ -90,7 +90,7 @@ function ThesisSection() {
       </div>
       <div className="w-1/2 h-full flex flex-col justify-end content-start items-start  mb-20">
         <div className="flex flex-col content-start gap-3 w-full h-full">
-          <div className="text-lg font-inter font-bold text-gray-800 text-left mb-3">
+          <div className="text-lg font-inter font-bold  -800 text-left mb-3">
             {" "}
             Masters' thesis : Automatic Music Tagging at Scale towards better
             Musical recommendations
@@ -161,7 +161,7 @@ function ThesisSectionSmall() {
       <div className="flex flex-col">
         <div className="w-full h-full flex flex-col justify-end content-start items-start  mb-20">
           <div className="flex flex-col content-start gap-3 w-full h-full">
-            <div className="text-lg font-inter font-bold text-gray-800 text-left mb-3">
+            <div className="text-lg font-inter font-bold  -800 text-left mb-3">
               {" "}
               Masters' thesis : Automatic Music Tagging at Scale towards better
               Musical recommendations
@@ -217,14 +217,14 @@ function ThesisSectionSmall() {
         </div>
         <div className="w-full flex flex-col justify-start content-end items-center mb-20">
           <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
-            <div className="h-px grow bg-violet-500"></div>
-            <div className="font-inter font-bold text-lg text-black">
+            <div className="h-px grow bg-violet-500 dark:bg-violet-200"></div>
+            <div className="font-inter font-bold text-lg dark:text-violet-300">
               Abstract
             </div>
-            <div className="h-px grow bg-violet-500"></div>
+            <div className="h-px grow bg-violet-500 dark:bg-violet-200"></div>
           </div>
           <div
-            className={`relative font-inter text-sm text-justify flex flex-col gap-3 text-black overflow-hidden transition-transform duration-200 ease-linear ${
+            className={`relative font-inter text-sm text-justify flex flex-col gap-3  overflow-hidden transition-transform duration-200 ease-linear ${
               abstractdeployed ? "h-20" : "h-auto"
             }`}
           >

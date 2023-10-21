@@ -20,13 +20,13 @@ const Academiatag2 = ({ text }) => {
 };
 
 const FillerBar = ({ height = "n" }) => {
-  let cn = `w-px bg-violet-700 my-3 grow h-[${height}] transition-all duration-200`;
+  let cn = `w-px bg-violet-700 dark:bg-violet-200 my-3 grow h-[${height}] transition-all duration-200`;
   return <div className={cn} />;
 };
 
 const Timelinedot = ({ section }) => {
   return (
-    <div className="w-3 aspect-square bg-violet-700 rounded-full flex justify-center my-10">
+    <div className="w-3 aspect-square bg-violet-700 dark:bg-violet-200 rounded-full flex justify-center my-10">
       {section}
     </div>
   );
@@ -34,7 +34,7 @@ const Timelinedot = ({ section }) => {
 
 const Timelinedot2 = () => {
   return (
-    <div className="w-3 aspect-square bg-violet-700 rounded-full flex justify-center my-2"></div>
+    <div className="w-3 aspect-square bg-violet-700 dark:bg-violet-200 rounded-full flex justify-center my-2"></div>
   );
 };
 
@@ -88,7 +88,7 @@ const ShowMore = ({ isdeployed, setdeployed }) => {
         setdeployed(!isdeployed);
       }}
     >
-      <p className="text-gray-600 font-mono z-40" id="readmore">
+      <p className="text-gray-600 dark:text-white z-40" id="readmore">
         {!isdeployed ? "read less" : "read more"}
       </p>
       <GrDown

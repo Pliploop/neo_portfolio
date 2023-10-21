@@ -27,7 +27,7 @@ const MusicSection = () => {
   return (
     // <div className="dark:bg-black  bg-gradient-to-b   from-emerald-100 to-sky-100 to-35% lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
 
-    <div className="dark:bg-emerald-950 relative float-left  bg-cover  bg-[url('MusicGradient.png')] dark:text-emerald-50 lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
+    <div className="dark:bg-emerald-950 relative float-left  bg-cover  bg-[url('MusicGradient.png')] dark:text-white lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
       <div className="absolute top-0 left-0 bg-[url('MusicGradient.png')] bg-contain blur-3xl w-full h-full lg:hidden"></div>
       <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-70 opacity-0 transition-opacity duration-200 bg-black show" />
       <div className="z-10 relative">
@@ -37,7 +37,7 @@ const MusicSection = () => {
             hoveraccent={"emerald-200"}
             clickaccent={"sky-300"}
           />
-          <div id="all">
+          <div className="w-full" id="all">
             <MusicHeader text="My Music" />
             <MusicNav />
             <MusicIntro />
@@ -81,8 +81,8 @@ const scrollto = (id) => {
 
 const MusicNav = () => {
   return (
-    <nav class=" border-black dark:border-white  dark:text-white backdrop-filter backdrop-blur-2xl bg-opacity-70 border-[1px]  sticky grow z-50 lg:top-24 top-20 mb-16 flex select-none">
-      <div class="container flex flex-wrap items-center justify-between mx-auto">
+    <nav class=" border-black dark:border-white text-sm lg:text-base  dark:text-white backdrop-filter backdrop-blur-2xl bg-opacity-70 border-[1px]  sticky grow z-50 lg:top-24 top-20 mb-16 flex flex-row justify-center select-none">
+      <div class="flex flex-row items-center w-full">
         {/* <div
             onClick={() => {
               scrollto("3");
@@ -94,9 +94,9 @@ const MusicNav = () => {
             </span>
           </div> */}
 
-        <div class=" w-full flex " id="navbar-sticky">
-          <ul class="flex w-full justify-evenly text-base md:font-medium ">
-            <li class="  text-base border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-emerald-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-emerald-300 p-2 text-center">
+        <div class=" w-full flex  " id="navbar-sticky">
+          <ul class="flex justify-evenly md:font-medium grow">
+            <li class="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-emerald-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-emerald-300 p-2 text-center">
               <div
                 onClick={() => {
                   scrollto("featured");
@@ -105,7 +105,7 @@ const MusicNav = () => {
                 Featured
               </div>
             </li>
-            <li class="  text-base border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-emerald-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-emerald-300 p-2 text-center">
+            <li class="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-emerald-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-emerald-300 p-2 text-center">
               <div
                 class=" "
                 onClick={() => {
@@ -115,7 +115,7 @@ const MusicNav = () => {
                 Mix-mastering
               </div>
             </li>
-            <li class=" text-base border-black h-full  grow cursor-pointer dark:hover:bg-white dark:hover:text-emerald-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-emerald-300 p-2 text-center">
+            <li class=" border-blackA  grow cursor-pointer dark:hover:bg-white dark:hover:text-emerald-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-emerald-300 p-2 text-center">
               <div
                 class=" "
                 onClick={() => {
@@ -257,7 +257,7 @@ const MusicFeatured = () => {
               <div className="h-3 w-3 border-1 rounded-full pressable border-black bg-yellow-500"></div>
               <div className="h-3 w-3 border-1 rounded-full pressable border-black bg-rose-500"></div>
             </div>
-            <div className="flex flex-row lg:w-auto  w-full h-full items-center">
+            <div className="flex flex-row lg:w-auto  w-full h-full items-center dark:text-black">
               <div>
                 <BsArrowLeftShort
                   size={30}
@@ -395,7 +395,7 @@ const MusicFeatured = () => {
               className="flex flex-col items-center justify-center mt-5 lg:hidden"
               onClick={() => toggleFonkeyText()}
             >
-              <p className="text-gray-600 font-mono z-40" id="fonkeyreadmore">
+              <p className="text-gray-600 dark:text-white font-mono z-40" id="fonkeyreadmore">
                 read more
               </p>
               <GrDown
@@ -448,7 +448,7 @@ const MusicFeatured = () => {
               className="flex flex-col items-center justify-center mt-5 lg:hidden"
               onClick={() => toggleAztecText()}
             >
-              <p className="text-gray-600 font-mono z-40" id="readmore">
+              <p className="text-gray-600 dark:text-white font-mono z-40" id="readmore">
                 read more
               </p>
               <GrDown

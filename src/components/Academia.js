@@ -32,11 +32,11 @@ const SectionHeader = ({ text }) => {
   return (
     <div className="h-auto lg:w-full lg:px-10">
       <div className="flex flex-row align-middle">
-        <h2 className="font-inter text-2xl lg:text-4xl font-semibold first-letter:text-7xl first-letter:font-zighead first-letter:text-violet-600">
+        <h2 className="font-inter text-2xl lg:text-4xl font-semibold first-letter:text-7xl first-letter:font-zighead first-letter:text-violet-600 dark:first-letter:text-violet-400">
           {" "}
           {text}
         </h2>
-        <div className="mx-6 h-[1px] grow bg-black self-center"></div>
+        <div className="mx-6 h-[1px] grow bg-black dark:bg-violet-300 self-center"></div>
       </div>
     </div>
   );
@@ -45,7 +45,7 @@ const SectionHeader = ({ text }) => {
 const AcademiaNav = () => {
   return (
     <nav class=" border-black md:flex  dark:border-white backdrop-filter backdrop-blur-2xl bg-opacity-70 border-[1px]  sticky grow z-50 lg:top-24 top-20 mb-16 hidden select-none">
-      <div class="container flex flex-wrap items-center justify-between mx-auto">
+      <div class="flex flex-wrap items-center justify-between w-full">
         {/* <div
               onClick={() => {
                 scrollto("3");
@@ -59,7 +59,7 @@ const AcademiaNav = () => {
 
         <div class=" w-full flex " id="navbar-sticky">
           <ul class="flex w-full justify-evenly lg:text-base text-sm md:font-medium ">
-            <li class=" lg:text-base text-sm border-black h-full grow cursor-pointer active:text-white dark:hover:bg-white dark:hover:text-violet-600 transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            <li class=" lg:text-base text-sm border-black h-full grow cursor-pointer active:text-white dark:hover:bg-white dark:hover:text-violet-500 transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
               <div
                 class="subnav-tag"
                 onClick={() => {
@@ -119,7 +119,7 @@ const AcademiaSection = () => {
   const animate = () => {};
 
   return (
-    <div className="relative  dark:text-blue-100 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-none bg-blur-xl lg:bg-[url('AcademiaGradient.png')] bg-opacity-75 lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
+    <div className="relative  dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-none bg-blur-xl lg:bg-[url('AcademiaGradient.png')] bg-opacity-75 lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
       <AllHeader
         pagename={"Academia"}
         hoveraccent={"emerald-200"}
@@ -135,7 +135,7 @@ const AcademiaSection = () => {
           <AcademiaHeader text={"Writing samples"} />
 
           <AcademiaNav />
-          <div className="lg:px-10 w-full mb-0 lg:text-sm lg:text-base text-sm text-black dark:text-violet-200 font-inter">
+          <div className="lg:px-10 w-full mb-0 lg:text-sm  text-sm text-black dark:text-white font-inter">
             <div className="w-full mb-3 text-justify">
               Here you'll find some of the papers I wrote in an academic
               context. Though I do not have any published articles at the

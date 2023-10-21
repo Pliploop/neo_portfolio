@@ -22,7 +22,7 @@ function SpectrogramSection() {
       />
       <div className="lg:w-1/2 w-full h-full flex flex-col justify-start content-end items-end">
         <div className="flex flex-col content-start items-end gap-3 w-full h-full">
-          <div className="text-lg font-inter font-bold text-gray-800 text-right mb-3">
+          <div className="text-lg font-inter font-bold   -800 text-right mb-3">
             {" "}
             Vocalist classification with spectrogram CNNs
           </div>
@@ -77,14 +77,14 @@ function SpectrogramSection() {
       </div>
       <div className="w-1/2 flex flex-col justify-start content-end items-center mb-20">
         <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
-          <div className="h-px grow bg-gray-500"></div>
-          <div className="font-inter font-bold text-lg text-gray-800">
+          <div className="h-px grow bg-violet-500 dark:bg-violet-300"></div>
+          <div className="font-inter font-bold text-lg   dark:text-violet-300">
             Abstract
           </div>
-          <div className="h-px grow bg-gray-500"></div>
+          <div className="h-px grow bg-violet-500 dark:bg-violet-300"></div>
         </div>
         <div
-          className={`relative font-inter text-sm text-justify flex flex-col gap-3 text-gray-800 overflow-hidden transition-transform duration-200 ease-linear ${
+          className={`relative font-inter text-sm text-justify flex flex-col gap-3   -800 overflow-hidden transition-transform duration-200 ease-linear ${
             abstractdeployed ? "h-32" : "h-auto"
           }`}
         >
@@ -141,7 +141,7 @@ function SpectrogramSectionSmall() {
       <div className="flex flex-col h-auto grow">
         <div className="lg:w-1/2 w-full h-full flex flex-col">
           <div className="flex flex-col gap-3 w-full h-full">
-            <div className="text-lg font-inter font-bold text-gray-800 text-left mb-3">
+            <div className="text-lg font-inter font-bold   -800 text-left mb-3">
               {" "}
               Vocalist classification with spectrogram CNNs
             </div>
@@ -193,14 +193,14 @@ function SpectrogramSectionSmall() {
 
         <div className="w-full h-full flex flex-col justify-start content-center items-center">
           <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
-            <div className="h-px grow bg-gray-500"></div>
-            <div className="font-inter font-bold text-lg text-gray-800">
+            <div className="h-px grow bg-violet-500 dark:bg-violet-300"></div>
+            <div className="font-inter font-bold text-lg   dark:text-violet-300">
               Abstract
             </div>
-            <div className="h-px grow bg-gray-500"></div>
+            <div className="h-px grow bg-violet-500 dark:bg-violet-300"></div>
           </div>
           <div
-            className={`relative font-inter text-sm text-justify flex flex-col gap-3 text-gray-800 overflow-hidden transition-transform duration-200 ease-linear ${
+            className={`relative font-inter text-sm text-justify flex flex-col gap-3   -800 overflow-hidden transition-transform duration-200 ease-linear ${
               abstractdeployed ? "h-20" : "h-auto"
             }`}
           >

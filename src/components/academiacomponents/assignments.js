@@ -8,20 +8,20 @@ import {
 
 function AssignmentSection() {
   return (
-    <div className="lg:w-full md:w-[calc(100%-10rem)] w-[calc(100%-3rem)] h-auto flex dark:text-violet-200 flex-row justify-evenly lg:gap-16 gap-8 -mt-2 mb-10">
+    <div className="lg:w-full md:w-[calc(100%-10rem)] w-[calc(100%-3rem)] h-auto flex flex-row justify-evenly lg:gap-16 gap-8 -mt-2 mb-10">
       <div
         className="absolute show -mt-40 h-10 w-10 invisible"
         id="assignments"
-      />
+      /> 
       <div className="lg:w-1/2 w-full h-full flex flex-col justify-start content-end items-end">
         <div className="flex flex-col content-start items-end gap-3 w-full h-full">
           <div className="flex flex-row justify-between items-center gap-3 w-full mb-3">
             <div className="h-px grow bg-gray-500"></div>
-            <div className="font-inter text-base text-gray-800">Context</div>
+            <div className="font-inter text-base     ">Context</div>
             <div className="h-px grow bg-gray-500"></div>
           </div>
 
-          <div className="font-inter text-base text-justify flex flex-col gap-3 text-gray-800 w-full mb-5">
+          <div className="font-inter text-base text-justify flex flex-col gap-3      w-full mb-5">
             <p>
               Over the course of my graduate studies at Ecole Centrale de Lyon,
               I completed multiple assignments. Though not research related they
@@ -36,7 +36,7 @@ function AssignmentSection() {
         <FillerBar />
       </div>
       <div className="w-1/2 flex flex-col justify-start content-end items-start mb-20">
-        <div className="text-lg font-inter font-bold text-gray-800 text-right mb-3">
+        <div className="text-lg font-inter font-bold      text-right mb-3">
           {" "}
           Graduate assignments
         </div>
@@ -84,7 +84,7 @@ const Assignment = ({ name, grade, href, tags, github }) => {
         <div className="w-2/3 flex items-center font-inter font-bold text-sm">
           {name}
         </div>
-        <div className="w-1/5 flex items-center font-mono font-bold text-violet-600">
+        <div className="w-1/5 flex items-center font-mono font-bold text-violet-600 dark:text-violet-100">
           {grade}
         </div>
       </div>
@@ -111,18 +111,18 @@ function AssignmentSectionSmall() {
       <div className="flex flex-col h-auto grow">
         <div className="lg:w-1/2 w-full h-full flex flex-col">
           <div className="flex flex-col gap-3 w-full h-full">
-            <div className="text-lg font-inter font-bold text-gray-800 text-left mb-3">
+            <div className="text-lg font-inter font-bold      text-left mb-3">
               {" "}
               Graduate Assignments
             </div>
 
             <div className="flex flex-row justify-between items-center gap-3 w-full mb-3">
               <div className="h-px grow bg-gray-500"></div>
-              <div className="font-inter text-base text-gray-800">Context</div>
+              <div className="font-inter text-base     ">Context</div>
               <div className="h-px grow bg-gray-500"></div>
             </div>
 
-            <div className="font-inter text-sm text-justify flex flex-col gap-3 text-gray-800 mb-5">
+            <div className="font-inter text-sm text-justify flex flex-col gap-3      mb-5">
               <p>
                 Over the course of my graduate studies at Ecole Centrale de
                 Lyon, I completed multiple assignments. Though not research

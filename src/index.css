@@ -83,7 +83,7 @@
   /* ... */
 
   .tab {
-    @apply lg:h-8 hover:cursor-pointer w-[100px] lg:w-auto lg:rounded-r-lg active:bg-rose-100 hover:bg-white flex flex-col text-start justify-center lg:px-4 py-6 text-sm;
+    @apply lg:h-8 hover:cursor-pointer lg:w-auto lg:rounded-r-lg active:bg-rose-100 hover:bg-white flex flex-col lg:text-start text-center justify-center px-6 lg:px-4 lg:py-6 py-5 text-sm lg:rounded-l-none rounded-2xl;
   }
 
   .commuzpinkdate {
@@ -91,7 +91,7 @@
   }
 
   .commuzpinkrole {
-    @apply ml-[230px] dark:text-emerald-100 absolute text-gray-600 lg:mt-[-100px] lg:ml-0 lg:items-center text-sm transition-all lg:w-72 w-40 justify-end flex flex-col items-start;
+    @apply ml-[230px] dark:text-emerald-100 absolute text-gray-600 lg:mt-[-100px] lg:ml-0 lg:items-center text-sm transition-all lg:w-72 w-40 justify-end flex flex-col items-start; 
   }
 
   .featured-tag {

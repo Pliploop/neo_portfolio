@@ -37,7 +37,7 @@ const MusicArranged = () => {
         </p>
       </div>
       <div className="lg:w-1/3 h-full rounded-3xl flex flex-col p-5 transition-all duration-75 ">
-        <h2 className=" text-xl font-inter font-bold text-slate-600 mb-3">
+        <h2 className=" text-xl font-inter font-bold mb-3">
           Misty mountains - solo choir
         </h2>
         
@@ -65,7 +65,7 @@ const MusicArranged = () => {
         </p>
       </div>
       <div className="lg:w-1/3 h-full rounded-3xl flex flex-col  p-5 transition-all duration-75 ">
-        <h2 className=" text-xl font-inter font-bold text-black mb-3">
+        <h2 className=" text-xl font-inter font-bold mb-3">
           Let it snow - SATB arrangement
         </h2>
         <div className="flex flex-col align-top items-start content-start h-full grow mb-10 rounded-b-xl overflow-clip block-shadow">

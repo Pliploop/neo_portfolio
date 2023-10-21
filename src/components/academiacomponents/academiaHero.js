@@ -4,7 +4,7 @@ export function HeroSection() {
       <div className="w-full flex lg:flex-row justify-between">
         <div className="grow flex flex-col justify-between gap-5 lg:px-12 lg:text-base text-sm">
           <div className="w-full">
-            <p className=" text-black text-justify mb-3">
+            <p className=" text-justify mb-3">
               {" "}
               I'm currently a PhD student at Queen Mary University of London in
               collaboration with Universal Music Group. <span className="font-bold">My PhD project focuses
@@ -13,7 +13,7 @@ export function HeroSection() {
               representations.</span> 
             </p>
 
-            <p className=" text-black text-justify mb-10">
+            <p className="  text-justify mb-10">
               {" "}
               The research questions I'm interested in answering are:
             </p>
@@ -56,13 +56,13 @@ const ResearchSection = () => {
   return (
     <div className="h-auto lg:mb-0 mb-10 lg:w-2/3 grow lg:px-10">
       <div className="flex flex-row align-middle mb-6">
-        <h2 className="font-inter text-lg font-semibold text-violet-500">
+        <h2 className="font-inter text-lg font-semibold text-violet-500 dark:text-violet-300">
           {" "}
           Other research interests
         </h2>
-        <div className="mx-3 h-px grow bg-black self-center"></div>
+        {/* <div className="mx-3 h-px grow bg-black dark:bg-violet-200 self-center"></div> */}
       </div>
-      <div className="text-sm text-gray-800 font-inter text-justify">
+      <div className="text-sm  font-inter text-justify">
         <p className="lg:mb-6 mb-10">
           {" "}
           My research interests lie at the intersection of music and Artificial

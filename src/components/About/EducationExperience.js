@@ -251,16 +251,17 @@ const EducationExperience = () => {
   return (
     <div className="w-full lg:px-14 flex flex-col jusitfy-center select-none lg:mt-0 mt-6">
       <div
-        className="w-full h-full flex justify-start border-x-[1px] border-t-[1px] border-black bg-rose-100  rounded-t-xl   block-shadow-md"
+        className="w-full h-full flex lg:flex-row flex-col justify-start border-x-[1px] border-t-[1px] border-black bg-rose-100  rounded-t-xl   block-shadow-md"
         id="folder-view-top"
       >
-        <div className="flex flex-row justify-evenly items-center px-3 space-x-3 border-b-[1px] border-black">
+        <div className="flex flex-row lg:justify-evenly lg:items-center px-3 lg:py-0 py-3 space-x-3 lg:border-b-[1px] lg:border-black">
           <div className="h-3 w-3 border-1 rounded-full pressable border-black bg-green-500"></div>
           <div className="h-3 w-3 border-1 rounded-full pressable border-black bg-yellow-500"></div>
           <div className="h-3 w-3 border-1 rounded-full pressable border-black bg-rose-500"></div>
         </div>
 
-        <div className="h-16 w-10 border-b-[1px] border-black"></div>
+        <div className="h-16 w-10 border-b-[1px] border-black lg:flex hidden"></div>
+        <div className="flex flex-row h-12 lg:h-auto">
         <div className="flex flex-col justify-end">
           <div
             className={`lg:w-32 lg:px-0 px-6 ${
@@ -282,7 +283,7 @@ const EducationExperience = () => {
             Education
           </div>
         </div>
-        <div className="h-16 w-2 border-b-[1px]  border-black"></div>
+        <div className="h-16 w-2 border-b-[1px]  border-black lg:flex hidden"></div>
         <div className="flex flex-col justify-end">
           <div
             className={`hover:cursor-pointer lg:w-32 lg:px-0 px-6 ${
@@ -304,9 +305,11 @@ const EducationExperience = () => {
             Experience
           </div>
         </div>
+        <div className="w-full border-b-[1px] border-black lg:hidden flex"></div>
+        </div>
 
         <div
-          className="h-16 grow border-b-[1px]  border-black"
+          className="h-16 grow border-b-[1px]  border-black lg:flex hidden"
           id="EducationTab"
         ></div>
       </div>

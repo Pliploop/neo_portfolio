@@ -17,14 +17,14 @@ function IRCAMSection() {
       <div className="absolute show -mt-40 h-10 w-10 invisible" id="ircam"/>
       <div className="w-1/2 flex flex-col justify-start content-end items-center mb-20">
         <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
-          <div className="h-px grow bg-gray-500"></div>
-          <div className="font-inter font-bold text-lg text-gray-800">
+          <div className="h-px grow bg-gray-500 dark:bg-violet-300"></div>
+          <div className="font-inter font-bold text-lg  dark:text-violet-300  ">
             Abstract
           </div>
-          <div className="h-px grow bg-gray-500"></div>
+          <div className="h-px grow bg-gray-500 dark:bg-violet-300"></div>
         </div>
         <div
-          className={`relative font-inter text-sm text-justify flex flex-col gap-3 text-gray-800 overflow-hidden transition-transform duration-200 ease-linear ${
+          className={`relative font-inter text-sm text-justify flex flex-col gap-3     overflow-hidden transition-transform duration-200 ease-linear ${
             abstractdeployed ? "h-32" : "h-auto"
           }`}
         >
@@ -70,21 +70,21 @@ function IRCAMSection() {
       </div>
       <div className="w-1/2 h-full flex flex-col justify-end content-start items-start  mb-20">
         <div className="flex flex-col content-start gap-3 w-full h-full">
-          <div className="text-lg font-inter font-bold text-gray-800 text-left mb-3">
+          <div className="text-lg font-inter font-bold     text-left mb-3">
             {" "}
             Research Internship{" "}
-            <a href="https://www.IRCAM.fr" className="text-bold text-violet-400">
+            <a href="https://www.IRCAM.fr" className="text-bold dark:text-sky-300 text-violet-500">
               @IRCAM
             </a>{" "}
             : Active control of the first vibrational modes of a cello.
           </div>
           <div className="flex flex-row justify-between items-center gap-3 w-full mb-3">
             <div className="h-px grow bg-gray-500"></div>
-            <div className="font-inter text-base text-gray-800">Context</div>
+            <div className="font-inter text-base    ">Context</div>
             <div className="h-px grow bg-gray-500"></div>
           </div>
 
-          <div className="font-inter text-base text-justify flex flex-col gap-3 text-gray-800 w-full mb-5">
+          <div className="font-inter text-sm text-justify flex flex-col gap-3     w-full mb-5">
             <p>
               In the second year of my masters at Ecole Centrale de Lyon, I
               undertook a research internship at IRCAM, Paris, in which I
@@ -136,18 +136,18 @@ function IRCAMSectionSmall() {
       <div className="flex flex-col">
         <div className="w-full h-full flex flex-col justify-end content-start items-start  mb-20">
           <div className="flex flex-col content-start gap-3 w-full h-full">
-            <div className="text-lg font-inter font-bold text-gray-800 text-left mb-3">
+            <div className="text-lg font-inter font-bold     text-left mb-3">
               {" "}
               Research Internship{" "}
               <a
                 href="https://www.IRCAM.fr"
-                className="text-bold text-violet-400"
+                className="text-bold dark:text-sky-300 text-violet-500"
               >
                 @IRCAM
               </a>{" "}
               : Active control of the first vibrational modes of a cello.
             </div>
-            <div className="font-inter text-sm text-justify flex flex-col gap-3 text-gray-800 w-full mb-5">
+            <div className="font-inter text-sm text-justify flex flex-col gap-3     w-full mb-5">
               <p>
                 In the second year of my masters at Ecole Centrale de Lyon, I
                 undertook a research internship at IRCAM, Paris, in which I
@@ -185,15 +185,15 @@ function IRCAMSectionSmall() {
         </div>
         <div className="w-full flex flex-col justify-start content-end items-center mb-20">
           <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
-            <div className="h-px grow bg-gray-500"></div>
-            <div className="font-inter font-bold text-lg text-gray-800">
+            <div className="h-px grow bg-gray-500 dark:bg-violet-300"></div>
+            <div className="font-inter font-bold text-lg  dark:text-violet-300  ">
               Abstract
             </div>
-            <div className="h-px grow bg-gray-500"></div>
+            <div className="h-px grow bg-gray-500 dark:bg-violet-300"></div>
           </div>
 
           <div
-            className={`relative font-inter text-sm text-justify flex flex-col gap-3 text-gray-800 overflow-hidden transition-transform duration-200 ease-linear ${
+            className={`relative font-inter text-sm text-justify flex flex-col gap-3     overflow-hidden transition-transform duration-200 ease-linear ${
               abstractdeployed ? "h-56" : "h-auto"
             }`}
           >

@@ -14,7 +14,7 @@ const MusicMixMaster = () => {
       <div className="flex lg:flex-row flex-col w-full h-auto lg:gap-20 gap-10">
         <div className="flex flex-col lg:w-full h-full lg:p-10">
           <div className="flex flex-col justify-start items-center font-inter">
-            <span className="mb-10 z-40">
+            <span className="mb-10 z-40 lg:text-base text-sm">
               {" "}
               During my 4 years of engineering school at Ecole Centrale de Lyon,
               I participated in a student-built student-led musical theatre
@@ -139,11 +139,11 @@ const MusicMixMaster = () => {
               </div>
             </div>
 
-            <p class="mt-8 font-inter text-gray-900   text-sm z-40 lg:hidden flex">
+            <p class="mt-8 font-inter    text-sm z-40 lg:hidden flex">
               And my featured mixes from the 2022 play are :
             </p>
 
-            <p class="mt-0 font-inter font-bold text-gray-900    text-sm z-40 lg:hidden flex">
+            <p class="mt-0 font-inter font-bold     text-sm z-40 lg:hidden flex">
               Feeling Good, Joga, Still Loving You, Le Rituel
             </p>
           </div>
@@ -192,7 +192,7 @@ const MixMasterAlbums = () => {
             className="m-auto text-white group-hover:text-black group-hover:scale-105"
           />
         </div>
-        <div className="lg:h-full h-[300px] lg:w-1/2 w-3/4 relative">
+        <div className="lg:h-full h-[400px] lg:w-1/2 w-3/4 relative">
           <AlbumEmbed
             link={
               "https://open.spotify.com/embed/album/4boTthC3VNuTVeBVcmJAED?utm_source=generator"
