@@ -14,13 +14,19 @@ import { BsGrid3X3 } from "react-icons/bs";
 import { CiWavePulse1 } from "react-icons/ci";
 import { BiLogoAws } from "react-icons/bi";
 
-
 const educationData = [
   {
     title: "PhD student - AI and music",
     company: "@Queen Mary University of London (QMUL)",
     dates: "September 2023 - present",
-    description: ["Item 1", "Item 2"],
+    description: [
+      "I'm currently a PhD student at Queen Mary University of London in collaboration with Universal Music Group. My PhD project focuses on refining self-supervised learning techniques for musical audio, to create interpretable, navigable and explainable learned representations The research questions I'm interested in answering are:",
+
+      "How can we leverage domain knowledge to create so far underexplored music-specific tasks to disentangle learned representations?",
+      "How can weak supervision from outside modalities further disentangle latent spaces and provide intuitive navigation means for users?",
+      "Can human feedback improve the intuitive navigation of latent music representations?",
+      "Through these questions I aim to create navigable, interpretable and multimodal latent spaces to help musicians create musicians and to further our understanding of music as a whole.",
+    ],
     skills: [
       <SiPytorch size={26} />,
       <SiPython size={26} />,
@@ -28,12 +34,20 @@ const educationData = [
       <GiPencil size={26} />,
     ],
     skillnames: ["Pytorch", "Python", "Research", "Writing"],
+    links:[],
+    linktexts:[],
   },
   {
     title: "MSc Engineering - Acoustics, Data Science",
     company: "@University of Adelaide",
     dates: "June 2021 - December 2022",
-    description: ["Item 1", "Item 2"],
+    description: [
+      "GPA : 5.86/7",
+      "Coursework: Deep Learning, Natural Language Processing, Computer Vision, Acoustics . Signal Processing, Machine Learning, Statistics",
+      "Project: Music Information Retrieval– Vocalist classification via spectrogram computer vision.",
+    ],
+    links: ["https://github.com/Pliploop/Spectrogram_Artist_Recognition"],
+    linktexts: ["Vocalist Classification (Github)"],
     skills: [
       <SiPytorch size={26} />,
       <SiPython size={26} />,
@@ -46,7 +60,14 @@ const educationData = [
     title: "MSc Engineering, Diplôme d'ingénieur",
     company: "@Ecole Centrale de Lyon",
     dates: "September 2020 - December 2022",
-    description: ["Item 1", "Item 2"],
+    description: [
+      "GPA : 3.6/4",
+      "Coursework: Python, C++, Acoustics, Musical Acoustics, Signal processing. Statistics, Machine Learning.",
+      "Master’s thesis: Implementation of audio tagging models at scale towards better musical recommendations. (A+)",
+      "Research project: 6-month research project on acoustic diodes in monodirectional waveguides",
+    ],
+    links:["/academia","/academia"],
+    linktexts:["Masters' thesis", "Acoustic Diodes"],
     skills: [
       <SiPytorch size={26} />,
       <SiPython size={26} />,
@@ -59,7 +80,12 @@ const educationData = [
     title: "BSc Engineering, Diplôme d'ingénieur",
     company: "@Ecole Centrale de Lyon",
     dates: "September 2018 - September 2020",
-    description: ["Item 1", "Item 2"],
+    description: [
+      "GPA : 3.6/4",
+      "Coursework: Python, C++, Acoustics, Musical Acoustics, Signal processing. Statistics, Machine Learning.",
+    ],
+    links:[],
+    linktexts:[],
     skills: [
       <SiPytorch size={26} />,
       <SiPython size={26} />,
@@ -81,6 +107,8 @@ const experienceData = [
       "Within the Music and Audio Machine Learning team, I will be working on leveraging the potential of self-supervised learning for musical audio.",
       "To this end, I'll be devising music-specific architectures and training techniques, leveraging domain knowledge and human-in-the-loop, and building multiscale and hierarchical models for music understanding.",
     ],
+    links:[],
+    linktexts:[],
     skills: [
       <SiPytorch size={26} />,
       <SiPython size={26} />,
@@ -103,6 +131,8 @@ const experienceData = [
       <GiNotebook size={26} />,
       <GiPencil size={26} />,
     ],
+    links:[],
+    linktexts:[],
     skillnames: ["Pytorch", "Python", "Research", "Writing"],
   },
   {
@@ -113,6 +143,8 @@ const experienceData = [
       "Built a bad revenue copyright strike identification pipeline from user consumption metrics",
       "Implemented data ingestion pipelines using Snowflake, PySpark, and machine learning models, reaching 93% accuracy on fraudulent revenue prediction with potential tripling of weekly processed claim by supporting the labelling team’s efforts",
     ],
+    links:[],
+    linktexts:[],
     skills: [
       <SiPython size={26} />,
       <BiLogoAws size={26} />,
@@ -131,6 +163,8 @@ const experienceData = [
       "Benchmarked, selected and fine-tuned state of the art audio tagging models for at-scale integration into a recommendation system for independent artists.",
       "Developed research culture at Groover via bi-weekly synthesis of state of the art papers in the MIR field & writing vulgarization articles for Medium.",
     ],
+    links:[],
+    linktexts:[],
     skills: [
       <SiPython size={26} />,
       <SiTensorflow size={26} />,
@@ -143,6 +177,8 @@ const experienceData = [
     title: "Data Science Consultant Intern",
     company: "@Artefact",
     dates: "March 2021 - September 2021",
+    links:[],
+    linktexts:[],
     description: [
       "Worked as a data science consultant with various clients, implementing and testing machine learning algorithms",
       "Created a bulk labelling web app towards greatly reducing the amount of time spent labelling data samples in NLP appplications",
@@ -161,6 +197,8 @@ const experienceData = [
     title: "Musical Acoustics Research Intern",
     company: "@IRCAM",
     dates: "March 2020 - June 2020",
+    links:[],
+    linktexts:[],
     description: [
       "Worked with a research team towards implementing active modal control of the first vibrational modes of a cello.",
       "Used matlab to simulate the sound produced by a struck or bowed cello string with coupling to the body. with state of the art error rate for plucked strings",
@@ -233,9 +271,9 @@ const EducationExperience = () => {
 
   useEffect(() => {
     console.log(content);
-    
+
     setActiveTabId(0);
-    changecontent(0,educationExp)
+    changecontent(0, educationExp);
   }, [educationExp]);
 
   useEffect(() => {
@@ -262,50 +300,50 @@ const EducationExperience = () => {
 
         <div className="h-16 w-10 border-b-[1px] border-black lg:flex hidden"></div>
         <div className="flex flex-row h-12 lg:h-auto">
-        <div className="flex flex-col justify-end">
-          <div
-            className={`lg:w-32 lg:px-0 px-6 ${
-              educationExp == "education"
-                ? " bg-rose-50 border-t-0 lg:h-full h-8"
-                : " bg-black text-rose-300 lg:h-8 h-6"
-            } border-black border-[1px] lg:border-t-[0px] border-t-[1px] border-b-0 flex flex-col text-center rounded-t-xl justify-center lg:text-base transition-all duration-200`}
-            id="EducationTab"
-            onClick={() => {
-              // toggleTab();
+          <div className="flex flex-col justify-end">
+            <div
+              className={`lg:w-32 lg:px-0 px-6 ${
+                educationExp == "education"
+                  ? " bg-rose-50 border-t-0 lg:h-full h-8"
+                  : " bg-black text-rose-300 lg:h-8 h-6"
+              } border-black border-[1px] lg:border-t-[0px] border-t-[1px] border-b-0 flex flex-col text-center rounded-t-xl justify-center lg:text-base transition-all duration-200`}
+              id="EducationTab"
+              onClick={() => {
+                // toggleTab();
 
-              // changecontent(activeTabId, educationExp);
+                // changecontent(activeTabId, educationExp);
 
-              setEducationExp(
-                educationExp === "education" ? "experience" : "education"
-              );
-            }}
-          >
-            Education
+                setEducationExp(
+                  educationExp === "education" ? "experience" : "education"
+                );
+              }}
+            >
+              Education
+            </div>
           </div>
-        </div>
-        <div className="h-16 w-2 border-b-[1px]  border-black lg:flex hidden"></div>
-        <div className="flex flex-col justify-end">
-          <div
-            className={`hover:cursor-pointer lg:w-32 lg:px-0 px-6 ${
-              educationExp == "experience"
-                ? " bg-rose-50 border-t-0 text-black lg:h-full h-8 "
-                : "bg-black text-rose-300 lg:h-8 h-6"
-            } border-black border-x-[1px] lg:border-t-[0px] border-t-[1px] border-b-0  flex flex-col text-center rounded-t-xl justify-center lg:text-base transition-all duration-200`}
-            id="ExperienceTab"
-            onClick={() => {
-              // toggleTab();
-              // changecontent(activeTabId, educationExp);
+          <div className="h-16 w-2 border-b-[1px]  border-black lg:flex hidden"></div>
+          <div className="flex flex-col justify-end">
+            <div
+              className={`hover:cursor-pointer lg:w-32 lg:px-0 px-6 ${
+                educationExp == "experience"
+                  ? " bg-rose-50 border-t-0 text-black lg:h-full h-8 "
+                  : "bg-black text-rose-300 lg:h-8 h-6"
+              } border-black border-x-[1px] lg:border-t-[0px] border-t-[1px] border-b-0  flex flex-col text-center rounded-t-xl justify-center lg:text-base transition-all duration-200`}
+              id="ExperienceTab"
+              onClick={() => {
+                // toggleTab();
+                // changecontent(activeTabId, educationExp);
 
-              setEducationExp(
-                educationExp === "education" ? "experience" : "education"
-              );
-            }}
-          >
-            {" "}
-            Experience
+                setEducationExp(
+                  educationExp === "education" ? "experience" : "education"
+                );
+              }}
+            >
+              {" "}
+              Experience
+            </div>
           </div>
-        </div>
-        <div className="w-full border-b-[1px] border-black lg:hidden flex"></div>
+          <div className="w-full border-b-[1px] border-black lg:hidden flex"></div>
         </div>
 
         <div
@@ -447,11 +485,16 @@ const EducationExperience = () => {
             <span>{content.dates}</span>
           </div>
           <div id="description">
-            <ul className="list-disc marker:text-orange-600 text-justify text-sm list-inside flex flex-col gap-3">
+            <ul className="list-disc marker:text-orange-600 text-sm list-inside flex flex-col gap-3 mb-10">
               {content.description.map((item, i) => (
                 <li key={i}>{item}</li>
               ))}
             </ul>
+            <div className="flex flex-row gap-3">
+            {content.links.map((item, i) => (
+                <a href={item} target="_blank" className="show p-2 text-rose-600 pressable border-[1px] rounded-xl border-rose-500 text-sm hover:bg-rose-500 hover:text-white">{content.linktexts[i]}</a>
+              ))}
+            </div>
           </div>
         </div>
         <div

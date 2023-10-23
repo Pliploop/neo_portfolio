@@ -119,7 +119,7 @@ const AcademiaSection = () => {
   const animate = () => {};
 
   return (
-    <div className="relative  dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-none bg-blur-xl lg:bg-[url('AcademiaGradient.png')] bg-opacity-75 lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
+    <div className="relative  dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-none bg-blur-xl lg:bg-[url('AcademiaGradient.png')] bg-opacity-75 lg:py-12 lg:px-32 p-6  scrollbar-hide">
       <AllHeader
         pagename={"Academia"}
         hoveraccent={"emerald-200"}

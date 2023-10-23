@@ -35,7 +35,7 @@ const About = () => {
   return (
     // <div className="dark:bg-black select-none  bg-gradient-to-b   from-orange-200 to-rose-100 to-35% lg:py-8 lg:px-32 p-6  scrollbar-hide">
 
-    <div className="relative select-none bg-cover  bg-[url('Gradient2.png')]  lg:py-12 lg:px-32 p-6 scrollbar-width:none">
+    <div className="relative  bg-cover  bg-[url('Gradient2.png')]  lg:py-12 lg:px-32 p-6 scrollbar-width:none">
       <div className="absolute top-0 left-0 bg-[url('Gradient2.png')] bg-contain blur-3xl w-full h-full lg:hidden"></div>
       <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-50 opacity-0 transition-opacity duration-200 bg-black show" />
       <div className="relative h-full w-full flex flex-col justify-between align-middle">
