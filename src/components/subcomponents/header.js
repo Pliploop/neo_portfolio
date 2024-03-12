@@ -42,7 +42,7 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
           className={`dark:text-white  dark:hover:text-black h-full lg:w-32  grow lg:grow-0 lg:text-lg text-sm flex flex-col active:bg-opacity-30 hover:bg-opacity-60 hover:bg-white hover:font-bold hover:cursor-pointer hover:border-black hover:border-x-[1px] dark:hover:border-white transition-all duration-100 p-auto text-center justify-center`}
           onClick={() => nav("/academia")}
         >
-          Academia
+          Research
         </div>
         <div
           className={`dark:text-white  dark:hover:text-black h-full lg:w-32 grow lg:grow-0  lg:text-lg text-sm flex flex-col active:bg-opacity-30 hover:bg-opacity-60 hover:bg-white hover:font-bold hover:cursor-pointer hover:border-black hover:border-x-[1px] dark:hover:border-white transition-all duration-100 p-auto text-center justify-center`}

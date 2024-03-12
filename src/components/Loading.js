@@ -372,7 +372,7 @@ const Loader = () => {
 
   return (
     <div
-      className="h-screen w-screen flex bg-black text-white flex-col align-middle justify-center items-center lg:px-0 px-0 py-12"
+      className="h-screen w-screen flex bg-white text-black flex-col align-middle justify-center items-center lg:px-0 px-0 py-12"
       isMounted={isMounted}
       isLiked={isLiked}
     >
@@ -380,14 +380,14 @@ const Loader = () => {
         className="flex flex-col lg:w-[30%] w-full aspect-[0.75] border-[2px] border-none rounded-3xl  transition-all duration-200"
         id="container"
       >
-        <div className="h-12 border-b-[1px]  border-black overflow-hidden rounded-t-3xl flex flex-row justify-start items-center p-3 space-x-3 hidden">
+        <div className="h-12 border-b-[1px]  border-none overflow-hidden rounded-t-3xl flex flex-row justify-start items-center p-3 space-x-3 hidden">
           <div className="h-3 w-3 border-1 rounded-full pressable  border-black bg-green-500"></div>
           <div className="h-3 w-3 border-1 rounded-full pressable  border-black bg-yellow-500"></div>
           <div className="h-3 w-3 border-1 rounded-full pressable  border-black bg-rose-500"></div>
         </div>
         <div className="flex flex-col p-6">
           <div
-            className="w-full aspect-square  border-black bg-cover  bg-[url('Gradient2.png')] border-2 rounded-3xl"
+            className="w-full aspect-square  border-none bg-cover  bg-[url('Gradient2.png')] border-2 rounded-3xl"
             id="transition"
           ></div>
           <div className="flex flex-col">
@@ -433,11 +433,11 @@ const Loader = () => {
 
               <div className="h-2 w-full flex flex-col justify-center self-center lg:px-2 px-1">
                 <div
-                  className="w-full h-full border-[1px]  border-white rounded-full"
+                  className="w-full h-full border-[1px]  border-black rounded-full"
                   id="bar"
                 >
                   <div
-                    className="w-[1%] h-full border-[1px]  border-white bg-white rounded-full"
+                    className="w-[1%] h-full border-[1px]  bg-black rounded-full"
                     id="progress"
                   ></div>
                 </div>

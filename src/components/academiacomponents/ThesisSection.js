@@ -13,10 +13,10 @@ function ThesisSection() {
   const [abstractdeployed, setabstractdeployed] = useState(true);
 
   return (
-    <div className="w-full flex flex-row justify-evenly lg:gap-16 gap-8 -mt-2">
+    <div className="w-full flex flex-row justify-left lg:gap-16 gap-8 -mt-2">
       <div className="absolute show -mt-40 h-10 w-10 invisible" id="thesis" />
-      <div className="w-1/2 flex flex-col justify-start content-end items-center mb-20">
-        <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
+      {/* <div className="w-1/2 flex flex-col justify-start content-end items-center mb-20"> */}
+        {/* <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
           <div className="h-px grow bg-violet-500 dark:bg-violet-200"></div>
           <div className="font-inter font-bold text-lg dark:text-violet-300">
             Abstract
@@ -82,38 +82,36 @@ function ThesisSection() {
         <ShowMore
           isdeployed={abstractdeployed}
           setdeployed={setabstractdeployed}
-        />
-      </div>
-      <div className="flex flex-col items-center gap-0">
+        /> */}
+      {/* </div> */}
+      {/* <div className="flex flex-col items-center gap-0">
         <Timelinedot2 />
         <FillerBar />
-      </div>
-      <div className="w-1/2 h-full flex flex-col justify-end content-start items-start  mb-20">
+      </div> */}
+      <div className="w-1/2 h-full flex flex-col  mb-20">
         <div className="flex flex-col content-start gap-3 w-full h-full">
           <div className="text-lg font-inter font-bold  -800 text-left mb-3">
             {" "}
-            Masters' thesis : Automatic Music Tagging at Scale towards better
-            Musical recommendations
+            Masters' thesis : Automatic Music Tagging at Scale Towards Better
+            Musical Recommendations
           </div>
           <div className="flex flex-row gap-3 text-[10px] font-inter text-violet-700 justify-start mb-5 flex-wrap">
             <Academiatag text={"Music Information Retrieval"} />
             <Academiatag text={"Music Tagging"} />
             <Academiatag text={"Machine Learning"} />
-            <Academiatag text={"Music technology"} />
-          </div>
-          <div className="flex flex-row gap-5 items-center justify-start">
+            <Academiatag text={"Music technology"} /><div className="flex flex-row gap-5 items-center justify-start">
             <a
               href="/TFE.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className=" rounded-full px-6 py-2 block-shadow bg-white flex flex-row gap-3 active:bg-red-500 active:scale-95 active:text-white select-none border-[1px] border-red-500 hover:border-red-400 text-red-500 hover:text-red-600 transition-all duration-[20ms] items-center shadow-sm shadow-gray-400 group hover:bg-gray-100 cursor-pointer"
+              className=" rounded-full py-2 flex flex-row gap-3 active:scale-95 active:text-black select-none border-red-500 hover:border-red-400 text-black hover:text-red-600 transition-all duration-[20ms] items-center group cursor-pointer"
             >
               <BsFileEarmarkPdf size={18} />
-              <div className="font-inter text-red-500 text-xs group-hover:text-red-600 group-active:text-white">
-                Open full pdf
-              </div>
+
             </a>
           </div>
+          </div>
+          
 
           {/* <div className="flex flex-col mt-6 items-start gap-3">
             <div className="text-base font-inter text-violet-500 font-bold text-left mb-3">
@@ -177,12 +175,12 @@ function ThesisSectionSmall() {
                 href="/TFE.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" rounded-full px-6 py-2 bg-white flex block-shadow flex-row gap-3 active:bg-red-500 active:scale-95 active:text-white select-none border-[1px] border-red-500 hover:border-red-400 text-red-500 hover:text-red-600 transition-all duration-[20ms] items-center shadow-sm shadow-gray-400 group hover:bg-gray-100 cursor-pointer"
+                className=" rounded-full py-2 flex flex-row gap-3 active:scale-95 active:text-black select-none border-red-500 hover:border-red-400 text-black hover:text-red-600 transition-all duration-[20ms] items-center group cursor-pointer"
               >
                 <BsFileEarmarkPdf size={18} />
-                <div className="font-inter text-red-500 text-xs group-hover:text-red-600 group-active:text-white">
+                {/* <div className="font-inter text-red-500 text-xs group-hover:text-red-600 group-active:text-white">
                   Open full pdf
-                </div>
+                </div> */}
               </a>
             </div>
 
@@ -215,7 +213,7 @@ function ThesisSectionSmall() {
             </div> */}
           </div>
         </div>
-        <div className="w-full flex flex-col justify-start content-end items-center mb-20">
+        {/* <div className="w-full flex flex-col justify-start content-end items-center mb-20">
           <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
             <div className="h-px grow bg-violet-500 dark:bg-violet-200"></div>
             <div className="font-inter font-bold text-lg dark:text-violet-300">
@@ -286,7 +284,7 @@ function ThesisSectionSmall() {
             isdeployed={abstractdeployed}
             setdeployed={setabstractdeployed}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -8,34 +8,33 @@ import {
 
 function AssignmentSection() {
   return (
-    <div className="lg:w-full md:w-[calc(100%-10rem)] w-[calc(100%-3rem)] h-auto flex flex-row justify-evenly lg:gap-16 gap-8 -mt-2 mb-10">
+    <div className="lg:w-full md:w-[calc(100%-10rem)] w-[calc(100%-3rem)] h-auto flex flex-row justify-left lg:gap-16 gap-8 -mt-2 mb-10">
       <div
         className="absolute show -mt-40 h-10 w-10 invisible"
         id="assignments"
       /> 
-      <div className="lg:w-1/2 w-full h-full flex flex-col justify-start content-end items-end">
-        <div className="flex flex-col content-start items-end gap-3 w-full h-full">
-          <div className="flex flex-row justify-between items-center gap-3 w-full mb-3">
+      {/* <div className="lg:w-1/2 w-full h-full flex flex-col justify-start content-end items-end">
+        <div className="flex flex-col content-start items-end gap-3 w-full h-full"> */}
+          {/* <div className="flex flex-row justify-between items-center gap-3 w-full mb-3">
             <div className="h-px grow bg-gray-500"></div>
             <div className="font-inter text-base     ">Context</div>
             <div className="h-px grow bg-gray-500"></div>
-          </div>
+          </div> */}
 
-          <div className="font-inter text-base text-justify flex flex-col gap-3      w-full mb-5">
+          {/* <div className="font-inter text-base text-justify flex flex-col gap-3      w-full mb-5">
             <p>
               Over the course of my graduate studies at Ecole Centrale de Lyon,
               I completed multiple assignments. Though not research related they
-              give a standard for my writing as well as academic work. Here you
-              can find the assignment and the grade received.
+              give a standard for my writing as well as academic work.
             </p>
           </div>
         </div>
-      </div>
-      <div className="flex flex-col items-center gap-0">
+      </div> */}
+      {/* <div className="flex flex-col items-center gap-0">
         <Timelinedot2 />
         <FillerBar />
-      </div>
-      <div className="w-1/2 flex flex-col justify-start content-end items-start mb-20">
+      </div> */}
+      <div className="w-full flex flex-col justify-start content-end items-start mb-20">
         <div className="text-lg font-inter font-bold      text-right mb-3">
           {" "}
           Graduate assignments
@@ -116,18 +115,18 @@ function AssignmentSectionSmall() {
               Graduate Assignments
             </div>
 
-            <div className="flex flex-row justify-between items-center gap-3 w-full mb-3">
+            {/* <div className="flex flex-row justify-between items-center gap-3 w-full mb-3">
               <div className="h-px grow bg-gray-500"></div>
               <div className="font-inter text-base     ">Context</div>
               <div className="h-px grow bg-gray-500"></div>
-            </div>
+            </div> */}
 
             <div className="font-inter text-sm text-justify flex flex-col gap-3      mb-5">
               <p>
                 Over the course of my graduate studies at Ecole Centrale de
                 Lyon, I completed multiple assignments. Though not research
                 related they give a standard for my writing as well as academic
-                work. Here you can find the assignment and the grade received.
+                work. 
               </p>
             </div>
 

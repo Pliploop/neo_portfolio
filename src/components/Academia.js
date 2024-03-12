@@ -119,9 +119,9 @@ const AcademiaSection = () => {
   const animate = () => {};
 
   return (
-    <div className="relative  dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-none bg-blur-xl lg:bg-[url('AcademiaGradient.png')] bg-opacity-75 lg:py-12 lg:px-32 p-6  scrollbar-hide">
+    <div className="relative  dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-3xl bg-blur-xl lg:bg-[url('AcademiaGradient.png')] bg-opacity-25 lg:py-12 lg:px-32 p-6  scrollbar-hide">
       <AllHeader
-        pagename={"Academia"}
+        pagename={"Research"}
         hoveraccent={"emerald-200"}
         clickaccent={"sky-300"}
       />
@@ -130,21 +130,19 @@ const AcademiaSection = () => {
         <div className="absolute top-0 left-0 bg-[url('AcademiaGradient.png')] bg-contain blur-3xl w-full h-full lg:hidden"></div>
         <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-50 opacity-0 transition-opacity duration-200 bg-black show" />
         <div className="relative">
+          <AcademiaHeader text={"Publications"} />
+          <p className="lg:px-10 mb-10">Nothing here yet! We're getting there ;)</p>
           <AcademiaHeader text={"My Research"} />
           <HeroSection />
           <AcademiaHeader text={"Writing samples"} />
 
           <AcademiaNav />
           <div className="lg:px-10 w-full mb-0 lg:text-sm  text-sm text-black dark:text-white font-inter">
-            <div className="w-full mb-3 text-justify">
-              Here you'll find some of the papers I wrote in an academic
-              context. Though I do not have any published articles at the
-              moment, I used my writing skills many times over the course of my
-              studies. My most recent of course being my masters' thesis, or
-              final dissertation.
+            <div className="w-full mb-20 text-justify">
+              Some writing samples I've cooked up over the years through my studies and/or projects.
             </div>
 
-            <div className="w-full  mb-20 text-justify">
+            {/* <div className="w-full  mb-20 text-justify">
               Some of the other papers included in this section comprise{" "}
               <b>
                 Research internships and project reports, assignments and
@@ -160,7 +158,7 @@ const AcademiaSection = () => {
               convenience but have yet to translate the 120 pages. I hope to get
               to that soon. I've elected to include them in chronological order
               as it is also order of relevance to my research interests.
-            </div>
+            </div> */}
 
             <div className="justify-center items-center lg:flex flex-col hidden">
               <ThesisSection />

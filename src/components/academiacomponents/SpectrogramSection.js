@@ -15,63 +15,61 @@ function SpectrogramSection() {
   // const [lang, setlang] = useState("english");
 
   return (
-    <div className="lg:w-full md:w-[calc(100%-10rem)] w-[calc(100%-3rem)] h-auto flex flex-row justify-evenly lg:gap-16 gap-8 -mt-2 mb-10">
+    <div className="lg:w-full md:w-[calc(100%-10rem)] w-[calc(100%-3rem)] h-auto flex flex-row justify-left lg:gap-16 gap-8 -mt-2 mb-10">
       <div
         className="absolute show -mt-40 h-10 w-10 invisible"
         id="spectrogram"
       />
-      <div className="lg:w-1/2 w-full h-full flex flex-col justify-start content-end items-end">
-        <div className="flex flex-col content-start items-end gap-3 w-full h-full">
-          <div className="text-lg font-inter font-bold   -800 text-right mb-3">
+      <div className="lg:w-full w-full h-full flex flex-col ">
+        <div className="flex flex-col gap-3 w-full h-full">
+          <div className="text-lg font-inter font-bold mb-3">
             {" "}
-            Vocalist classification with spectrogram CNNs
+            Vocalist classification with CNNs
           </div>
-          <div className="flex flex-row gap-3 text-[10px] font-inter text-violet-700 justify-end mb-5 flex-wrap">
+          <div className="flex flex-row gap-3 text-[10px] font-inter text-violet-700 mb-5 flex-wrap">
             <Academiatag text={"Music Information Retrieval"} />
             <Academiatag text={"Music Tagging"} />
             <Academiatag text={"Machine Learning"} />
-            <Academiatag text={"Singing voice"} />
-          </div>
-          
-
-          <div className="flex flex-row gap-5 items-center justify-end">
+            <Academiatag text={"Singing voice"} /><div className="flex flex-row gap-5 items-center justify-end">
             <a
               href="/RecoNet.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className=" rounded-full px-3 py-2 bg-white flex flex-row gap-3 active:bg-red-500 active:scale-95 active:text-white select-none border-[1px] border-red-500 hover:border-red-400 text-red-500 hover:text-red-600 transition-all duration-[20ms] items-center shadow-sm shadow-gray-400 group hover:bg-gray-100 cursor-pointer"
-            >
+              className=" rounded-full py-2 flex flex-row gap-3 active:scale-95 active:text-black select-none border-red-500 hover:border-red-400 text-black hover:text-red-600 transition-all duration-[20ms] items-center group cursor-pointer"
+           
+              >
               <BsFileEarmarkPdf size={18} />
-              <div className="font-inter text-red-500 text-xs group-hover:text-red-600 group-active:text-white">
-                View pdf
-              </div>
+              
             </a>
             <a
               href="/Deck.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className=" rounded-full px-3 py-2 bg-white flex flex-row gap-3 active:bg-orange-500 active:scale-95 active:text-white select-none border-[1px] border-orange-500 hover:border-orange-400 text-orange-500 hover:text-orange-600 transition-all duration-[20ms] items-center shadow-sm shadow-gray-400 group hover:bg-gray-100 cursor-pointer"
-            >
+              className=" rounded-full py-2 flex flex-row gap-3 active:scale-95 active:text-black select-none border-red-500 hover:border-red-400 text-black hover:text-orange-600 transition-all duration-[20ms] items-center group cursor-pointer"
+           >
               <SiMicrosoftpowerpoint size={18} />
-              <div className="font-inter text-orange-500 text-xs group-hover:text-orange-600 group-active:text-white">
-                View Slide Deck
-              </div>
+              
             </a>
             <a
               href="https://github.com/Pliploop/Spectrogram_Artist_Recognition"
               target="_blank"
               rel="noopener noreferrer"
-              className=" rounded-full px-3 py-2 bg-white flex flex-row gap-3 active:bg-purple-500 active:scale-95 active:text-white select-none border-[1px] border-purple-500 hover:border-purple-400 text-purple-500 hover:text-purple-600 transition-all duration-[20ms] items-center shadow-sm shadow-gray-400 group hover:bg-gray-100 cursor-pointer"
-            >
+              
+              className=" rounded-full py-2 flex flex-row gap-3 active:scale-95 active:text-black select-none border-red-500 hover:border-red-400 text-black hover:text-purple-600 transition-all duration-[20ms] items-center group cursor-pointer"
+           >
               <VscGithub size={18} />
-              <div className="font-inter text-purple-500 text-xs group-hover:text-purple-600 group-active:text-white">
+              {/* <div className="font-inter text-purple-500 text-xs group-hover:text-purple-600 group-active:text-white">
                 Github
-              </div>
+              </div> */}
             </a>
           </div>
+          </div>
+          
+
+          
         </div>
       </div>
-      <div className="flex flex-col items-center gap-0">
+      {/* <div className="flex flex-col items-center gap-0">
         <Timelinedot2 />
         <FillerBar />
       </div>
@@ -124,7 +122,7 @@ function SpectrogramSection() {
           isdeployed={abstractdeployed}
           setdeployed={setabstractdeployed}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -143,7 +141,7 @@ function SpectrogramSectionSmall() {
           <div className="flex flex-col gap-3 w-full h-full">
             <div className="text-lg font-inter font-bold   -800 text-left mb-3">
               {" "}
-              Vocalist classification with spectrogram CNNs
+              Vocalist classification with CNNs
             </div>
             <div className="flex flex-row gap-3 text-[10px] font-inter text-violet-700 justify-start mb-5 flex-wrap">
               <Academiatag text={"Music Information Retrieval"} />
@@ -158,40 +156,36 @@ function SpectrogramSectionSmall() {
                 href="/RecoNet.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" rounded-full px-3 py-2 bg-white flex flex-row gap-3 active:bg-red-500 active:scale-95 active:text-white select-none border-[1px] border-red-500 hover:border-red-400 text-red-500 hover:text-red-600 transition-all duration-[20ms] items-center shadow-sm shadow-gray-400 group hover:bg-gray-100 cursor-pointer"
-              >
+                
+                className=" rounded-full py-2 flex flex-row gap-3 active:scale-95 active:text-black select-none border-red-500 hover:border-red-400 text-black hover:text-red-600 transition-all duration-[20ms] items-center group cursor-pointer"
+           >
                 <BsFileEarmarkPdf size={18} />
-                <div className="font-inter text-red-500 text-xs group-hover:text-red-600 group-active:text-white">
-                  View pdf
-                </div>
+                
               </a>
               <a
                 href="/Deck.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" rounded-full px-3 py-2 bg-white flex flex-row gap-3 active:bg-orange-500 active:scale-95 active:text-white select-none border-[1px] border-orange-500 hover:border-orange-400 text-orange-500 hover:text-orange-600 transition-all duration-[20ms] items-center shadow-sm shadow-gray-400 group hover:bg-gray-100 cursor-pointer"
-              >
+                className=" rounded-full py-2 flex flex-row gap-3 active:scale-95 active:text-black select-none border-red-500 hover:border-red-400 text-black hover:text-orange-600 transition-all duration-[20ms] items-center group cursor-pointer"
+           >
                 <SiMicrosoftpowerpoint size={18} />
-                <div className="font-inter text-orange-500 text-xs group-hover:text-orange-600 group-active:text-white">
-                  View Slide Deck
-                </div>
+                
               </a>
               <a
                 href="https://github.com/Pliploop/Spectrogram_Artist_Recognition"
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" rounded-full px-3 py-2 bg-white flex flex-row gap-3 active:bg-purple-500 active:scale-95 active:text-white select-none border-[1px] border-purple-500 hover:border-purple-400 text-purple-500 hover:text-purple-600 transition-all duration-[20ms] items-center shadow-sm shadow-gray-400 group hover:bg-gray-100 cursor-pointer"
-              >
+                
+                className=" rounded-full py-2 flex flex-row gap-3 active:scale-95 active:text-black select-none border-red-500 hover:border-red-400 text-black hover:text-purple-600 transition-all duration-[20ms] items-center group cursor-pointer"
+           >
                 <VscGithub size={18} />
-                <div className="font-inter text-purple-500 text-xs group-hover:text-purple-600 group-active:text-white">
-                  Github
-                </div>
+                
               </a>
             </div>
           </div>
         </div>
 
-        <div className="w-full h-full flex flex-col justify-start content-center items-center">
+        {/* <div className="w-full h-full flex flex-col justify-start content-center items-center">
           <div className="flex flex-row justify-between items-center gap-3 w-full mb-5">
             <div className="h-px grow bg-violet-500 dark:bg-violet-300"></div>
             <div className="font-inter font-bold text-lg   dark:text-violet-300">
@@ -240,7 +234,7 @@ function SpectrogramSectionSmall() {
             isdeployed={abstractdeployed}
             setdeployed={setabstractdeployed}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

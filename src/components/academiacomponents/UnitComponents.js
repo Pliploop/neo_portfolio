@@ -5,7 +5,7 @@ import { VscGithub } from "react-icons/vsc";
 
 const Academiatag = ({ text }) => {
   return (
-    <div className="rounded-full px-2 py-1.5 bg-white block-shadow border-violet-500 pressable border-[1px] items-center justify-center">
+    <div className="rounded-full px-2 py-1.5 dark:border-violet-200 dark:text-violet-200 dark:bg-none border-violet-500 pressable border-[1px] items-center justify-center">
       {text}
     </div>
   );
@@ -13,7 +13,7 @@ const Academiatag = ({ text }) => {
 
 const Academiatag2 = ({ text }) => {
   return (
-    <div className="rounded-full text-sm px-2 py-2 content-center text-center block-shadow pressable bg-white border-violet-500 border-[1px] items-center justify-center">
+    <div className="rounded-full text-sm px-2 py-2 dark:bg-none content-center text-center pressable bg-white border-violet-500 border-[1px] items-center justify-center">
       {text}
     </div>
   );
@@ -59,7 +59,7 @@ const Pdfbutton = ({href}) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className=" rounded-full p-2 px-5 justify-center flex flex-row gap-3 bg-white block-shadow active:bg-white active:scale-95 active:text-gray-600 select-none text-red-500 hover:text-red-600 transition-all duration-[30ms] border-[1px] border-red-500 active:border-gray-500 items-center shadow-gray-300 group hover:bg-gray-0 cursor-pointer"
+      className=" rounded-full p-2 justify-center flex flex-row gap-3 active:scale-95 select-none text-black hover:text-red-600 transition-all duration-[30ms]  items-center  cursor-pointer"
     >
       <BsFileEarmarkPdf size={14} />
     </a>
@@ -73,7 +73,7 @@ const GithubButton = ({href}) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className=" rounded-full p-2 px-5 justify-center bg-white block-shadow flex flex-row gap-3 active:bg-white active:scale-95 active:text-gray-600 select-none text-purple-500 hover:text-purple-600 transition-all duration-[30ms] border-[1px] border-purple-500 active:border-gray-500 items-center shadow-gray-300 group hover:bg-gray-0 cursor-pointer"
+      className=" rounded-full p-2 justify-center flex flex-row gap-3 active:scale-95 active:text-purple-600 select-none text-black hover:text-purple-600 transition-all duration-[30ms] items-center shadow-gray-300 group cursor-pointer"
     >
       <VscGithub size={14} />
     </a>
