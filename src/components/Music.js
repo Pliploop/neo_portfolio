@@ -40,7 +40,7 @@ const MusicSection = () => {
           <div className="w-full" id="all">
             <MusicHeader text="My Music" />
             <MusicNav />
-            <MusicIntro />
+            {/* <MusicIntro /> */}
             {/* </div> */}
             <div className="flex flex-col w-full  mb-20">
               <div
