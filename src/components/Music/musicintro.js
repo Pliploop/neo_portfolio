@@ -4,21 +4,15 @@ const MusicIntro = () => {
     <div className=" flex lg:flex-col flex-col mb-20 gap-10">
       <div className=" lg:w-full w-full lg:px-10 font-inter text-sm flex lg:flex-row flex-col lg:mb-0 mb-10 gap-10">
         <p className="text-justify">
-          Music has been the focal point of my life for the past 5 years. I
+          Music has been the focal point of my life forever. I
           started playing music about 8 years ago with guitar, and have never
           stopped since. I love learning new instruments, new skills, and new
-          areas of music I have never explored before. The creative puzzle music
-          is to me makes me motivated to become the best I can at it, and
-          combining it with research and artificial intelligence could not make
-          me happier.{" "}
+          areas of music I have never explored before.{" "}
         </p>
         <p className="text-justify">
           I am motivated by and interested in all areas of music. I have dabbled
           in and explored performance, being a multi-instrumentalist, a
-          vocalist, mixing, mastering, composing, arranging, producing, and
-          music theory even though I do not have a formal musical education. And
-          of course, I'm always open to learning more! There are few things I am
-          more curious about than music.
+          vocalist, mixing, mastering, composing, arranging, producing...
         </p>
       </div>
       <div className=" grow flex lg:flex-row flex-col lg:space-y-0 space-y-5 justify-evenly lg:space-x-6 lg:mx-6 lg:h-52 dark:text-black">
