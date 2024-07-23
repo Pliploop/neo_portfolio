@@ -231,6 +231,8 @@ const MusicFeatured = () => {
         return "https://www.youtube.com/watch?v=MUyIXcaW89s&ab_channel=FonkeyBusiness";
       case 2:
         return "https://youtu.be/sIvH9gapjvc?si=MeHXO4TSO0XmGfcq";
+      case 3:
+        return "https://www.youtube.com/watch?v=9fj4GnkUb2o";
     }
   };
 
@@ -241,7 +243,7 @@ const MusicFeatured = () => {
     if (tempactive === -1) {
       tempactive = 2;
     }
-    if (tempactive === 3) {
+    if (tempactive === 4) {
       tempactive = 0;
     }
     setActiveTabFonkey(tempactive);
@@ -296,6 +298,14 @@ const MusicFeatured = () => {
                 }}
               >
                 Don't stop the music
+              </div>
+              <div className={`h-full lg:border-t-0 border-t-[1px]  p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-rose-100 transition-colors duration-300 lg:border-r-[1px] border-black bg-white ${
+                activeTabFonkey === 3 ? "bg-rose-100" : "bg-white"}`}
+                onClick={() => {
+                  setActiveTabFonkey(3);
+                }}
+                >
+                Redbone
               </div>
               <div>
                 <BsArrowRightShort
@@ -361,9 +371,7 @@ const MusicFeatured = () => {
               ></div>
               <p className="font-inter  text-sm">
                 I'm also part of a funk-soul-RnB band for which I am bassist,
-                mixing engineer and mastering engineer. We treated ourselves to
-                a studio recording session to record some covers, which you can
-                see here.
+                mixing engineer and mastering engineer. We mostly record live studio versions of covers (so far!).
               </p>
               <div>
                 <div className="flex flex-row items-center gap-2 p-2">
@@ -384,6 +392,13 @@ const MusicFeatured = () => {
 
                 <div className="flex flex-row items-center gap-2 p-2">
                   Jamie Cullum - Don't stop the music
+                  <SiSpotify
+                    size={20}
+                    className="pressable hover:text-emerald-500 hover:stroke-[1px] stroke-black hover:block-shadow"
+                  ></SiSpotify>
+                </div>
+                <div className="flex flex-row items-center gap-2 p-2">
+                  Childish Gambino - Redbone
                   <SiSpotify
                     size={20}
                     className="pressable hover:text-emerald-500 hover:stroke-[1px] stroke-black hover:block-shadow"
@@ -423,24 +438,15 @@ const MusicFeatured = () => {
               ></div>
               <p className=" mb-3 text-sm">
                 This is an OST I composed, produced and mix-mastered for the
-                trailer of an animated series on ancient Aztecs. The trailer was
-                to give a taste of the series and lasted about 2mins.
-              </p>
-              <p className="  mb-3 text-sm">
-                I scored this over an animated trailer. The goal was to create a
-                dreamy rainforest ambient sound at the start. As the village
-                gets closer and the ceremony depicted in the trailer can be
-                heard more and more clearly, We transition to recorded samples
-                of south american chants.
+                trailer of an animated series on ancient Aztecs.
               </p>
               <p className="mb-10 text-sm">
                 I used samples of traditional drums from south america, samples
                 of aztec death whistles and my own voice to create a "tribal
-                chant" in the final movement.
+                chant" following a lush rainforest-ish soundscape.
               </p>
-
               <p className="font-mono text-xs text-gray-500  mb-3">
-                Fun fact : I generated the cover of the album using stable
+                The album cover was generated using stable
                 diffusion!
               </p>
             </div>
@@ -548,16 +554,7 @@ const MusicFeatured = () => {
                   </div>
                   <p className="font-inter  text-sm  mb-3  text-justify">
                     I produced this disco house track during the first lockdown
-                    (2020) to integrate into my DJ sets. I used ableton and this
-                    was first time producing something from scratch. I learned a
-                    lot about mixing producing this! I play the guitar and bass
-                    on this track.
-                  </p>
-                  <p className="font-inter  text-sm  mb-3  text-justify">
-                    Note : this is a remastered version of the track, In which I
-                    corrected the tonal balance as low-end was much too present
-                    (specifically kick was overpowering) and glued the mix
-                    together a bit more using saturation and compression.
+                    (2020) to integrate into my DJ sets.
                   </p>
                 </div>
               </div>
@@ -604,15 +601,13 @@ const MusicFeatured = () => {
                   </div>
 
                   <p className="font-inter  text-sm  mb-3 text-justify">
-                    This is what I consider to be the best mix I produced from
-                    the latest album of the student musical I was part of for 4
-                    years (See mix/mastering). It's my latest mix and represents
-                    my mixing ability well.
+                    This is the latest mix I produced from
+                    the album of the last edition of the student musical I was part of for 4
+                    years (See mix/mastering).
                   </p>
                   <p className="font-inter  text-sm  mb-5 text-justify">
-                    I am also specifically proud of this track because I was the
-                    vocal coach for the main performer and I believe the
-                    performance turned out quite well.
+                    I am also proud of this track as I was the
+                    vocal coach for the main performer.
                   </p>
                 </div>
               </div>

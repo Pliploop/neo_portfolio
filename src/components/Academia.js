@@ -22,6 +22,11 @@ import { HeroSection } from "./academiacomponents/academiaHero";
 
 import { useEffect, useState } from "react";
 
+import { VscGithub } from "react-icons/vsc";
+import { SiArxiv } from "react-icons/si";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
+
 const scrollto = (id) => {
   console.log("scrolling to " + id);
   let element = document.getElementById(id);
@@ -89,7 +94,7 @@ const AcademiaNav = () => {
                 IRCAM research internship
               </div>
             </li>
-            <li class=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            {/* <li class=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
               <div
                 class="subnav-tag"
                 onClick={() => {
@@ -98,7 +103,7 @@ const AcademiaNav = () => {
               >
                 Assignments
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
@@ -119,7 +124,7 @@ const AcademiaSection = () => {
   const animate = () => {};
 
   return (
-    <div className="relative  dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-3xl bg-blur-xl lg:bg-[url('AcademiaGradient.png')] bg-opacity-25 lg:py-12 lg:px-32 p-6  scrollbar-hide">
+    <div className="relative  dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-3xl bg-blur-xl bg-opacity-25 lg:py-12 lg:px-32 p-6  scrollbar-hide">
       <AllHeader
         pagename={"Research"}
         hoveraccent={"emerald-200"}
@@ -127,11 +132,28 @@ const AcademiaSection = () => {
       />
 
       <div id="all">
-        <div className="absolute top-0 left-0 bg-[url('AcademiaGradient.png')] bg-contain blur-3xl w-full h-full lg:hidden"></div>
+        <div className="absolute top-0 left-0 bg-contain blur-3xl w-full h-full lg:hidden"></div>
         <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-50 opacity-0 transition-opacity duration-200 bg-black show" />
         <div className="relative">
+          
           <AcademiaHeader text={"Publications"} />
-          <p className="lg:px-10 mb-10">Nothing here yet! We're getting there ;)</p>
+          <div className="flex flex-col  lg:mt-0 mt-10 mb-10">
+            <div className="w-full flex lg:flex-row justify-between">
+              <div className="grow flex flex-col justify-between gap-5 lg:px-12 lg:text-base text-sm">
+      
+                <Paper
+                  title={"Semi-Supervised Contrastive Learning of Musical Representations"}
+                  authors={["Julien Guinot", "Elio Quinton", "George Fazekas"]}
+                  affiliations={["Queen Mary University of London", "Universal Music Group"]}
+                  affiliations_indices={["1,2", "2", "1"]}
+                  venue={"25th International Society for Music Information Retrieval Conference (ISMIR 2024) "}
+                  abstract={"Despite the success of contrastive learning in Music Information Retrieval, the inherent ambiguity of contrastive self-supervision presents a challenge. Relying solely on augmentation chains and self-supervised positive sampling strategies can lead to a pretraining objective that does not capture key musical information for downstream tasks. We introduce semi-supervised contrastive learning (SemiSupCon), a simple method for leveraging musically informed labeled data (supervision signals) in the contrastive learning of musical representations. Our approach introduces musically relevant supervision signals into self-supervised contrastive learning by combining supervised and self-supervised contrastive objectives in a simpler framework than previous approaches. This framework improves downstream performance and robustness to audio corruptions on a range of downstream MIR tasks with moderate amounts of labeled data. Our approach enables shaping the learned similarity metric through the choice of labeled data that (1) infuses the representations with musical domain knowledge and (2) improves out-of-domain performance with minimal general downstream performance loss. We show strong transfer learning performance on musically related yet not trivially similar tasks - such as pitch and key estimation. Additionally, our approach shows performance improvement on automatic tagging over self-supervised approaches with only 5\% of available labels included in pretraining."}
+                  arxiv={"https://arxiv.org/abs/2407.13840"}
+                  github={"https://github.com/Pliploop/SemiSupCon"}
+                />
+                </div>
+              </div>
+            </div>
           <AcademiaHeader text={"My Research"} />
           <HeroSection />
           <AcademiaHeader text={"Writing samples"} />
@@ -164,7 +186,7 @@ const AcademiaSection = () => {
               <ThesisSection />
               <SpectrogramSection />
               <IRCAMSection />
-              <AssignmentSection />
+              {/* <AssignmentSection /> */}
             </div>
 
             <div className="justify-center items-center lg:hidden flex flex-col">
@@ -172,7 +194,7 @@ const AcademiaSection = () => {
               <ThesisSectionSmall />
               <SpectrogramSectionSmall />
               <IRCAMSectionSmall />
-              <AssignmentSectionSmall />
+              {/* <AssignmentSectionSmall /> */}
             </div>
             {/* <div className="justify-center items-center align-middle content-center lg:flex hidden">
           <div className=" flex flex-col content-center items-center justify-evenly w-6">
@@ -199,6 +221,122 @@ const AcademiaHeader = ({ text }) => {
     </div>
   );
 };
+
+
+
+// Write  a component for paper including fields for title, authors, venue, absract (default hidden), links to arxiv, github
+// title, authors, venue and abstract should be vertically stacked
+// arxiv and github badges should be on a div to the right of the abstract
+
+
+const AuthorsAndAffiliations = ({ authors, affiliations, affiliations_indices }) => {
+  // authors is an array of objects with name. The first author is always the first author
+  // affiliations is an array of arrays with affiliations. one person can have multiple affiliations
+  // authors and affiliations are the same length. affiliations are denoted with exponents. For example,
+  // Julien Guinot ^1,2, George Fazekas^2, Elio Quinton^1
+  // ^2Queen Mary University of London, ^1Universal Music Group
+  // two vertically stacked divs, one for authors and one for affiliations
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="font-inter text-base text-gray-800 dark:text-white">
+        {authors.map((author, index) => {
+          return (
+            <span key={index} className={`${index === 0 ? "font-black" : ""}`}>
+              {author}<sup> {`${index == 0 ? "*" : ""}`}</sup><sup className="text-violet-500">{affiliations_indices[index]}</sup>
+              {index < authors.length - 1 ? ", " : ""}
+            </span>
+          );
+        })}
+
+      </div>
+      <div className="font-inter text-xs text-gray-600 dark:text-white">
+        {affiliations.map((affiliation, index) => {
+          return (
+            <span key={index}>
+              <sup className="text-violet-400">{index + 1}</sup>
+              {affiliation}
+              {index < affiliations.length - 1 ? ", " : ""}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const Abstract = ({ abstract }) => {
+  // expandable class that by default is hidden and can be expanded by clicking on it. Should contain 'show asbtract' button when hidden and 'hide abstract' when shown
+  const [isExpanded, setIsExpanded] = useState(false);
+  return (
+    <div className="flex flex-col gap-3">
+      {/* create a div that expands and contracts with an animation based on isexanded */}
+      <div
+
+        className={`font-inter text-sm text-gray-500 ${
+          isExpanded ? "h-auto" : "h-0"
+        } overflow-hidden transition-all duration-200 dark:text-white italic`}
+      >
+        {abstract}
+      </div>
+
+      <div className="font-inter text-sm text-gray-800 dark:text-white cursor-pointer hover:text-violet-400 flex flex-row" onClick={() => setIsExpanded(!isExpanded)}>
+        
+        {/* down or up arrow depeding on expanded or no*/}
+        {isExpanded ? "Hide abstract" : "Show abstract"}
+        {isExpanded ? <IoIosArrowUp size={20} /> : <IoIosArrowDown size={20} />}
+      </div>
+    </div>
+  );
+};
+
+
+
+
+const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abstract, arxiv, github }) => {
+  return (
+    <div className="flex flex-row justify-between items-start gap-5">
+      <div className="flex flex-col gap-3">
+        <div className="font-inter text-lg font-semibold text-gray-800 dark:text-white">{title}</div>
+        {/* first author is bolded and starred, attributions are denoted by exponents in purple, with map */}
+        <AuthorsAndAffiliations authors={authors} affiliations={affiliations} affiliations_indices={affiliations_indices}/>
+        <div className="font-inter text-sm text-black italic dark:text-white">{venue}</div>
+        <Abstract abstract={abstract} />
+      </div>
+      <div className="flex flex-col gap-3 dark:text-white">
+        <div className="flex flex-row gap-3">
+          <a
+
+            href={arxiv}
+            target="_blank"
+            rel="noopener noreferrer"
+
+            className="rounded-2xl px-3 py-1 flex flex-row gap-3 items-center hover:text-violet-400"
+          >
+            <SiArxiv size={20} />
+            <div className="font-inter text-xs hover:text-violet-400">
+              ArXiv
+            </div>
+          </a>
+          <a  href={github}
+
+            target="_blank"
+            rel="noopener noreferrer"
+
+            className="rounded-full px-3 py-2 flex flex-row gap-3 items-center hover:text-violet-400"
+          >
+            <VscGithub size={20} />
+            <div className="font-inter text-xs group-active:text-white">
+              Github
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
 
 // function SpectrogramSection() {
 //   // const [lang, setlang] = useState("english");

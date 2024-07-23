@@ -6,6 +6,9 @@ import {
   AiOutlineMedium,
   AiOutlineTwitter,
 } from "react-icons/ai";
+import { SiGooglescholar } from "react-icons/si";
+
+
 
 const ContactFooter = ({ pagename }) => {
   const openLinkInNewTab = (url) => {
@@ -44,6 +47,21 @@ const ContactFooter = ({ pagename }) => {
             ></AiFillGithub>
           </a>
           <a
+            href="https://scholar.google.com/citations?user=pk3boQEAAAAJ&hl=en"
+            target="_blank"
+            onClick={() =>
+              openLinkInNewTab(
+                "https://scholar.google.com/citations?user=pk3boQEAAAAJ&hl=en"
+              )
+            }
+            className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
+          >
+            <SiGooglescholar
+              className="group-active:text-orange-200 transition-all duration-100 group-active:scale-90"
+              size={22}
+            ></SiGooglescholar>
+          </a>
+          <a
             href="https://www.linkedin.com/julien-guinot"
             target="_blank"
             onClick={() =>
@@ -78,6 +96,8 @@ const ContactFooter = ({ pagename }) => {
               size={26}
             ></AiOutlineMedium>
           </a>
+          {/* google scholar */}
+          
         </div>
       </div>
     </div>

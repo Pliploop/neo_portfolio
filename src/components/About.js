@@ -87,24 +87,19 @@ const AboutSection = () => {
             e
           </div>
           <p className="first-letter:text-rose-600 text-sm mb-6">
-            Hello! I’m Julien, a music afficionado with a vivid interest for
-            machine learning - researching both is my career! I’ve always loved
-            music. As a 10-year guitarist, bassist, producer, mixing engineer,
-            DJ, and vocalist, I'm passionate about what technology can bring to
-            music creation and undertanding! I'm interested in finding out what
-            machine learning can learn about music and how it can help producers
+            Hello! I’m Julien, music nut and AI adfficionado. As a musician, producer, mixing engineer, and DJ, I'm passionate about what technology can bring to
+            musical creation and undertanding. I'm interested in finding out what
+            AI can learn about music and how it can help producers
             and musicians move forward in the discovery of new ways of making
             music.
           </p>
           <p className="first-letter:text-rose-600 text-sm mb-8">
-            I've just started a PhD at Queen Mary University of London at the AI
-            and Music doctoral training center under the supervision of Pr.
+            I'm a first year PhD student at Queen Mary University of London at the AI
+            and Music Centre for Doctoral Training under the supervision of Pr.
             George Fazekas and Elio Quinton, sponsored by universal music group.
             Before this, I’ve obtained two Masters degrees, with a focus on
-            Musical acoustics and deep learning in France and Australia.
-            Throughout my internships and experiences at Sony CSL, Believe,
-            Groover, Artefact and IRCAM, I've worked with the following
-            technologies:
+            Musical acoustics and deep learning in France and Australia, with professional experiences at
+            Sony CSL, Believe, Groover, Artefact and IRCAM.
           </p>
           <Infinitescroll></Infinitescroll>
         </div>
@@ -152,7 +147,7 @@ const Intro = () => {
 
         <p className="lg:text-base text-sm dark:text-rose-50 lg:w-5/6 text-justify">
           I'm passionate about marrying the technicality and creativity of music
-          and AI together. Helping musicians make music and machines understand
+          and AI. Helping musicians make music and machines understand
           it drives me. I'm currently a PhD student @Queen Mary University of
           London, in the AI and Music Doctoral Training Center, under the
           supervision of Both QMUL and Universal Music Group
