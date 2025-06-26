@@ -11,11 +11,13 @@ import { MusicMixMaster } from "../components/Music/musicmixmaster";
 import image from "../content/images/logo_countour.png";
 
 const MusicSection = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  const [showGradient, setShowGradient] = useState(false);
+  const [MeshGradientRenderer, setMeshGradientRenderer] = useState(null);
+
   const animate = () => {
     
   };
-
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     console.log(localStorage.theme);
@@ -24,11 +26,48 @@ const MusicSection = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  // Lazy load the MeshGradientRenderer
+  useEffect(() => {
+    const loadMeshGradient = async () => {
+      try {
+        const { MeshGradientRenderer } = await import('@johnn-e/react-mesh-gradient');
+        setMeshGradientRenderer(() => MeshGradientRenderer);
+        // Show gradient after a short delay for smooth fade-in
+        setTimeout(() => setShowGradient(true), 100);
+      } catch (error) {
+        console.error('Failed to load mesh gradient:', error);
+      }
+    };
+
+    loadMeshGradient();
+  }, []);
+
   return (
     // <div className="dark:bg-black  bg-gradient-to-b   from-emerald-100 to-sky-100 to-35% lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
 
-    <div className="dark:bg-emerald-950 relative float-left  bg-cover  bg-[url('MusicGradient.png')] dark:text-white lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
-      <div className="absolute top-0 left-0 bg-[url('MusicGradient.png')] bg-contain blur-3xl w-full h-full lg:hidden"></div>
+    <div className="dark:bg-gray-900 relative float-left bg-cover dark:text-white lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
+      {/* Animated mesh gradient background with fade-in */}
+      {MeshGradientRenderer && (
+        <div 
+          className={`transition-opacity duration-1000 ease-in-out ${
+            showGradient ? 'opacity-70' : 'opacity-0'
+          }`}
+        >
+          <MeshGradientRenderer
+            className="music-mesh-gradient-bg"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 0,
+              pointerEvents: 'none',
+            }}
+            colors={["#ffffff", "#5eead4", "#6ee7b7", "#a7f3d0", "#ffffff"]}
+            speed={0.005}
+          />
+        </div>
+      )}
       <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-70 opacity-0 transition-opacity duration-200 bg-black show" />
       <div className="z-10 relative">
         <div className="h-full  flex flex-col justify-between align-middle">
@@ -619,4 +658,4 @@ const MusicFeatured = () => {
   );
 };
 
-export default <MusicSection />;
+export default MusicSection;

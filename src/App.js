@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, 
   useLocation} from 'react-router-dom';
 import Loader from './components/Loading';
-import About from './components/About';
+import AboutPage from './components/AboutPage';
 import Projects from './components/Projects';
 import AcademiaSection from './components/Academia';
 import MusicSection from './components/Music';
@@ -45,21 +45,18 @@ const AnimationLayout = () => {
   );
 };
 
-
 const App = () => {
-
-  
   return (
     <Router>
       <ScrollToTop />
       
       <Routes >
-        <Route path="/" element={Loader} />
-        <Route path="/about" element={About} />
-        <Route path="/projects" element={Projects} />
-        <Route path="/academia" element={AcademiaSection} />
-        <Route path="/music" element={MusicSection} />
-        <Route path="/blog" element={Blog} />
+        <Route path="/" element={<Loader />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/academia" element={<AcademiaSection />} />
+        <Route path="/music" element={<MusicSection />} />
+        <Route path="/blog" element={<Blog />} />
       </Routes>
     </Router>
   );

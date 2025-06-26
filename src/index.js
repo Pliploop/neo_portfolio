@@ -7,9 +7,11 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"></link>
-    <link href="https://fonts.googleapis.com/css?family=DM Sans" rel="stylesheet"></link>
-    <link href="https://fonts.googleapis.com/css?family=Roboto Condensed" rel="stylesheet"></link>
+    {/* Move these <link> tags to public/index.html for best practice:
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=DM Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto Condensed" rel="stylesheet" />
+    */}
     <App />
   </React.StrictMode>
 );

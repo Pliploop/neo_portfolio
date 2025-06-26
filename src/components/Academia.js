@@ -27,8 +27,9 @@ import { SiArxiv } from "react-icons/si";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 
+
 const scrollto = (id) => {
-  console.log("scrolling to " + id);
+  // console.log("scrolling to " + id);
   let element = document.getElementById(id);
   element.scrollIntoView({ behavior: "smooth" });
 };
@@ -49,8 +50,8 @@ const SectionHeader = ({ text }) => {
 
 const AcademiaNav = () => {
   return (
-    <nav class=" border-black md:flex  dark:border-white backdrop-filter backdrop-blur-2xl bg-opacity-70 border-[1px]  sticky grow z-50 lg:top-24 top-20 mb-16 hidden select-none">
-      <div class="flex flex-wrap items-center justify-between w-full">
+    <nav className=" border-black md:flex  dark:border-white backdrop-filter backdrop-blur-2xl bg-opacity-70 border-[1px]  sticky grow z-50 lg:top-24 top-20 mb-16 hidden select-none">
+      <div className="flex flex-wrap items-center justify-between w-full">
         {/* <div
               onClick={() => {
                 scrollto("3");
@@ -62,11 +63,11 @@ const AcademiaNav = () => {
               </span>
             </div> */}
 
-        <div class=" w-full flex " id="navbar-sticky">
-          <ul class="flex w-full justify-evenly lg:text-base text-sm md:font-medium ">
-            <li class=" lg:text-base text-sm border-black h-full grow cursor-pointer active:text-white dark:hover:bg-white dark:hover:text-violet-500 transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+        <div className=" w-full flex " id="navbar-sticky">
+          <ul className="flex w-full justify-evenly lg:text-base text-sm md:font-medium ">
+            <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer active:text-white dark:hover:bg-white dark:hover:text-violet-500 transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
               <div
-                class="subnav-tag"
+                className="subnav-tag"
                 onClick={() => {
                   scrollto("thesis");
                 }}
@@ -74,9 +75,9 @@ const AcademiaNav = () => {
                 Masters' thesis
               </div>
             </li>
-            <li class="  lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            <li className="  lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
               <div
-                class="subnav-tag"
+                className="subnav-tag"
                 onClick={() => {
                   scrollto("spectrogram");
                 }}
@@ -84,9 +85,9 @@ const AcademiaNav = () => {
                 Vocalist classification
               </div>
             </li>
-            <li class=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
               <div
-                class="subnav-tag"
+                className="subnav-tag"
                 onClick={() => {
                   scrollto("ircam");
                 }}
@@ -94,9 +95,9 @@ const AcademiaNav = () => {
                 IRCAM research internship
               </div>
             </li>
-            {/* <li class=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            {/* <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
               <div
-                class="subnav-tag"
+                className="subnav-tag"
                 onClick={() => {
                   scrollto("assignments");
                 }}
@@ -112,19 +113,72 @@ const AcademiaNav = () => {
 };
 
 const AcademiaSection = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  const [showGradient, setShowGradient] = useState(false);
+  const [MeshGradientRenderer, setMeshGradientRenderer] = useState(null);
+
   useEffect(() => {
-    console.log(localStorage.theme);
+    // console.log(localStorage.theme);
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
     return () => clearTimeout(timeout);
   }, []);
 
-  const [isMounted, setIsMounted] = useState(false);
+  // Lazy load the MeshGradientRenderer
+  useEffect(() => {
+    const loadMeshGradient = async () => {
+      try {
+        const { MeshGradientRenderer } = await import('@johnn-e/react-mesh-gradient');
+        setMeshGradientRenderer(() => MeshGradientRenderer);
+        // Show gradient after a short delay for smooth fade-in
+        setTimeout(() => setShowGradient(true), 100);
+      } catch (error) {
+        console.error('Failed to load mesh gradient:', error);
+      }
+    };
+
+    loadMeshGradient();
+  }, []);
 
   const animate = () => {};
 
+  const papers = [
+    {
+      title: "Semi-Supervised Contrastive Learning of Musical Representations",
+      authors: ["Julien Guinot", "Elio Quinton", "George Fazekas"],
+      affiliations: ["Queen Mary University of London", "Universal Music Group"],
+      affiliations_indices: ["1,2", "2", "1"],
+      venue: "25th International Society for Music Information Retrieval Conference (ISMIR 2024)",
+      abstract: "Despite the success of contrastive learning in Music Information Retrieval, the inherent ambiguity of contrastive self-supervision presents a challenge. Relying solely on augmentation chains and self-supervised positive sampling strategies can lead to a pretraining objective that does not capture key musical information for downstream tasks. We introduce semi-supervised contrastive learning (SemiSupCon), a simple method for leveraging musically informed labeled data (supervision signals) in the contrastive learning of musical representations. Our approach introduces musically relevant supervision signals into self-supervised contrastive learning by combining supervised and self-supervised contrastive objectives in a simpler framework than previous approaches. This framework improves downstream performance and robustness to audio corruptions on a range of downstream MIR tasks with moderate amounts of labeled data. Our approach enables shaping the learned similarity metric through the choice of labeled data that (1) infuses the representations with musical domain knowledge and (2) improves out-of-domain performance with minimal general downstream performance loss. We show strong transfer learning performance on musically related yet not trivially similar tasks - such as pitch and key estimation. Additionally, our approach shows performance improvement on automatic tagging over self-supervised approaches with only 5% of available labels included in pretraining.",
+      arxiv: "https://arxiv.org/abs/2407.13840",
+      github: "https://github.com/Pliploop/SemiSupCon",
+    },
+  ]
+
   return (
-    <div className="relative  dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-3xl bg-blur-xl bg-opacity-25 lg:py-12 lg:px-32 p-6  scrollbar-hide">
+    <div className="relative dark:bg-gray-900 dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-3xl bg-blur-xl bg-opacity-25 lg:py-12 lg:px-32 p-6  scrollbar-hide">
+      {/* Animated mesh gradient background with fade-in */}
+      {MeshGradientRenderer && (
+        <div 
+          className={`transition-opacity duration-1000 ease-in-out ${
+            showGradient ? 'opacity-70' : 'opacity-0'
+          }`}
+        >
+          <MeshGradientRenderer
+            className="academia-mesh-gradient-bg"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 0,
+              pointerEvents: 'none',
+            }}
+            colors={["#ffffff", "#f3e8ff", "#e6d7ff", "#8b5cf6", "#ffffff"]}
+            speed={0.01}
+          />
+        </div>
+      )}
       <AllHeader
         pagename={"Research"}
         hoveraccent={"emerald-200"}
@@ -141,16 +195,23 @@ const AcademiaSection = () => {
             <div className="w-full flex lg:flex-row justify-between">
               <div className="grow flex flex-col justify-between gap-5 lg:px-12 lg:text-base text-sm">
       
-                <Paper
-                  title={"Semi-Supervised Contrastive Learning of Musical Representations"}
-                  authors={["Julien Guinot", "Elio Quinton", "George Fazekas"]}
-                  affiliations={["Queen Mary University of London", "Universal Music Group"]}
-                  affiliations_indices={["1,2", "2", "1"]}
-                  venue={"25th International Society for Music Information Retrieval Conference (ISMIR 2024) "}
-                  abstract={"Despite the success of contrastive learning in Music Information Retrieval, the inherent ambiguity of contrastive self-supervision presents a challenge. Relying solely on augmentation chains and self-supervised positive sampling strategies can lead to a pretraining objective that does not capture key musical information for downstream tasks. We introduce semi-supervised contrastive learning (SemiSupCon), a simple method for leveraging musically informed labeled data (supervision signals) in the contrastive learning of musical representations. Our approach introduces musically relevant supervision signals into self-supervised contrastive learning by combining supervised and self-supervised contrastive objectives in a simpler framework than previous approaches. This framework improves downstream performance and robustness to audio corruptions on a range of downstream MIR tasks with moderate amounts of labeled data. Our approach enables shaping the learned similarity metric through the choice of labeled data that (1) infuses the representations with musical domain knowledge and (2) improves out-of-domain performance with minimal general downstream performance loss. We show strong transfer learning performance on musically related yet not trivially similar tasks - such as pitch and key estimation. Additionally, our approach shows performance improvement on automatic tagging over self-supervised approaches with only 5\% of available labels included in pretraining."}
-                  arxiv={"https://arxiv.org/abs/2407.13840"}
-                  github={"https://github.com/Pliploop/SemiSupCon"}
-                />
+                {papers.map((paper, index) => {
+                  return (
+                    
+
+                    <Paper
+                      title={paper.title}
+                      authors={paper.authors}
+                      affiliations={paper.affiliations}
+                      affiliations_indices={paper.affiliations_indices}
+                      venue={paper.venue}
+                      abstract={paper.abstract}
+                      arxiv={paper.arxiv}
+                      github={paper.github}
+                    />
+                  );
+                }
+                )}
                 </div>
               </div>
             </div>
@@ -237,7 +298,7 @@ const AuthorsAndAffiliations = ({ authors, affiliations, affiliations_indices })
   // ^2Queen Mary University of London, ^1Universal Music Group
   // two vertically stacked divs, one for authors and one for affiliations
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 lg:w-full w-3/4">
       <div className="font-inter text-base text-gray-800 dark:text-white">
         {authors.map((author, index) => {
           return (
@@ -294,7 +355,8 @@ const Abstract = ({ abstract }) => {
 
 const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abstract, arxiv, github }) => {
   return (
-    <div className="flex flex-row justify-between items-start gap-5">
+    <div>
+    <div className="flex lg:flex-row flex-col justify-between items-start gap-5">
       <div className="flex flex-col gap-3">
         <div className="font-inter text-lg font-semibold text-gray-800 dark:text-white">{title}</div>
         {/* first author is bolded and starred, attributions are denoted by exponents in purple, with map */}
@@ -331,9 +393,16 @@ const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abst
           </a>
         </div>
       </div>
+
     </div>
+
+    {/* <div className="h-[1px] w-full bg-gray-300 dark:bg-violet-400 mt-10"></div> */}
+    </div>
+    
   );
 };
+
+
 
 
 
@@ -437,7 +506,7 @@ const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abst
 //             Shazam algorithm lacks robustness to real-life situa- tions such as
 //             live performances or remixes. This prompts this project. This paper
 //             focuses on the proceedings and results obtained over the course of
-//             the project to replicate Shazam’s functionality through deep
+//             the project to replicate Shazam's functionality through deep
 //             learning and mel-spectrograms.
 //           </p>
 //           <p>
@@ -465,4 +534,4 @@ const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abst
 //   );
 // }
 
-export default <AcademiaSection />;
+export default AcademiaSection;

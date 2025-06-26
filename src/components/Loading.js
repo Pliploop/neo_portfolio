@@ -6,8 +6,14 @@ import { IoIosSkipForward, IoIosSkipBackward } from "react-icons/io";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { MeshGradientRenderer } from '@johnn-e/react-mesh-gradient';
 
-const musictime = Math.floor(Math.random() * (180 - 240) + 180);
+const MUSIC_TIME_MIN = 180;
+const MUSIC_TIME_MAX = 240;
+const ANIMATION_DURATION_MIN = 1200;
+const ANIMATION_DURATION_MAX = 1800;
+
+const musictime = Math.floor(Math.random() * (MUSIC_TIME_MAX - MUSIC_TIME_MIN) + MUSIC_TIME_MIN);
 const minutes = Math.floor(musictime / 60);
 const seconds = ("0" + (musictime % 60)).slice(-2);
 
@@ -24,11 +30,7 @@ const data = [
   "not going to find much more",
 ];
 const maxreplies = data.length;
-var Liked = [];
-for (var i = 0; i < maxreplies; i++) {
-  Liked.push(false);
-}
-
+const Liked = Array(maxreplies).fill(false);
 
 const Loader = () => {
   const green = "#EA5A64";
@@ -36,10 +38,9 @@ const Loader = () => {
   const [isLiked, setisLiked] = useState(false);
   const [isplaying, setisplaying] = useState(false);
   const [replyindex, setReply] = useState(1);
-
-  
-
   const [paused, setPaused] = useState(true);
+  const [progressTime, setProgressTime] = useState("0:00");
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -170,7 +171,14 @@ const Loader = () => {
     barref.current = anime
       .timeline({
         autoplay: false,
-        complete: () => navigate("/about"),
+        complete: () => {
+          // Start the fade out transition
+          setIsTransitioning(true);
+          // Navigate after a short delay to allow fade out animation
+          setTimeout(() => {
+            navigate("/about");
+          }, 500);
+        },
       })
       .add({
         targets: "#bar #progress",
@@ -183,16 +191,15 @@ const Loader = () => {
         targets: "#bar #progress",
         easing: "linear",
         delay: 0,
-        duration: Math.floor(Math.random() * (1200 - 1800) + 1200),
+        duration: Math.floor(Math.random() * (ANIMATION_DURATION_MAX - ANIMATION_DURATION_MIN) + ANIMATION_DURATION_MIN),
         width: "100%",
         update: function (anim) {
           var time_seconds = Math.round(0.01 * anim.progress * musictime);
-          console.log();
           var timestring =
             Math.floor(time_seconds / 60) +
             ":" +
             ("0" + (time_seconds % 60)).slice(-2);
-          document.getElementById("progresstime").innerHTML = timestring;
+          setProgressTime(timestring);
         },
       })
       .add(
@@ -235,7 +242,7 @@ const Loader = () => {
         opacity: 0,
         zIndex: -1,
       });
-  }, []);
+  }, [navigate]);
   const minreply = 0;
 
   const animate = () => {
@@ -288,7 +295,6 @@ const Loader = () => {
   function setlike() {
     Liked[replyindex - 1] = !Liked[replyindex - 1];
     setisLiked(Liked[replyindex - 1]);
-    console.log(Liked);
   }
 
   function animatelike() {
@@ -301,13 +307,11 @@ const Loader = () => {
   }, [replyindex]);
 
   function replies() {
-    document.getElementById("progresstime").innerHTML = "0:00";
-
     const prevnext = anime.timeline({
       complete: () => null,
     });
 
-    if (i == 1) {
+    if (replyindex == 1) {
       var targ = ".right-skip";
     } else {
       var targ = ".left-skip";
@@ -321,7 +325,7 @@ const Loader = () => {
           delay: 0,
           duration: 200,
           easing: "easeInOutQuart",
-          translateX: i * -30,
+          translateX: (replyindex - 1) * -30,
           opacity: 0,
         },
         "-=100"
@@ -333,7 +337,7 @@ const Loader = () => {
         update: function () {
           document.getElementById("songtitle").innerHTML = data[replyindex - 1];
         },
-        translateX: i * 60,
+        translateX: (replyindex - 1) * 60,
         opacity: 0,
       })
       .add({
@@ -341,11 +345,10 @@ const Loader = () => {
         delay: 0,
         duration: 100,
         easing: "easeInOutQuart",
-        translateX: -0,
+        translateX: 0,
         opacity: 1,
       });
 
-    console.log(Liked);
     setisLiked(Liked[replyindex - 1]);
     playref.current.reset();
     barref.current.reset();
@@ -372,7 +375,9 @@ const Loader = () => {
 
   return (
     <div
-      className="h-screen w-screen flex bg-white text-black flex-col align-middle justify-center items-center lg:px-0 px-0 py-12"
+      className={`h-screen w-screen flex bg-white text-black flex-col align-middle justify-center items-center lg:px-0 px-0 py-12 transition-opacity duration-500 ${
+        isTransitioning ? 'opacity-0' : 'opacity-100'
+      }`}
       isMounted={isMounted}
       isLiked={isLiked}
     >
@@ -387,9 +392,21 @@ const Loader = () => {
         </div>
         <div className="flex flex-col p-6">
           <div
-            className="w-full aspect-square  border-none bg-cover  bg-[url('Gradient2.png')] border-2 rounded-3xl"
+            className="w-full aspect-square border-none border-2 rounded-3xl relative overflow-hidden"
             id="transition"
-          ></div>
+          >
+            <MeshGradientRenderer
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                opacity: 0.4,
+              }}
+              colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"]}
+              speed={0.01}
+            />
+          </div>
           <div className="flex flex-col">
             <div className="flex flex-row justify-between px-5 py-5  ">
               <div className="flex flex-col" id="song">
@@ -428,7 +445,7 @@ const Loader = () => {
                 className="   flex flex-col justify-center   lg:text-base select-none"
                 id="progresstime"
               >
-                0:00
+                {progressTime}
               </div>
 
               <div className="h-2 w-full flex flex-col justify-center self-center lg:px-2 px-1">
@@ -504,4 +521,4 @@ const Loader = () => {
   );
 };
 
-export default <Loader />;
+export default Loader;
