@@ -226,11 +226,13 @@ const educationtitles = [
 const SkillTab = ({ IconComponent, skillName }) => {
   return (
     <div className="w-full h-16 flex flex-col lg:flex-row justify-start items-center lg:space-x-6 mt-3 lg:mt-0">
-      <div className="hover:text-rose-500 transition-colors duration-100  flex lg:scale-100 scale-75 flex-col justify-center h-full">
+      <div className="hover:text-rose-500 transition-colors duration-100 flex lg:scale-100 scale-75 flex-col justify-center h-full">
         {IconComponent}
       </div>
       <div className="lg:text-md text-sm flex lg:flex-col flex-row justify-center h-full">
-        {skillName}
+        <span className="px-3 py-1 rounded-lg backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-black/30 hover:bg-white/30 dark:hover:bg-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 shadow-sm">
+          {skillName}
+        </span>
       </div>
     </div>
   );
@@ -362,7 +364,7 @@ const EducationExperience = () => {
                 }`}
               >
                 <div
-                  className={`absolute w-[4px] z-50 h-12 lg:flex bg-black dark:bg-white hidden`}
+                  className={`absolute w-[4px] z-50 h-12 lg:flex bg-rose-500 hidden`}
                   style={{
                     transform: `translateY(${translateY}px)`,
                     transition: "transform 0.2s ease",
@@ -381,9 +383,7 @@ const EducationExperience = () => {
                   jobtitles.map((job, i) => {
                     return (
                       <div
-                        className={`tab backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 ${
-                          activeTabId === i ? 'bg-white/40 dark:bg-black/40' : ''
-                        }`}
+                        className={`tab backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200`}
                         key={i}
                         isActive={activeTabId === i}
                         onClick={() => {
@@ -419,7 +419,7 @@ const EducationExperience = () => {
                 }`}
               >
                 <div
-                  className={`absolute w-[4px] z-50 h-12 bg-black dark:bg-white lg:flex hidden`}
+                  className={`absolute w-[4px] z-50 h-12 lg:flex bg-rose-500 hidden`}
                   style={{
                     transform: `translateY(${translateY}px)`,
                     transition: "transform 0.2s ease",
@@ -438,9 +438,7 @@ const EducationExperience = () => {
                   educationtitles.map((education, i) => {
                     return (
                       <div
-                        className={`tab backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 ${
-                          activeTabId === i ? 'bg-white/40 dark:bg-black/40' : ''
-                        }`}
+                        className={`tab transition-all duration-200`}
                         key={i}
                         isActive={activeTabId === i}
                         onClick={() => {
@@ -490,7 +488,7 @@ const EducationExperience = () => {
               </ul>
               <div className="flex flex-row gap-3">
               {content.links.map((item, i) => (
-                  <a href={item} target="_blank" className="show p-2 text-rose-600 dark:text-orange-300 pressable border-[1px] border-rose-500 dark:border-orange-400 text-sm backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200">{content.linktexts[i]}</a>
+                  <a href={item} target="_blank" className="show px-4 py-2 text-rose-600 dark:text-orange-300 pressable rounded-lg border border-white/30 dark:border-black/30 text-sm backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 shadow-sm">{content.linktexts[i]}</a>
                 ))}
               </div>
             </div>

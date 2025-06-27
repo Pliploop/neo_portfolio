@@ -175,8 +175,8 @@ const AboutSection = () => {
         </div>
 
         <div className="grow flex-row justify-end lg:pr-10 py-6 lg:flex hidden">
-          <div className="aspect-square w-3/5 show rounded-t-full flex flex-row p-4 block-shadow-md bg-rose-200 dark:bg-orange-300">
-            <div className="h-full  w-full show rounded-t-full overflow-clip ">
+          <div className="aspect-square w-3/5 rounded-[50px] flex flex-row p-4 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-lg">
+            <div className="h-full w-full rounded-[50px] overflow-clip">
               <img
                 src={image}
                 alt=""

@@ -83,7 +83,7 @@
   /* ... */
 
   .tab {
-    @apply lg:h-8 hover:cursor-pointer lg:w-auto lg:rounded-r-lg active:bg-rose-100 hover:bg-white flex flex-col lg:text-start text-center justify-center px-6 lg:px-4 lg:py-6 py-5 text-sm lg:rounded-l-none rounded-2xl;
+    @apply lg:h-8 hover:cursor-pointer lg:w-auto lg:rounded-r-lg active:bg-rose-100 hover:bg-white/10 flex flex-col lg:text-start text-center justify-center px-6 lg:px-4 lg:py-6 py-5 text-sm lg:rounded-l-none rounded-2xl;
   }
 
   .commuzpinkdate {
