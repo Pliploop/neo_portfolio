@@ -384,7 +384,7 @@ const Loader = () => {
                 inset: 0,
                 width: '100%',
                 height: '100%',
-                opacity: 0.4,
+                opacity: 0.2,
               }}
               colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"]}
               speed={0.01}

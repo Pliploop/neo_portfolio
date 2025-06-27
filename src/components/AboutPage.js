@@ -224,39 +224,39 @@ const Intro = () => {
         </p>
       </div>
 
-      <div className="flex flex-row dark:text-black lg:justify-start justify-center">
+      <div className="flex flex-row lg:justify-start justify-center">
         <div
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 border-[1px] border-black dark:border-white backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 rounded-full backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center shadow-lg hover:shadow-xl"
           onClick={() => {
             scrollto("contactform");
           }}
         >
           {" "}
-          <p className="lg:text-md text-sm font-medium">Reach out!</p>{" "}
+          <p className="lg:text-md text-sm font-medium text-black dark:text-white">Reach out!</p>{" "}
           <HiOutlineArrowUpRight
-            className="lg:scale-100 scale-50 lg:flex hidden"
+            className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
             size={16}
           ></HiOutlineArrowUpRight>{" "}
         </div>
         <div
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 border-[1px] border-black dark:border-white backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 rounded-full backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center shadow-lg hover:shadow-xl"
           onClick={() => nav("/music")}
         >
-          <p className="lg:text-md text-sm font-medium">My Music</p>{" "}
+          <p className="lg:text-md text-sm font-medium text-black dark:text-white">My Music</p>{" "}
           <HiOutlineArrowUpRight
-            className="lg:scale-100 scale-50 lg:flex hidden"
+            className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
             size={16}
           ></HiOutlineArrowUpRight>
         </div>
         <a
-          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 border-[1px] border-black dark:border-white backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center"
+          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 rounded-full backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center shadow-lg hover:shadow-xl"
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <p className="lg:text-md text-sm font-medium">Resume</p>{" "}
+          <p className="lg:text-md text-sm font-medium text-black dark:text-white">Resume</p>{" "}
           <HiOutlineArrowUpRight
-            className="lg:scale-100 scale-50 lg:flex hidden"
+            className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
             size={16}
           ></HiOutlineArrowUpRight>
         </a>

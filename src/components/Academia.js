@@ -144,6 +144,36 @@ const AcademiaSection = () => {
 
   const papers = [
     {
+      title: "GD-Retriever: Controllable Generative Text-Music Retrieval with Diffusion Models",
+      authors: ["Julien Guinot", "Elio Quinton", "György Fazekas"],
+      affiliations: ["Queen Mary University of London", "Universal Music Group"],
+      affiliations_indices: ["1,2", "2", "1"],
+      venue: "International Society for Music Information Retrieval Conference (ISMIR 2025)",
+      abstract: "Multimodal contrastive models have achieved strong performance in text-audio retrieval and zero-shot settings, but improving joint embedding spaces remains an active research area. Less attention has been given to making these systems controllable and interactive for users. In text-music retrieval, the ambiguity of freeform language creates a many-to-many mapping, often resulting in inflexible or unsatisfying results. We introduce Generative Diffusion Retriever (GDR), a novel framework that leverages diffusion models to generate queries in a retrieval-optimized latent space. This enables controllability through generative tools such as negative prompting and denoising diffusion implicit models (DDIM) inversion, opening a new direction in retrieval control. GDR improves retrieval performance over contrastive teacher models and supports retrieval in audio-only latent spaces using non-jointly trained encoders. Finally, we demonstrate that GDR enables effective post-hoc manipulation of retrieval behavior, enhancing interactive control for text-music retrieval tasks.",
+      arxiv: "https://arxiv.org/abs/2506.17886",
+      github: "https://github.com/Pliploop/GDRetriever",
+    },
+    {
+      title: "SLAP: Siamese Language-Audio Pretraining Without Negative Samples for Music Understanding",
+      authors: ["Julien Guinot", "Alain Riou", "Elio Quinton", "György Fazekas"],
+      affiliations: ["Queen Mary University of London", "Universal Music Group"],
+      affiliations_indices: ["1,2", "2", "2", "1"],
+      venue: "International Society for Music Information Retrieval Conference (ISMIR 2025)",
+      abstract: "Joint embedding spaces have significantly advanced music understanding and generation by linking text and audio through multimodal contrastive learning. However, these approaches face large memory requirement limitations due to relying on large batch sizes to effectively utilize negative samples. Further, multimodal joint embedding spaces suffer from a modality gap wherein embeddings from different modalities lie in different manifolds of the embedding space. To address these challenges, we propose Siamese Language-Audio Pretraining (SLAP), a novel multimodal pretraining framework that allows learning powerful representations without negative samples. SLAP adapts the Bootstrap Your Own Latent (BYOL) paradigm for multimodal audio-text training, promoting scalability in training multimodal embedding spaces. We illustrate the ability of our model to learn meaningful relationships between music and text -- specifically, we show that SLAP outperforms CLAP on tasks such as text-music retrieval and zero-shot classification. We also observe competitive downstream performance on several MIR tasks, including with larger or supervised models (genre and instrument classification, auto-tagging). Additionally, our approach has attractive properties, such as a quantifiably reduced modality gap and improved robustness to batch size variations on retrieval performance. Finally, its novel formulation unlocks large-scale training on a single GPU through gradient accumulation.",
+      arxiv: "https://arxiv.org/abs/2506.17815",
+      github: "https://github.com/Pliploop/SLAP",
+    },
+    {
+      title: "Leave-One-EquiVariant: Alleviating invariance-related information loss in contrastive music representations",
+      authors: ["Julien Guinot", "Elio Quinton", "György Fazekas"],
+      affiliations: ["Queen Mary University of London", "Universal Music Group"],
+      affiliations_indices: ["1,2", "2", "1"],
+      venue: "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP 2025)",
+      abstract: "Contrastive learning has proven effective in self-supervised musical representation learning, particularly for Music Information Retrieval (MIR) tasks. However, reliance on augmentation chains for contrastive view generation and the resulting learnt invariances pose challenges when different downstream tasks require sensitivity to certain musical attributes. To address this, we propose the Leave One EquiVariant (LOEV) framework, which introduces a flexible, task-adaptive approach compared to previous work by selectively preserving information about specific augmentations, allowing the model to maintain task-relevant equivariances. We demonstrate that LOEV alleviates information loss related to learned invariances, improving performance on augmentation related tasks and retrieval without sacrificing general representation quality. Furthermore, we introduce a variant of LOEV, LOEV++, which builds a disentangled latent space by design in a self-supervised manner, and enables targeted retrieval based on augmentation related attributes.",
+      arxiv: "https://arxiv.org/abs/2412.18955",
+      github: "https://github.com/Pliploop/LOEV-Mix",
+    },
+    {
       title: "Semi-Supervised Contrastive Learning of Musical Representations",
       authors: ["Julien Guinot", "Elio Quinton", "George Fazekas"],
       affiliations: ["Queen Mary University of London", "Universal Music Group"],
@@ -173,6 +203,7 @@ const AcademiaSection = () => {
               height: '100%',
               zIndex: 0,
               pointerEvents: 'none',
+              opacity: 0.3,
             }}
             colors={["#ffffff", "#f3e8ff", "#e6d7ff", "#8b5cf6", "#ffffff"]}
             speed={0.01}
@@ -191,24 +222,27 @@ const AcademiaSection = () => {
         <div className="relative">
           
           <AcademiaHeader text={"Publications"} />
-          <div className="flex flex-col  lg:mt-0 mt-10 mb-10">
+          <div className="flex flex-col lg:mt-0 mt-10 mb-10">
             <div className="w-full flex lg:flex-row justify-between">
-              <div className="grow flex flex-col justify-between gap-5 lg:px-12 lg:text-base text-sm">
+              <div className="grow flex flex-col justify-between gap-4 lg:px-12 lg:text-base text-sm">
       
                 {papers.map((paper, index) => {
                   return (
-                    
-
-                    <Paper
-                      title={paper.title}
-                      authors={paper.authors}
-                      affiliations={paper.affiliations}
-                      affiliations_indices={paper.affiliations_indices}
-                      venue={paper.venue}
-                      abstract={paper.abstract}
-                      arxiv={paper.arxiv}
-                      github={paper.github}
-                    />
+                    <div key={index}>
+                      <Paper
+                        title={paper.title}
+                        authors={paper.authors}
+                        affiliations={paper.affiliations}
+                        affiliations_indices={paper.affiliations_indices}
+                        venue={paper.venue}
+                        abstract={paper.abstract}
+                        arxiv={paper.arxiv}
+                        github={paper.github}
+                      />
+                      {index < papers.length - 1 && (
+                        <div className="w-1/2 h-[1px] bg-black dark:bg-white self-center my-4 mx-auto"></div>
+                      )}
+                    </div>
                   );
                 }
                 )}
@@ -367,27 +401,24 @@ const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abst
       <div className="flex flex-col gap-3 dark:text-white">
         <div className="flex flex-row gap-3">
           <a
-
             href={arxiv}
             target="_blank"
             rel="noopener noreferrer"
-
-            className="rounded-2xl px-3 py-1 flex flex-row gap-3 items-center hover:text-violet-400"
+            className="px-3 py-1 flex flex-row gap-3 items-center rounded-lg hover:backdrop-blur-md hover:bg-gray-200/80 dark:hover:bg-gray-800/80 active:backdrop-blur-md active:bg-gray-300/80 dark:active:bg-gray-700/80 transition-all duration-200"
           >
             <SiArxiv size={20} />
-            <div className="font-inter text-xs hover:text-violet-400">
+            <div className="font-inter text-xs">
               ArXiv
             </div>
           </a>
-          <a  href={github}
-
+          <a  
+            href={github}
             target="_blank"
             rel="noopener noreferrer"
-
-            className="rounded-full px-3 py-2 flex flex-row gap-3 items-center hover:text-violet-400"
+            className="px-3 py-1 flex flex-row gap-3 items-center rounded-lg hover:backdrop-blur-md hover:bg-gray-200/80 dark:hover:bg-gray-800/80 active:backdrop-blur-md active:bg-gray-300/80 dark:active:bg-gray-700/80 transition-all duration-200"
           >
             <VscGithub size={20} />
-            <div className="font-inter text-xs group-active:text-white">
+            <div className="font-inter text-xs">
               Github
             </div>
           </a>

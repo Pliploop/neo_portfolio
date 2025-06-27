@@ -62,9 +62,10 @@ const MusicSection = () => {
               height: '100%',
               zIndex: 0,
               pointerEvents: 'none',
+              opacity: 0.3,
             }}
             colors={["#ffffff", "#5eead4", "#6ee7b7", "#a7f3d0", "#ffffff"]}
-            speed={0.005}
+            speed={0.01}
           />
         </div>
       )}

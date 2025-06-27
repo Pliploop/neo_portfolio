@@ -288,223 +288,225 @@ const EducationExperience = () => {
 
   return (
     <div className="w-full lg:px-14 flex flex-col jusitfy-center select-none lg:mt-0 mt-6">
-      <div
-        className="w-full h-full flex lg:flex-row flex-col justify-start border-x-[1px] border-t-[1px] border-b-[1px] border-black dark:border-white backdrop-blur-md bg-white/20 dark:bg-black/20"
-        id="folder-view-top"
-      >
-        <div className="flex flex-row lg:justify-evenly lg:items-center px-3 lg:py-0 py-3 space-x-3 lg:border-b-[1px] lg:border-black dark:border-white">
-          <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-green-500"></div>
-          <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-yellow-500"></div>
-          <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-rose-500"></div>
-        </div>
-
-        <div className="h-16 w-10 border-b-[1px] border-black dark:border-white lg:flex hidden"></div>
-        <div className="flex flex-row h-12 lg:h-auto">
-          <div className="flex flex-col justify-end">
-            <div
-              className={`lg:w-32 lg:px-0 px-6 ${
-                educationExp == "education"
-                  ? "backdrop-blur-md bg-white/30 dark:bg-black/30 border-t-[1px] border-t-0 lg:h-full h-8"
-                  : "backdrop-blur-md bg-black/20 dark:bg-white/20 text-white dark:text-white lg:h-8 h-6 border-t-[1px]"
-              } border-black dark:border-white border-[1px] lg:border-t-[1px] border-b-0 flex flex-col text-center justify-center lg:text-base transition-all duration-200`}
-              id="EducationTab"
-              onClick={() => {
-                setEducationExp(
-                  educationExp === "education" ? "experience" : "education"
-                );
-              }}
-            >
-              Education
-            </div>
-          </div>
-          <div className="h-16 w-2 border-b-[1px] border-black dark:border-white lg:flex hidden"></div>
-          <div className="flex flex-col justify-end">
-            <div
-              className={`hover:cursor-pointer lg:w-32 lg:px-0 px-6 ${
-                educationExp == "experience"
-                  ? "backdrop-blur-md bg-white/30 dark:bg-black/30 border-t-[1px] border-t-0 text-black dark:text-white lg:h-full h-8"
-                  : "backdrop-blur-md bg-black/20 dark:bg-white/20 text-white dark:text-white lg:h-8 h-6 border-t-[1px]"
-              } border-black dark:border-white border-x-[1px] lg:border-t-[1px] border-b-0 flex flex-col text-center justify-center lg:text-base transition-all duration-200`}
-              id="ExperienceTab"
-              onClick={() => {
-                setEducationExp(
-                  educationExp === "education" ? "experience" : "education"
-                );
-              }}
-            >
-              {" "}
-              Experience
-            </div>
-          </div>
-          <div className="w-full border-b-[1px] border-black dark:border-white lg:hidden flex"></div>
-        </div>
-
+      <div className="backdrop-blur-md bg-white/40 dark:bg-black/40 rounded-2xl shadow-lg">
         <div
-          className="h-16 grow border-b-[1px] border-black dark:border-white lg:flex hidden"
-          id="EducationTab"
-        ></div>
-      </div>
-      <div className="h-full w-full lg:p-12 p-6 backdrop-blur-md bg-white/20 dark:bg-black/20 border-x-[1px] border-b-[1px] border-black dark:border-white flex lg:flex-row flex-col justify-between transition-all duration-200 min-h-[600px]">
-        <div className="lg:w-1/4">
-          <div
-            className={`lg:h-72 flex transition-opacity transition-visibility duration-500 flex-row ${
-              educationExp === "experience"
-                ? "opacity-100 flex"
-                : "opacity-0 hidden"
-            }`}
-          >
-            <div
-              className={`h-full w-[1px] lg:flex hidden flex-row justify-center bg-black dark:bg-white ${
-                educationExp === "experience"
-                  ? "opacity-100 flex"
-                  : "opacity-0 hidden"
-              }`}
-            >
-              <div
-                className={`absolute w-[4px] z-50 h-12 lg:flex bg-black dark:bg-white hidden`}
-                style={{
-                  transform: `translateY(${translateY}px)`,
-                  transition: "transform 0.2s ease",
-                }}
-              ></div>
-            </div>
-            <div
-              id="timeline"
-              className={`lg:h-auto lg:mb-0 mb-6 w-full border-black dark:border-white lg:flex-col flex-row justify-start lg:overflow-auto overflow-scroll transition-opacity transition-display duration-500 ${
-                educationExp === "experience"
-                  ? "opacity-100 flex"
-                  : "opacity-0 hidden"
-              }`}
-            >
-              {jobtitles &&
-                jobtitles.map((job, i) => {
-                  return (
-                    <div
-                      className={`tab backdrop-blur-md bg-white/10 dark:bg-black/10 hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-200 ${
-                        activeTabId === i ? 'bg-white/30 dark:bg-black/30' : ''
-                      }`}
-                      key={i}
-                      isActive={activeTabId === i}
-                      onClick={() => {
-                        setActiveTabId(i);
-                        changecontent(i, educationExp);
-                      }}
-                      ref={(el) => (tabs.current[i] = el)}
-                      id={`tab-${i}`}
-                      role="tab"
-                      tabIndex={activeTabId === i ? "0" : "-1"}
-                      aria-selected={activeTabId === i ? true : false}
-                      aria-controls={`panel-${i}`}
-                    >
-                      {job}
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-
-          <div
-            className={`flex transition-opacity transition-display duration-500 flex-row ${
-              educationExp === "education"
-                ? "opacity-100 flex"
-                : "opacity-0 hidden"
-            }`}
-          >
-            <div
-              className={`w-[1px] justify-center lg:flex hidden bg-black dark:bg-white ${
-                educationExp === "education"
-                  ? "opacity-100 flex"
-                  : "opacity-0 hidden"
-              }`}
-            >
-              <div
-                className={`absolute w-[4px] z-50 h-12 bg-black dark:bg-white lg:flex hidden`}
-                style={{
-                  transform: `translateY(${translateY}px)`,
-                  transition: "transform 0.2s ease",
-                }}
-              ></div>
-            </div>
-            <div
-              id="timeline"
-              className={`lg:h-auto lg:mb-0 mb-6 lg:w-full border-black dark:border-white lg:flex-col flex-row justify-start lg:overflow-auto overflow-scroll transition-opacity transition-display duration-500 ${
-                educationExp === "education"
-                  ? "opacity-100 flex"
-                  : "opacity-0 hidden"
-              }`}
-            >
-              {educationtitles &&
-                educationtitles.map((education, i) => {
-                  return (
-                    <div
-                      className={`tab backdrop-blur-md bg-white/10 dark:bg-black/10 hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-200 ${
-                        activeTabId === i ? 'bg-white/30 dark:bg-black/30' : ''
-                      }`}
-                      key={i}
-                      isActive={activeTabId === i}
-                      onClick={() => {
-                        setActiveTabId(i);
-                        changecontent(i, educationExp);
-                      }}
-                      ref={(el) => (tabs.current[i] = el)}
-                      id={`tab-${i}`}
-                      role="tab"
-                      tabIndex={activeTabId === i ? "0" : "-1"}
-                      aria-selected={activeTabId === i ? true : false}
-                      aria-controls={`panel-${i}`}
-                    >
-                      {education}
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-        </div>
-        <div
-          className="lg:w-1/2 lg:px-6 flex flex-col items-left space-y-4"
-          id="description"
-          key={updateKey}
+          className="w-full h-full flex lg:flex-row flex-col justify-start backdrop-blur-md bg-white/20 dark:bg-black/20 rounded-t-2xl"
+          id="folder-view-top"
         >
-          <div id="title" className="w-full text-lg">
-            <span className="mr-2">{content.title}</span>
-            <span>
-              <a
-                className="hover:cursor-pointer font-bold active:text-rose-300 duration-150 text-rose-600 dark:text-orange-300 hover:underline-offset-6 hover:underline"
-                href={content.companyLink}
-                target="_blank"
-                rel="noopener noreferrer"
+          <div className="flex flex-row lg:justify-evenly lg:items-center px-3 lg:py-0 py-3 space-x-3">
+            <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-green-500"></div>
+            <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-yellow-500"></div>
+            <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-rose-500"></div>
+          </div>
+
+          <div className="h-16 w-10 lg:flex hidden"></div>
+          <div className="flex flex-row h-12 lg:h-auto">
+            <div className="flex flex-col justify-end">
+              <div
+                className={`lg:w-32 lg:px-0 px-6 ${
+                  educationExp == "education"
+                    ? "backdrop-blur-md bg-white/40 dark:bg-black/40 lg:h-full h-8"
+                    : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-white lg:h-8 h-6"
+                } flex flex-col text-center justify-center lg:text-base transition-all duration-200`}
+                id="EducationTab"
+                onClick={() => {
+                  setEducationExp(
+                    educationExp === "education" ? "experience" : "education"
+                  );
+                }}
               >
-                {content.company}
-              </a>
-            </span>
+                Education
+              </div>
+            </div>
+            <div className="h-16 w-2 lg:flex hidden"></div>
+            <div className="flex flex-col justify-end">
+              <div
+                className={`hover:cursor-pointer lg:w-32 lg:px-0 px-6 ${
+                  educationExp == "experience"
+                    ? "backdrop-blur-md bg-white/40 dark:bg-black/40 text-black dark:text-white lg:h-full h-8"
+                    : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-white lg:h-8 h-6"
+                } flex flex-col text-center justify-center lg:text-base transition-all duration-200`}
+                id="ExperienceTab"
+                onClick={() => {
+                  setEducationExp(
+                    educationExp === "education" ? "experience" : "education"
+                  );
+                }}
+              >
+                {" "}
+                Experience
+              </div>
+            </div>
+            <div className="w-full lg:hidden flex"></div>
           </div>
-          <div id="dates" className="text-sm text-rose-600 dark:text-orange-300">
-            <span>{content.dates}</span>
-          </div>
-          <div id="description">
-            <ul className="list-disc marker:text-orange-600 dark:marker:text-orange-400 text-sm list-inside flex flex-col gap-3 mb-10">
-              {content.description.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-            <div className="flex flex-row gap-3">
-            {content.links.map((item, i) => (
-                <a href={item} target="_blank" className="show p-2 text-rose-600 dark:text-orange-300 pressable border-[1px] border-rose-500 dark:border-orange-400 text-sm backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200">{content.linktexts[i]}</a>
-              ))}
+
+          <div
+            className="h-16 grow lg:flex hidden"
+            id="EducationTab"
+          ></div>
+        </div>
+        <div className="h-full w-full lg:p-12 p-6 flex lg:flex-row flex-col justify-between transition-all duration-200 min-h-[600px]">
+          <div className="lg:w-1/4">
+            <div
+              className={`lg:h-72 flex transition-opacity transition-visibility duration-500 flex-row ${
+                educationExp === "experience"
+                  ? "opacity-100 flex"
+                  : "opacity-0 hidden"
+              }`}
+            >
+              <div
+                className={`h-full w-[1px] lg:flex hidden flex-row justify-center bg-black dark:bg-white ${
+                  educationExp === "experience"
+                    ? "opacity-100 flex"
+                    : "opacity-0 hidden"
+                }`}
+              >
+                <div
+                  className={`absolute w-[4px] z-50 h-12 lg:flex bg-black dark:bg-white hidden`}
+                  style={{
+                    transform: `translateY(${translateY}px)`,
+                    transition: "transform 0.2s ease",
+                  }}
+                ></div>
+              </div>
+              <div
+                id="timeline"
+                className={`lg:h-auto lg:mb-0 mb-6 w-full lg:flex-col flex-row justify-start lg:overflow-auto overflow-scroll transition-opacity transition-display duration-500 ${
+                  educationExp === "experience"
+                    ? "opacity-100 flex"
+                    : "opacity-0 hidden"
+                }`}
+              >
+                {jobtitles &&
+                  jobtitles.map((job, i) => {
+                    return (
+                      <div
+                        className={`tab backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 ${
+                          activeTabId === i ? 'bg-white/40 dark:bg-black/40' : ''
+                        }`}
+                        key={i}
+                        isActive={activeTabId === i}
+                        onClick={() => {
+                          setActiveTabId(i);
+                          changecontent(i, educationExp);
+                        }}
+                        ref={(el) => (tabs.current[i] = el)}
+                        id={`tab-${i}`}
+                        role="tab"
+                        tabIndex={activeTabId === i ? "0" : "-1"}
+                        aria-selected={activeTabId === i ? true : false}
+                        aria-controls={`panel-${i}`}
+                      >
+                        {job}
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+
+            <div
+              className={`flex transition-opacity transition-display duration-500 flex-row ${
+                educationExp === "education"
+                  ? "opacity-100 flex"
+                  : "opacity-0 hidden"
+              }`}
+            >
+              <div
+                className={`w-[1px] justify-center lg:flex hidden bg-black dark:bg-white ${
+                  educationExp === "education"
+                    ? "opacity-100 flex"
+                    : "opacity-0 hidden"
+                }`}
+              >
+                <div
+                  className={`absolute w-[4px] z-50 h-12 bg-black dark:bg-white lg:flex hidden`}
+                  style={{
+                    transform: `translateY(${translateY}px)`,
+                    transition: "transform 0.2s ease",
+                  }}
+                ></div>
+              </div>
+              <div
+                id="timeline"
+                className={`lg:h-auto lg:mb-0 mb-6 lg:w-full lg:flex-col flex-row justify-start lg:overflow-auto overflow-scroll transition-opacity transition-display duration-500 ${
+                  educationExp === "education"
+                    ? "opacity-100 flex"
+                    : "opacity-0 hidden"
+                }`}
+              >
+                {educationtitles &&
+                  educationtitles.map((education, i) => {
+                    return (
+                      <div
+                        className={`tab backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 ${
+                          activeTabId === i ? 'bg-white/40 dark:bg-black/40' : ''
+                        }`}
+                        key={i}
+                        isActive={activeTabId === i}
+                        onClick={() => {
+                          setActiveTabId(i);
+                          changecontent(i, educationExp);
+                        }}
+                        ref={(el) => (tabs.current[i] = el)}
+                        id={`tab-${i}`}
+                        role="tab"
+                        tabIndex={activeTabId === i ? "0" : "-1"}
+                        aria-selected={activeTabId === i ? true : false}
+                        aria-controls={`panel-${i}`}
+                      >
+                        {education}
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          className="lg:w-1/5 lg:px-10 w-full flex flex-row justify-evenly lg:flex-col lg:justify-start"
-          id="skills"
-        >
-          {content.skills.map((skill, i) => (
-            <SkillTab
-              key={i}
-              IconComponent={skill}
-              skillName={content.skillnames[i]}
-            />
-          ))}
+          <div
+            className="lg:w-1/2 lg:px-6 flex flex-col items-left space-y-4"
+            id="description"
+            key={updateKey}
+          >
+            <div id="title" className="w-full text-lg">
+              <span className="mr-2">{content.title}</span>
+              <span>
+                <a
+                  className="hover:cursor-pointer font-bold active:text-rose-300 duration-150 text-rose-600 dark:text-orange-300 hover:underline-offset-6 hover:underline"
+                  href={content.companyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {content.company}
+                </a>
+              </span>
+            </div>
+            <div id="dates" className="text-sm text-rose-600 dark:text-orange-300">
+              <span>{content.dates}</span>
+            </div>
+            <div id="description">
+              <ul className="list-disc marker:text-orange-600 dark:marker:text-orange-400 text-sm list-inside flex flex-col gap-3 mb-10">
+                {content.description.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+              <div className="flex flex-row gap-3">
+              {content.links.map((item, i) => (
+                  <a href={item} target="_blank" className="show p-2 text-rose-600 dark:text-orange-300 pressable border-[1px] border-rose-500 dark:border-orange-400 text-sm backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200">{content.linktexts[i]}</a>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div
+            className="lg:w-1/5 lg:px-10 w-full flex flex-row justify-evenly lg:flex-col lg:justify-start"
+            id="skills"
+          >
+            {content.skills.map((skill, i) => (
+              <SkillTab
+                key={i}
+                IconComponent={skill}
+                skillName={content.skillnames[i]}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

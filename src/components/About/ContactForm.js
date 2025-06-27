@@ -53,7 +53,7 @@ const ContactForm = () => {
             Name
           </label>
           <input
-            className="appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white border-black dark:border-white border-[1px] leading-tight focus:outline-none focus:border-black dark:focus:border-white focus:border-2 transition-all duration-200"
+            className="appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white rounded-lg leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl"
             id="name"
             type="text"
             placeholder=""
@@ -71,7 +71,7 @@ const ContactForm = () => {
             Email
           </label>
           <input
-            className="appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white border-black dark:border-white border-[1px] leading-tight focus:outline-none focus:border-black dark:focus:border-white focus:border-2 transition-all duration-200"
+            className="appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white rounded-lg leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl"
             id="email"
             type="email"
             placeholder=""
@@ -90,7 +90,7 @@ const ContactForm = () => {
           Message
         </label>
         <textarea
-          className="w-full appearance-none mb-2 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white border-black dark:border-white border-[1px] leading-tight focus:outline-none focus:border-black dark:focus:border-white focus:border-2 transition-all duration-200"
+          className="w-full appearance-none mb-2 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white rounded-lg leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl"
           id="message"
           placeholder=""
           {...formik.getFieldProps("message")}
@@ -101,7 +101,7 @@ const ContactForm = () => {
       </div>
       <div className="flex flex-row items-center justify-between">
         <button
-          className="border-black dark:border-white dark:text-white text-black backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 pressable flex flex-row items-center content-center gap-2 border-[1px] font-bold py-2 px-4 focus:outline-none"
+          className="text-black dark:text-white backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 pressable flex flex-row items-center content-center gap-2 font-bold py-2 px-4 focus:outline-none rounded-full shadow-lg hover:shadow-xl"
           type="submit"
         >
           Send
