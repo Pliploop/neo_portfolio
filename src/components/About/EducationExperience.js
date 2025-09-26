@@ -1,18 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  SiPython,
-  SiPytorch,
-  SiTensorflow,
-  SiMicrosoftazure,
-  SiApplemusic,
-  SiJupyter,
-  SiPandas,
-} from "react-icons/si";
-import { GiPencil, GiNotebook, GiSoundWaves } from "react-icons/gi";
-import { FaGitAlt } from "react-icons/fa";
-import { BsGrid3X3 } from "react-icons/bs";
-import { CiWavePulse1 } from "react-icons/ci";
-import { BiLogoAws } from "react-icons/bi";
 
 const educationData = [
   {
@@ -27,13 +13,6 @@ const educationData = [
       "Can human feedback improve the intuitive navigation of latent music representations?",
       "Through these questions I aim to create navigable, interpretable and multimodal latent spaces to help musicians create musicians and to further our understanding of music as a whole.",
     ],
-    skills: [
-      <SiPytorch size={26} />,
-      <SiPython size={26} />,
-      <GiNotebook size={26} />,
-      <GiPencil size={26} />,
-    ],
-    skillnames: ["Pytorch", "Python", "Research", "Writing"],
     links:[],
     linktexts:[],
   },
@@ -48,13 +27,6 @@ const educationData = [
     ],
     links: ["https://github.com/Pliploop/Spectrogram_Artist_Recognition"],
     linktexts: ["Vocalist Classification (Github)"],
-    skills: [
-      <SiPytorch size={26} />,
-      <SiPython size={26} />,
-      <GiNotebook size={26} />,
-      <GiPencil size={26} />,
-    ],
-    skillnames: ["Pytorch", "Python", "Research", "Writing"],
   },
   {
     title: "MSc Engineering, Diplôme d'ingénieur",
@@ -68,13 +40,6 @@ const educationData = [
     ],
     links:["/academia","/academia"],
     linktexts:["Masters' thesis", "Acoustic Diodes"],
-    skills: [
-      <SiPytorch size={26} />,
-      <SiPython size={26} />,
-      <GiNotebook size={26} />,
-      <GiPencil size={26} />,
-    ],
-    skillnames: ["Pytorch", "Python", "Research", "Writing"],
   },
   {
     title: "BSc Engineering, Diplôme d'ingénieur",
@@ -86,13 +51,6 @@ const educationData = [
     ],
     links:[],
     linktexts:[],
-    skills: [
-      <SiPytorch size={26} />,
-      <SiPython size={26} />,
-      <GiNotebook size={26} />,
-      <GiPencil size={26} />,
-    ],
-    skillnames: ["Pytorch", "Python", "Research", "Writing"],
   },
   // Add more education entries if needed
 ];
@@ -109,13 +67,6 @@ const experienceData = [
     ],
     links:[],
     linktexts:[],
-    skills: [
-      <SiPytorch size={26} />,
-      <SiPython size={26} />,
-      <GiNotebook size={26} />,
-      <GiPencil size={26} />,
-    ],
-    skillnames: ["Pytorch", "Python", "Research", "Writing"],
   },
   {
     title: "Research Scientist Intern",
@@ -125,15 +76,8 @@ const experienceData = [
       "Under the superivision of Stefan Lattner, I researched audio-conditioned symbolic music generation for live jamming and producing",
       "Wrote a yet-to-be-published paper with conclusive results and interesting contributions beyond symbolic music.",
     ],
-    skills: [
-      <SiPytorch size={26} />,
-      <SiPython size={26} />,
-      <GiNotebook size={26} />,
-      <GiPencil size={26} />,
-    ],
     links:[],
     linktexts:[],
-    skillnames: ["Pytorch", "Python", "Research", "Writing"],
   },
   {
     title: "Data Scientist",
@@ -145,13 +89,6 @@ const experienceData = [
     ],
     links:[],
     linktexts:[],
-    skills: [
-      <SiPython size={26} />,
-      <BiLogoAws size={26} />,
-      <SiJupyter size={26} />,
-      <SiPandas size={26} />,
-    ],
-    skillnames: ["Python", "AWS", "Jupyter", "Pandas"],
   },
   {
     title: "Data Scientist / MIR R&D Intern",
@@ -165,13 +102,6 @@ const experienceData = [
     ],
     links:[],
     linktexts:[],
-    skills: [
-      <SiPython size={26} />,
-      <SiTensorflow size={26} />,
-      <GiNotebook size={26} />,
-      <SiApplemusic size={26} />,
-    ],
-    skillnames: ["Python", "Tensorflow", "Research", "MIR"],
   },
   {
     title: "Data Science Consultant Intern",
@@ -185,13 +115,6 @@ const experienceData = [
       "Participated in the creation of a sentiment analysis pipeline for an ENGIE internal call desk: implemented sentiment analysis on speech-to-text generated dialog from phone calls.",
       "Worked with Mecanicus, a car pricing company towards implementing a custom layer-structured fuzzy matcher algorithm to match market listings to their clean database",
     ],
-    skills: [
-      <SiPython size={26} />,
-      <SiTensorflow size={26} />,
-      <SiMicrosoftazure size={26} />,
-      <FaGitAlt size={26} />,
-    ],
-    skillnames: ["Python", "Tensorflow", "Azure", "Git"],
   },
   {
     title: "Musical Acoustics Research Intern",
@@ -204,13 +127,6 @@ const experienceData = [
       "Used matlab to simulate the sound produced by a struck or bowed cello string with coupling to the body. with state of the art error rate for plucked strings",
       "Conducted thorough bibliography analysis of state of the art simulation methods.",
     ],
-    skills: [
-      <GiSoundWaves size={26} />,
-      <BsGrid3X3 size={26} />,
-      <CiWavePulse1 size={26} />,
-      <GiPencil size={26} />,
-    ],
-    skillnames: ["Acoustics", "Matlab", "DSP", "Research"],
   },
   // Add more experience entries if needed
 ];
@@ -223,20 +139,6 @@ const educationtitles = [
   "Ecole Centrale de Lyon (BSc)",
 ];
 
-const SkillTab = ({ IconComponent, skillName }) => {
-  return (
-    <div className="w-full h-16 flex flex-col lg:flex-row justify-start items-center lg:space-x-6 mt-3 lg:mt-0">
-      <div className="hover:text-rose-500 transition-colors duration-100 flex lg:scale-100 scale-75 flex-col justify-center h-full">
-        {IconComponent}
-      </div>
-      <div className="lg:text-md text-sm flex lg:flex-col flex-row justify-center h-full">
-        <span className="px-3 py-1 rounded-lg backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-black/30 hover:bg-white/30 dark:hover:bg-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 shadow-sm">
-          {skillName}
-        </span>
-      </div>
-    </div>
-  );
-};
 
 const EducationExperience = () => {
   const [educationExp, setEducationExp] = useState("education");
@@ -288,18 +190,27 @@ const EducationExperience = () => {
       : setContent(experienceData[i]);
   };
 
+  const navigateToPrevious = () => {
+    const currentData = educationExp === "education" ? educationData : experienceData;
+    const newIndex = activeTabId === 0 ? currentData.length - 1 : activeTabId - 1;
+    setActiveTabId(newIndex);
+    changecontent(newIndex, educationExp);
+  };
+
+  const navigateToNext = () => {
+    const currentData = educationExp === "education" ? educationData : experienceData;
+    const newIndex = activeTabId === currentData.length - 1 ? 0 : activeTabId + 1;
+    setActiveTabId(newIndex);
+    changecontent(newIndex, educationExp);
+  };
+
   return (
-    <div className="w-full lg:px-14 flex flex-col jusitfy-center select-none lg:mt-0 mt-6">
-      <div className="backdrop-blur-md bg-white/40 dark:bg-black/40 rounded-2xl shadow-lg">
+    <div className="w-full lg:px-14 flex flex-col jusitfy-center select-none lg:mt-2 mt-6">
+      <div className="backdrop-blur-md bg-white/40 dark:bg-black/40 shadow-lg border border-black dark:border-white">
         <div
-          className="w-full h-full flex lg:flex-row flex-col justify-start backdrop-blur-md bg-white/20 dark:bg-black/20 rounded-t-2xl"
+          className="w-full h-full flex lg:flex-row flex-col justify-start backdrop-blur-md bg-white/20 dark:bg-black/20 border-b border-black dark:border-white"
           id="folder-view-top"
         >
-          <div className="flex flex-row lg:justify-evenly lg:items-center px-3 lg:py-0 py-3 space-x-3">
-            <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-green-500"></div>
-            <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-yellow-500"></div>
-            <div className="h-3 w-3 border-1 rounded-full pressable border-black dark:border-white bg-rose-500"></div>
-          </div>
 
           <div className="h-16 w-10 lg:flex hidden"></div>
           <div className="flex flex-row h-12 lg:h-auto">
@@ -307,8 +218,8 @@ const EducationExperience = () => {
               <div
                 className={`lg:w-32 lg:px-0 px-6 ${
                   educationExp == "education"
-                    ? "backdrop-blur-md bg-white/40 dark:bg-black/40 lg:h-full h-8"
-                    : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-white lg:h-8 h-6"
+                    ? "backdrop-blur-md bg-white/40 dark:bg-black/40 text-black dark:text-white lg:h-[90%] h-8 border-t border-l border-r border-black dark:border-white"
+                    : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-black lg:h-8 h-6 border-t border-l border-r border-black dark:border-white"
                 } flex flex-col text-center justify-center lg:text-base transition-all duration-200`}
                 id="EducationTab"
                 onClick={() => {
@@ -325,8 +236,8 @@ const EducationExperience = () => {
               <div
                 className={`hover:cursor-pointer lg:w-32 lg:px-0 px-6 ${
                   educationExp == "experience"
-                    ? "backdrop-blur-md bg-white/40 dark:bg-black/40 text-black dark:text-white lg:h-full h-8"
-                    : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-white lg:h-8 h-6"
+                    ? "backdrop-blur-md bg-white/40 dark:bg-black/40 text-black dark:text-white lg:h-[90%] h-8 border-t border-l border-r border-black dark:border-white"
+                    : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-black lg:h-8 h-6 border-t border-l border-r border-black dark:border-white"
                 } flex flex-col text-center justify-center lg:text-base transition-all duration-200`}
                 id="ExperienceTab"
                 onClick={() => {
@@ -347,61 +258,77 @@ const EducationExperience = () => {
             id="EducationTab"
           ></div>
         </div>
-        <div className="h-full w-full lg:p-12 p-6 flex lg:flex-row flex-col justify-between transition-all duration-200 min-h-[600px]">
-          <div className="lg:w-1/4">
+        <div className="h-full w-full p-6 pt-2 flex flex-col transition-all duration-200 min-h-[600px]">
+          <div className="w-full mb-2">
             <div
-              className={`lg:h-72 flex transition-opacity transition-visibility duration-500 flex-row ${
+              className={`flex transition-opacity transition-visibility duration-500 flex-row ${
                 educationExp === "experience"
                   ? "opacity-100 flex"
                   : "opacity-0 hidden"
               }`}
             >
-              <div
-                className={`h-full w-[1px] lg:flex hidden flex-row justify-center bg-black dark:bg-white ${
-                  educationExp === "experience"
-                    ? "opacity-100 flex"
-                    : "opacity-0 hidden"
-                }`}
-              >
-                <div
-                  className={`absolute w-[4px] z-50 h-12 lg:flex bg-rose-500 hidden`}
-                  style={{
-                    transform: `translateY(${translateY}px)`,
-                    transition: "transform 0.2s ease",
-                  }}
-                ></div>
-              </div>
-              <div
-                id="timeline"
-                className={`lg:h-auto lg:mb-0 mb-6 w-full lg:flex-col flex-row justify-start lg:overflow-auto overflow-scroll transition-opacity transition-display duration-500 ${
-                  educationExp === "experience"
-                    ? "opacity-100 flex"
-                    : "opacity-0 hidden"
-                }`}
-              >
-                {jobtitles &&
-                  jobtitles.map((job, i) => {
-                    return (
-                      <div
-                        className={`tab backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200`}
-                        key={i}
-                        isActive={activeTabId === i}
-                        onClick={() => {
-                          setActiveTabId(i);
-                          changecontent(i, educationExp);
-                        }}
-                        ref={(el) => (tabs.current[i] = el)}
-                        id={`tab-${i}`}
-                        role="tab"
-                        tabIndex={activeTabId === i ? "0" : "-1"}
-                        aria-selected={activeTabId === i ? true : false}
-                        aria-controls={`panel-${i}`}
-                      >
-                        {job}
-                      </div>
-                    );
-                  })}
-              </div>
+              <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4">
+                <div className="w-full flex items-center" id="navbar-sticky">
+                  {/* Previous Button */}
+                  <button
+                    onClick={navigateToPrevious}
+                    className="flex items-center justify-center w-8 h-8 mx-2 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
+                    aria-label="Previous tab"
+                  >
+                    <svg 
+                      className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                  </button>
+                  
+                  <ul className="flex w-full justify-evenly lg:text-base text-sm md:font-medium">
+                    {jobtitles &&
+                      jobtitles.map((job, i) => {
+                        return (
+                          <li
+                            className={`lg:text-base text-sm border-black dark:border-white h-full grow cursor-pointer transition-colors duration-100 p-2 text-center ${
+                              activeTabId === i
+                                ? "bg-white text-black border-x border-black dark:bg-white dark:text-black dark:border-white font-bold"
+                                : "hover:bg-white hover:bg-opacity-20 hover:text-black dark:hover:bg-white dark:hover:text-black"
+                            }`}
+                            key={i}
+                            isActive={activeTabId === i}
+                            onClick={() => {
+                              setActiveTabId(i);
+                              changecontent(i, educationExp);
+                            }}
+                            ref={(el) => (tabs.current[i] = el)}
+                            id={`tab-${i}`}
+                            role="tab"
+                            tabIndex={activeTabId === i ? "0" : "-1"}
+                            aria-selected={activeTabId === i ? true : false}
+                            aria-controls={`panel-${i}`}
+                          >
+                            <div className="subnav-tag">{job}</div>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                  
+                  {/* Next Button */}
+                  <button
+                    onClick={navigateToNext}
+                    className="flex items-center justify-center w-8 h-8 mx-2 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
+                    aria-label="Next tab"
+                  >
+                    <svg 
+                      className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                  </button>
+                </div>
+              </nav>
             </div>
 
             <div
@@ -411,56 +338,72 @@ const EducationExperience = () => {
                   : "opacity-0 hidden"
               }`}
             >
-              <div
-                className={`w-[1px] justify-center lg:flex hidden bg-black dark:bg-white ${
-                  educationExp === "education"
-                    ? "opacity-100 flex"
-                    : "opacity-0 hidden"
-                }`}
-              >
-                <div
-                  className={`absolute w-[4px] z-50 h-12 lg:flex bg-rose-500 hidden`}
-                  style={{
-                    transform: `translateY(${translateY}px)`,
-                    transition: "transform 0.2s ease",
-                  }}
-                ></div>
-              </div>
-              <div
-                id="timeline"
-                className={`lg:h-auto lg:mb-0 mb-6 lg:w-full lg:flex-col flex-row justify-start lg:overflow-auto overflow-scroll transition-opacity transition-display duration-500 ${
-                  educationExp === "education"
-                    ? "opacity-100 flex"
-                    : "opacity-0 hidden"
-                }`}
-              >
-                {educationtitles &&
-                  educationtitles.map((education, i) => {
-                    return (
-                      <div
-                        className={`tab transition-all duration-200`}
-                        key={i}
-                        isActive={activeTabId === i}
-                        onClick={() => {
-                          setActiveTabId(i);
-                          changecontent(i, educationExp);
-                        }}
-                        ref={(el) => (tabs.current[i] = el)}
-                        id={`tab-${i}`}
-                        role="tab"
-                        tabIndex={activeTabId === i ? "0" : "-1"}
-                        aria-selected={activeTabId === i ? true : false}
-                        aria-controls={`panel-${i}`}
-                      >
-                        {education}
-                      </div>
-                    );
-                  })}
-              </div>
+              <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4">
+                <div className="w-full flex items-center" id="navbar-sticky">
+                  {/* Previous Button */}
+                  <button
+                    onClick={navigateToPrevious}
+                    className="flex items-center justify-center w-8 h-8 mx-2 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
+                    aria-label="Previous tab"
+                  >
+                    <svg 
+                      className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                  </button>
+                  
+                  <ul className="flex w-full justify-evenly lg:text-base text-sm md:font-medium">
+                    {educationtitles &&
+                      educationtitles.map((education, i) => {
+                        return (
+                          <li
+                            className={`lg:text-base text-sm border-black dark:border-white h-full grow cursor-pointer transition-colors duration-100 p-2 text-center ${
+                              activeTabId === i
+                                ? "bg-white text-black border-x border-black dark:bg-white dark:text-black dark:border-white font-bold"
+                                : "hover:bg-white hover:bg-opacity-20 hover:text-black dark:hover:bg-white dark:hover:text-black"
+                            }`}
+                            key={i}
+                            isActive={activeTabId === i}
+                            onClick={() => {
+                              setActiveTabId(i);
+                              changecontent(i, educationExp);
+                            }}
+                            ref={(el) => (tabs.current[i] = el)}
+                            id={`tab-${i}`}
+                            role="tab"
+                            tabIndex={activeTabId === i ? "0" : "-1"}
+                            aria-selected={activeTabId === i ? true : false}
+                            aria-controls={`panel-${i}`}
+                          >
+                            <div className="subnav-tag">{education}</div>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                  
+                  {/* Next Button */}
+                  <button
+                    onClick={navigateToNext}
+                    className="flex items-center justify-center w-8 h-8 mx-2 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
+                    aria-label="Next tab"
+                  >
+                    <svg 
+                      className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                  </button>
+                </div>
+              </nav>
             </div>
           </div>
           <div
-            className="lg:w-1/2 lg:px-6 flex flex-col items-left space-y-4"
+            className="w-full flex flex-col items-left space-y-4 pt-4"
             id="description"
             key={updateKey}
           >
@@ -492,18 +435,6 @@ const EducationExperience = () => {
                 ))}
               </div>
             </div>
-          </div>
-          <div
-            className="lg:w-1/5 lg:px-10 w-full flex flex-row justify-evenly lg:flex-col lg:justify-start"
-            id="skills"
-          >
-            {content.skills.map((skill, i) => (
-              <SkillTab
-                key={i}
-                IconComponent={skill}
-                skillName={content.skillnames[i]}
-              />
-            ))}
           </div>
         </div>
       </div>

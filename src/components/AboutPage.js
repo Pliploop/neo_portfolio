@@ -175,8 +175,8 @@ const AboutSection = () => {
         </div>
 
         <div className="grow flex-row justify-end lg:pr-10 py-6 lg:flex hidden">
-          <div className="aspect-square w-3/5 rounded-[50px] flex flex-row p-4 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-lg">
-            <div className="h-full w-full rounded-[50px] overflow-clip">
+          <div className="aspect-square w-3/5 flex flex-row p-4 backdrop-blur-md bg-white/20 dark:bg-black/20 border border-black">
+            <div className="h-full w-full overflow-clip">
               <img
                 src={image}
                 alt=""
@@ -226,7 +226,7 @@ const Intro = () => {
 
       <div className="flex flex-row lg:justify-start justify-center">
         <div
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 rounded-full backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center shadow-lg hover:shadow-xl"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black"
           onClick={() => {
             scrollto("contactform");
           }}
@@ -239,7 +239,7 @@ const Intro = () => {
           ></HiOutlineArrowUpRight>{" "}
         </div>
         <div
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 rounded-full backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center shadow-lg hover:shadow-xl"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black"
           onClick={() => nav("/music")}
         >
           <p className="lg:text-md text-sm font-medium text-black dark:text-white">My Music</p>{" "}
@@ -248,8 +248,18 @@ const Intro = () => {
             size={16}
           ></HiOutlineArrowUpRight>
         </div>
+        <div
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black"
+          onClick={() => nav("/academia")}
+        >
+          <p className="lg:text-md text-sm font-medium text-black dark:text-white">My Research</p>{" "}
+          <HiOutlineArrowUpRight
+            className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
+            size={16}
+          ></HiOutlineArrowUpRight>
+        </div>
         <a
-          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 rounded-full backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center shadow-lg hover:shadow-xl"
+          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black"
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"

@@ -20,7 +20,7 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
 
   return (
     <div
-      className="lg:h-16 z-50 select-none h-12 w-full sticky mb-12 lg:top-8 top-6 backdrop-filter backdrop-blur-lg lg:backdrop-blur-xl bg-opacity-90 border-black dark:border-white lg:border-2 border-[1px] bg-transparent flex flex-row justify-between"
+      className="lg:h-16 z-[100] select-none h-12 w-full sticky mb-12 lg:top-8 top-6 backdrop-filter backdrop-blur-lg lg:backdrop-blur-xl bg-opacity-90 border-black dark:border-white lg:border-2 border-[1px] bg-transparent flex flex-row justify-between"
       id="all_about"
     >
       <div

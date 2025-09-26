@@ -25,6 +25,10 @@ import { useEffect, useState } from "react";
 import { VscGithub } from "react-icons/vsc";
 import { SiArxiv } from "react-icons/si";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { FaTrophy } from "react-icons/fa";
+import { MdRecordVoiceOver } from "react-icons/md";
+import { IoNewspaperSharp } from "react-icons/io5";
+import { FaBook } from "react-icons/fa";
 
 
 
@@ -144,16 +148,6 @@ const AcademiaSection = () => {
 
   const papers = [
     {
-      title: "GD-Retriever: Controllable Generative Text-Music Retrieval with Diffusion Models",
-      authors: ["Julien Guinot", "Elio Quinton", "György Fazekas"],
-      affiliations: ["Queen Mary University of London", "Universal Music Group"],
-      affiliations_indices: ["1,2", "2", "1"],
-      venue: "International Society for Music Information Retrieval Conference (ISMIR 2025)",
-      abstract: "Multimodal contrastive models have achieved strong performance in text-audio retrieval and zero-shot settings, but improving joint embedding spaces remains an active research area. Less attention has been given to making these systems controllable and interactive for users. In text-music retrieval, the ambiguity of freeform language creates a many-to-many mapping, often resulting in inflexible or unsatisfying results. We introduce Generative Diffusion Retriever (GDR), a novel framework that leverages diffusion models to generate queries in a retrieval-optimized latent space. This enables controllability through generative tools such as negative prompting and denoising diffusion implicit models (DDIM) inversion, opening a new direction in retrieval control. GDR improves retrieval performance over contrastive teacher models and supports retrieval in audio-only latent spaces using non-jointly trained encoders. Finally, we demonstrate that GDR enables effective post-hoc manipulation of retrieval behavior, enhancing interactive control for text-music retrieval tasks.",
-      arxiv: "https://arxiv.org/abs/2506.17886",
-      github: "https://github.com/Pliploop/GDRetriever",
-    },
-    {
       title: "SLAP: Siamese Language-Audio Pretraining Without Negative Samples for Music Understanding",
       authors: ["Julien Guinot", "Alain Riou", "Elio Quinton", "György Fazekas"],
       affiliations: ["Queen Mary University of London", "Universal Music Group"],
@@ -162,6 +156,32 @@ const AcademiaSection = () => {
       abstract: "Joint embedding spaces have significantly advanced music understanding and generation by linking text and audio through multimodal contrastive learning. However, these approaches face large memory requirement limitations due to relying on large batch sizes to effectively utilize negative samples. Further, multimodal joint embedding spaces suffer from a modality gap wherein embeddings from different modalities lie in different manifolds of the embedding space. To address these challenges, we propose Siamese Language-Audio Pretraining (SLAP), a novel multimodal pretraining framework that allows learning powerful representations without negative samples. SLAP adapts the Bootstrap Your Own Latent (BYOL) paradigm for multimodal audio-text training, promoting scalability in training multimodal embedding spaces. We illustrate the ability of our model to learn meaningful relationships between music and text -- specifically, we show that SLAP outperforms CLAP on tasks such as text-music retrieval and zero-shot classification. We also observe competitive downstream performance on several MIR tasks, including with larger or supervised models (genre and instrument classification, auto-tagging). Additionally, our approach has attractive properties, such as a quantifiably reduced modality gap and improved robustness to batch size variations on retrieval performance. Finally, its novel formulation unlocks large-scale training on a single GPU through gradient accumulation.",
       arxiv: "https://arxiv.org/abs/2506.17815",
       github: "https://github.com/Pliploop/SLAP",
+      presentationType: "oral,poster",
+      awards: ["Best Paper Nominee"],
+    },
+    {
+      title: "GD-Retriever: Controllable Generative Text-Music Retrieval with Diffusion Models",
+      authors: ["Julien Guinot", "Elio Quinton", "György Fazekas"],
+      affiliations: ["Queen Mary University of London", "Universal Music Group"],
+      affiliations_indices: ["1,2", "2", "1"],
+      venue: "International Society for Music Information Retrieval Conference (ISMIR 2025)",
+      abstract: "Multimodal contrastive models have achieved strong performance in text-audio retrieval and zero-shot settings, but improving joint embedding spaces remains an active research area. Less attention has been given to making these systems controllable and interactive for users. In text-music retrieval, the ambiguity of freeform language creates a many-to-many mapping, often resulting in inflexible or unsatisfying results. We introduce Generative Diffusion Retriever (GDR), a novel framework that leverages diffusion models to generate queries in a retrieval-optimized latent space. This enables controllability through generative tools such as negative prompting and denoising diffusion implicit models (DDIM) inversion, opening a new direction in retrieval control. GDR improves retrieval performance over contrastive teacher models and supports retrieval in audio-only latent spaces using non-jointly trained encoders. Finally, we demonstrate that GDR enables effective post-hoc manipulation of retrieval behavior, enhancing interactive control for text-music retrieval tasks.",
+      arxiv: "https://arxiv.org/abs/2506.17886",
+      github: "https://github.com/Pliploop/GDRetriever",
+      presentationType: "oral,poster",
+      awards: null,
+    },
+    {
+      title: "Towards a Unified Representation Evaluation Framework Beyond Downstream Tasks",
+      authors: ["Christos Plachouras", "Julien Guinot", "George Fazekas", "Elio Quinton", "Emmanouil Benetos", "Johan Pauwels"],
+      affiliations: ["Queen Mary University of London", "Universal Music Group", "Various Institutions"],
+      affiliations_indices: ["1,2", "1,2", "1", "2", "1", "3"],
+      venue: "International Joint Conference on Neural Networks (IJCNN 2025)",
+      abstract: "Downstream probing has been the dominant method for evaluating model representations, an important process given the increasing prominence of self-supervised learning and foundation models. However, downstream probing primarily assesses the availability of task-relevant information in the model's latent space, overlooking attributes such as equivariance, invariance, and disentanglement, which contribute to the interpretability, adaptability, and utility of representations in real-world applications. While some attempts have been made to measure these qualities in representations, no unified evaluation framework with modular, generalizable, and interpretable metrics exists. In this paper, we argue for the importance of representation evaluation beyond downstream probing. We introduce a standardized protocol to quantify informativeness, equivariance, invariance, and disentanglement of factors of variation in model representations. We use it to evaluate representations from a variety of models in the image and speech domains using different architectures and pretraining approaches on identified controllable factors of variation. We find that representations from models with similar downstream performance can behave substantially differently with regard to these attributes. This hints that the respective mechanisms underlying their downstream performance are functionally different, prompting new research directions to understand and improve representations.",
+      arxiv: "https://arxiv.org/abs/2505.06224",
+      github: null,
+      presentationType: "oral,poster",
+      awards: ["UKAIRS Symposium Nominee"],
     },
     {
       title: "Leave-One-EquiVariant: Alleviating invariance-related information loss in contrastive music representations",
@@ -172,6 +192,8 @@ const AcademiaSection = () => {
       abstract: "Contrastive learning has proven effective in self-supervised musical representation learning, particularly for Music Information Retrieval (MIR) tasks. However, reliance on augmentation chains for contrastive view generation and the resulting learnt invariances pose challenges when different downstream tasks require sensitivity to certain musical attributes. To address this, we propose the Leave One EquiVariant (LOEV) framework, which introduces a flexible, task-adaptive approach compared to previous work by selectively preserving information about specific augmentations, allowing the model to maintain task-relevant equivariances. We demonstrate that LOEV alleviates information loss related to learned invariances, improving performance on augmentation related tasks and retrieval without sacrificing general representation quality. Furthermore, we introduce a variant of LOEV, LOEV++, which builds a disentangled latent space by design in a self-supervised manner, and enables targeted retrieval based on augmentation related attributes.",
       arxiv: "https://arxiv.org/abs/2412.18955",
       github: "https://github.com/Pliploop/LOEV-Mix",
+      presentationType: "oral",
+      awards: null,
     },
     {
       title: "Semi-Supervised Contrastive Learning of Musical Representations",
@@ -182,6 +204,21 @@ const AcademiaSection = () => {
       abstract: "Despite the success of contrastive learning in Music Information Retrieval, the inherent ambiguity of contrastive self-supervision presents a challenge. Relying solely on augmentation chains and self-supervised positive sampling strategies can lead to a pretraining objective that does not capture key musical information for downstream tasks. We introduce semi-supervised contrastive learning (SemiSupCon), a simple method for leveraging musically informed labeled data (supervision signals) in the contrastive learning of musical representations. Our approach introduces musically relevant supervision signals into self-supervised contrastive learning by combining supervised and self-supervised contrastive objectives in a simpler framework than previous approaches. This framework improves downstream performance and robustness to audio corruptions on a range of downstream MIR tasks with moderate amounts of labeled data. Our approach enables shaping the learned similarity metric through the choice of labeled data that (1) infuses the representations with musical domain knowledge and (2) improves out-of-domain performance with minimal general downstream performance loss. We show strong transfer learning performance on musically related yet not trivially similar tasks - such as pitch and key estimation. Additionally, our approach shows performance improvement on automatic tagging over self-supervised approaches with only 5% of available labels included in pretraining.",
       arxiv: "https://arxiv.org/abs/2407.13840",
       github: "https://github.com/Pliploop/SemiSupCon",
+      presentationType: "oral,poster",
+      awards: null,
+    },
+    {
+      title: "Foundation models for music: A survey",
+      authors: ["Yinghao Ma", "Anders Øland", "Anton Ragni", "Bleiz MacSen Del Sette", "Charalampos Saitis", "Chris Donahue", "Chenghua Lin", "Christos Plachouras", "Emmanouil Benetos", "Elona Shatri", "Fabio Morreale", "Ge Zhang", "György Fazekas", "Gus Xia", "Huan Zhang", "Ilaria Manco", "Jiawen Huang", "Julien Guinot", "Liwei Lin", "Luca Marinelli", "Max WY Lam", "Megha Sharma", "Qiuqiang Kong", "Roger B Dannenberg", "Ruibin Yuan", "Shangda Wu", "Shih-Lun Wu", "Shuqi Dai", "Shun Lei", "Shiyin Kang", "Simon Dixon", "Wenhu Chen", "Wenhao Huang", "Xingjian Du", "Xingwei Qu", "Xu Tan", "Yizhi Li", "Zeyue Tian", "Zhiyong Wu", "Zhizheng Wu", "Ziyang Ma", "Ziyu Wang"],
+      affiliations: ["Queen Mary University of London", "Universal Music Group", "Various Institutions"],
+      affiliations_indices: ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1,2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      venue: "Transactions on Audio, Speech, and Language Processing (TASLP) (2024)",
+      abstract: "In recent years, foundation models (FMs) such as large language models (LLMs) and latent diffusion models (LDMs) have profoundly impacted diverse sectors, including music. This comprehensive review examines state-of-the-art (SOTA) pre-trained models and foundation models in music, spanning from representation learning, generative learning and multimodal learning. We first contextualise the significance of music in various industries and trace the evolution of AI in music. By delineating the modalities targeted by foundation models, we discover many of the music representations are underexplored in FM development. Then, emphasis is placed on the lack of versatility of previous methods on diverse music applications, along with the potential of FMs in music understanding, generation and medical application. By comprehensively exploring the details of the model pre-training paradigm, architectural choices, tokenisation, finetuning methodologies and controllability, we emphasise the important topics that should have been well explored, like instruction tuning and in-context learning, scaling law and emergent ability, as well as long-sequence modelling etc. A dedicated section presents insights into music agents, accompanied by a thorough analysis of datasets and evaluations essential for pre-training and downstream tasks. Finally, by underscoring the vital importance of ethical considerations, we advocate that following research on FM for music should focus more on such issues as interpretability, transparency, human responsibility, and copyright issues. The paper offers insights into future challenges and trends on FMs for music.",
+      arxiv: "https://arxiv.org/abs/2408.14340",
+      github: null,
+      presentationType: null,
+      awards: null,
+      isJournal: true,
     },
   ]
 
@@ -238,6 +275,9 @@ const AcademiaSection = () => {
                         abstract={paper.abstract}
                         arxiv={paper.arxiv}
                         github={paper.github}
+                        presentationType={paper.presentationType}
+                        awards={paper.awards}
+                        isJournal={paper.isJournal}
                       />
                       {index < papers.length - 1 && (
                         <div className="w-1/2 h-[1px] bg-black dark:bg-white self-center my-4 mx-auto"></div>
@@ -251,7 +291,7 @@ const AcademiaSection = () => {
             </div>
           <AcademiaHeader text={"My Research"} />
           <HeroSection />
-          <AcademiaHeader text={"Writing samples"} />
+          {/* <AcademiaHeader text={"Writing samples"} />
 
           <AcademiaNav />
           <div className="lg:px-10 w-full mb-0 lg:text-sm  text-sm text-black dark:text-white font-inter">
@@ -259,50 +299,18 @@ const AcademiaSection = () => {
               Some writing samples I've cooked up over the years through my studies and/or projects.
             </div>
 
-            {/* <div className="w-full  mb-20 text-justify">
-              Some of the other papers included in this section comprise{" "}
-              <b>
-                Research internships and project reports, assignments and
-                practicals for classes in both France and Australia.
-              </b>
-              Unfortunately, some of the papers, specifically both of my
-              research internship reports on{" "}
-              <b>
-                "Active control of the first vibrational modes of a cello" and
-                "Impedance-based acoustic diode effect"{" "}
-              </b>
-              are in French. I've included translated abstracts for your
-              convenience but have yet to translate the 120 pages. I hope to get
-              to that soon. I've elected to include them in chronological order
-              as it is also order of relevance to my research interests.
-            </div> */}
-
             <div className="justify-center items-center lg:flex flex-col hidden">
               <ThesisSection />
               <SpectrogramSection />
               <IRCAMSection />
-              {/* <AssignmentSection /> */}
             </div>
 
             <div className="justify-center items-center lg:hidden flex flex-col">
-              {/* <ThesisSectionSmall /> */}
               <ThesisSectionSmall />
               <SpectrogramSectionSmall />
               <IRCAMSectionSmall />
-              {/* <AssignmentSectionSmall /> */}
             </div>
-            {/* <div className="justify-center items-center align-middle content-center lg:flex hidden">
-          <div className=" flex flex-col content-center items-center justify-evenly w-6">
-            <Timelinedot section={<ThesisSection />} />
-            <FillerBar height={"500px"} />
-            <Timelinedot section={<SpectrogramSection />} />
-            <FillerBar height={"500px"} />
-            <Timelinedot section={<></>} />
-            <FillerBar height={"100px"} />
-            <Timelinedot section={<></>} />
-          </div>
-        </div> */}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
@@ -323,6 +331,43 @@ const AcademiaHeader = ({ text }) => {
 // title, authors, venue and abstract should be vertically stacked
 // arxiv and github badges should be on a div to the right of the abstract
 
+
+// Badge Components
+const OralBadge = () => {
+  return (
+    <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs font-medium">
+      <MdRecordVoiceOver size={12} />
+      Oral
+    </div>
+  );
+};
+
+const PosterBadge = () => {
+  return (
+    <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs font-medium">
+      <IoNewspaperSharp size={12} />
+      Poster
+    </div>
+  );
+};
+
+const AwardBadge = ({ awardName }) => {
+  return (
+    <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs font-medium">
+      <FaTrophy size={12} />
+      {awardName}
+    </div>
+  );
+};
+
+const JournalBadge = () => {
+  return (
+    <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-medium">
+      <FaBook size={12} />
+      Journal
+    </div>
+  );
+};
 
 const AuthorsAndAffiliations = ({ authors, affiliations, affiliations_indices }) => {
   // authors is an array of objects with name. The first author is always the first author
@@ -387,7 +432,7 @@ const Abstract = ({ abstract }) => {
 
 
 
-const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abstract, arxiv, github }) => {
+const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abstract, arxiv, github, presentationType, awards, isJournal }) => {
   return (
     <div>
     <div className="flex lg:flex-row flex-col justify-between items-start gap-5">
@@ -396,6 +441,23 @@ const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abst
         {/* first author is bolded and starred, attributions are denoted by exponents in purple, with map */}
         <AuthorsAndAffiliations authors={authors} affiliations={affiliations} affiliations_indices={affiliations_indices}/>
         <div className="font-inter text-sm text-black italic dark:text-white">{venue}</div>
+        
+        {/* Badges Section */}
+        <div className="flex flex-wrap gap-2">
+          {isJournal && <JournalBadge />}
+          {presentationType === 'oral' && <OralBadge />}
+          {presentationType === 'poster' && <PosterBadge />}
+          {presentationType === 'oral,poster' && (
+            <>
+              <OralBadge />
+              <PosterBadge />
+            </>
+          )}
+          {awards && awards.map((award, index) => (
+            <AwardBadge key={index} awardName={award} />
+          ))}
+        </div>
+        
         <Abstract abstract={abstract} />
       </div>
       <div className="flex flex-col gap-3 dark:text-white">
@@ -411,17 +473,19 @@ const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abst
               ArXiv
             </div>
           </a>
-          <a  
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-3 py-1 flex flex-row gap-3 items-center rounded-lg hover:backdrop-blur-md hover:bg-gray-200/80 dark:hover:bg-gray-800/80 active:backdrop-blur-md active:bg-gray-300/80 dark:active:bg-gray-700/80 transition-all duration-200"
-          >
-            <VscGithub size={20} />
-            <div className="font-inter text-xs">
-              Github
-            </div>
-          </a>
+          {github && (
+            <a  
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1 flex flex-row gap-3 items-center rounded-lg hover:backdrop-blur-md hover:bg-gray-200/80 dark:hover:bg-gray-800/80 active:backdrop-blur-md active:bg-gray-300/80 dark:active:bg-gray-700/80 transition-all duration-200"
+            >
+              <VscGithub size={20} />
+              <div className="font-inter text-xs">
+                Github
+              </div>
+            </a>
+          )}
         </div>
       </div>
 

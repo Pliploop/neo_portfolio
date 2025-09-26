@@ -353,6 +353,7 @@ const Loader = () => {
     playref.current.reset();
     barref.current.reset();
     setPaused(true);
+    setProgressTime("0:00");
   }
 
   function playanimation() {
@@ -426,13 +427,13 @@ const Loader = () => {
               <div className="active:scale-90 transition-all duration-200">
               {isLiked ? (
                 <HiHeart
-                  className="pressable home-accent-text white-block-shadow stroke-1 stroke-black heart"
+                  className="pressable text-rose-500 drop-shadow-lg heart stroke-1 stroke-black"
                   size={32} 
                   onClick={() => animatelike()}
                 />
               ) : (
                 <HiOutlineHeart
-                  className="pressable active:home-accent-text heart stroke-1"
+                  className="pressable text-gray-600 heart stroke-1 stroke-black"
                   size={32}
                   onClick={() => animatelike()}
                 />
@@ -450,12 +451,18 @@ const Loader = () => {
 
               <div className="h-2 w-full flex flex-col justify-center self-center lg:px-2 px-1">
                 <div
-                  className="w-full h-full border-[1px]  border-black rounded-full"
+                  className="w-full h-full border-[1px] border-black rounded-full relative overflow-hidden"
                   id="bar"
                 >
                   <div
-                    className="w-[1%] h-full border-[1px]  bg-black rounded-full"
+                    className="w-[1%] h-full bg-black rounded-full transition-all duration-100 ease-linear"
                     id="progress"
+                  ></div>
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)'
+                    }}
                   ></div>
                 </div>
               </div>
@@ -488,13 +495,13 @@ const Loader = () => {
                 </div>
 
                 <div
-                  className="   flex flex-col justify-center pressable rounded-full p-2 active:home-accent-text"
+                  className="flex flex-col justify-center pressable rounded-full p-2 active:scale-95 active:bg-rose-100 transition-all duration-150 ease-in-out"
                   onClick={() => setPaused(!paused)}
                 >
                   {isplaying ? (
-                    <IoPauseSharp size={32} />
+                    <IoPauseSharp size={32} className="text-rose-500 transition-colors duration-150" />
                   ) : (
-                    <IoPlaySharp size={32} />
+                    <IoPlaySharp size={32} className="text-gray-600 hover:text-rose-500 transition-colors duration-150" />
                   )}
                 </div>
 

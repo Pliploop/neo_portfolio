@@ -28,14 +28,9 @@ const MusicMixMaster = () => {
             ></img>
             <blockquote class="relative mb-20">
               <div>
-                <div className="rounded-t-xl border-1 border-black bg-white h-10 w-full block-shadow flex flex-row justify-start items-center ">
-                  <div className="items-center px-3 space-x-2 flex flex-row mr-10">
-                    <div className="h-3 w-3 border-1 rounded-full pressable border-black bg-green-500"></div>
-                    <div className="h-3 w-3 border-1 rounded-full pressable border-black bg-yellow-500"></div>
-                    <div className="h-3 w-3 border-1 rounded-full pressable border-black bg-rose-500"></div>
-                  </div>
+                <div className="border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 h-10 w-full flex flex-row justify-start items-center">
                 </div>
-                <p class="text-sm italic p-4 font-medium leading-relaxed text-gray-900 z-40 block-shadow bg-emerald-100 rounded-b-2xl border-black border-1 border-t-0 h-full w-full">
+                <p class="text-sm italic p-4 font-medium leading-relaxed text-gray-900 dark:text-white z-40 backdrop-blur-md bg-white/40 dark:bg-black/40 border border-black dark:border-white border-t-0 h-full w-full">
                   Commuz' is a student-led society that creates a new musical
                   theatre piece every year. Everything is done by the students :
                   Scenario, playwriting, Arrangement, Composition, Sound

@@ -53,10 +53,10 @@ const ContactForm = () => {
             Name
           </label>
           <input
-            className="appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white rounded-lg leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl"
+            className="w-full appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl border border-black dark:border-white"
             id="name"
             type="text"
-            placeholder=""
+            placeholder="Your name"
             {...formik.getFieldProps("name")}
           />
           {formik.touched.name && formik.errors.name ? (
@@ -71,10 +71,10 @@ const ContactForm = () => {
             Email
           </label>
           <input
-            className="appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white rounded-lg leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl"
+            className="w-full appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl border border-black dark:border-white"
             id="email"
             type="email"
-            placeholder=""
+            placeholder="your.email@example.com"
             {...formik.getFieldProps("email")}
           />
           {formik.touched.email && formik.errors.email ? (
@@ -90,9 +90,9 @@ const ContactForm = () => {
           Message
         </label>
         <textarea
-          className="w-full appearance-none mb-2 backdrop-blur-md bg-white/20 dark:bg-black/20 py-2 px-3 text-black dark:text-white rounded-lg leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl"
+          className="w-full appearance-none mb-2 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl border border-black dark:border-white min-h-[120px] resize-vertical"
           id="message"
-          placeholder=""
+          placeholder="Tell me about your project, collaboration idea, or just say hello!"
           {...formik.getFieldProps("message")}
         />
         {formik.touched.message && formik.errors.message ? (
