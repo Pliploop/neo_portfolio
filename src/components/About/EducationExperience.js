@@ -267,7 +267,8 @@ const EducationExperience = () => {
                   : "opacity-0 hidden"
               }`}
             >
-              <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4">
+              {/* Desktop Navigation */}
+              <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4 lg:flex hidden">
                 <div className="w-full flex items-center" id="navbar-sticky">
                   {/* Previous Button */}
                   <button
@@ -329,6 +330,48 @@ const EducationExperience = () => {
                   </button>
                 </div>
               </nav>
+
+              {/* Mobile Navigation */}
+              <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4 lg:hidden flex">
+                <div className="w-full flex items-center justify-between px-4" id="navbar-sticky">
+                  {/* Previous Button */}
+                  <button
+                    onClick={navigateToPrevious}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
+                    aria-label="Previous tab"
+                  >
+                    <svg 
+                      className="w-5 h-5 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                  </button>
+                  
+                  {/* Current Item Name */}
+                  <div className="flex-1 text-center px-4">
+                    <span className="text-sm font-medium text-black dark:text-white">
+                      {jobtitles[activeTabId]}
+                    </span>
+                  </div>
+                  
+                  {/* Next Button */}
+                  <button
+                    onClick={navigateToNext}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
+                    aria-label="Next tab"
+                  >
+                    <svg 
+                      className="w-5 h-5 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                  </button>
+                </div>
+              </nav>
             </div>
 
             <div
@@ -338,7 +381,8 @@ const EducationExperience = () => {
                   : "opacity-0 hidden"
               }`}
             >
-              <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4">
+              {/* Desktop Navigation */}
+              <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4 lg:flex hidden">
                 <div className="w-full flex items-center" id="navbar-sticky">
                   {/* Previous Button */}
                   <button
@@ -392,6 +436,48 @@ const EducationExperience = () => {
                   >
                     <svg 
                       className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                  </button>
+                </div>
+              </nav>
+
+              {/* Mobile Navigation */}
+              <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4 lg:hidden flex">
+                <div className="w-full flex items-center justify-between px-4" id="navbar-sticky">
+                  {/* Previous Button */}
+                  <button
+                    onClick={navigateToPrevious}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
+                    aria-label="Previous tab"
+                  >
+                    <svg 
+                      className="w-5 h-5 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                  </button>
+                  
+                  {/* Current Item Name */}
+                  <div className="flex-1 text-center px-4">
+                    <span className="text-sm font-medium text-black dark:text-white">
+                      {educationtitles[activeTabId]}
+                    </span>
+                  </div>
+                  
+                  {/* Next Button */}
+                  <button
+                    onClick={navigateToNext}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
+                    aria-label="Next tab"
+                  >
+                    <svg 
+                      className="w-5 h-5 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
                       fill="currentColor" 
                       viewBox="0 0 24 24"
                     >

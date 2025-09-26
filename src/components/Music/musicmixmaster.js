@@ -175,19 +175,19 @@ const MixMasterAlbums = () => {
   return (
     <div className="flex lg:flex-row flex-col w-full h-auto lg:h-[700px] gap-20">
       <div
-        className="flex lg:w-1/2 lg:h-5/6 flex-row justify-center self-center w-full"
+        className="flex lg:w-1/2 lg:h-5/6 flex-row justify-center self-center w-full overflow-x-hidden lg:overflow-x-visible"
         {...handlers}
       >
         <div
-          className="hidden lg:flex h-14 border-2 border-white  aspect-square z-40 rounded-full mr-5 self-center cursor-pointer hover:shadow-md shadow-gray-800 active:scale-95 active:bg-gray-200 hover:border-black group hover:scale-105 ease-linear transition-all duration-[25ms] "
+          className="hidden lg:flex h-12 w-12 border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 aspect-square z-40 rounded-full mr-5 self-center cursor-pointer hover:shadow-lg hover:scale-110 active:scale-95 group transition-all duration-200"
           onClick={() => changealbum(false)}
         >
           <BiSkipPrevious
-            size={36}
-            className="m-auto text-white group-hover:text-black group-hover:scale-105"
+            size={24}
+            className="m-auto text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
           />
         </div>
-        <div className="lg:h-full h-[400px] lg:w-1/2 w-3/4 relative">
+        <div className="lg:h-full h-[400px] lg:w-1/2 w-3/4 relative overflow-hidden lg:overflow-visible">
           <AlbumEmbed
             link={
               "https://open.spotify.com/embed/album/4boTthC3VNuTVeBVcmJAED?utm_source=generator"
@@ -219,12 +219,12 @@ const MixMasterAlbums = () => {
         </div>
 
         <div
-          className="hidden lg:flex h-14 border-2 border-white ml-5 aspect-square rounded-full z-40 self-center cursor-pointer hover:shadow-md shadow-gray-600 active:scale-95 active:bg-gray-200 hover:border-black group hover:scale-105 ease-linear transition-all duration-[25ms] "
+          className="hidden lg:flex h-12 w-12 border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 aspect-square rounded-full z-40 self-center cursor-pointer hover:shadow-lg hover:scale-110 active:scale-95 group transition-all duration-200 ml-5"
           onClick={() => changealbum(true)}
         >
           <BiSkipNext
-            size={36}
-            className="m-auto text-white group-hover:text-black group-hover:scale-105"
+            size={24}
+            className="m-auto text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
           />
         </div>
       </div>
@@ -288,27 +288,68 @@ const AlbumDate = ({ date, color, albumid, currentalbum }) => {
 };
 
 const AlbumEmbed = ({ link, currentalbum, albumid }) => {
-  var classname = "hidden";
-  if (albumid === currentalbum) {
-    classname =
-      "w-full lg:h-4/5 h-full  absolute z-10 transition-all ease-linear duration-200 rounded-2xl block-shadow flex flex-col";
-  }
-  if (albumid === currentalbum - 1) {
-    classname =
-      " absolute lg:h-2/3 w-3/4 h-full lg:ml-[-40%] ml-[-20%] lg:mt-[25%] mt-[10%] z-0 blur-sm  transition-all ease-linear duration-200 pointer-events-none rounded-xl overflow-clip";
-  }
-  if (albumid === currentalbum + 1) {
-    classname =
-      "absolute lg:h-2/3 w-3/4  h-full z-0 blur-sm lg:mt-[25%] mt-[10%] lg:ml-[65%] ml-[45%] transition-all ease-linear duration-200 pointer-events-none rounded-xl overflow-clip";
-  }
+  const getTransform = () => {
+    const diff = albumid - currentalbum;
+    if (diff === 0) return "translateX(0%) scale(1)";
+    if (diff === -1) return "translateX(-30%) scale(0.85)";
+    if (diff === 1) return "translateX(30%) scale(0.85)";
+    if (diff < -1) return "translateX(-200%) scale(0.8)";
+    if (diff > 1) return "translateX(200%) scale(0.8)";
+    return "translateX(0%) scale(0.8)";
+  };
+
+  const getMobileTransform = () => {
+    const diff = albumid - currentalbum;
+    if (diff === 0) return "translateX(0%) scale(1)";
+    if (diff === -1) return "translateX(-5%) scale(0.9)";
+    if (diff === 1) return "translateX(5%) scale(0.9)";
+    if (diff < -1) return "translateX(-200%) scale(0.8)";
+    if (diff > 1) return "translateX(200%) scale(0.8)";
+    return "translateX(0%) scale(0.8)";
+  };
+
+
+  const getOpacity = () => {
+    const diff = Math.abs(albumid - currentalbum);
+    if (diff === 0) return 1;
+    if (diff === 1) return 0.4;
+    if (diff === 2) return 0.05;
+    if (diff === 3) return 0.01;
+    return 0;
+  };
+
+  const getZIndex = () => {
+    const diff = albumid - currentalbum;
+    if (diff === 0) return 10;
+    if (diff === -1) return 9;
+    if (diff === 1) return 8;
+    return 7 - Math.abs(diff);
+  };
+
+  const getBlur = () => {
+    const diff = Math.abs(albumid - currentalbum);
+    if (diff === 0) return "blur(0px)";
+    if (diff === 1) return "blur(5px)";
+    if (diff === 2) return "blur(15px)";
+    if (diff === 3) return "blur(25px)";
+    return "blur(40px)";
+  };
 
   return (
-    <div className={classname}>
-      
+    <div 
+      className="absolute w-full lg:h-4/5 h-full transition-all duration-500 ease-out rounded-2xl overflow-clip"
+      style={{
+        transform: window.innerWidth >= 1024 ? getTransform() : getMobileTransform(),
+        opacity: getOpacity(),
+        zIndex: getZIndex(),
+        filter: getBlur(),
+        pointerEvents: albumid === currentalbum ? 'auto' : 'none'
+      }}
+    >
       <iframe
         src={link}
-        className="h-full w-full  select-none rounded-2xl border-black bg-black border-1 block-shadow "
-        allowfullscreen=""
+        className="h-full w-full select-none rounded-2xl border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40"
+        allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
         loading="lazy"
         title="album"

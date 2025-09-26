@@ -4,6 +4,7 @@ import { GrDown } from "react-icons/gr";
 import { SiSpotify } from "react-icons/si";
 import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
 import { BiLogoInstagramAlt } from "react-icons/bi";
+import { HiSun, HiMoon } from "react-icons/hi";
 import ReactPlayer from "react-player";
 import { MusicIntro } from "../components/Music/musicintro";
 import { MusicArranged } from "../components/Music/musicarranged";
@@ -14,6 +15,21 @@ const MusicSection = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [showGradient, setShowGradient] = useState(false);
   const [MeshGradientRenderer, setMeshGradientRenderer] = useState(null);
+  const [isDark, setIsDark] = useState(false);
+
+  const switchLightDark = () => {
+    var element = document.body;
+    if (localStorage.theme === "light") {
+      element.classList.add("dark");
+      localStorage.theme = "dark";
+      setIsDark(true);
+    } else {
+      element.classList.remove("dark");
+      localStorage.theme = "light";
+      setIsDark(false);
+    }
+    console.log(localStorage.theme);
+  };
 
   const animate = () => {
     
@@ -23,6 +39,8 @@ const MusicSection = () => {
     console.log(localStorage.theme);
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
+    // Initialize theme state
+    setIsDark(localStorage.theme === "dark");
     return () => clearTimeout(timeout);
   }, []);
 
@@ -45,7 +63,7 @@ const MusicSection = () => {
   return (
     // <div className="dark:bg-black  bg-gradient-to-b   from-emerald-100 to-sky-100 to-35% lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
 
-    <div className="dark:bg-gray-900 relative float-left bg-cover dark:text-white lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
+    <div className="dark:bg-gray-900 relative float-left bg-cover dark:text-white lg:py-12 lg:px-32 p-6 scrollbar-hide select-none overflow-x-hidden lg:overflow-x-visible w-full">
       {/* Animated mesh gradient background with fade-in */}
       {MeshGradientRenderer && (
         <div 
@@ -100,6 +118,20 @@ const MusicSection = () => {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Mobile Theme Toggle */}
+      <div className="fixed bottom-6 right-6 z-[100] lg:hidden">
+        <button
+          onClick={switchLightDark}
+          className="h-12 w-12 rounded-full border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
+        >
+          {isDark ? (
+            <HiSun size={24} className="text-yellow-500" />
+          ) : (
+            <HiMoon size={24} className="text-gray-700" />
+          )}
+        </button>
       </div>
     </div>
   );

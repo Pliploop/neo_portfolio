@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AllHeader from "./subcomponents/header";
 import ContactFooter from "./subcomponents/contactfooter";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
+import { HiSun, HiMoon } from "react-icons/hi";
 import { default as EducationExperience } from "./About/EducationExperience";
 import { default as Infinitescroll } from "./About/infinitescroll";
 import image from "../content/images/propic.jpg";
@@ -19,7 +20,22 @@ const AboutPage = () => {
   const [showGradient, setShowGradient] = useState(false);
   const [MeshGradientRenderer, setMeshGradientRenderer] = useState(null);
   const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const navigate = useNavigate();
+
+  const switchLightDark = () => {
+    var element = document.body;
+    if (localStorage.theme === "light") {
+      element.classList.add("dark");
+      localStorage.theme = "dark";
+      setIsDark(true);
+    } else {
+      element.classList.remove("dark");
+      localStorage.theme = "light";
+      setIsDark(false);
+    }
+    console.log(localStorage.theme);
+  };
 
   const animate = () => {
     
@@ -29,6 +45,8 @@ const AboutPage = () => {
     console.log(localStorage.theme);
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
+    // Initialize theme state
+    setIsDark(localStorage.theme === "dark");
     return () => clearTimeout(timeout);
   }, []);
 
@@ -135,6 +153,20 @@ const AboutPage = () => {
           <ContactForm></ContactForm>
           <ContactFooter />
         </div>
+      </div>
+      
+      {/* Mobile Theme Toggle */}
+      <div className="fixed bottom-6 right-6 z-[100] lg:hidden">
+        <button
+          onClick={switchLightDark}
+          className="h-12 w-12 rounded-full border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
+        >
+          {isDark ? (
+            <HiSun size={24} className="text-yellow-500" />
+          ) : (
+            <HiMoon size={24} className="text-gray-700" />
+          )}
+        </button>
       </div>
     </div>
   );
@@ -252,7 +284,7 @@ const Intro = () => {
           className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black"
           onClick={() => nav("/academia")}
         >
-          <p className="lg:text-md text-sm font-medium text-black dark:text-white">My Research</p>{" "}
+          <p className="lg:text-md text-sm font-medium text-black dark:text-white">Research</p>{" "}
           <HiOutlineArrowUpRight
             className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
             size={16}
