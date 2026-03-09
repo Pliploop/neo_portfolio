@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getTheme, setTheme } from '../utils/storage';
 import AllHeader from "./subcomponents/header";
 import { GrDown } from "react-icons/gr";
 import { SiSpotify } from "react-icons/si";
@@ -19,16 +20,16 @@ const MusicSection = () => {
 
   const switchLightDark = () => {
     var element = document.body;
-    if (localStorage.theme === "light") {
+    if (getTheme() === 'light') {
       element.classList.add("dark");
-      localStorage.theme = "dark";
+      setTheme('dark');
       setIsDark(true);
     } else {
       element.classList.remove("dark");
-      localStorage.theme = "light";
+      setTheme('light');
       setIsDark(false);
     }
-    console.log(localStorage.theme);
+    console.log(getTheme());
   };
 
   const animate = () => {
@@ -36,11 +37,11 @@ const MusicSection = () => {
   };
 
   useEffect(() => {
-    console.log(localStorage.theme);
+    console.log(getTheme());
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
     // Initialize theme state
-    setIsDark(localStorage.theme === "dark");
+    setIsDark(getTheme() === 'dark');
     return () => clearTimeout(timeout);
   }, []);
 
@@ -287,11 +288,12 @@ const MusicFeatured = () => {
       <div className="flex lg:flex-row flex-col w-full h-auto lg:gap-10 hover:border-black transition-all duration-100 rounded-3xl">
         <div className="lg:h-2/3 grow lg:m-10 mb-0 lg:mr-5 flex flex-col">
           <div className="border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 lg:h-10 h-auto flex lg:flex-row flex-col justify-start lg:items-center items-start">
-            <div className="flex flex-row lg:w-auto w-full h-full items-center dark:text-black">
+            {/* Desktop Navigation */}
+            <div className="flex flex-row lg:w-auto w-full h-full items-center dark:text-black lg:flex hidden">
               <div>
                 <BsArrowLeftShort
                   size={30}
-                  className="hover:text-gray-600 cursor-pointer pressable hidden lg:flex"
+                  className="hover:text-gray-600 cursor-pointer pressable"
                   onClick={() => {
                     nexturl(-1);
                   }}
@@ -338,7 +340,39 @@ const MusicFeatured = () => {
               <div>
                 <BsArrowRightShort
                   size={30}
-                  className="hover:text-gray-600 cursor-pointer pressable lg:flex hidden"
+                  className="hover:text-gray-600 cursor-pointer pressable"
+                  onClick={() => {
+                    nexturl(1);
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="flex flex-row w-full h-full items-center dark:text-black lg:hidden flex">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group">
+                <BsArrowLeftShort
+                  size={20}
+                  className="text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
+                  onClick={() => {
+                    nexturl(-1);
+                  }}
+                />
+              </div>
+              
+              {/* Current Item Name */}
+              <div className="flex-1 text-center px-4">
+                <span className="text-sm font-medium text-black dark:text-white">
+                  {activeTabFonkey === 0 ? "Colors" : 
+                   activeTabFonkey === 1 ? "Lover Boy" : 
+                   activeTabFonkey === 2 ? "Don't stop the music" : "Redbone"}
+                </span>
+              </div>
+              
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group">
+                <BsArrowRightShort
+                  size={20}
+                  className="text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
                   onClick={() => {
                     nexturl(1);
                   }}

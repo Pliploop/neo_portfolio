@@ -1,19 +1,19 @@
 import { IoPlaySharp } from "react-icons/io5";
-
+import { getTheme, setTheme } from '../../utils/storage';
 import { useNavigate } from "react-router-dom";
 
 const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
   const switchLightDark = () => {
     var element = document.body;
-    if (localStorage.theme === "light") {
+    if (getTheme() === 'light') {
       element.classList.add("dark");
-      localStorage.theme = "dark";
+      setTheme('dark');
     } else {
       element.classList.remove("dark");
-      localStorage.theme = "light";
+      setTheme('light');
     }
 
-    console.log(localStorage.theme);
+    console.log(getTheme());
   };
 
   const nav = useNavigate();

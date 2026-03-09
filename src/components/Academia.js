@@ -16,6 +16,7 @@ import {
   AssignmentSectionSmall,
 } from "../components/academiacomponents/assignments";
 
+import { getTheme, setTheme } from '../utils/storage';
 import AllHeader from "./subcomponents/header";
 import { HiSun, HiMoon } from "react-icons/hi";
 
@@ -125,16 +126,16 @@ const AcademiaSection = () => {
 
   const switchLightDark = () => {
     var element = document.body;
-    if (localStorage.theme === "light") {
+    if (getTheme() === 'light') {
       element.classList.add("dark");
-      localStorage.theme = "dark";
+      setTheme('dark');
       setIsDark(true);
     } else {
       element.classList.remove("dark");
-      localStorage.theme = "light";
+      setTheme('light');
       setIsDark(false);
     }
-    console.log(localStorage.theme);
+    console.log(getTheme());
   };
 
   useEffect(() => {
@@ -142,7 +143,7 @@ const AcademiaSection = () => {
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
     // Initialize theme state
-    setIsDark(localStorage.theme === "dark");
+    setIsDark(getTheme() === 'dark');
     return () => clearTimeout(timeout);
   }, []);
 

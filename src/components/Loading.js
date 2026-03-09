@@ -7,6 +7,7 @@ import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { MeshGradientRenderer } from '@johnn-e/react-mesh-gradient';
+import { setTheme } from '../utils/storage';
 
 const MUSIC_TIME_MIN = 180;
 const MUSIC_TIME_MAX = 240;
@@ -44,7 +45,7 @@ const Loader = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.theme = "light";
+    setTheme('light');
   }, []);
 
   const playref = React.useRef(null);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getTheme, setTheme } from '../utils/storage';
 import AllHeader from "./subcomponents/header";
 import ContactFooter from "./subcomponents/contactfooter";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
@@ -25,16 +26,16 @@ const AboutPage = () => {
 
   const switchLightDark = () => {
     var element = document.body;
-    if (localStorage.theme === "light") {
+    if (getTheme() === 'light') {
       element.classList.add("dark");
-      localStorage.theme = "dark";
+      setTheme('dark');
       setIsDark(true);
     } else {
       element.classList.remove("dark");
-      localStorage.theme = "light";
+      setTheme('light');
       setIsDark(false);
     }
-    console.log(localStorage.theme);
+    console.log(getTheme());
   };
 
   const animate = () => {
@@ -42,11 +43,11 @@ const AboutPage = () => {
   };
 
   useEffect(() => {
-    console.log(localStorage.theme);
+    console.log(getTheme());
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
     // Initialize theme state
-    setIsDark(localStorage.theme === "dark");
+    setIsDark(getTheme() === 'dark');
     return () => clearTimeout(timeout);
   }, []);
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { setTheme } from '../utils/storage';
 import { useNavigate } from "react-router-dom";
 import { MeshGradientRenderer } from '@johnn-e/react-mesh-gradient';
 import anime from "animejs";
@@ -80,7 +81,6 @@ const Loader = () => {
   };
 
   useEffect(() => {
-    console.log(localStorage.theme);
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
     return () => clearTimeout(timeout);
@@ -88,7 +88,7 @@ const Loader = () => {
 
   // Loader logic
   useEffect(() => {
-    localStorage.theme = "light";
+    setTheme('light');
   }, []);
 
   const playref = React.useRef(null);
