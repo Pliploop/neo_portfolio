@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-// TODO: migrate to framer-motion (Task 9) — anime.js removed
-import { IconLoader, LoadBar, Heart, SkipLeft, SkipRight } from "./icons";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { IoIosSkipForward, IoIosSkipBackward } from "react-icons/io";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi2";
@@ -18,7 +16,6 @@ const musictime = Math.floor(Math.random() * (MUSIC_TIME_MAX - MUSIC_TIME_MIN) +
 const minutes = Math.floor(musictime / 60);
 const seconds = ("0" + (musictime % 60)).slice(-2);
 
-// Now you can use the 'tech' array in your JavaScript code.
 const data = [
   "Hey!",
   "This page is interactive.",
@@ -34,7 +31,6 @@ const maxreplies = data.length;
 const Liked = Array(maxreplies).fill(false);
 
 const Loader = () => {
-  const green = "#EA5A64";
   const [isMounted, setIsMounted] = useState(false);
   const [isLiked, setisLiked] = useState(false);
   const [isplaying, setisplaying] = useState(false);
@@ -42,33 +38,60 @@ const Loader = () => {
   const [paused, setPaused] = useState(true);
   const [progressTime, setProgressTime] = useState("0:00");
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [barProgress, setBarProgress] = useState(0);
+  const barIntervalRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     setTheme('light');
   }, []);
 
-  const playref = React.useRef(null);
-  const barref = React.useRef(null);
-  // TODO: migrate to framer-motion (Task 9) — playref anime.timeline commented out
-  useEffect(() => {
-    // playref.current = anime.timeline({ ... });
-  }, []);
-
-  // TODO: migrate to framer-motion (Task 9) — barref anime.timeline commented out
-  useEffect(() => {
-    // barref.current = anime.timeline({ ... navigate('/about') ... });
-  }, [navigate]);
-  const minreply = 0;
-
-  // TODO: migrate to framer-motion (Task 9)
-  // const animate = () => { ... anime.timeline ... };
-
   useEffect(() => {
     const timeout = setTimeout(() => setIsMounted(true), 10);
-    // animate(); // TODO: migrate to framer-motion (Task 9)
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    return () => stopBar();
+  }, []);
+
+  const minreply = 0;
+
+  const startBar = () => {
+    const duration = Math.floor(
+      Math.random() * (ANIMATION_DURATION_MAX - ANIMATION_DURATION_MIN) + ANIMATION_DURATION_MIN
+    );
+    const steps = 100;
+    const stepInterval = duration / steps;
+    let step = 0;
+    barIntervalRef.current = setInterval(() => {
+      step++;
+      const progress = step / steps;
+      setBarProgress(step);
+      const time_seconds = Math.round(progress * musictime);
+      setProgressTime(
+        Math.floor(time_seconds / 60) + ':' + ('0' + (time_seconds % 60)).slice(-2)
+      );
+      if (step >= steps) {
+        clearInterval(barIntervalRef.current);
+        setIsTransitioning(true);
+        setTimeout(() => navigate('/about'), 500);
+      }
+    }, stepInterval);
+  };
+
+  const stopBar = () => {
+    if (barIntervalRef.current) {
+      clearInterval(barIntervalRef.current);
+      barIntervalRef.current = null;
+    }
+  };
+
+  const resetBar = () => {
+    stopBar();
+    setBarProgress(0);
+    setProgressTime('0:00');
+  };
 
   function setlike() {
     Liked[replyindex - 1] = !Liked[replyindex - 1];
@@ -79,35 +102,22 @@ const Loader = () => {
     setlike();
   }
 
-
   useEffect(() => {
     replies();
   }, [replyindex]);
 
   function replies() {
-    // TODO: migrate to framer-motion (Task 9) — anime.timeline song transition commented out
-    // const prevnext = anime.timeline({ ... });
-
-    // Update song title directly without animation
-    const el = document.getElementById("songtitle");
-    if (el) el.innerHTML = data[replyindex - 1];
-
     setisLiked(Liked[replyindex - 1]);
-    if (playref.current) playref.current.reset();
-    if (barref.current) barref.current.reset();
+    resetBar();
     setPaused(true);
-    setProgressTime("0:00");
   }
 
   function playanimation() {
-    // TODO: migrate to framer-motion (Task 9) — anime ref calls guarded until migration
-    if (paused == false) {
-      if (playref.current) { playref.current.reset(); playref.current.play(); }
-      if (barref.current) barref.current.play();
+    if (paused === false) {
+      startBar();
       setisplaying(true);
     } else {
-      if (barref.current) barref.current.pause();
-      if (playref.current) { playref.current.reverse(); playref.current.play(); }
+      stopBar();
       setisplaying(false);
     }
   }
@@ -153,11 +163,19 @@ const Loader = () => {
           <div className="flex flex-col">
             <div className="flex flex-row justify-between px-5 py-5  ">
               <div className="flex flex-col" id="song">
-                <div
-                  className="lg:text-lg text-base font-bold song select-none"
-                  id="songtitle"
-                >
-                  {data[0]}
+                <div className="lg:text-lg text-base font-bold song select-none overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={replyindex}
+                      id="songtitle"
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -30 }}
+                      transition={{ duration: 0.15, ease: 'easeInOut' }}
+                    >
+                      {data[replyindex - 1]}
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
                 <div
                   className="text-sm home-accent-text select-none font-bold"
@@ -170,7 +188,7 @@ const Loader = () => {
               {isLiked ? (
                 <HiHeart
                   className="pressable text-rose-500 drop-shadow-lg heart stroke-1 stroke-black"
-                  size={32} 
+                  size={32}
                   onClick={() => animatelike()}
                 />
               ) : (
@@ -197,9 +215,10 @@ const Loader = () => {
                   id="bar"
                 >
                   <div
-                    className="w-[1%] h-full bg-black rounded-full transition-all duration-100 ease-linear"
                     id="progress"
-                  ></div>
+                    style={{ width: `${barProgress}%` }}
+                    className="h-full bg-black transition-none"
+                  />
                   <div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full pointer-events-none"
                     style={{
@@ -224,7 +243,7 @@ const Loader = () => {
                   onClick={() => {
                     if (replyindex - 1 < minreply + 1) {
                       setReply(maxreplies);
-                    
+
                     } else {
                       setReply(replyindex - 1);
                     }
@@ -240,11 +259,31 @@ const Loader = () => {
                   className="flex flex-col justify-center pressable rounded-full p-2 active:scale-95 active:bg-rose-100 transition-all duration-150 ease-in-out"
                   onClick={() => setPaused(!paused)}
                 >
-                  {isplaying ? (
-                    <IoPauseSharp size={32} className="text-rose-500 transition-colors duration-150" />
-                  ) : (
-                    <IoPlaySharp size={32} className="text-gray-600 hover:text-rose-500 transition-colors duration-150" />
-                  )}
+                  <AnimatePresence mode="wait">
+                    {isplaying ? (
+                      <motion.span
+                        key="pause"
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.6 }}
+                        transition={{ duration: 0.1, ease: 'easeInOut' }}
+                        className="flex items-center justify-center"
+                      >
+                        <IoPauseSharp size={32} className="text-rose-500" />
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="play"
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.6 }}
+                        transition={{ duration: 0.1, ease: 'easeInOut' }}
+                        className="flex items-center justify-center"
+                      >
+                        <IoPlaySharp size={32} className="text-gray-600 hover:text-rose-500 transition-colors duration-150" />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 <div

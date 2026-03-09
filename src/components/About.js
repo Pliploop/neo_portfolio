@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { setTheme } from '../utils/storage';
 import { useNavigate } from "react-router-dom";
 import { MeshGradientRenderer } from '@johnn-e/react-mesh-gradient';
-// TODO: migrate to framer-motion (Task 9) — anime.js removed
 import { IoIosSkipForward, IoIosSkipBackward } from "react-icons/io";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi2";
@@ -37,36 +37,58 @@ const Loader = () => {
   const [replyindex, setReply] = useState(1);
   const [paused, setPaused] = useState(true);
   const [progressTime, setProgressTime] = useState("0:00");
+  const [barProgress, setBarProgress] = useState(0);
+  const barIntervalRef = useRef(null);
   const navigate = useNavigate();
 
-  // TODO: migrate to framer-motion (Task 9)
-  // const animate = () => { ... anime.timeline ... };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 10);
-    // animate(); // TODO: migrate to framer-motion (Task 9)
-    return () => clearTimeout(timeout);
-  }, []);
-
-  // Loader logic
   useEffect(() => {
     setTheme('light');
   }, []);
 
-  const playref = React.useRef(null);
-  const barref = React.useRef(null);
-
-  // TODO: migrate to framer-motion (Task 9) — playref anime.timeline commented out
   useEffect(() => {
-    // playref.current = anime.timeline({ ... });
+    const timeout = setTimeout(() => setIsMounted(true), 10);
+    return () => clearTimeout(timeout);
   }, []);
 
-  // TODO: migrate to framer-motion (Task 9) — barref anime.timeline commented out
   useEffect(() => {
-    // barref.current = anime.timeline({ ... navigate('/about') ... });
-  }, [navigate]);
+    return () => stopBar();
+  }, []);
 
   const minreply = 0;
+
+  const startBar = () => {
+    const duration = Math.floor(
+      Math.random() * (ANIMATION_DURATION_MAX - ANIMATION_DURATION_MIN) + ANIMATION_DURATION_MIN
+    );
+    const steps = 100;
+    const stepInterval = duration / steps;
+    let step = 0;
+    barIntervalRef.current = setInterval(() => {
+      step++;
+      const progress = step / steps;
+      setBarProgress(step);
+      const time_seconds = Math.round(progress * musictime);
+      setProgressTime(
+        Math.floor(time_seconds / 60) + ':' + ('0' + (time_seconds % 60)).slice(-2)
+      );
+      if (step >= steps) {
+        clearInterval(barIntervalRef.current);
+      }
+    }, stepInterval);
+  };
+
+  const stopBar = () => {
+    if (barIntervalRef.current) {
+      clearInterval(barIntervalRef.current);
+      barIntervalRef.current = null;
+    }
+  };
+
+  const resetBar = () => {
+    stopBar();
+    setBarProgress(0);
+    setProgressTime('0:00');
+  };
 
   function setlike() {
     Liked[replyindex - 1] = !Liked[replyindex - 1];
@@ -82,28 +104,17 @@ const Loader = () => {
   }, [replyindex]);
 
   function replies() {
-    // TODO: migrate to framer-motion (Task 9) — anime.timeline song transition commented out
-    // const prevnext = anime.timeline({ ... });
-
-    // Update song title directly without animation
-    const el = document.getElementById("songtitle");
-    if (el) el.innerHTML = data[replyindex - 1];
-
     setisLiked(Liked[replyindex - 1]);
-    if (playref.current) playref.current.reset();
-    if (barref.current) barref.current.reset();
+    resetBar();
     setPaused(true);
   }
 
   function playanimation() {
-    // TODO: migrate to framer-motion (Task 9) — anime ref calls guarded until migration
-    if (paused == false) {
-      if (playref.current) { playref.current.reset(); playref.current.play(); }
-      if (barref.current) barref.current.play();
+    if (paused === false) {
+      startBar();
       setisplaying(true);
     } else {
-      if (barref.current) barref.current.pause();
-      if (playref.current) { playref.current.reverse(); playref.current.play(); }
+      stopBar();
       setisplaying(false);
     }
   }
@@ -147,11 +158,19 @@ const Loader = () => {
           <div className="flex flex-col">
             <div className="flex flex-row justify-between px-5 py-5">
               <div className="flex flex-col" id="song">
-                <div
-                  className="lg:text-lg text-base font-bold song select-none"
-                  id="songtitle"
-                >
-                  {data[0]}
+                <div className="lg:text-lg text-base font-bold song select-none overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={replyindex}
+                      id="songtitle"
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -30 }}
+                      transition={{ duration: 0.15, ease: 'easeInOut' }}
+                    >
+                      {data[replyindex - 1]}
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
                 <div
                   className="text-sm home-accent-text select-none font-bold"
@@ -187,13 +206,14 @@ const Loader = () => {
 
               <div className="h-2 w-full flex flex-col justify-center self-center lg:px-2 px-1">
                 <div
-                  className="w-full h-full border-[1px] border-black rounded-full"
+                  className="w-full h-full border-[1px] border-black rounded-full relative overflow-hidden"
                   id="bar"
                 >
                   <div
-                    className="w-[1%] h-full border-[1px] bg-black rounded-full"
                     id="progress"
-                  ></div>
+                    style={{ width: `${barProgress}%` }}
+                    className="h-full bg-black transition-none"
+                  />
                 </div>
               </div>
 
@@ -227,11 +247,31 @@ const Loader = () => {
                   className="flex flex-col justify-center pressable rounded-full p-2 active:home-accent-text"
                   onClick={() => setPaused(!paused)}
                 >
-                  {isplaying ? (
-                    <IoPauseSharp size={32} />
-                  ) : (
-                    <IoPlaySharp size={32} />
-                  )}
+                  <AnimatePresence mode="wait">
+                    {isplaying ? (
+                      <motion.span
+                        key="pause"
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.6 }}
+                        transition={{ duration: 0.1, ease: 'easeInOut' }}
+                        className="flex items-center justify-center"
+                      >
+                        <IoPauseSharp size={32} />
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="play"
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.6 }}
+                        transition={{ duration: 0.1, ease: 'easeInOut' }}
+                        className="flex items-center justify-center"
+                      >
+                        <IoPlaySharp size={32} />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 <div
