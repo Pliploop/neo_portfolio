@@ -218,14 +218,12 @@ const MusicFeatured = () => {
     }
   };
 
+  const FONKEY_COUNT = 4; // number of Fonkey Business video tabs (cases 0-3 in geturl)
+
   const nexturl = (skip) => {
     var tempactive = activeTabFonkey + skip;
-    if (tempactive === -1) {
-      tempactive = 2;
-    }
-    if (tempactive === 4) {
-      tempactive = 0;
-    }
+    if (tempactive < 0) { tempactive = FONKEY_COUNT - 1; }
+    if (tempactive >= FONKEY_COUNT) { tempactive = 0; }
     setActiveTabFonkey(tempactive);
   };
 

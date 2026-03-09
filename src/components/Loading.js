@@ -28,11 +28,11 @@ const data = [
   "not going to find much more",
 ];
 const maxreplies = data.length;
-const Liked = Array(maxreplies).fill(false);
 
 const Loader = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [isLiked, setisLiked] = useState(false);
+  const [liked, setLiked] = useState(() => Array(maxreplies).fill(false));
   const [isplaying, setisplaying] = useState(false);
   const [replyindex, setReply] = useState(1);
   const [paused, setPaused] = useState(true);
@@ -94,8 +94,12 @@ const Loader = () => {
   };
 
   function setlike() {
-    Liked[replyindex - 1] = !Liked[replyindex - 1];
-    setisLiked(Liked[replyindex - 1]);
+    setLiked(prev => {
+      const next = [...prev];
+      next[replyindex - 1] = !next[replyindex - 1];
+      setisLiked(next[replyindex - 1]);
+      return next;
+    });
   }
 
   function animatelike() {
@@ -107,7 +111,7 @@ const Loader = () => {
   }, [replyindex]);
 
   function replies() {
-    setisLiked(Liked[replyindex - 1]);
+    setisLiked(liked[replyindex - 1]);
     resetBar();
     setPaused(true);
   }
