@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { setTheme } from '../utils/storage';
 import { useNavigate } from "react-router-dom";
 import { MeshGradientRenderer } from '@johnn-e/react-mesh-gradient';
-import anime from "animejs";
+// TODO: migrate to framer-motion (Task 9) — anime.js removed
 import { IoIosSkipForward, IoIosSkipBackward } from "react-icons/io";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi2";
@@ -39,50 +39,12 @@ const Loader = () => {
   const [progressTime, setProgressTime] = useState("0:00");
   const navigate = useNavigate();
 
-  const animate = () => {
-    const loader = anime.timeline({
-      complete: () => null,
-    });
-
-    loader
-      .add({
-        targets: "#logo #circle",
-        delay: 300,
-        duration: 500,
-        easing: "easeInOutQuart",
-        strokeDashoffset: [anime.setDashoffset, 0],
-      })
-      .add(
-        {
-          targets: "#logo #play",
-          delay: 0,
-          duration: 500,
-          easing: "easeInOutQuart",
-          strokeDashoffset: [anime.setDashoffset, 0],
-          opacity: 1,
-          fill: "#FFFFFF",
-        },
-        "-=400"
-      )
-      .add({
-        targets: "#logo #leftplay",
-        delay: 100,
-        duration: 100,
-        easing: "easeInOutQuart",
-        opacity: 1,
-      })
-      .add({
-        targets: "#logo #rightplay",
-        delay: 100,
-        duration: 100,
-        easing: "easeInOutQuart",
-        opacity: 1,
-      });
-  };
+  // TODO: migrate to framer-motion (Task 9)
+  // const animate = () => { ... anime.timeline ... };
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsMounted(true), 10);
-    animate();
+    // animate(); // TODO: migrate to framer-motion (Task 9)
     return () => clearTimeout(timeout);
   }, []);
 
@@ -94,187 +56,14 @@ const Loader = () => {
   const playref = React.useRef(null);
   const barref = React.useRef(null);
 
+  // TODO: migrate to framer-motion (Task 9) — playref anime.timeline commented out
   useEffect(() => {
-    playref.current = anime
-      .timeline({
-        autoplay: false,
-        complete: () => null,
-      })
-      .add({
-        targets: "#logo #play",
-        delay: 0,
-        duration: 100,
-        easing: "easeInOutQuart",
-        scale: 0.6,
-        fill: "#EA5A64",
-        stroke: "#EA5A64",
-      })
-      .add(
-        {
-          targets: "#logo #circle",
-          delay: 0,
-          duration: 100,
-          easing: "easeInOutQuart",
-          stroke: "#EA5A64",
-          scale: 0.8,
-        },
-        "-=100"
-      )
-      .add(
-        {
-          targets: "#logo #rightplay",
-          delay: 0,
-          duration: 100,
-          easing: "easeInOutQuart",
-          scale: 0.6,
-        },
-        "-=100"
-      )
-      .add(
-        {
-          targets: "#logo #leftplay",
-          delay: 0,
-          duration: 100,
-          easing: "easeInOutQuart",
-          scale: 0.6,
-        },
-        "-=100"
-      )
-      .add(
-        {
-          targets: "#logo #play",
-          delay: 0,
-          duration: 100,
-          easing: "easeInOutQuart",
-          opacity: 0,
-        },
-        "-=100"
-      )
-      .add({
-        targets: "#logo #leftplay",
-        points: [
-          {
-            value: "   29.54 23.53 29.54 62.95  40.83 62.97  40.88 23.53 29.54 23.53 ",
-          },
-        ],
-        easing: "easeOutQuad",
-        delay: 0,
-        scale: 1,
-        duration: 100,
-        stroke: "#161616",
-        fill: "#161616",
-      })
-      .add(
-        {
-          targets: "#logo #rightplay",
-          points: [
-            {
-              value: "50.12 23.53 61.46 23.53 61.4 62.97 50.12 62.95 50.12 23.53",
-            },
-          ],
-          easing: "easeOutQuad",
-          delay: 0,
-          scale: 1,
-          duration: 100,
-          stroke: "#161616",
-          fill: "#161616",
-        },
-        "-=100"
-      )
-      .add(
-        {
-          targets: "#logo #circle",
-          easing: "easeOutQuad",
-          delay: 0,
-          scale: 1,
-          duration: 100,
-        },
-        "-=100"
-      )
-      .add(
-        {
-          targets: "#logo #circle",
-          easing: "easeOutQuad",
-          delay: 0,
-          duration: 100,
-          stroke: "#FFFFFF",
-          fill: "#FFFFFF",
-        },
-        "-=100"
-      );
+    // playref.current = anime.timeline({ ... });
   }, []);
 
+  // TODO: migrate to framer-motion (Task 9) — barref anime.timeline commented out
   useEffect(() => {
-    barref.current = anime
-      .timeline({
-        autoplay: false,
-        complete: () => {
-          // Navigate to about page when loader finishes
-          navigate('/about');
-        },
-      })
-      .add({
-        targets: "#bar #progress",
-        easing: "easeOutQuad",
-        delay: 0,
-        duration: 50,
-        opacity: 1,
-      })
-      .add({
-        targets: "#bar #progress",
-        easing: "linear",
-        delay: 0,
-        duration: Math.floor(Math.random() * (ANIMATION_DURATION_MAX - ANIMATION_DURATION_MIN) + ANIMATION_DURATION_MIN),
-        width: "100%",
-        update: function (anim) {
-          var time_seconds = Math.round(0.01 * anim.progress * musictime);
-          var timestring =
-            Math.floor(time_seconds / 60) +
-            ":" +
-            ("0" + (time_seconds % 60)).slice(-2);
-          setProgressTime(timestring);
-        },
-      })
-      .add(
-        {
-          targets: [
-            "#logo",
-            "#bar",
-            ".heart",
-            "#skipright",
-            "#skipleft",
-            "#song",
-            "#artist",
-            "#progresstime",
-            "#totaltime",
-            "#buttons",
-          ],
-          delay: 300,
-          duration: 300,
-          easing: "easeInOutQuart",
-          opacity: 0,
-          scale: 0.1,
-        },
-        "-=100"
-      )
-      .add(
-        {
-          targets: ["#transition", "#container"],
-          delay: 0,
-          duration: 200,
-          easing: "easeInQuad",
-          opacity: 1,
-          scale: 2,
-        },
-        "-=100"
-      )
-      .add({
-        targets: ".loader",
-        duration: 200,
-        easing: "easeInOutQuart",
-        opacity: 0,
-        zIndex: -1,
-      });
+    // barref.current = anime.timeline({ ... navigate('/about') ... });
   }, [navigate]);
 
   const minreply = 0;
@@ -293,63 +82,28 @@ const Loader = () => {
   }, [replyindex]);
 
   function replies() {
-    const prevnext = anime.timeline({
-      complete: () => null,
-    });
+    // TODO: migrate to framer-motion (Task 9) — anime.timeline song transition commented out
+    // const prevnext = anime.timeline({ ... });
 
-    if (replyindex == 1) {
-      var targ = ".right-skip";
-    } else {
-      var targ = ".left-skip";
-    }
-
-    prevnext
-      .add(
-        {
-          targets: ".song",
-          delay: 0,
-          duration: 200,
-          easing: "easeInOutQuart",
-          translateX: (replyindex - 1) * -30,
-          opacity: 0,
-        },
-        "-=100"
-      )
-      .add({
-        targets: ".song",
-        delay: 5,
-        duration: 20,
-        update: function () {
-          document.getElementById("songtitle").innerHTML = data[replyindex - 1];
-        },
-        translateX: (replyindex - 1) * 60,
-        opacity: 0,
-      })
-      .add({
-        targets: ".song",
-        delay: 0,
-        duration: 100,
-        easing: "easeInOutQuart",
-        translateX: 0,
-        opacity: 1,
-      });
+    // Update song title directly without animation
+    const el = document.getElementById("songtitle");
+    if (el) el.innerHTML = data[replyindex - 1];
 
     setisLiked(Liked[replyindex - 1]);
-    playref.current.reset();
-    barref.current.reset();
+    if (playref.current) playref.current.reset();
+    if (barref.current) barref.current.reset();
     setPaused(true);
   }
 
   function playanimation() {
+    // TODO: migrate to framer-motion (Task 9) — anime ref calls guarded until migration
     if (paused == false) {
-      playref.current.reset();
-      playref.current.play();
-      barref.current.play();
+      if (playref.current) { playref.current.reset(); playref.current.play(); }
+      if (barref.current) barref.current.play();
       setisplaying(true);
     } else {
-      barref.current.pause();
-      playref.current.reverse();
-      playref.current.play();
+      if (barref.current) barref.current.pause();
+      if (playref.current) { playref.current.reverse(); playref.current.play(); }
       setisplaying(false);
     }
   }

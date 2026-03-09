@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoSendSharp} from 'react-icons/io5'
 
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 const stripHtml = (str) => str.replace(/<[^>]*>/g, '').trim();
 
