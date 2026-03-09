@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoSendSharp} from 'react-icons/io5'
@@ -8,7 +8,7 @@ import emailjs from 'emailjs-com';
 const stripHtml = (str) => str.replace(/<[^>]*>/g, '').trim();
 
 const ContactForm = () => {
-  const [lastSubmit, setLastSubmit] = useState(0);
+  const lastSubmitRef = useRef(0);
   const [cooldownMsg, setCooldownMsg] = useState('');
 
   const formik = useFormik({
@@ -24,7 +24,7 @@ const ContactForm = () => {
     }),
     onSubmit: (values, { resetForm }) => {
       const now = Date.now();
-      if (now - lastSubmit < 30000) {
+      if (now - lastSubmitRef.current < 30000) {
         setCooldownMsg('Please wait 30 seconds before sending another message.');
         return;
       }
@@ -33,7 +33,7 @@ const ContactForm = () => {
         email: values.email,
         message: stripHtml(values.message),
       };
-      setLastSubmit(now);
+      lastSubmitRef.current = now;
       setCooldownMsg('');
       sendEmail(sanitized);
       resetForm();
