@@ -5,6 +5,7 @@
 @font-face {
   font-family: "mowera";
   src: url("fonts/mowera.regular.otf");
+  font-display: swap;
 }
 
 
@@ -13,37 +14,40 @@
 @font-face {
   font-family: "grande";
   src: url("fonts/grande.otf");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "gothic";
   src: url("fonts/old-english-five.regular.ttf");
+  font-display: swap;
 }
 @font-face {
   font-family: "poker";
   src: url("fonts/PokerInOctoberDemo-Dxm3.otf");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "saint";
   src: url("fonts/Saint\ Regular.ttf");
-}
-@font-face {
-  font-family: "poker";
-  src: url("fonts/PokerInOctoberDemo-Dxm3.otf");
+  font-display: swap;
 }
 @font-face {
   font-family: "swomun";
   src: url("fonts/swomun-serif.otf");
+  font-display: swap;
 }
 @font-face {
   font-family: "zighead";
   src: url("fonts/Zighead.otf");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "helvetica";
   src: url("fonts/Helvetica.ttf");
+  font-display: swap;
 }
 
 @layer components {
