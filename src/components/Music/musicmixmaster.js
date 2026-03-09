@@ -1,4 +1,5 @@
 
+import { albums } from '../../data/music';
 import { IoIosMusicalNotes, IoIosMusicalNote } from "react-icons/io";
 import { MdGraphicEq } from "react-icons/md";
 import { FaPenNib } from "react-icons/fa";
@@ -156,8 +157,8 @@ const MixMasterAlbums = () => {
     var incr = right ? 1 : -1;
     var tempalbum = album + incr;
 
-    if (tempalbum > 4) {
-      tempalbum = 4;
+    if (tempalbum > albums.length) {
+      tempalbum = albums.length;
     }
     if (tempalbum < 1) {
       tempalbum = 1;
@@ -174,10 +175,10 @@ const MixMasterAlbums = () => {
 
   return (
     <div className="flex lg:flex-row flex-col w-full h-auto lg:h-[700px] gap-20">
-      <div
-        className="flex lg:w-1/2 lg:h-5/6 flex-row justify-center self-center w-full overflow-x-hidden lg:overflow-x-visible"
-        {...handlers}
-      >
+        <div
+          className="flex lg:w-1/2 lg:h-5/6 flex-row justify-center self-center w-full overflow-x-visible"
+          {...handlers}
+        >
         <div
           className="hidden lg:flex h-12 w-12 border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 aspect-square z-40 rounded-full mr-5 self-center cursor-pointer hover:shadow-lg hover:scale-110 active:scale-95 group transition-all duration-200"
           onClick={() => changealbum(false)}
@@ -187,35 +188,15 @@ const MixMasterAlbums = () => {
             className="m-auto text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
           />
         </div>
-        <div className="lg:h-full h-[400px] lg:w-1/2 w-3/4 relative overflow-hidden lg:overflow-visible">
-          <AlbumEmbed
-            link={
-              "https://open.spotify.com/embed/album/4boTthC3VNuTVeBVcmJAED?utm_source=generator"
-            }
-            currentalbum={album}
-            albumid={1}
-          />
-          <AlbumEmbed
-            link={
-              "https://open.spotify.com/embed/album/75UGY5R9yFlqCxhYB91CLB?utm_source=generator"
-            }
-            currentalbum={album}
-            albumid={2}
-          />
-          <AlbumEmbed
-            link={
-              "https://open.spotify.com/embed/album/4vHXsNBT0GHheB2SSNk7u1?utm_source=generator"
-            }
-            currentalbum={album}
-            albumid={3}
-          />
-          <AlbumEmbed
-            link={
-              "https://open.spotify.com/embed/album/6ymtsIOKfk6TsKiHoGssp5?utm_source=generator"
-            }
-            currentalbum={album}
-            albumid={4}
-          />
+        <div className="lg:h-full h-[400px] lg:w-1/2 w-3/4 relative overflow-visible">
+          {albums.map((a) => (
+            <AlbumEmbed
+              key={a.id}
+              link={a.spotifyUrl}
+              currentalbum={album}
+              albumid={a.id}
+            />
+          ))}
         </div>
 
         <div

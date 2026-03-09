@@ -11,6 +11,7 @@ import ReactPlayer from "react-player";
 import { MusicIntro } from "../components/Music/musicintro";
 import { MusicArranged } from "../components/Music/musicarranged";
 import { MusicMixMaster } from "../components/Music/musicmixmaster";
+import { tracks } from "../data/music";
 import image from "../content/images/logo_countour.png";
 
 const MusicSection = () => {
@@ -179,24 +180,6 @@ const MusicHeader = ({ text }) => {
 const MusicFeatured = () => {
   const [activeCard, setActiveCard] = useState(null);
   const [activeTabFonkey, setActiveTabFonkey] = useState(0);
-
-  const tracks = [
-    {
-      title: "Oolala - Original Composition",
-      url: "https://soundcloud.com/jujgui/bullshit",
-      tags: ["Composition", "Production", "Mixing", "Mastering"]
-    },
-    {
-      title: "Aztecs - Original Composition",
-      url: "https://soundcloud.com/jujgui/aztecs",
-      tags: ["Composition", "Arrangement", "Mixing", "Mastering", "Production"]
-    },
-    {
-      title: "LikeTHAT - Disco House",
-      url: "https://soundcloud.com/jujgui/likethat-remastered",
-      tags: ["Production", "Mixing", "Mastering"]
-    }
-  ];
 
   function toggleFonkeyText() {
     var gradient = document.getElementById("fonkeyreadmoregradient");
