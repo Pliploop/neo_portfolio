@@ -1,63 +1,28 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route, 
-  useLocation} from 'react-router-dom';
-import Loader from './components/Loading';
-import AboutPage from './components/AboutPage';
-import Projects from './components/Projects';
-import AcademiaSection from './components/Academia';
-import MusicSection from './components/Music';
-import Blog from './components/Blog';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/subcomponents/scrolltotop';
 
-import { motion } from "framer-motion"
-
-const pageVariants = {
-  initial: {
-    opacity: 0.5
-  },
-  in: {
-    opacity: 1
-  },
-  out: {
-    opacity: 0.5
-  }
-};
-
-const pageTransition = {
-  type: 'tween',
-  ease: 'linear',
-  duration: 0.0
-}; 
-
-const AnimationLayout = () => {
-  const { pathname } = useLocation();
-  return (
-      <motion.div
-        key={pathname}
-        initial="initial"
-        animate="in"
-        variants={pageVariants}
-        transition={pageTransition}
-      >
-        <Outlet />
-      </motion.div>
-  );
-};
+const Loader = React.lazy(() => import('./components/Loading'));
+const AboutPage = React.lazy(() => import('./components/AboutPage'));
+const Projects = React.lazy(() => import('./components/Projects'));
+const AcademiaSection = React.lazy(() => import('./components/Academia'));
+const MusicSection = React.lazy(() => import('./components/Music'));
+const Blog = React.lazy(() => import('./components/Blog'));
 
 const App = () => {
   return (
     <Router>
       <ScrollToTop />
-      
-      <Routes >
-        <Route path="/" element={<Loader />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/academia" element={<AcademiaSection />} />
-        <Route path="/music" element={<MusicSection />} />
-        <Route path="/blog" element={<Blog />} />
-      </Routes>
+      <React.Suspense fallback={<div className="h-screen w-screen bg-white dark:bg-gray-900" />}>
+        <Routes>
+          <Route path="/" element={<Loader />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/academia" element={<AcademiaSection />} />
+          <Route path="/music" element={<MusicSection />} />
+          <Route path="/blog" element={<Blog />} />
+        </Routes>
+      </React.Suspense>
     </Router>
   );
 };
