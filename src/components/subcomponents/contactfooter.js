@@ -16,7 +16,6 @@ const ContactFooter = ({ pagename }) => {
   };
 
   const scrollto = (id) => {
-    console.log("scrolling to " + id);
     let element = document.getElementById(id);
     element.scrollIntoView({ behavior: "smooth" });
   };

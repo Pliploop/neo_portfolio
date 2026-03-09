@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import ContactForm from "./About/ContactForm";
 
 const scrollto = (id) => {
-  console.log("scrolling to " + id);
   let element = document.getElementById(id);
   element.scrollIntoView({ behavior: "smooth" });
 };

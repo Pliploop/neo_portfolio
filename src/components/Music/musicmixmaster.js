@@ -165,7 +165,6 @@ const MixMasterAlbums = () => {
     }
     setalbum(tempalbum);
 
-    console.log(album);
   };
 
   const handlers = useSwipeable({

@@ -36,15 +36,10 @@ const EducationExperience = () => {
   useEffect(() => focusTab(), [tabFocus]);
 
   useEffect(() => {
-    console.log(content);
-
     setActiveTabId(0);
     changecontent(0, educationExp);
   }, [educationExp]);
 
-  useEffect(() => {
-    console.log("");
-  }, []);
 
   const changecontent = (i, educationExp) => {
     educationExp === "education"

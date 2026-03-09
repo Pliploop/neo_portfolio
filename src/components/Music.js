@@ -107,7 +107,6 @@ const MusicSection = () => {
 };
 
 const scrollto = (id) => {
-  console.log("scrolling to " + id);
   let element = document.getElementById(id);
   element.scrollIntoView({ behavior: "smooth" });
 };
@@ -220,8 +219,6 @@ const MusicFeatured = () => {
   };
 
   const nexturl = (skip) => {
-    console.log(skip);
-    console.log(activeTabFonkey);
     var tempactive = activeTabFonkey + skip;
     if (tempactive === -1) {
       tempactive = 2;

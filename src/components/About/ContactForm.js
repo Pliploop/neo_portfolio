@@ -51,7 +51,6 @@ const ContactForm = () => {
       process.env.REACT_APP_EMAILJS_PUBLIC_KEY
     )
         .then((result) => {
-          console.log('Email successfully sent:', result.text);
         }, (error) => {
           console.error('Error sending email:', error.text);
         });
