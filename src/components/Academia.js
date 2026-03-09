@@ -17,6 +17,7 @@ import {
 } from "../components/academiacomponents/assignments";
 
 import { useThemeToggle } from '../hooks/useThemeToggle';
+import { useMeshGradient } from '../hooks/useMeshGradient';
 import AllHeader from "./subcomponents/header";
 import { HiSun, HiMoon } from "react-icons/hi";
 
@@ -120,30 +121,13 @@ const AcademiaNav = () => {
 
 const AcademiaSection = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const [showGradient, setShowGradient] = useState(false);
-  const [MeshGradientRenderer, setMeshGradientRenderer] = useState(null);
   const { isDark, toggle } = useThemeToggle();
+  const { MeshGradientRenderer, showGradient } = useMeshGradient();
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
     return () => clearTimeout(timeout);
-  }, []);
-
-  // Lazy load the MeshGradientRenderer
-  useEffect(() => {
-    const loadMeshGradient = async () => {
-      try {
-        const { MeshGradientRenderer } = await import('@johnn-e/react-mesh-gradient');
-        setMeshGradientRenderer(() => MeshGradientRenderer);
-        // Show gradient after a short delay for smooth fade-in
-        setTimeout(() => setShowGradient(true), 100);
-      } catch (error) {
-        console.error('Failed to load mesh gradient:', error);
-      }
-    };
-
-    loadMeshGradient();
   }, []);
 
   const animate = () => {};

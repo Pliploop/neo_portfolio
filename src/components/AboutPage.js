@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useThemeToggle } from '../hooks/useThemeToggle';
+import { useMeshGradient } from '../hooks/useMeshGradient';
 import AllHeader from "./subcomponents/header";
 import ContactFooter from "./subcomponents/contactfooter";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
@@ -18,11 +19,10 @@ const scrollto = (id) => {
 
 const AboutPage = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const [showGradient, setShowGradient] = useState(false);
-  const [MeshGradientRenderer, setMeshGradientRenderer] = useState(null);
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const navigate = useNavigate();
   const { isDark, toggle } = useThemeToggle();
+  const { MeshGradientRenderer, showGradient } = useMeshGradient();
 
   const animate = () => {
 
@@ -49,22 +49,6 @@ const AboutPage = () => {
     };
 
     loadFonts();
-  }, []);
-
-  // Lazy load the MeshGradientRenderer
-  useEffect(() => {
-    const loadMeshGradient = async () => {
-      try {
-        const { MeshGradientRenderer } = await import('@johnn-e/react-mesh-gradient');
-        setMeshGradientRenderer(() => MeshGradientRenderer);
-        // Show gradient after a short delay for smooth fade-in
-        setTimeout(() => setShowGradient(true), 100);
-      } catch (error) {
-        console.error('Failed to load mesh gradient:', error);
-      }
-    };
-
-    loadMeshGradient();
   }, []);
 
   // Show loading state while fonts and gradient are loading
