@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoSendSharp} from 'react-icons/io5'
 
 import emailjs from 'emailjs-com';
 
+const stripHtml = (str) => str.replace(/<[^>]*>/g, '').trim();
 
 const ContactForm = () => {
+  const [lastSubmit, setLastSubmit] = useState(0);
+  const [cooldownMsg, setCooldownMsg] = useState('');
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -18,10 +22,21 @@ const ContactForm = () => {
       email: Yup.string().email("Invalid email address").required("Required"),
       message: Yup.string().required("Required"),
     }),
-    onSubmit: (values, {resetForm}) => {
-      sendEmail(values)
-      console.log(values);
-      resetForm()
+    onSubmit: (values, { resetForm }) => {
+      const now = Date.now();
+      if (now - lastSubmit < 30000) {
+        setCooldownMsg('Please wait 30 seconds before sending another message.');
+        return;
+      }
+      const sanitized = {
+        name: stripHtml(values.name),
+        email: values.email,
+        message: stripHtml(values.message),
+      };
+      setLastSubmit(now);
+      setCooldownMsg('');
+      sendEmail(sanitized);
+      resetForm();
     },
   });
 
@@ -108,7 +123,9 @@ const ContactForm = () => {
           Send
           <IoSendSharp size={22}></IoSendSharp>
         </button>
-        
+        {cooldownMsg && (
+          <p className="text-amber-500 text-sm mt-2" role="alert">{cooldownMsg}</p>
+        )}
       </div>
     </form>
   );
