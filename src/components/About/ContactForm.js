@@ -29,11 +29,12 @@ const ContactForm = () => {
     
     const { name, email, message } = values;
 
-    emailjs.send('service_02y1b2a', 'template_0lpcm0l', {
-        from_name: name,
-        reply_to: email,
-        message: message,
-      }, 'QDMo21gqwu5H1QJj2')
+    emailjs.send(
+      process.env.REACT_APP_EMAILJS_SERVICE_ID,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      { from_name: name, reply_to: email, message: message },
+      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+    )
         .then((result) => {
           console.log('Email successfully sent:', result.text);
         }, (error) => {
