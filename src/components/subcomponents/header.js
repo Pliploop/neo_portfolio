@@ -1,20 +1,9 @@
 import { IoPlaySharp } from "react-icons/io5";
-import { getTheme, setTheme } from '../../utils/storage';
 import { useNavigate } from "react-router-dom";
+import { useThemeToggle } from '../../hooks/useThemeToggle';
 
 const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
-  const switchLightDark = () => {
-    var element = document.body;
-    if (getTheme() === 'light') {
-      element.classList.add("dark");
-      setTheme('dark');
-    } else {
-      element.classList.remove("dark");
-      setTheme('light');
-    }
-
-    console.log(getTheme());
-  };
+  const { toggle } = useThemeToggle();
 
   const nav = useNavigate();
 
@@ -64,7 +53,7 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
       <div className="  group select-none hidden h-full text-black lg:flex flex-col text-center justify-center">
         <div
           className="dark:border-white border-black border-[1px] hover:cursor-pointer h-6 w-12 rounded-full flex flex-col justify-center px-1"
-          onClick={switchLightDark}
+          onClick={toggle}
         >
           <div className="h-3 w-3 rounded-full bg-black dark:bg-white dark:translate-x-6 transition-transform duration-300"></div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getTheme, setTheme } from '../utils/storage';
+import { useThemeToggle } from '../hooks/useThemeToggle';
 import AllHeader from "./subcomponents/header";
 import ContactFooter from "./subcomponents/contactfooter";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
@@ -21,33 +21,16 @@ const AboutPage = () => {
   const [showGradient, setShowGradient] = useState(false);
   const [MeshGradientRenderer, setMeshGradientRenderer] = useState(null);
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const navigate = useNavigate();
-
-  const switchLightDark = () => {
-    var element = document.body;
-    if (getTheme() === 'light') {
-      element.classList.add("dark");
-      setTheme('dark');
-      setIsDark(true);
-    } else {
-      element.classList.remove("dark");
-      setTheme('light');
-      setIsDark(false);
-    }
-    console.log(getTheme());
-  };
+  const { isDark, toggle } = useThemeToggle();
 
   const animate = () => {
-    
+
   };
 
   useEffect(() => {
-    console.log(getTheme());
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
-    // Initialize theme state
-    setIsDark(getTheme() === 'dark');
     return () => clearTimeout(timeout);
   }, []);
 
@@ -159,7 +142,7 @@ const AboutPage = () => {
       {/* Mobile Theme Toggle */}
       <div className="fixed bottom-6 right-6 z-[100] lg:hidden">
         <button
-          onClick={switchLightDark}
+          onClick={toggle}
           className="h-12 w-12 rounded-full border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
         >
           {isDark ? (
