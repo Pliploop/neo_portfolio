@@ -1,30 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { educationData, experienceData, jobtitles, educationtitles } from '../../data/education';
 
 const EducationExperience = () => {
-  const [educationExp, setEducationExp] = useState("education");
-  const [activeTabId, setActiveTabId] = useState(0);
+  // Single compound state — section + tabId always change atomically,
+  // so content = currentData[tabId] can never be undefined.
+  const [selection, setSelection] = useState({ section: "education", tabId: 0 });
   const chipRefs = useRef([]);
 
-  const currentTitles = educationExp === "education" ? educationtitles : jobtitles;
-  const currentData = educationExp === "education" ? educationData : experienceData;
-  const content = currentData[activeTabId];
+  const isEducation = selection.section === "education";
+  const currentTitles = isEducation ? educationtitles : jobtitles;
+  const currentData = isEducation ? educationData : experienceData;
+  const content = currentData[selection.tabId];
 
   useEffect(() => {
-    setActiveTabId(0);
-  }, [educationExp]);
-
-  useEffect(() => {
-    // Scroll active chip into view on mobile
-    if (chipRefs.current[activeTabId]) {
-      chipRefs.current[activeTabId].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-    }
-  }, [activeTabId]);
-
-  const selectTab = (i) => {
-    setActiveTabId(i);
-  };
+    const el = chipRefs.current[selection.tabId];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }, [selection]);
 
   return (
     <div className="w-full lg:px-14 flex flex-col lg:mt-2 mt-6 select-none">
@@ -37,10 +29,10 @@ const EducationExperience = () => {
               key={tab}
               type="button"
               role="tab"
-              aria-selected={educationExp === tab}
-              onClick={() => setEducationExp(tab)}
+              aria-selected={selection.section === tab}
+              onClick={() => setSelection({ section: tab, tabId: 0 })}
               className={`px-6 py-2 rounded-full text-sm capitalize font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 ${
-                educationExp === tab
+                selection.section === tab
                   ? "bg-white dark:bg-black/60 shadow-md text-rose-600 dark:text-orange-300 font-bold"
                   : "text-black/50 dark:text-white/40 hover:text-black dark:hover:text-white"
               }`}
@@ -56,18 +48,18 @@ const EducationExperience = () => {
         className="flex gap-2 overflow-x-auto pb-2 mb-6"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         role="tablist"
-        aria-label={educationExp === "education" ? "Education items" : "Experience items"}
+        aria-label={isEducation ? "Education items" : "Experience items"}
       >
         {currentTitles.map((title, i) => (
           <button
-            key={i}
+            key={`${selection.section}-${i}`}
             type="button"
             role="tab"
-            aria-selected={activeTabId === i}
+            aria-selected={selection.tabId === i}
             ref={(el) => (chipRefs.current[i] = el)}
-            onClick={() => selectTab(i)}
+            onClick={() => setSelection(prev => ({ ...prev, tabId: i }))}
             className={`whitespace-nowrap px-4 py-2 rounded-full text-sm transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 ${
-              activeTabId === i
+              selection.tabId === i
                 ? "bg-rose-400/20 dark:bg-orange-400/15 text-rose-700 dark:text-orange-300 font-semibold shadow-sm"
                 : "bg-white/20 dark:bg-black/20 backdrop-blur-sm text-black/70 dark:text-white/60 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white"
             }`}
@@ -80,14 +72,14 @@ const EducationExperience = () => {
       {/* Content card */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={`${educationExp}-${activeTabId}`}
+          key={`${selection.section}-${selection.tabId}`}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.18, ease: "easeOut" }}
           className="rounded-2xl bg-white/30 dark:bg-black/20 backdrop-blur-sm shadow-lg p-6 lg:p-8 min-h-[360px]"
           role="tabpanel"
-          aria-label={currentTitles[activeTabId]}
+          aria-label={currentTitles[selection.tabId]}
           tabIndex={0}
         >
           {/* Title + company */}

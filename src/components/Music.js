@@ -20,30 +20,24 @@ const MusicSection = () => {
     // <div className="dark:bg-black  bg-gradient-to-b   from-emerald-100 to-sky-100 to-35% lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
 
     <div className="dark:bg-gray-900 relative bg-cover dark:text-white lg:py-12 lg:px-32 p-6 scrollbar-hide select-none overflow-x-hidden lg:overflow-x-visible w-full">
-      {/* Animated mesh gradient background with fade-in */}
+      {/* Animated mesh gradient background — light and dark variants */}
       {MeshGradientRenderer && (
-        <div 
-          className={`transition-opacity duration-1000 ease-in-out ${
-            showGradient ? 'opacity-70' : 'opacity-0'
+        <div
+          className={`absolute inset-0 w-full h-full z-0 pointer-events-none transition-opacity duration-1000 ease-in-out ${
+            showGradient ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <MeshGradientRenderer
-            className="music-mesh-gradient-bg"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              zIndex: 0,
-              pointerEvents: 'none',
-              opacity: 0.3,
-            }}
-            colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"]}
-            speed={0.01}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+            colors={isDark
+              ? ["#2d0a14", "#1a0d2e", "#0d1a2e", "#2e1a0d", "#1a2d0a"]
+              : ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"]}
+            speed={0.008}
           />
+          {/* subtle tint overlay to soften gradient */}
+          <div className={`absolute inset-0 ${isDark ? 'bg-gray-950/60' : 'bg-white/30'}`} />
         </div>
       )}
-      <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-70 opacity-0 transition-opacity duration-200 bg-black show" />
       <div className="z-10 relative">
         <div className="h-full  flex flex-col justify-between align-middle">
           <AllHeader
