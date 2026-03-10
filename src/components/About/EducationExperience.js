@@ -5,12 +5,14 @@ import { educationData, experienceData, jobtitles, educationtitles } from '../..
 const EducationExperience = () => {
   const [educationExp, setEducationExp] = useState("education");
   const [activeTabId, setActiveTabId] = useState(0);
-  const [content, setContent] = useState(educationData[0]);
   const chipRefs = useRef([]);
+
+  const currentTitles = educationExp === "education" ? educationtitles : jobtitles;
+  const currentData = educationExp === "education" ? educationData : experienceData;
+  const content = currentData[activeTabId];
 
   useEffect(() => {
     setActiveTabId(0);
-    setContent(educationExp === "education" ? educationData[0] : experienceData[0]);
   }, [educationExp]);
 
   useEffect(() => {
@@ -20,12 +22,8 @@ const EducationExperience = () => {
     }
   }, [activeTabId]);
 
-  const currentTitles = educationExp === "education" ? educationtitles : jobtitles;
-  const currentData = educationExp === "education" ? educationData : experienceData;
-
   const selectTab = (i) => {
     setActiveTabId(i);
-    setContent(currentData[i]);
   };
 
   return (

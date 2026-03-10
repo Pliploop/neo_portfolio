@@ -152,13 +152,12 @@ const Loader = () => {
             className="w-full aspect-square rounded-3xl relative overflow-hidden"
             id="transition"
           >
-            <div className={`absolute inset-0 transition-opacity duration-1000 ${gradientVisible ? 'opacity-100' : 'opacity-0'}`}>
-              <MeshGradientRenderer
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-                colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"]}
-                speed={0.01}
-              />
-            </div>
+            <MeshGradientRenderer
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+              colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"]}
+              speed={0.01}
+            />
+            <div className={`absolute inset-0 bg-white transition-opacity duration-1000 pointer-events-none ${gradientVisible ? 'opacity-0' : 'opacity-100'}`} />
           </div>
           <div className="flex flex-col">
             <div className="flex flex-row justify-between px-5 py-5  ">
