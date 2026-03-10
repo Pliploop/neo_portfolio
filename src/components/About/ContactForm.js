@@ -72,10 +72,11 @@ const ContactForm = () => {
             id="name"
             type="text"
             placeholder="Your name"
+            aria-describedby={formik.touched.name && formik.errors.name ? "name-error" : undefined}
             {...formik.getFieldProps("name")}
           />
           {formik.touched.name && formik.errors.name ? (
-            <div className="text-red-500 text-sm">{formik.errors.name}</div>
+            <div id="name-error" role="alert" className="text-red-500 text-sm">{formik.errors.name}</div>
           ) : null}
         </div>
         <div className="mb-4">
@@ -90,10 +91,11 @@ const ContactForm = () => {
             id="email"
             type="email"
             placeholder="your.email@example.com"
+            aria-describedby={formik.touched.email && formik.errors.email ? "email-error" : undefined}
             {...formik.getFieldProps("email")}
           />
           {formik.touched.email && formik.errors.email ? (
-            <div className="text-red-500 text-sm">{formik.errors.email}</div>
+            <div id="email-error" role="alert" className="text-red-500 text-sm">{formik.errors.email}</div>
           ) : null}
         </div>
       </div>
@@ -108,10 +110,11 @@ const ContactForm = () => {
           className="w-full appearance-none mb-2 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-lg focus:shadow-xl border border-black dark:border-white min-h-[120px] resize-vertical"
           id="message"
           placeholder="Tell me about your project, collaboration idea, or just say hello!"
+          aria-describedby={formik.touched.message && formik.errors.message ? "message-error" : undefined}
           {...formik.getFieldProps("message")}
         />
         {formik.touched.message && formik.errors.message ? (
-          <div className="text-red-500 text-sm">{formik.errors.message}</div>
+          <div id="message-error" role="alert" className="text-red-500 text-sm">{formik.errors.message}</div>
         ) : null}
       </div>
       <div className="flex flex-row items-center justify-between">
