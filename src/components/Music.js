@@ -8,8 +8,6 @@ import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
 import { BiLogoInstagramAlt } from "react-icons/bi";
 import { HiSun, HiMoon } from "react-icons/hi";
 import ReactPlayer from "react-player";
-import { MusicIntro } from "../components/Music/musicintro";
-import { MusicArranged } from "../components/Music/musicarranged";
 import { MusicMixMaster } from "../components/Music/musicmixmaster";
 import { tracks } from "../data/music";
 import image from "../content/images/logo_countour.png";
@@ -129,23 +127,24 @@ const MusicNav = () => {
         <div class=" w-full flex  " id="navbar-sticky">
           <ul class="flex justify-evenly md:font-medium grow">
             <li class="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-blue-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-blue-300 p-2 text-center">
-              <div
+              <button
+                type="button"
                 onClick={() => {
                   scrollto("featured");
                 }}
               >
                 Featured
-              </div>
+              </button>
             </li>
             <li class="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-blue-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-blue-300 p-2 text-center">
-              <div
-                class=" "
+              <button
+                type="button"
                 onClick={() => {
                   scrollto("mixmaster");
                 }}
               >
                 Mix-mastering
-              </div>
+              </button>
             </li>
           </ul>
         </div>
@@ -495,6 +494,7 @@ const MusicFeatured = () => {
                   scrolling="no"
                   frameBorder="no"
                   allow="autoplay"
+                  title={track.title}
                   src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(track.url)}&color=%23111111&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}
                 ></iframe>
               </div>

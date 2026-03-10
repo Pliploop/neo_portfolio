@@ -24,8 +24,8 @@ const ContactFooter = ({ pagename }) => {
     <div className="lg:h-10 h-12 w-full flex flex-row justify-center sticky bottom-8 dark:text-white overflow-clip z-[100]">
       <div className="lg:h-10 h-12 w-full lg:w-1/3  border-black dark:border-white lg:border-[2px]  border-[1px] backdrop-filter backdrop-blur-lg flex flex-row justify-center">
         <div className="h-full w-full flex flex-row justify-evenly  items-center">
-          <a
-            target="_blank"
+          <button
+            type="button"
             onClick={() => {scrollto("contactform")}}
             className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200  h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
@@ -33,10 +33,11 @@ const ContactFooter = ({ pagename }) => {
               className="group-active:text-orange-200 transition-all duration-100 group-active:scale-90"
               size={26}
             ></AiFillMail>
-          </a>
+          </button>
           <a
             href="https://www.github.com/Pliploop"
             target="_blank"
+            rel="noreferrer"
             onClick={() => openLinkInNewTab("https://www.github.com/Pliploop")}
             className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
@@ -48,6 +49,7 @@ const ContactFooter = ({ pagename }) => {
           <a
             href="https://scholar.google.com/citations?user=pk3boQEAAAAJ&hl=en"
             target="_blank"
+            rel="noreferrer"
             onClick={() =>
               openLinkInNewTab(
                 "https://scholar.google.com/citations?user=pk3boQEAAAAJ&hl=en"
@@ -63,6 +65,7 @@ const ContactFooter = ({ pagename }) => {
           <a
             href="https://www.linkedin.com/julien-guinot"
             target="_blank"
+            rel="noreferrer"
             onClick={() =>
               openLinkInNewTab("https://www.linkedin.com/in/julien-guinot/")
             }
@@ -76,6 +79,7 @@ const ContactFooter = ({ pagename }) => {
           <a
             href="https://twitter.com/juj_gnt"
             target="_blank"
+            rel="noreferrer"
             onClick={() => openLinkInNewTab("https://twitter.com/Juj_Guinot")}
             className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
@@ -87,6 +91,7 @@ const ContactFooter = ({ pagename }) => {
           <a
             href="https://www.medium.com/juj_gnt"
             target="_blank"
+            rel="noreferrer"
             onClick={() => openLinkInNewTab("https://medium.com/@juj_guinot")}
             className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >

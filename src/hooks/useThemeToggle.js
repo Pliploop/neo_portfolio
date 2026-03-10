@@ -1,12 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getTheme, setTheme } from '../utils/storage';
 
 export const useThemeToggle = () => {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    setIsDark(getTheme() === 'dark');
-  }, []);
+  const [isDark, setIsDark] = useState(() => getTheme() === 'dark');
 
   const toggle = () => {
     const element = document.body;

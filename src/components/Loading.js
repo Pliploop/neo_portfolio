@@ -30,7 +30,6 @@ const data = [
 const maxreplies = data.length;
 
 const Loader = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const [isLiked, setisLiked] = useState(false);
   const [liked, setLiked] = useState(() => Array(maxreplies).fill(false));
   const [isplaying, setisplaying] = useState(false);
@@ -44,11 +43,6 @@ const Loader = () => {
 
   useEffect(() => {
     setTheme('light');
-  }, []);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 10);
-    return () => clearTimeout(timeout);
   }, []);
 
   useEffect(() => {
@@ -135,8 +129,6 @@ const Loader = () => {
       className={`h-screen w-screen flex bg-white text-black flex-col align-middle justify-center items-center lg:px-0 px-0 py-12 transition-opacity duration-500 ${
         isTransitioning ? 'opacity-0' : 'opacity-100'
       }`}
-      isMounted={isMounted}
-      isLiked={isLiked}
     >
       <div
         className="flex flex-col lg:w-[30%] w-full aspect-[0.75] border-[2px] border-none rounded-3xl  transition-all duration-200"

@@ -21,12 +21,13 @@ const MusicMixMaster = () => {
               I participated in a student-built student-led musical theatre
               project :{" "}
             </span>
-            <img
-              src={Commuz_Titre}
-              alt="Commuz logo"
-              className="scale-90 hover:scale-95 active:scale-90 cursor-pointer transition-all duration-200 lg:w-1/2 dark:invert"
-              onClick={() => window.open("https://commuz.fr", "_blank")}
-            ></img>
+            <a href="https://commuz.fr" target="_blank" rel="noreferrer" aria-label="Visit Commuz website">
+              <img
+                src={Commuz_Titre}
+                alt="Commuz logo"
+                className="scale-90 hover:scale-95 active:scale-90 cursor-pointer transition-all duration-200 lg:w-1/2 dark:invert"
+              />
+            </a>
             <blockquote class="relative mb-20">
               <div>
                 <div className="border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 h-10 w-full flex flex-row justify-start items-center">
