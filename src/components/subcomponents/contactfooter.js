@@ -22,12 +22,12 @@ const ContactFooter = ({ pagename }) => {
 
   return (
     <div className="lg:h-10 h-12 w-full flex flex-row justify-center sticky bottom-8 dark:text-white overflow-clip z-[100]">
-      <div className="lg:h-10 h-12 w-full lg:w-1/3  border-black dark:border-white lg:border-[2px]  border-[1px] backdrop-filter backdrop-blur-lg flex flex-row justify-center">
+      <div className="lg:h-10 h-12 w-full lg:w-1/3 border border-white/25 dark:border-white/15 shadow-lg backdrop-filter backdrop-blur-lg bg-white/10 dark:bg-black/10 flex flex-row justify-center">
         <div className="h-full w-full flex flex-row justify-evenly  items-center">
           <button
             type="button"
             onClick={() => {scrollto("contactform")}}
-            className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200  h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
+            className="lg:scale-100 scale-75 hover:bg-white/40 dark:hover:bg-white/15 dark:hover:text-rose-300 hover:text-rose-600  h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
             <AiFillMail
               className="group-active:text-orange-200 transition-all duration-100 group-active:scale-90"
@@ -39,7 +39,7 @@ const ContactFooter = ({ pagename }) => {
             target="_blank"
             rel="noreferrer"
             onClick={() => openLinkInNewTab("https://www.github.com/Pliploop")}
-            className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
+            className="lg:scale-100 scale-75 hover:bg-white/40 dark:hover:bg-white/15 dark:hover:text-rose-300 hover:text-rose-600 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
             <AiFillGithub
               className="group-active:text-orange-200 transition-all duration-100 group-active:scale-90"
@@ -55,7 +55,7 @@ const ContactFooter = ({ pagename }) => {
                 "https://scholar.google.com/citations?user=pk3boQEAAAAJ&hl=en"
               )
             }
-            className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
+            className="lg:scale-100 scale-75 hover:bg-white/40 dark:hover:bg-white/15 dark:hover:text-rose-300 hover:text-rose-600 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
             <SiGooglescholar
               className="group-active:text-orange-200 transition-all duration-100 group-active:scale-90"
@@ -69,7 +69,7 @@ const ContactFooter = ({ pagename }) => {
             onClick={() =>
               openLinkInNewTab("https://www.linkedin.com/in/julien-guinot/")
             }
-            className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
+            className="lg:scale-100 scale-75 hover:bg-white/40 dark:hover:bg-white/15 dark:hover:text-rose-300 hover:text-rose-600 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
             <AiFillLinkedin
               className="group-active:text-orange-200 transition-all duration-100 group-active:scale-90"
@@ -81,7 +81,7 @@ const ContactFooter = ({ pagename }) => {
             target="_blank"
             rel="noreferrer"
             onClick={() => openLinkInNewTab("https://twitter.com/Juj_Guinot")}
-            className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
+            className="lg:scale-100 scale-75 hover:bg-white/40 dark:hover:bg-white/15 dark:hover:text-rose-300 hover:text-rose-600 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
             <AiOutlineTwitter
               className="group-active:text-orange-200 transition-all duration-100 group-active:scale-90"
@@ -93,7 +93,7 @@ const ContactFooter = ({ pagename }) => {
             target="_blank"
             rel="noreferrer"
             onClick={() => openLinkInNewTab("https://medium.com/@juj_guinot")}
-            className="lg:scale-100 scale-75 hover:bg-black dark:hover:bg-white dark:hover:text-rose-800 hover:text-rose-200 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
+            className="lg:scale-100 scale-75 hover:bg-white/40 dark:hover:bg-white/15 dark:hover:text-rose-300 hover:text-rose-600 h-full flex flex-row items-center grow justify-center hover:cursor-pointer active:text-orange-200 group "
           >
             <AiOutlineMedium
               className="group-active:text-orange-200 transition-all duration-100 group-active:scale-90"

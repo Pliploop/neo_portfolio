@@ -119,7 +119,7 @@ const AboutPage = () => {
       <div className="fixed bottom-6 right-6 z-[100] lg:hidden">
         <button
           onClick={toggle}
-          className="h-12 w-12 rounded-full border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
+          className="h-12 w-12 rounded-full border border-white/30 dark:border-white/20 backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
         >
           {isDark ? (
             <HiSun size={24} className="text-yellow-500" />
@@ -167,7 +167,7 @@ const AboutSection = () => {
         </div>
 
         <div className="grow flex-row justify-end lg:pr-10 py-6 lg:flex hidden">
-          <div className="aspect-square w-3/5 flex flex-row p-4 backdrop-blur-md bg-white/20 dark:bg-black/20 border border-black">
+          <div className="aspect-square w-3/5 flex flex-row p-4 backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/25 dark:border-white/15 shadow-xl">
             <div className="h-full w-full overflow-clip">
               <img
                 src={image}
@@ -219,7 +219,7 @@ const Intro = () => {
       <div className="flex flex-row lg:justify-start justify-center">
         <button
           type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black cursor-pointer"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center border border-white/30 dark:border-white/20 shadow-sm cursor-pointer"
           onClick={() => {
             scrollto("contactform");
           }}
@@ -233,7 +233,7 @@ const Intro = () => {
         </button>
         <button
           type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black cursor-pointer"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center border border-white/30 dark:border-white/20 shadow-sm cursor-pointer"
           onClick={() => nav("/music")}
         >
           <p className="lg:text-md text-sm font-medium text-black dark:text-white">My Music</p>{" "}
@@ -244,7 +244,7 @@ const Intro = () => {
         </button>
         <button
           type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black cursor-pointer"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center border border-white/30 dark:border-white/20 shadow-sm cursor-pointer"
           onClick={() => nav("/academia")}
         >
           <p className="lg:text-md text-sm font-medium text-black dark:text-white">Research</p>{" "}
@@ -254,7 +254,7 @@ const Intro = () => {
           ></HiOutlineArrowUpRight>
         </button>
         <a
-          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 flex flex-row justify-evenly items-center border border-black"
+          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center border border-white/30 dark:border-white/20 shadow-sm"
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"

@@ -58,7 +58,7 @@ const SectionHeader = ({ text }) => {
 
 const AcademiaNav = () => {
   return (
-    <nav className=" border-black md:flex  dark:border-white backdrop-filter backdrop-blur-2xl bg-opacity-70 border-[1px]  sticky grow z-50 lg:top-24 top-20 mb-16 hidden select-none">
+    <nav className="border border-white/20 dark:border-white/15 shadow-md md:flex backdrop-filter backdrop-blur-2xl bg-white/10 dark:bg-black/10 sticky grow z-50 lg:top-24 top-20 mb-16 hidden select-none">
       <div className="flex flex-wrap items-center justify-between w-full">
         {/* <div
               onClick={() => {
@@ -83,7 +83,7 @@ const AcademiaNav = () => {
                 Masters' thesis
               </div>
             </li>
-            <li className="  lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
+            <li className="  lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black/80 hover:text-rose-300 p-2 text-center">
               <div
                 className="subnav-tag"
                 onClick={() => {
@@ -93,7 +93,7 @@ const AcademiaNav = () => {
                 Vocalist classification
               </div>
             </li>
-            <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
+            <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black/80 hover:text-rose-300 p-2 text-center">
               <div
                 className="subnav-tag"
                 onClick={() => {
@@ -103,7 +103,7 @@ const AcademiaNav = () => {
                 IRCAM research internship
               </div>
             </li>
-            {/* <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
+            {/* <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black/80 hover:text-rose-300 p-2 text-center">
               <div
                 className="subnav-tag"
                 onClick={() => {
@@ -182,7 +182,7 @@ const AcademiaSection = () => {
                         isJournal={paper.isJournal}
                       />
                       {index < papers.length - 1 && (
-                        <div className="w-1/2 h-[1px] bg-black dark:bg-white self-center my-4 mx-auto"></div>
+                        <div className="w-1/2 h-[1px] bg-black/10 dark:bg-white/10 self-center my-4 mx-auto"></div>
                       )}
                     </div>
                   );
@@ -220,7 +220,7 @@ const AcademiaSection = () => {
       <div className="fixed bottom-6 right-6 z-[100] lg:hidden">
         <button
           onClick={toggle}
-          className="h-12 w-12 rounded-full border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
+          className="h-12 w-12 rounded-full border border-white/30 dark:border-white/20 backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
         >
           {isDark ? (
             <HiSun size={24} className="text-yellow-500" />

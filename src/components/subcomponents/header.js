@@ -15,9 +15,9 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
         onClick={() => nav(path)}
         className={`dark:text-white h-full lg:w-32 grow lg:grow-0 lg:text-lg text-sm flex flex-col justify-center text-center
           transition-all duration-100 cursor-pointer
-          hover:bg-white/60 hover:font-bold hover:border-x-[1px] hover:border-black dark:hover:border-white dark:hover:text-black
-          active:bg-opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-black dark:focus-visible:ring-white
-          ${isActive ? 'font-bold border-b-2 border-black dark:border-white' : ''}`}
+          hover:bg-white/40 dark:hover:bg-white/10 hover:font-bold
+          active:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-rose-400
+          ${isActive ? 'font-bold border-b-2 border-rose-400/70 dark:border-rose-400/50' : ''}`}
         aria-current={isActive ? 'page' : undefined}
       >
         {label}
@@ -27,13 +27,13 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
 
   return (
     <div
-      className="lg:h-16 z-[100] select-none h-12 w-full sticky mb-12 lg:top-8 top-6 backdrop-filter backdrop-blur-lg lg:backdrop-blur-xl bg-opacity-90 border-black dark:border-white lg:border-2 border-[1px] bg-transparent flex flex-row justify-between"
+      className="lg:h-16 z-[100] select-none h-12 w-full sticky mb-12 lg:top-8 top-6 backdrop-filter backdrop-blur-lg lg:backdrop-blur-xl bg-white/20 dark:bg-black/20 border border-white/25 dark:border-white/15 shadow-lg flex flex-row justify-between"
       id="all_about"
     >
       <button
         type="button"
         aria-label="Go to home"
-        className={`lg:flex hidden h-full aspect-square group text-black flex-row align-middle justify-center border-r-[2px] border-black dark:border-white hover:bg-black hover:text-white hover:font-bold transition-all duration-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-black dark:focus-visible:ring-white`}
+        className={`lg:flex hidden h-full aspect-square group text-black flex-row align-middle justify-center border-r border-white/20 dark:border-white/15 hover:bg-black/80 hover:text-white hover:font-bold transition-all duration-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-rose-400`}
         onClick={() => nav("/")}
       >
         <IoPlaySharp
@@ -64,7 +64,7 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
         <button
           type="button"
           aria-label="Toggle dark mode"
-          className="dark:border-white border-black border-[1px] cursor-pointer h-6 w-12 rounded-full flex flex-col justify-center px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black dark:focus-visible:ring-white"
+          className="border border-black/25 dark:border-white/25 cursor-pointer h-6 w-12 rounded-full flex flex-col justify-center px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
           onClick={toggle}
         >
           <div className="h-3 w-3 rounded-full bg-black dark:bg-white dark:translate-x-6 transition-transform duration-300"></div>
@@ -72,7 +72,7 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
       </div>
       <button
         type="button"
-        className="  group select-none hidden text-4xl h-full lg:w-64 w-0 text-black lg:flex border-l-[1px] ml-6 dark:border-white flex-col text-center justify-center border-black hover:bg-black hover:font-bold hover:home-accent-text transition-all duration-100 cursor-pointer"
+        className="  group select-none hidden text-4xl h-full lg:w-64 w-0 text-black lg:flex border-l border-white/20 dark:border-white/15 ml-6 flex-col text-center justify-center hover:bg-black/80 hover:font-bold hover:home-accent-text transition-all duration-100 cursor-pointer"
         onClick={() => {
           window.scrollTo({
             top: 0,
