@@ -28,6 +28,7 @@ const data = [
   "not going to find much more",
 ];
 const maxreplies = data.length;
+const GRADIENT_COLORS = ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"];
 
 const Loader = () => {
   const [isLiked, setisLiked] = useState(false);
@@ -154,7 +155,7 @@ const Loader = () => {
           >
             <MeshGradientRenderer
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-              colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"]}
+              colors={GRADIENT_COLORS}
               speed={0.01}
             />
             <div className={`absolute inset-0 bg-white transition-opacity duration-1000 pointer-events-none ${gradientVisible ? 'opacity-0' : 'opacity-100'}`} />

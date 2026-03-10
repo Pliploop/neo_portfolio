@@ -7,6 +7,7 @@ const EducationExperience = () => {
   // so content = currentData[tabId] can never be undefined.
   const [selection, setSelection] = useState({ section: "education", tabId: 0 });
   const chipRefs = useRef([]);
+  const chipContainerRef = useRef(null);
   const didMountRef = useRef(false);
 
   const isEducation = selection.section === "education";
@@ -17,7 +18,11 @@ const EducationExperience = () => {
   useEffect(() => {
     if (!didMountRef.current) { didMountRef.current = true; return; }
     const el = chipRefs.current[selection.tabId];
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const container = chipContainerRef.current;
+    if (!el || !container) return;
+    // Scroll only the chip row horizontally — never scroll the page
+    const target = el.offsetLeft - container.offsetWidth / 2 + el.offsetWidth / 2;
+    container.scrollTo({ left: target, behavior: 'smooth' });
   }, [selection]);
 
   return (
@@ -47,6 +52,7 @@ const EducationExperience = () => {
 
       {/* Item chips — horizontal scroll on mobile */}
       <div
+        ref={chipContainerRef}
         className="flex gap-2 overflow-x-auto pb-2 mb-6"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         role="tablist"
