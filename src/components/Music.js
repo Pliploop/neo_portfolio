@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useThemeToggle } from '../hooks/useThemeToggle';
 import { useMeshGradient } from '../hooks/useMeshGradient';
 import AllHeader from "./subcomponents/header";
@@ -13,24 +13,13 @@ import { tracks } from "../data/music";
 import image from "../content/images/logo_countour.png";
 
 const MusicSection = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const { isDark, toggle } = useThemeToggle();
   const { MeshGradientRenderer, showGradient } = useMeshGradient();
-
-  const animate = () => {
-
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 10);
-    animate();
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     // <div className="dark:bg-black  bg-gradient-to-b   from-emerald-100 to-sky-100 to-35% lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
 
-    <div className="dark:bg-gray-900 relative float-left bg-cover dark:text-white lg:py-12 lg:px-32 p-6 scrollbar-hide select-none overflow-x-hidden lg:overflow-x-visible w-full">
+    <div className="dark:bg-gray-900 relative bg-cover dark:text-white lg:py-12 lg:px-32 p-6 scrollbar-hide select-none overflow-x-hidden lg:overflow-x-visible w-full">
       {/* Animated mesh gradient background with fade-in */}
       {MeshGradientRenderer && (
         <div 

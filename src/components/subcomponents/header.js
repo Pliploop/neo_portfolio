@@ -1,11 +1,29 @@
 import { IoPlaySharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useThemeToggle } from '../../hooks/useThemeToggle';
 
 const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
   const { toggle } = useThemeToggle();
-
   const nav = useNavigate();
+  const { pathname } = useLocation();
+
+  const navBtn = (label, path) => {
+    const isActive = pathname === path;
+    return (
+      <button
+        type="button"
+        onClick={() => nav(path)}
+        className={`dark:text-white h-full lg:w-32 grow lg:grow-0 lg:text-lg text-sm flex flex-col justify-center text-center
+          transition-all duration-100 cursor-pointer
+          hover:bg-white/60 hover:font-bold hover:border-x-[1px] hover:border-black dark:hover:border-white dark:hover:text-black
+          active:bg-opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-black dark:focus-visible:ring-white
+          ${isActive ? 'font-bold border-b-2 border-black dark:border-white' : ''}`}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        {label}
+      </button>
+    );
+  };
 
   return (
     <div
@@ -14,50 +32,39 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
     >
       <button
         type="button"
-        className={`lg:flex hidden h-full aspect-square group text-black flex-row align-middle justify-center border-r-[2px] border-black dark:border-white hover:bg-black hover:text-white hover:font-bold hover:home-accent-text transition-all duration-100 cursor-pointer`} onClick={() => nav("/")}
+        aria-label="Go to home"
+        className={`lg:flex hidden h-full aspect-square group text-black flex-row align-middle justify-center border-r-[2px] border-black dark:border-white hover:bg-black hover:text-white hover:font-bold transition-all duration-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-black dark:focus-visible:ring-white`}
+        onClick={() => nav("/")}
       >
         <IoPlaySharp
           size={32}
-          className={`self-center lg:scale-100 scale-50 lg:group-active:scale-90 transition-all duration-100  dark:text-white`}
-        ></IoPlaySharp>
+          className={`self-center lg:scale-100 scale-50 lg:group-active:scale-90 transition-all duration-100 dark:text-white`}
+        />
       </button>
-      <div className="lg:w-2/3 w-full h-full flex flex-row lg:justify-center justify-around lg:space-x-8 ">
-        <button
-          type="button"
-          className={`dark:text-white  dark:hover:text-black h-full lg:w-32 grow lg:grow-0 lg:text-lg text-sm flex flex-col active:bg-opacity-30 hover:bg-opacity-60 hover:bg-white hover:font-bold cursor-pointer hover:border-black hover:border-x-[1px] dark:hover:border-white transition-all duration-100 p-auto text-center justify-center`}
-          onClick={() => nav("/about")}
-        >
-          About
-        </button>
-        <button
-          type="button"
-          className={`dark:text-white  dark:hover:text-black h-full lg:w-32  grow lg:grow-0 lg:text-lg text-sm flex flex-col active:bg-opacity-30 hover:bg-opacity-60 hover:bg-white hover:font-bold cursor-pointer hover:border-black hover:border-x-[1px] dark:hover:border-white transition-all duration-100 p-auto text-center justify-center`}
-          onClick={() => nav("/academia")}
-        >
-          Research
-        </button>
-        <button
-          type="button"
-          className={`dark:text-white  dark:hover:text-black h-full lg:w-32 grow lg:grow-0  lg:text-lg text-sm flex flex-col active:bg-opacity-30 hover:bg-opacity-60 hover:bg-white hover:font-bold cursor-pointer hover:border-black hover:border-x-[1px] dark:hover:border-white transition-all duration-100 p-auto text-center justify-center`}
-          onClick={() => nav("/music")}
-        >
-          Music
-        </button>
+      <div className="lg:w-2/3 w-full h-full flex flex-row lg:justify-center justify-around lg:space-x-8">
+        {navBtn('About', '/about')}
+        {navBtn('Research', '/academia')}
+        {navBtn('Music', '/music')}
         <div
-          className={`dark:text-gray-500 text-gray-500  dark:hover:text-black h-full lg:w-32 grow lg:grow-0  lg:text-lg text-sm flex flex-col active:bg-opacity-30 hover:bg-opacity-60  hover:border-black hover:border-x-[1px] transition-all duration-100 dark:hover:border-white p-auto text-center justify-center`}
+          title="Coming soon"
+          className="dark:text-gray-500 text-gray-400 h-full lg:w-32 grow lg:grow-0 lg:text-lg text-sm flex flex-col justify-center text-center cursor-not-allowed select-none relative group"
         >
           Projects
+          <span className="hidden lg:block absolute -bottom-0.5 left-1/2 -translate-x-1/2 text-[9px] tracking-widest uppercase text-gray-400 dark:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-150">soon</span>
         </div>
         <div
-          className={`dark:text-gray-500 text-gray-500 dark:hover:text-black h-full lg:w-32 grow lg:grow-0  lg:text-lg text-sm flex flex-col active:bg-opacity-30 hover:bg-opacity-60  hover:border-black hover:border-x-[1px] transition-all duration-100 dark:hover:border-white p-auto text-center justify-center`}
+          title="Coming soon"
+          className="dark:text-gray-500 text-gray-400 h-full lg:w-32 grow lg:grow-0 lg:text-lg text-sm flex flex-col justify-center text-center cursor-not-allowed select-none relative group"
         >
           Blog
+          <span className="hidden lg:block absolute -bottom-0.5 left-1/2 -translate-x-1/2 text-[9px] tracking-widest uppercase text-gray-400 dark:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-150">soon</span>
         </div>
       </div>
       <div className="  group select-none hidden h-full text-black lg:flex flex-col text-center justify-center">
         <button
           type="button"
-          className="dark:border-white border-black border-[1px] cursor-pointer h-6 w-12 rounded-full flex flex-col justify-center px-1"
+          aria-label="Toggle dark mode"
+          className="dark:border-white border-black border-[1px] cursor-pointer h-6 w-12 rounded-full flex flex-col justify-center px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black dark:focus-visible:ring-white"
           onClick={toggle}
         >
           <div className="h-3 w-3 rounded-full bg-black dark:bg-white dark:translate-x-6 transition-transform duration-300"></div>

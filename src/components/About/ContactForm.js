@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { IoSendSharp} from 'react-icons/io5'
+import { IoSendSharp, IoCheckmarkCircleOutline } from 'react-icons/io5';
 
 import emailjs from '@emailjs/browser';
 
@@ -10,6 +10,7 @@ const stripHtml = (str) => str.replace(/<[^>]*>/g, '').trim();
 const ContactForm = () => {
   const lastSubmitRef = useRef(0);
   const [cooldownMsg, setCooldownMsg] = useState('');
+  const [sendStatus, setSendStatus] = useState(null); // null | 'success' | 'error'
 
   const formik = useFormik({
     initialValues: {
@@ -41,24 +42,49 @@ const ContactForm = () => {
   });
 
   const sendEmail = (values) => {
-    
     const { name, email, message } = values;
-
     emailjs.send(
       process.env.REACT_APP_EMAILJS_SERVICE_ID,
       process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
       { from_name: name, reply_to: email, message: message },
       process.env.REACT_APP_EMAILJS_PUBLIC_KEY
-    )
-        .then((result) => {
-        }, (error) => {
-          console.error('Error sending email:', error.text);
-        });
+    ).then(() => {
+      setSendStatus('success');
+    }).catch(() => {
+      setSendStatus('error');
+    });
   };
+
+  if (sendStatus === 'success') {
+    return (
+      <div className="lg:px-14 mb-20 flex flex-col items-start gap-4" id="contactform">
+        <div className="flex items-center gap-3 text-green-600 dark:text-green-400">
+          <IoCheckmarkCircleOutline size={32} />
+          <p className="text-lg font-bold">Message sent!</p>
+        </div>
+        <p className="dark:text-rose-50 text-gray-600">Thanks for reaching out — I'll get back to you soon.</p>
+        <button
+          type="button"
+          onClick={() => setSendStatus(null)}
+          className="text-sm text-rose-600 dark:text-orange-300 underline underline-offset-2 hover:opacity-70 transition-opacity"
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form className="lg:px-14 mb-20" id="contactform" onSubmit={formik.handleSubmit}>
-        <p className="mb-6 dark:text-rose-50">Send me a message via this form or contact me yourself <span className="font-bold text-rose-600 dark:text-orange-300 hover:underline transition-all duration-100">@jul.guinot@gmail.com!</span></p>
+      <p className="mb-6 dark:text-rose-50">
+        Send me a message via this form or reach me directly at{' '}
+        <a
+          href="mailto:jul.guinot@gmail.com"
+          className="font-bold text-rose-600 dark:text-orange-300 hover:underline transition-all duration-100"
+        >
+          jul.guinot@gmail.com
+        </a>
+      </p>
       <div className="flex lg:flex-row flex-col lg:gap-10">
         <div className="mb-4">
           <label
@@ -126,7 +152,10 @@ const ContactForm = () => {
           <IoSendSharp size={22}></IoSendSharp>
         </button>
         {cooldownMsg && (
-          <p className="text-amber-500 text-sm mt-2" role="alert">{cooldownMsg}</p>
+          <p className="text-amber-500 text-sm" role="alert">{cooldownMsg}</p>
+        )}
+        {sendStatus === 'error' && (
+          <p className="text-red-500 text-sm" role="alert">Something went wrong — please try emailing me directly.</p>
         )}
       </div>
     </form>

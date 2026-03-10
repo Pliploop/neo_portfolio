@@ -17,21 +17,10 @@ const scrollto = (id) => {
 };
 
 const AboutPage = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const navigate = useNavigate();
   const { isDark, toggle } = useThemeToggle();
   const { MeshGradientRenderer, showGradient } = useMeshGradient();
-
-  const animate = () => {
-
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 10);
-    animate();
-    return () => clearTimeout(timeout);
-  }, []);
 
   // Load fonts
   useEffect(() => {
@@ -61,7 +50,11 @@ const AboutPage = () => {
             clickaccent={"rose-300"}
           />
           <div className="flex items-center justify-center h-64">
-            <div className="text-lg">Loading...</div>
+            <div className="flex gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:0ms]" />
+              <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:150ms]" />
+              <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:300ms]" />
+            </div>
           </div>
         </div>
       </div>

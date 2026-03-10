@@ -63,7 +63,7 @@ const ContactFooter = ({ pagename }) => {
             ></SiGooglescholar>
           </a>
           <a
-            href="https://www.linkedin.com/julien-guinot"
+            href="https://www.linkedin.com/in/julien-guinot/"
             target="_blank"
             rel="noreferrer"
             onClick={() =>
