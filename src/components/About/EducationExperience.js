@@ -70,7 +70,7 @@ const EducationExperience = () => {
         >
 
           <div className="h-16 w-10 lg:flex hidden"></div>
-          <div className="flex flex-row h-12 lg:h-auto">
+          <div className="flex flex-row h-12 lg:h-auto" role="tablist" aria-label="Education or Experience">
             <div className="flex flex-col justify-end">
               <button
                 type="button"
@@ -79,7 +79,10 @@ const EducationExperience = () => {
                     ? "backdrop-blur-md bg-white/40 dark:bg-black/40 text-black dark:text-white lg:h-[90%] h-8 border-t border-l border-r border-black dark:border-white"
                     : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-black lg:h-8 h-6 border-t border-l border-r border-black dark:border-white"
                 } flex flex-col text-center justify-center lg:text-base transition-all duration-200 cursor-pointer`}
-                id="EducationTab"
+                id="tab-education"
+                role="tab"
+                aria-selected={educationExp === "education"}
+                aria-controls="panel-education"
                 onClick={() => {
                   setEducationExp(
                     educationExp === "education" ? "experience" : "education"
@@ -98,7 +101,10 @@ const EducationExperience = () => {
                     ? "backdrop-blur-md bg-white/40 dark:bg-black/40 text-black dark:text-white lg:h-[90%] h-8 border-t border-l border-r border-black dark:border-white"
                     : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-black lg:h-8 h-6 border-t border-l border-r border-black dark:border-white"
                 } flex flex-col text-center justify-center lg:text-base transition-all duration-200`}
-                id="ExperienceTab"
+                id="tab-experience"
+                role="tab"
+                aria-selected={educationExp === "experience"}
+                aria-controls="panel-experience"
                 onClick={() => {
                   setEducationExp(
                     educationExp === "education" ? "experience" : "education"
@@ -125,6 +131,10 @@ const EducationExperience = () => {
                   ? "opacity-100 flex"
                   : "opacity-0 hidden"
               }`}
+              id="panel-experience"
+              role="tabpanel"
+              aria-labelledby="tab-experience"
+              tabIndex={0}
             >
               {/* Desktop Navigation */}
               <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4 lg:flex hidden">
@@ -135,16 +145,16 @@ const EducationExperience = () => {
                     className="flex items-center justify-center w-8 h-8 mx-2 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
                     aria-label="Previous tab"
                   >
-                    <svg 
-                      className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
-                      fill="currentColor" 
+                    <svg
+                      className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200"
+                      fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                     </svg>
                   </button>
-                  
-                  <ul className="flex w-full justify-evenly lg:text-base text-sm md:font-medium">
+
+                  <ul className="flex w-full justify-evenly lg:text-base text-sm md:font-medium" role="tablist" aria-label="Experience items">
                     {jobtitles &&
                       jobtitles.map((job, i) => {
                         return (
@@ -239,6 +249,10 @@ const EducationExperience = () => {
                   ? "opacity-100 flex"
                   : "opacity-0 hidden"
               }`}
+              id="panel-education"
+              role="tabpanel"
+              aria-labelledby="tab-education"
+              tabIndex={0}
             >
               {/* Desktop Navigation */}
               <nav className="w-full border-black dark:border-white backdrop-filter backdrop-blur-lg bg-opacity-90 border-[1px] bg-transparent flex flex-row justify-center select-none mb-4 lg:flex hidden">
@@ -249,16 +263,16 @@ const EducationExperience = () => {
                     className="flex items-center justify-center w-8 h-8 mx-2 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group"
                     aria-label="Previous tab"
                   >
-                    <svg 
-                      className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200" 
-                      fill="currentColor" 
+                    <svg
+                      className="w-4 h-4 text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-orange-300 transition-colors duration-200"
+                      fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                     </svg>
                   </button>
-                  
-                  <ul className="flex w-full justify-evenly lg:text-base text-sm md:font-medium">
+
+                  <ul className="flex w-full justify-evenly lg:text-base text-sm md:font-medium" role="tablist" aria-label="Education items">
                     {educationtitles &&
                       educationtitles.map((education, i) => {
                         return (
@@ -349,7 +363,10 @@ const EducationExperience = () => {
           </div>
           <div
             className="w-full flex flex-col items-left space-y-4 pt-4"
-            id="description"
+            id={`panel-${activeTabId}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${activeTabId}`}
+            tabIndex={0}
             key={updateKey}
           >
             <div id="title" className="w-full text-lg">

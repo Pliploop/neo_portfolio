@@ -234,7 +234,7 @@ const MusicFeatured = () => {
         <div className="lg:h-2/3 grow lg:m-10 mb-0 lg:mr-5 flex flex-col">
           <div className="border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 lg:h-10 h-auto flex lg:flex-row flex-col justify-start lg:items-center items-start">
             {/* Desktop Navigation */}
-            <div className="flex flex-row lg:w-auto w-full h-full items-center dark:text-black lg:flex hidden">
+            <div className="flex flex-row lg:w-auto w-full h-full items-center dark:text-black lg:flex hidden" role="tablist" aria-label="Fonkey Business videos">
               <div>
                 <BsArrowLeftShort
                   size={30}
@@ -246,6 +246,10 @@ const MusicFeatured = () => {
               </div>
               <button
                 type="button"
+                role="tab"
+                id="tab-fonkey-0"
+                aria-selected={activeTabFonkey === 0}
+                aria-controls="panel-fonkey"
                 className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-purple-100 transition-colors duration-300 lg:border-x-[1px] border-r-[1px] border-black cursor-pointer ${
                   activeTabFonkey === 0 ? "bg-purple-100" : "bg-white"
                 }`}
@@ -257,6 +261,10 @@ const MusicFeatured = () => {
               </button>
               <button
                 type="button"
+                role="tab"
+                id="tab-fonkey-1"
+                aria-selected={activeTabFonkey === 1}
+                aria-controls="panel-fonkey"
                 className={`h-full lg:border-t-0 border-t-[1px] lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-orange-100 transition-colors duration-300 border-r-[1px] border-black cursor-pointer ${
                   activeTabFonkey === 1 ? "bg-orange-100" : "bg-white"
                 }`}
@@ -268,6 +276,10 @@ const MusicFeatured = () => {
               </button>
               <button
                 type="button"
+                role="tab"
+                id="tab-fonkey-2"
+                aria-selected={activeTabFonkey === 2}
+                aria-controls="panel-fonkey"
                 className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-lime-100 transition-colors duration-300 lg:border-r-[1px] border-black cursor-pointer ${
                   activeTabFonkey === 2 ? "bg-lime-100" : "bg-white"
                 }`}
@@ -279,6 +291,10 @@ const MusicFeatured = () => {
               </button>
               <button
                 type="button"
+                role="tab"
+                id="tab-fonkey-3"
+                aria-selected={activeTabFonkey === 3}
+                aria-controls="panel-fonkey"
                 className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-rose-100 transition-colors duration-300 lg:border-r-[1px] border-black cursor-pointer bg-white ${
                 activeTabFonkey === 3 ? "bg-rose-100" : "bg-white"}`}
                 onClick={() => {
@@ -330,7 +346,13 @@ const MusicFeatured = () => {
               </div>
             </div>
           </div>
-          <div className="overflow-clip aspect-video border border-black dark:border-white border-t-0">
+          <div
+            className="overflow-clip aspect-video border border-black dark:border-white border-t-0"
+            id="panel-fonkey"
+            role="tabpanel"
+            aria-labelledby={`tab-fonkey-${activeTabFonkey}`}
+            tabIndex={0}
+          >
             <ReactPlayer
               width={"100%"}
               height={"100%"}
