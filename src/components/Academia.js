@@ -23,7 +23,7 @@ import { HiSun, HiMoon } from "react-icons/hi";
 
 import { HeroSection } from "./academiacomponents/academiaHero";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { papers } from '../data/papers';
 import { VscGithub } from "react-icons/vsc";
@@ -46,11 +46,11 @@ const SectionHeader = ({ text }) => {
   return (
     <div className="h-auto lg:w-full lg:px-10">
       <div className="flex flex-row align-middle">
-        <h2 className="font-inter text-2xl lg:text-4xl font-semibold first-letter:text-7xl first-letter:font-zighead first-letter:text-violet-600 dark:first-letter:text-violet-400">
+        <h2 className="font-inter text-2xl lg:text-4xl font-semibold first-letter:text-7xl first-letter:font-zighead first-letter:text-rose-500 dark:first-letter:text-rose-400">
           {" "}
           {text}
         </h2>
-        <div className="mx-6 h-[1px] grow bg-black dark:bg-violet-300 self-center"></div>
+        <div className="mx-6 h-[1px] grow bg-black dark:bg-rose-300 self-center"></div>
       </div>
     </div>
   );
@@ -73,7 +73,7 @@ const AcademiaNav = () => {
 
         <div className=" w-full flex " id="navbar-sticky">
           <ul className="flex w-full justify-evenly lg:text-base text-sm md:font-medium ">
-            <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer active:text-white dark:hover:bg-white dark:hover:text-violet-500 transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer active:text-white dark:hover:bg-white dark:hover:text-rose-500 transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
               <div
                 className="subnav-tag"
                 onClick={() => {
@@ -83,7 +83,7 @@ const AcademiaNav = () => {
                 Masters' thesis
               </div>
             </li>
-            <li className="  lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            <li className="  lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
               <div
                 className="subnav-tag"
                 onClick={() => {
@@ -93,7 +93,7 @@ const AcademiaNav = () => {
                 Vocalist classification
               </div>
             </li>
-            <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
               <div
                 className="subnav-tag"
                 onClick={() => {
@@ -103,7 +103,7 @@ const AcademiaNav = () => {
                 IRCAM research internship
               </div>
             </li>
-            {/* <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-violet-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-violet-300 p-2 text-center">
+            {/* <li className=" lg:text-base text-sm border-black h-full grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
               <div
                 className="subnav-tag"
                 onClick={() => {
@@ -121,20 +121,11 @@ const AcademiaNav = () => {
 };
 
 const AcademiaSection = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const { isDark, toggle } = useThemeToggle();
   const { MeshGradientRenderer, showGradient } = useMeshGradient();
 
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), 10);
-    animate();
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const animate = () => {};
-
   return (
-    <div className="relative dark:bg-gray-900 dark:text-violet-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-3xl bg-blur-xl bg-opacity-25 lg:py-12 lg:px-32 p-6  scrollbar-hide">
+    <div className="relative dark:bg-gray-900 dark:text-rose-50 lg:bg-cover bg-contain bg-repeat-round lg:bg-blur-3xl bg-blur-xl bg-opacity-25 lg:py-12 lg:px-32 p-6  scrollbar-hide">
       {/* Animated mesh gradient background with fade-in */}
       {MeshGradientRenderer && (
         <div 
@@ -153,7 +144,7 @@ const AcademiaSection = () => {
               pointerEvents: 'none',
               opacity: 0.3,
             }}
-            colors={["#ffffff", "#f3e8ff", "#e6d7ff", "#8b5cf6", "#ffffff"]}
+            colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"]}
             speed={0.01}
           />
         </div>
@@ -307,7 +298,7 @@ const AuthorsAndAffiliations = ({ authors, affiliations, affiliations_indices })
         {authors.map((author, index) => {
           return (
             <span key={index} className={`${index === 0 ? "font-black" : ""}`}>
-              {author}<sup> {`${index == 0 ? "*" : ""}`}</sup><sup className="text-violet-500">{affiliations_indices[index]}</sup>
+              {author}<sup> {`${index == 0 ? "*" : ""}`}</sup><sup className="text-rose-500">{affiliations_indices[index]}</sup>
               {index < authors.length - 1 ? ", " : ""}
             </span>
           );
@@ -318,7 +309,7 @@ const AuthorsAndAffiliations = ({ authors, affiliations, affiliations_indices })
         {affiliations.map((affiliation, index) => {
           return (
             <span key={index}>
-              <sup className="text-violet-400">{index + 1}</sup>
+              <sup className="text-rose-400">{index + 1}</sup>
               {affiliation}
               {index < affiliations.length - 1 ? ", " : ""}
             </span>
@@ -344,7 +335,7 @@ const Abstract = ({ abstract }) => {
         {abstract}
       </div>
 
-      <button type="button" className="font-inter text-sm text-gray-800 dark:text-white cursor-pointer hover:text-violet-400 flex flex-row" onClick={() => setIsExpanded(!isExpanded)}>
+      <button type="button" className="font-inter text-sm text-gray-800 dark:text-white cursor-pointer hover:text-rose-400 flex flex-row" onClick={() => setIsExpanded(!isExpanded)}>
         
         {/* down or up arrow depeding on expanded or no*/}
         {isExpanded ? "Hide abstract" : "Show abstract"}
@@ -359,7 +350,7 @@ const Abstract = ({ abstract }) => {
 
 const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abstract, arxiv, github, presentationType, awards, isJournal }) => {
   return (
-    <div>
+    <div className="p-4 bg-white/30 dark:bg-black/20 backdrop-blur-sm shadow-sm hover:shadow-md border border-black/10 dark:border-white/10 border-l-[3px] border-l-black/10 dark:border-l-white/10 hover:border-l-rose-400 transition-all duration-200 rounded-sm">
     <div className="flex lg:flex-row flex-col justify-between items-start gap-5">
       <div className="flex flex-col gap-3">
         <div className="font-inter text-lg font-semibold text-gray-800 dark:text-white">{title}</div>

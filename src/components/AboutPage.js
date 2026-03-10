@@ -191,13 +191,13 @@ const Intro = () => {
     >
       <div className="lg:w-2/3 flex flex-col justify-start mb-12">
         <p className="lg:text-2xl text-lg font-bold font-grande">Hey! I'm</p>
-        <p className="lg:text-6xl text-[35px] font-grande font-bold ">
+        <p className="lg:text-6xl text-4xl font-grande font-bold ">
           {" "}
-          <span className="font-zighead text-rose-700  dark:text-orange-300 lg:text-9xl text-[50px]">
+          <span className="font-zighead text-rose-700  dark:text-orange-300 lg:text-9xl text-5xl">
             J
           </span>
           ulien{" "}
-          <span className="lg:text-9xl text-[50px] text-rose-500 dark:text-orange-200 font-saint">
+          <span className="lg:text-9xl text-5xl text-rose-500 dark:text-orange-200 font-saint">
             G
           </span>
           uinot

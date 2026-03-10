@@ -38,7 +38,7 @@ const MusicSection = () => {
               pointerEvents: 'none',
               opacity: 0.3,
             }}
-            colors={["#ffffff", "#3b82f6", "#1e40af", "#0ea5e9", "#ffffff"]}
+            colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"]}
             speed={0.01}
           />
         </div>
@@ -48,8 +48,8 @@ const MusicSection = () => {
         <div className="h-full  flex flex-col justify-between align-middle">
           <AllHeader
             pagename={"Music"}
-            hoveraccent={"blue-200"}
-            clickaccent={"blue-300"}
+            hoveraccent={"rose-200"}
+            clickaccent={"rose-300"}
           />
           <div className="w-full" id="all">
             <MusicHeader text="My Music" />
@@ -100,22 +100,11 @@ const scrollto = (id) => {
 
 const MusicNav = () => {
   return (
-    <nav class=" border-black dark:border-white text-sm lg:text-base  dark:text-white backdrop-filter backdrop-blur-2xl bg-opacity-70 border-[1px]  sticky grow z-50 lg:top-24 top-20 mb-16 flex flex-row justify-center select-none">
-      <div class="flex flex-row items-center w-full">
-        {/* <div
-            onClick={() => {
-              scrollto("3");
-            }}
-            class="flex items-center cursor-pointer"
-          >
-            <span class="self-center text-xl font-semibold whitespace-nowrap hover:text-blue-500 active:scale-95 transition-all  duration-[20ms] active:text-blue-700">
-              My Music
-            </span>
-          </div> */}
-
-        <div class=" w-full flex  " id="navbar-sticky">
-          <ul class="flex justify-evenly md:font-medium grow">
-            <li class="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-blue-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-blue-300 p-2 text-center">
+    <nav className=" border-black dark:border-white text-sm lg:text-base  dark:text-white backdrop-filter backdrop-blur-2xl bg-opacity-70 border-[1px]  sticky grow z-50 lg:top-24 top-20 mb-16 flex flex-row justify-center select-none">
+      <div className="flex flex-row items-center w-full">
+        <div className=" w-full flex  " id="navbar-sticky">
+          <ul className="flex justify-evenly md:font-medium grow">
+            <li className="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
               <button
                 type="button"
                 onClick={() => {
@@ -125,7 +114,7 @@ const MusicNav = () => {
                 Featured
               </button>
             </li>
-            <li class="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-blue-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-blue-300 p-2 text-center">
+            <li className="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black hover:text-rose-300 p-2 text-center">
               <button
                 type="button"
                 onClick={() => {
@@ -146,7 +135,7 @@ const SectionHeader = ({ text }) => {
   return (
     <div className="h-auto lg:w-full lg:px-10">
       <div className="flex flex-row align-middle">
-        <h2 className="font-inter text-2xl lg:text-4xl font-semibold first-letter:text-7xl first-letter:font-zighead first-letter:text-blue-600">
+        <h2 className="font-inter text-2xl lg:text-4xl font-semibold first-letter:text-7xl first-letter:font-zighead first-letter:text-rose-500">
           {" "}
           {text}
         </h2>
@@ -158,7 +147,7 @@ const SectionHeader = ({ text }) => {
 
 const MusicHeader = ({ text }) => {
   return (
-    <div className="lg:mb-16 mb-10 first-letter:font-saint first-letter:text-3xl first-letter:text-blue-700">
+    <div className="lg:mb-16 mb-10 first-letter:font-saint first-letter:text-3xl first-letter:text-rose-600">
       <SectionHeader text={text} />
     </div>
   );
@@ -307,7 +296,7 @@ const MusicFeatured = () => {
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group">
                 <BsArrowLeftShort
                   size={20}
-                  className="text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
+                  className="text-black dark:text-white group-hover:text-rose-500 transition-colors duration-200"
                   onClick={() => {
                     nexturl(-1);
                   }}
@@ -326,7 +315,7 @@ const MusicFeatured = () => {
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group">
                 <BsArrowRightShort
                   size={20}
-                  className="text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
+                  className="text-black dark:text-white group-hover:text-rose-500 transition-colors duration-200"
                   onClick={() => {
                     nexturl(1);
                   }}
@@ -447,7 +436,7 @@ const MusicFeatured = () => {
       <div className="w-full h-1px border-t-[1px] border-black dark:border-white"></div>
       <div className="flex flex-row gap-12 w-full justify-between">
         {tracks.map((track, index) => (
-          <div key={index} className="flex flex-col w-48">
+          <div key={index} className="flex flex-col w-48 border-l-[3px] border-l-transparent hover:border-l-rose-400 transition-all duration-200">
             {/* Card */}
             <button
               type="button"
