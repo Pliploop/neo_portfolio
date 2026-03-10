@@ -14,10 +14,10 @@ const AllHeader = ({ pagename, hoveraccent, clickaccent }) => {
         type="button"
         onClick={() => nav(path)}
         className={`dark:text-white h-full lg:w-32 grow lg:grow-0 lg:text-lg text-sm flex flex-col justify-center text-center
-          transition-all duration-100 cursor-pointer rounded-xl
-          hover:bg-white/40 dark:hover:bg-white/10 hover:font-bold
+          transition-all duration-200 cursor-pointer rounded-xl px-2
+          hover:bg-white/30 dark:hover:bg-white/10 hover:font-bold
           active:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-rose-400
-          ${isActive ? 'font-bold border-b-2 border-rose-400/70 dark:border-rose-400/50' : ''}`}
+          ${isActive ? 'font-bold bg-rose-400/15 dark:bg-orange-400/10 text-rose-700 dark:text-orange-300 shadow-sm' : 'text-black dark:text-white'}`}
         aria-current={isActive ? 'page' : undefined}
       >
         {label}
