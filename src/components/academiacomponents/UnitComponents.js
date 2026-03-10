@@ -82,8 +82,9 @@ const GithubButton = ({href}) => {
 
 const ShowMore = ({ isdeployed, setdeployed }) => {
   return (
-    <div
-      className="flex flex-col items-center justify-center mt-5"
+    <button
+      type="button"
+      className="flex flex-col items-center justify-center mt-5 cursor-pointer"
       onClick={() => {
         setdeployed(!isdeployed);
       }}
@@ -96,7 +97,7 @@ const ShowMore = ({ isdeployed, setdeployed }) => {
           isdeployed ? "rotate-0" : "rotate-180"
         } transition-all duration-300`}
       />
-    </div>
+    </button>
   );
 };
 

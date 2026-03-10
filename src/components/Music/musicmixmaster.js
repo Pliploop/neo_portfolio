@@ -23,7 +23,7 @@ const MusicMixMaster = () => {
             </span>
             <img
               src={Commuz_Titre}
-              alt="commuz"
+              alt="Commuz logo"
               className="scale-90 hover:scale-95 active:scale-90 cursor-pointer transition-all duration-200 lg:w-1/2 dark:invert"
               onClick={() => window.open("https://commuz.fr", "_blank")}
             ></img>
@@ -178,7 +178,8 @@ const MixMasterAlbums = () => {
           className="flex lg:w-1/2 lg:h-5/6 flex-row justify-center self-center w-full overflow-x-visible"
           {...handlers}
         >
-        <div
+        <button
+          type="button"
           className="hidden lg:flex h-12 w-12 border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 aspect-square z-40 rounded-full mr-5 self-center cursor-pointer hover:shadow-lg hover:scale-110 active:scale-95 group transition-all duration-200"
           onClick={() => changealbum(false)}
         >
@@ -186,7 +187,7 @@ const MixMasterAlbums = () => {
             size={24}
             className="m-auto text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
           />
-        </div>
+        </button>
         <div className="lg:h-full h-[400px] lg:w-1/2 w-3/4 relative overflow-visible">
           {albums.map((a) => (
             <AlbumEmbed
@@ -198,7 +199,8 @@ const MixMasterAlbums = () => {
           ))}
         </div>
 
-        <div
+        <button
+          type="button"
           className="hidden lg:flex h-12 w-12 border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 aspect-square rounded-full z-40 self-center cursor-pointer hover:shadow-lg hover:scale-110 active:scale-95 group transition-all duration-200 ml-5"
           onClick={() => changealbum(true)}
         >
@@ -206,7 +208,7 @@ const MixMasterAlbums = () => {
             size={24}
             className="m-auto text-black dark:text-white group-hover:text-blue-500 transition-colors duration-200"
           />
-        </div>
+        </button>
       </div>
       <div className="flex flex-col lg:w-1/2 h-full gap-10">
         <div className="w-full p-5 px-10 flex flex-row justify-between ">

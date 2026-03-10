@@ -244,8 +244,9 @@ const MusicFeatured = () => {
                   }}
                 />
               </div>
-              <div
-                className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-purple-100 transition-colors duration-300 lg:border-x-[1px] border-r-[1px] border-black ${
+              <button
+                type="button"
+                className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-purple-100 transition-colors duration-300 lg:border-x-[1px] border-r-[1px] border-black cursor-pointer ${
                   activeTabFonkey === 0 ? "bg-purple-100" : "bg-white"
                 }`}
                 onClick={() => {
@@ -253,9 +254,10 @@ const MusicFeatured = () => {
                 }}
               >
                 Colors
-              </div>
-              <div
-                className={`h-full lg:border-t-0 border-t-[1px] lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-orange-100 transition-colors duration-300 border-r-[1px] border-black ${
+              </button>
+              <button
+                type="button"
+                className={`h-full lg:border-t-0 border-t-[1px] lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-orange-100 transition-colors duration-300 border-r-[1px] border-black cursor-pointer ${
                   activeTabFonkey === 1 ? "bg-orange-100" : "bg-white"
                 }`}
                 onClick={() => {
@@ -263,9 +265,10 @@ const MusicFeatured = () => {
                 }}
               >
                 Lover Boy
-              </div>
-              <div
-                className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-lime-100 transition-colors duration-300 lg:border-r-[1px] border-black ${
+              </button>
+              <button
+                type="button"
+                className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-lime-100 transition-colors duration-300 lg:border-r-[1px] border-black cursor-pointer ${
                   activeTabFonkey === 2 ? "bg-lime-100" : "bg-white"
                 }`}
                 onClick={() => {
@@ -273,15 +276,17 @@ const MusicFeatured = () => {
                 }}
               >
                 Don't stop the music
-              </div>
-              <div className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-rose-100 transition-colors duration-300 lg:border-r-[1px] border-black bg-white ${
+              </button>
+              <button
+                type="button"
+                className={`h-full lg:border-t-0 border-t-[1px] p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black hover:text-rose-100 transition-colors duration-300 lg:border-r-[1px] border-black cursor-pointer bg-white ${
                 activeTabFonkey === 3 ? "bg-rose-100" : "bg-white"}`}
                 onClick={() => {
                   setActiveTabFonkey(3);
                 }}
                 >
                 Redbone
-              </div>
+              </button>
               <div>
                 <BsArrowRightShort
                   size={30}
@@ -350,7 +355,7 @@ const MusicFeatured = () => {
             <div className="w-full grow flex flex-row lg:justify-start justify-evenly gap-6">
               <img
                 src={image}
-                alt=""
+                alt="Julien Guinot logo"
                 className="w-2/3 mb-6 filter grayscale opacity-75 mt-3"
               />
               <div className="flex flex-col justify-start gap-3 py-3 mt-6 overflow-visible">
@@ -411,8 +416,9 @@ const MusicFeatured = () => {
                 </div>
               </div>
             </div>
-            <div
-              className="flex flex-col items-center justify-center mt-5 lg:hidden"
+            <button
+              type="button"
+              className="flex flex-col items-center justify-center mt-5 lg:hidden cursor-pointer"
               onClick={() => toggleFonkeyText()}
             >
               <p className="text-gray-600 dark:text-white font-mono z-40" id="fonkeyreadmore">
@@ -422,7 +428,7 @@ const MusicFeatured = () => {
                 className="rotate-0 transition-all duration-300"
                 id="fonkeyreadmoreicon"
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>
@@ -433,10 +439,11 @@ const MusicFeatured = () => {
         {tracks.map((track, index) => (
           <div key={index} className="flex flex-col w-48">
             {/* Card */}
-            <div 
+            <button
+              type="button"
               className={`aspect-square border border-black dark:border-white backdrop-blur-md bg-white/40 dark:bg-black/40 cursor-pointer transition-all duration-200 ${
-                activeCard === index 
-                  ? 'scale-105 shadow-lg' 
+                activeCard === index
+                  ? 'scale-105 shadow-lg'
                   : 'hover:scale-105 hover:shadow-md'
               }`}
               onClick={() => setActiveCard(activeCard === index ? null : index)}
@@ -460,16 +467,16 @@ const MusicFeatured = () => {
               
               {/* SoundCloud Embed */}
               <div className="h-full w-full overflow-clip">
-                <iframe 
-                  width="100%" 
-                  height="100%" 
-                  scrolling="no" 
-                  frameBorder="no" 
-                  allow="autoplay" 
+                <iframe
+                  width="100%"
+                  height="100%"
+                  scrolling="no"
+                  frameBorder="no"
+                  allow="autoplay"
                   src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(track.url)}&color=%23111111&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}
                 ></iframe>
               </div>
-            </div>
+            </button>
             
             {/* Title */}
             <h3 className="font-inter text-sm font-bold mt-3 text-center">

@@ -344,12 +344,12 @@ const Abstract = ({ abstract }) => {
         {abstract}
       </div>
 
-      <div className="font-inter text-sm text-gray-800 dark:text-white cursor-pointer hover:text-violet-400 flex flex-row" onClick={() => setIsExpanded(!isExpanded)}>
+      <button type="button" className="font-inter text-sm text-gray-800 dark:text-white cursor-pointer hover:text-violet-400 flex flex-row" onClick={() => setIsExpanded(!isExpanded)}>
         
         {/* down or up arrow depeding on expanded or no*/}
         {isExpanded ? "Hide abstract" : "Show abstract"}
         {isExpanded ? <IoIosArrowUp size={20} /> : <IoIosArrowDown size={20} />}
-      </div>
+      </button>
     </div>
   );
 };

@@ -72,12 +72,13 @@ const EducationExperience = () => {
           <div className="h-16 w-10 lg:flex hidden"></div>
           <div className="flex flex-row h-12 lg:h-auto">
             <div className="flex flex-col justify-end">
-              <div
+              <button
+                type="button"
                 className={`lg:w-32 lg:px-0 px-6 ${
                   educationExp == "education"
                     ? "backdrop-blur-md bg-white/40 dark:bg-black/40 text-black dark:text-white lg:h-[90%] h-8 border-t border-l border-r border-black dark:border-white"
                     : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-black lg:h-8 h-6 border-t border-l border-r border-black dark:border-white"
-                } flex flex-col text-center justify-center lg:text-base transition-all duration-200`}
+                } flex flex-col text-center justify-center lg:text-base transition-all duration-200 cursor-pointer`}
                 id="EducationTab"
                 onClick={() => {
                   setEducationExp(
@@ -86,12 +87,13 @@ const EducationExperience = () => {
                 }}
               >
                 Education
-              </div>
+              </button>
             </div>
             <div className="h-16 w-2 lg:flex hidden"></div>
             <div className="flex flex-col justify-end">
-              <div
-                className={`hover:cursor-pointer lg:w-32 lg:px-0 px-6 ${
+              <button
+                type="button"
+                className={`cursor-pointer lg:w-32 lg:px-0 px-6 ${
                   educationExp == "experience"
                     ? "backdrop-blur-md bg-white/40 dark:bg-black/40 text-black dark:text-white lg:h-[90%] h-8 border-t border-l border-r border-black dark:border-white"
                     : "backdrop-blur-md bg-black/30 dark:bg-white/30 text-white dark:text-black lg:h-8 h-6 border-t border-l border-r border-black dark:border-white"
@@ -105,7 +107,7 @@ const EducationExperience = () => {
               >
                 {" "}
                 Experience
-              </div>
+              </button>
             </div>
             <div className="w-full lg:hidden flex"></div>
           </div>

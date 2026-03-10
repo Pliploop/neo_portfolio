@@ -242,8 +242,9 @@ const Loader = () => {
               id="buttons"
             >
               <div className="flex flex-row justify-between w-1/3 align-middle ">
-                <div
-                  className="  flex flex-col justify-center"
+                <button
+                  type="button"
+                  className="flex flex-col justify-center cursor-pointer"
                   onClick={() => {
                     if (replyindex - 1 < minreply + 1) {
                       setReply(maxreplies);
@@ -257,10 +258,11 @@ const Loader = () => {
                     className="pressable active:home-accent-text"
                     size={20}
                   ></IoIosSkipBackward>
-                </div>
+                </button>
 
-                <div
-                  className="flex flex-col justify-center pressable rounded-full p-2 active:scale-95 active:bg-rose-100 transition-all duration-150 ease-in-out"
+                <button
+                  type="button"
+                  className="flex flex-col justify-center pressable rounded-full p-2 active:scale-95 active:bg-rose-100 transition-all duration-150 ease-in-out cursor-pointer"
                   onClick={() => setPaused(!paused)}
                 >
                   <AnimatePresence mode="wait">
@@ -288,10 +290,11 @@ const Loader = () => {
                       </motion.span>
                     )}
                   </AnimatePresence>
-                </div>
+                </button>
 
-                <div
-                  className="  flex flex-col justify-center active:home-accent-text"
+                <button
+                  type="button"
+                  className="flex flex-col justify-center active:home-accent-text cursor-pointer"
                   onClick={() => {
                     if (replyindex +1 < minreply + 1) {
                       setReply(maxreplies);
@@ -303,7 +306,7 @@ const Loader = () => {
                   }}
                 >
                   <IoIosSkipForward className="pressable" size={20} />
-                </div>
+                </button>
               </div>
             </div>
           </div>
