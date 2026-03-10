@@ -7,6 +7,7 @@ const EducationExperience = () => {
   // so content = currentData[tabId] can never be undefined.
   const [selection, setSelection] = useState({ section: "education", tabId: 0 });
   const chipRefs = useRef([]);
+  const didMountRef = useRef(false);
 
   const isEducation = selection.section === "education";
   const currentTitles = isEducation ? educationtitles : jobtitles;
@@ -14,6 +15,7 @@ const EducationExperience = () => {
   const content = currentData[selection.tabId];
 
   useEffect(() => {
+    if (!didMountRef.current) { didMountRef.current = true; return; }
     const el = chipRefs.current[selection.tabId];
     if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [selection]);
