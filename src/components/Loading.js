@@ -4,6 +4,7 @@ import { IoIosSkipForward, IoIosSkipBackward } from "react-icons/io";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { MeshGradientRenderer } from '@johnn-e/react-mesh-gradient';
 import { setTheme } from '../utils/storage';
 
 const MUSIC_TIME_MIN = 180;
@@ -37,11 +38,15 @@ const Loader = () => {
   const [progressTime, setProgressTime] = useState("0:00");
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [barProgress, setBarProgress] = useState(0);
+  const [gradientVisible, setGradientVisible] = useState(false);
   const barIntervalRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     setTheme('light');
+    // Give WebGL ~200ms to initialize before fading in
+    const t = setTimeout(() => setGradientVisible(true), 200);
+    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -144,14 +149,17 @@ const Loader = () => {
         </div>
         <div className="flex flex-col p-6">
           <div
-            className="w-full aspect-square rounded-3xl overflow-hidden"
+            className="w-full aspect-square rounded-3xl relative overflow-hidden"
             id="transition"
-            style={{
-              background: 'linear-gradient(-45deg, #FEA4B0, #FECC96, #FFE8F0, #FFF2B8, #FEA4B0)',
-              backgroundSize: '300% 300%',
-              animation: 'loading-gradient 6s ease infinite',
-            }}
-          />
+          >
+            <div className={`absolute inset-0 transition-opacity duration-1000 ${gradientVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <MeshGradientRenderer
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+                colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"]}
+                speed={0.01}
+              />
+            </div>
+          </div>
           <div className="flex flex-col">
             <div className="flex flex-row justify-between px-5 py-5  ">
               <div className="flex flex-col" id="song">
