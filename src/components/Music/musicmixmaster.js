@@ -172,11 +172,20 @@ const MixMasterAlbums = () => {
     onSwipedRight: (eventData) => changealbum(false),
   });
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'ArrowRight') changealbum(true);
+    if (e.key === 'ArrowLeft') changealbum(false);
+  };
+
   return (
     <div className="flex lg:flex-row flex-col w-full h-auto lg:h-[700px] gap-20">
         <div
           className="flex lg:w-1/2 lg:h-5/6 flex-row justify-center self-center w-full overflow-x-visible"
           {...handlers}
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
+          role="region"
+          aria-label="Album carousel"
         >
         <button
           type="button"
