@@ -211,7 +211,7 @@ const Loader = () => {
 
               <div className="h-2 w-full flex flex-col justify-center self-center lg:px-2 px-1">
                 <div
-                  className="w-full h-full border border-black/15 rounded-full relative overflow-hidden"
+                  className="w-full h-full rounded-full relative overflow-hidden shadow-inner bg-black/5"
                   id="bar"
                 >
                   <div

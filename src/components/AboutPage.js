@@ -167,12 +167,12 @@ const AboutSection = () => {
         </div>
 
         <div className="grow flex-row justify-end lg:pr-10 py-6 lg:flex hidden">
-          <div className="aspect-square w-3/5 flex flex-row p-4 backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/25 dark:border-white/15 shadow-xl">
-            <div className="h-full w-full overflow-clip">
+          <div className="aspect-square w-3/5 flex flex-row p-4 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-2xl rounded-2xl">
+            <div className="h-full w-full overflow-clip rounded-xl">
               <img
                 src={image}
                 alt="Julien Guinot profile photo"
-                className=" object-cover w-full h-full hover:scale-105 transition-transform duration-300"
+                className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
               ></img>
             </div>
           </div>
@@ -219,7 +219,7 @@ const Intro = () => {
       <div className="flex flex-row lg:justify-start justify-center">
         <button
           type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center border border-white/30 dark:border-white/20 shadow-sm cursor-pointer"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center shadow-md hover:shadow-lg rounded-xl cursor-pointer"
           onClick={() => {
             scrollto("contactform");
           }}
@@ -233,7 +233,7 @@ const Intro = () => {
         </button>
         <button
           type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center border border-white/30 dark:border-white/20 shadow-sm cursor-pointer"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center shadow-md hover:shadow-lg rounded-xl cursor-pointer"
           onClick={() => nav("/music")}
         >
           <p className="lg:text-md text-sm font-medium text-black dark:text-white">My Music</p>{" "}
@@ -244,7 +244,7 @@ const Intro = () => {
         </button>
         <button
           type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center border border-white/30 dark:border-white/20 shadow-sm cursor-pointer"
+          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center shadow-md hover:shadow-lg rounded-xl cursor-pointer"
           onClick={() => nav("/academia")}
         >
           <p className="lg:text-md text-sm font-medium text-black dark:text-white">Research</p>{" "}
@@ -254,7 +254,7 @@ const Intro = () => {
           ></HiOutlineArrowUpRight>
         </button>
         <a
-          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center border border-white/30 dark:border-white/20 shadow-sm"
+          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center shadow-md hover:shadow-lg rounded-xl"
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"

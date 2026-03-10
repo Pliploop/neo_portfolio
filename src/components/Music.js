@@ -100,7 +100,7 @@ const scrollto = (id) => {
 
 const MusicNav = () => {
   return (
-    <nav className="border border-white/20 dark:border-white/15 shadow-md text-sm lg:text-base dark:text-white backdrop-filter backdrop-blur-2xl bg-white/10 dark:bg-black/10 sticky grow z-50 lg:top-24 top-20 mb-16 flex flex-row justify-center select-none">
+    <nav className="shadow-lg text-sm lg:text-base dark:text-white backdrop-filter backdrop-blur-2xl bg-white/20 dark:bg-black/20 rounded-xl overflow-hidden sticky grow z-50 lg:top-24 top-20 mb-16 flex flex-row justify-center select-none">
       <div className="flex flex-row items-center w-full">
         <div className=" w-full flex  " id="navbar-sticky">
           <ul className="flex justify-evenly md:font-medium grow">
@@ -209,7 +209,7 @@ const MusicFeatured = () => {
       {/* Fonkey Business Section - Keep Original */}
       <div className="flex lg:flex-row flex-col w-full h-auto lg:gap-10 hover:border-black transition-all duration-100 rounded-3xl">
         <div className="lg:h-2/3 grow lg:m-10 mb-0 lg:mr-5 flex flex-col">
-          <div className="border border-white/25 dark:border-white/15 shadow-sm backdrop-blur-md bg-white/30 dark:bg-black/30 lg:h-10 h-auto flex lg:flex-row flex-col justify-start lg:items-center items-start">
+          <div className="shadow-sm backdrop-blur-md bg-white/30 dark:bg-black/30 rounded-t-xl lg:h-10 h-auto flex lg:flex-row flex-col justify-start lg:items-center items-start">
             {/* Desktop Navigation */}
             <div className="flex flex-row lg:w-auto w-full h-full items-center dark:text-black lg:flex hidden" role="tablist" aria-label="Fonkey Business videos">
               <div>
@@ -227,7 +227,7 @@ const MusicFeatured = () => {
                 id="tab-fonkey-0"
                 aria-selected={activeTabFonkey === 0}
                 aria-controls="panel-fonkey"
-                className={`h-full lg:border-t-0 border-t p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-rose-100 transition-colors duration-300 lg:border-x border-r border-white/20 cursor-pointer ${
+                className={`h-full p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-rose-100 transition-colors duration-300 cursor-pointer ${
                   activeTabFonkey === 0 ? "bg-rose-50/60" : "bg-white/20"
                 }`}
                 onClick={() => {
@@ -242,7 +242,7 @@ const MusicFeatured = () => {
                 id="tab-fonkey-1"
                 aria-selected={activeTabFonkey === 1}
                 aria-controls="panel-fonkey"
-                className={`h-full lg:border-t-0 border-t lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-orange-100 transition-colors duration-300 border-r border-white/20 cursor-pointer ${
+                className={`h-full lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-orange-100 transition-colors duration-300 cursor-pointer ${
                   activeTabFonkey === 1 ? "bg-orange-50/60" : "bg-white/20"
                 }`}
                 onClick={() => {
@@ -257,7 +257,7 @@ const MusicFeatured = () => {
                 id="tab-fonkey-2"
                 aria-selected={activeTabFonkey === 2}
                 aria-controls="panel-fonkey"
-                className={`h-full lg:border-t-0 border-t p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-lime-100 transition-colors duration-300 lg:border-r border-white/20 cursor-pointer ${
+                className={`h-full lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-lime-100 transition-colors duration-300 cursor-pointer ${
                   activeTabFonkey === 2 ? "bg-lime-50/60" : "bg-white/20"
                 }`}
                 onClick={() => {
@@ -272,7 +272,7 @@ const MusicFeatured = () => {
                 id="tab-fonkey-3"
                 aria-selected={activeTabFonkey === 3}
                 aria-controls="panel-fonkey"
-                className={`h-full lg:border-t-0 border-t p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-rose-100 transition-colors duration-300 lg:border-r border-white/20 cursor-pointer ${
+                className={`h-full lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-rose-100 transition-colors duration-300 cursor-pointer ${
                 activeTabFonkey === 3 ? "bg-rose-50/60" : "bg-white/20"}`}
                 onClick={() => {
                   setActiveTabFonkey(3);
@@ -324,7 +324,7 @@ const MusicFeatured = () => {
             </div>
           </div>
           <div
-            className="overflow-clip aspect-video border border-white/20 dark:border-white/15 border-t-0 shadow-md"
+            className="overflow-clip aspect-video shadow-lg rounded-b-xl"
             id="panel-fonkey"
             role="tabpanel"
             aria-labelledby={`tab-fonkey-${activeTabFonkey}`}
@@ -436,11 +436,11 @@ const MusicFeatured = () => {
       <div className="w-full h-px border-t border-white/15 dark:border-white/10"></div>
       <div className="flex flex-row gap-12 w-full justify-between">
         {tracks.map((track, index) => (
-          <div key={index} className="flex flex-col w-48 border-l-[3px] border-l-transparent hover:border-l-rose-400 transition-all duration-200">
+          <div key={index} className="flex flex-col w-48 transition-all duration-200 hover:translate-y-[-2px]">
             {/* Card */}
             <button
               type="button"
-              className={`aspect-square border border-white/25 dark:border-white/15 shadow-md backdrop-blur-md bg-white/30 dark:bg-black/30 cursor-pointer transition-all duration-200 ${
+              className={`aspect-square shadow-md backdrop-blur-md bg-white/30 dark:bg-black/30 cursor-pointer transition-all duration-200 rounded-2xl overflow-hidden ${
                 activeCard === index
                   ? 'scale-105 shadow-lg'
                   : 'hover:scale-105 hover:shadow-md'

@@ -94,7 +94,7 @@ const ContactForm = () => {
             Name
           </label>
           <input
-            className="w-full appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-sm focus:shadow-lg border border-white/30 dark:border-white/20 focus:border-rose-300/50"
+            className="w-full appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-md focus:shadow-rose-200/40 focus:shadow-xl rounded-xl"
             id="name"
             type="text"
             placeholder="Your name"
@@ -113,7 +113,7 @@ const ContactForm = () => {
             Email
           </label>
           <input
-            className="w-full appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-sm focus:shadow-lg border border-white/30 dark:border-white/20 focus:border-rose-300/50"
+            className="w-full appearance-none mb-3 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-md focus:shadow-rose-200/40 focus:shadow-xl rounded-xl"
             id="email"
             type="email"
             placeholder="your.email@example.com"
@@ -133,7 +133,7 @@ const ContactForm = () => {
           Message
         </label>
         <textarea
-          className="w-full appearance-none mb-2 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-sm focus:shadow-lg border border-white/30 dark:border-white/20 focus:border-rose-300/50 min-h-[120px] resize-vertical"
+          className="w-full appearance-none mb-2 backdrop-blur-md bg-white/20 dark:bg-black/20 py-3 px-4 text-black dark:text-white leading-tight focus:outline-none transition-all duration-200 shadow-md focus:shadow-rose-200/40 focus:shadow-xl rounded-xl min-h-[120px] resize-vertical"
           id="message"
           placeholder="Tell me about your project, collaboration idea, or just say hello!"
           aria-describedby={formik.touched.message && formik.errors.message ? "message-error" : undefined}
@@ -145,7 +145,7 @@ const ContactForm = () => {
       </div>
       <div className="flex flex-row items-center justify-between">
         <button
-          className="text-black dark:text-white backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/35 dark:hover:bg-white/10 transition-all duration-200 pressable flex flex-row items-center content-center gap-2 font-bold py-2 px-4 focus:outline-none rounded-full shadow-md hover:shadow-lg border border-white/30 dark:border-white/20"
+          className="text-black dark:text-white backdrop-blur-md bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 pressable flex flex-row items-center content-center gap-2 font-bold py-2 px-4 focus:outline-none rounded-full shadow-md hover:shadow-lg"
           type="submit"
         >
           Send

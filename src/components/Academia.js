@@ -58,7 +58,7 @@ const SectionHeader = ({ text }) => {
 
 const AcademiaNav = () => {
   return (
-    <nav className="border border-white/20 dark:border-white/15 shadow-md md:flex backdrop-filter backdrop-blur-2xl bg-white/10 dark:bg-black/10 sticky grow z-50 lg:top-24 top-20 mb-16 hidden select-none">
+    <nav className="shadow-lg md:flex backdrop-filter backdrop-blur-2xl bg-white/20 dark:bg-black/20 rounded-xl overflow-hidden sticky grow z-50 lg:top-24 top-20 mb-16 hidden select-none">
       <div className="flex flex-wrap items-center justify-between w-full">
         {/* <div
               onClick={() => {
@@ -350,7 +350,7 @@ const Abstract = ({ abstract }) => {
 
 const Paper = ({ title, authors, affiliations, affiliations_indices, venue, abstract, arxiv, github, presentationType, awards, isJournal }) => {
   return (
-    <div className="p-4 bg-white/30 dark:bg-black/20 backdrop-blur-sm shadow-sm hover:shadow-md border border-black/10 dark:border-white/10 border-l-[3px] border-l-black/10 dark:border-l-white/10 hover:border-l-rose-400 transition-all duration-200 rounded-sm">
+    <div className="p-4 bg-white/30 dark:bg-black/20 backdrop-blur-sm shadow-sm hover:shadow-lg transition-all duration-200 rounded-xl hover:translate-y-[-1px]">
     <div className="flex lg:flex-row flex-col justify-between items-start gap-5">
       <div className="flex flex-col gap-3">
         <div className="font-inter text-lg font-semibold text-gray-800 dark:text-white">{title}</div>
