@@ -157,7 +157,7 @@ const AboutSection = () => (
     <div className="flex lg:flex-row flex-col lg:gap-10 gap-10 items-start">
 
       {/* Left column: heading + text + currently + skills */}
-      <div className="lg:w-2/3 w-full flex flex-col">
+      <div className="lg:w-1/2 w-full flex flex-col">
         <h2 className="font-grande font-bold lg:text-4xl text-3xl dark:text-rose-50 mb-7">
           <span className="font-zighead text-rose-700 dark:text-orange-300 lg:text-6xl text-5xl">A</span>bout{" "}
           <span className="font-saint text-rose-400 dark:text-orange-200 lg:text-6xl text-5xl">M</span>e
@@ -205,8 +205,8 @@ const AboutSection = () => (
       </div>
 
       {/* Right column: photo — desktop only */}
-      <div className="lg:flex hidden flex-col items-center justify-start pt-2 flex-shrink-0">
-        <div className="relative w-44">
+      <div className="lg:flex hidden flex-1 flex-col items-center justify-start pt-2">
+        <div className="relative w-56">
           <div className="w-full aspect-[3/4] p-2 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-xl rounded-2xl">
             <div className="h-full w-full overflow-clip rounded-xl">
               <img
