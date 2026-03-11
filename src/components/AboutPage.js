@@ -154,10 +154,10 @@ const Intro = () => {
 
 const AboutSection = () => (
   <div className="lg:px-14 w-full flex flex-col dark:text-rose-50">
-    <div className="flex lg:flex-row flex-col lg:gap-14 gap-10 items-start">
+    <div className="flex lg:flex-row flex-col lg:gap-10 gap-10 items-start">
 
       {/* Left column: heading + text + currently + skills */}
-      <div className="lg:w-3/5 w-full flex flex-col">
+      <div className="lg:w-2/3 w-full flex flex-col">
         <h2 className="font-grande font-bold lg:text-4xl text-3xl dark:text-rose-50 mb-7">
           <span className="font-zighead text-rose-700 dark:text-orange-300 lg:text-6xl text-5xl">A</span>bout{" "}
           <span className="font-saint text-rose-400 dark:text-orange-200 lg:text-6xl text-5xl">M</span>e
@@ -205,9 +205,9 @@ const AboutSection = () => (
       </div>
 
       {/* Right column: photo — desktop only */}
-      <div className="lg:flex hidden flex-col items-center justify-start pt-2 lg:w-2/5">
-        <div className="relative w-full aspect-[3/4]">
-          <div className="w-full h-full p-3 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-2xl rounded-2xl">
+      <div className="lg:flex hidden flex-col items-center justify-start pt-2 flex-shrink-0">
+        <div className="relative w-44">
+          <div className="w-full aspect-[3/4] p-2 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-xl rounded-2xl">
             <div className="h-full w-full overflow-clip rounded-xl">
               <img
                 src={image}
@@ -216,9 +216,9 @@ const AboutSection = () => (
               />
             </div>
           </div>
-          <div className="absolute -bottom-2 -right-2 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md shadow-lg rounded-xl px-3 py-2">
-            <p className="text-xs font-bold text-rose-600 dark:text-orange-300 leading-tight">PhD student · London</p>
-            <p className="text-xs text-black/45 dark:text-white/40 leading-tight">AI & Music · QMUL</p>
+          <div className="absolute -bottom-2 -right-2 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md shadow-lg rounded-xl px-2.5 py-1.5">
+            <p className="text-[10px] font-bold text-rose-600 dark:text-orange-300 leading-tight">PhD · London</p>
+            <p className="text-[10px] text-black/45 dark:text-white/40 leading-tight">AI & Music · QMUL</p>
           </div>
         </div>
       </div>
