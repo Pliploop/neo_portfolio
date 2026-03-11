@@ -4,9 +4,7 @@ import { IoIosSkipForward, IoIosSkipBackward } from "react-icons/io";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { MeshGradientRenderer } from '@johnn-e/react-mesh-gradient';
 import { setTheme } from '../utils/storage';
-import NoiseOverlay from './subcomponents/NoiseOverlay';
 
 const MUSIC_TIME_MIN = 180;
 const MUSIC_TIME_MAX = 240;
@@ -29,14 +27,6 @@ const data = [
   "not going to find much more",
 ];
 const maxreplies = data.length;
-const GRADIENT_COLORS = ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"];
-const GRADIENT_STYLE = { position: 'absolute', inset: 0, width: '100%', height: '100%' };
-
-// Memoized so the WebGL canvas mounts once and is never re-rendered by
-// the parent's setInterval-driven state updates.
-const StableGradient = React.memo(() => (
-  <MeshGradientRenderer style={GRADIENT_STYLE} colors={GRADIENT_COLORS} speed={0.01} />
-));
 
 const Loader = () => {
   const [isLiked, setisLiked] = useState(false);
@@ -154,12 +144,9 @@ const Loader = () => {
         </div>
         <div className="flex flex-col p-6">
           <div
-            className="w-full aspect-square rounded-3xl relative overflow-hidden"
+            className="w-full aspect-square rounded-3xl"
             id="transition"
-          >
-            <StableGradient />
-            <NoiseOverlay opacity={0.65} blendMode="overlay" baseFrequency="0.5" />
-          </div>
+          />
           <div className="flex flex-col">
             <div className="flex flex-row justify-between px-5 py-5  ">
               <div className="flex flex-col" id="song">
