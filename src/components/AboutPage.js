@@ -53,7 +53,7 @@ const AboutPage = () => {
             colors={GRADIENT_COLORS}
             speed={0.01}
           />
-          <NoiseOverlay opacity={0.25} blendMode="color-burn" />
+          <NoiseOverlay opacity={0.5} blendMode="color-burn" baseFrequency="0.35" />
         </div>
       )}
 
