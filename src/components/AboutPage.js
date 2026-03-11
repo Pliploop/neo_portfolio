@@ -12,49 +12,31 @@ import { useNavigate } from "react-router-dom";
 import ContactForm from "./About/ContactForm";
 
 const scrollto = (id) => {
-  let element = document.getElementById(id);
-  element.scrollIntoView({ behavior: "smooth" });
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 };
+
+const GRADIENT_COLORS = ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"];
 
 const AboutPage = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const navigate = useNavigate();
   const { isDark, toggle } = useThemeToggle();
   const { MeshGradientRenderer, showGradient } = useMeshGradient();
 
-  // Load fonts
   useEffect(() => {
-    const loadFonts = async () => {
-      try {
-        // Wait for fonts to be ready
-        await document.fonts.ready;
-        setFontsLoaded(true);
-      } catch (error) {
-        console.error('Failed to load fonts:', error);
-        // Fallback: set fonts as loaded after a timeout
-        setTimeout(() => setFontsLoaded(true), 1000);
-      }
-    };
-
-    loadFonts();
+    document.fonts.ready.then(() => setFontsLoaded(true)).catch(() => {
+      setTimeout(() => setFontsLoaded(true), 1000);
+    });
   }, []);
 
-  // Show loading state while fonts and gradient are loading
   if (!fontsLoaded) {
     return (
-      <div className="relative overflow-hidden bg-cover dark:bg-gray-950 lg:py-12 lg:px-32 p-6 scrollbar-width:none">
-        <div className="relative h-full w-full flex flex-col justify-between align-middle">
-          <AllHeader
-            pagename={"About"}
-            hoveraccent={"orange-200"}
-            clickaccent={"rose-300"}
-          />
-          <div className="flex items-center justify-center h-64">
-            <div className="flex gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:0ms]" />
-              <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:150ms]" />
-              <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:300ms]" />
-            </div>
+      <div className="relative overflow-hidden bg-cover dark:bg-gray-950 lg:py-12 lg:px-32 p-6">
+        <AllHeader pagename={"About"} hoveraccent={"orange-200"} clickaccent={"rose-300"} />
+        <div className="flex items-center justify-center h-64">
+          <div className="flex gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:0ms]" />
+            <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:150ms]" />
+            <span className="w-2 h-2 rounded-full bg-rose-400 animate-bounce [animation-delay:300ms]" />
           </div>
         </div>
       </div>
@@ -62,118 +44,144 @@ const AboutPage = () => {
   }
 
   return (
-    <div className="relative overflow-hidden bg-cover dark:bg-gray-950 lg:py-12 lg:px-32 p-6 scrollbar-width:none">
-      {/* Animated mesh gradient background with fade-in */}
+    <div className="relative overflow-hidden bg-cover dark:bg-gray-950 lg:py-12 lg:px-32 p-6">
       {MeshGradientRenderer && (
-        <div 
-          className={`transition-opacity duration-1000 ease-in-out ${
-            showGradient ? 'opacity-70' : 'opacity-0'
-          }`}
-        >
+        <div className={`transition-opacity duration-1000 ease-in-out ${showGradient ? 'opacity-70' : 'opacity-0'}`}>
           <MeshGradientRenderer
-            className="about-mesh-gradient-bg"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              zIndex: 0,
-              pointerEvents: 'none',
-            }}
-            colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"]}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
+            colors={GRADIENT_COLORS}
             speed={0.01}
           />
         </div>
       )}
-      
+
       <div className="relative h-full w-full flex flex-col justify-between align-middle">
-        <AllHeader
-          pagename={"About"}
-          hoveraccent={"orange-200"}
-          clickaccent={"rose-300"}
-        />
+        <AllHeader pagename={"About"} hoveraccent={"orange-200"} clickaccent={"rose-300"} />
         <div id="all">
           <Intro />
-          <Separator></Separator>
-
+          <Separator />
           <AboutSection />
-          <Separator></Separator>
-
-          <div className="lg:px-14 lg:p-16 pt-2 font-bold lg:text-3xl text-2xl first-letter:text-5xl lg:first-letter:text-7xl first-letter:font-zighead first-letter:text-rose-700 dark:first-letter:text-orange-300 dark:text-rose-50">
-            Education /{" "}
-            <span className="lg:text-7xl text-5xl font-saint text-rose-400">
-              E
-            </span>
-            xperience
-          </div>
+          <Separator />
+          <SectionHeading label="Background" title="Education & Experience" />
           <EducationExperience />
-          <div className="lg:px-14 mt-10  lg:p-16 pt-2 lg:mb-0 mb-8 lg:text-3xl text-2xl first-letter:text-7xl font-bold first-letter:font-zighead first-letter:text-rose-700 dark:first-letter:text-orange-200 dark:text-rose-50">
-            Get in touch!{" "}
-          </div>
-          <ContactForm></ContactForm>
+          <Separator />
+          <SectionHeading label="Contact" title="Get in touch" />
+          <ContactForm />
           <ContactFooter />
         </div>
       </div>
-      
+
       {/* Mobile Theme Toggle */}
       <div className="fixed bottom-6 right-6 z-[100] lg:hidden">
         <button
           onClick={toggle}
-          className="h-12 w-12 rounded-full border border-white/30 dark:border-white/20 backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
+          className="h-12 w-12 rounded-full backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
         >
-          {isDark ? (
-            <HiSun size={24} className="text-yellow-500" />
-          ) : (
-            <HiMoon size={24} className="text-gray-700" />
-          )}
+          {isDark ? <HiSun size={24} className="text-yellow-500" /> : <HiMoon size={24} className="text-gray-700" />}
         </button>
       </div>
     </div>
   );
 };
 
-const Separator = () => {
-  return <div className="w-1/2 h-[2px] lg:my-16 my-10 self-center"></div>;
-};
+const Separator = () => (
+  <div className="w-full h-px bg-black/6 dark:bg-white/8 lg:my-14 my-10" />
+);
 
-const AboutSection = () => {
+const SectionHeading = ({ label, title }) => (
+  <div className="lg:px-14 mb-8">
+    <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-2">{label}</p>
+    <h2 className="font-bold lg:text-3xl text-2xl dark:text-rose-50">{title}</h2>
+  </div>
+);
+
+const Intro = () => {
+  const nav = useNavigate();
   return (
-    <div className="lg:px-14 lg:mt-2 w-full h-auto flex flex-col dark:text-rose-50 justify-start">
-      <div className="flex flex-row w-full justify-between space-x-10">
-        <div className="lg:w-1/2 w-full flex flex-col text-justify">
-          <div className="lg:text-3xl text-3xl first-letter:font-semibold first-letter:text-5xl font-bold mb-6 lg:first-letter:text-7xl first-letter:font-saint first-letter:text-rose-700 dark:first-letter:text-orange-500 dark:text-rose-50">
-            About{" "}
-            <span className="lg:text-7xl text-5xl  font-roboto text-rose-400 dark:text-orange-300">
-              M
-            </span>
-            e
-          </div>
-          <p className="first-letter:text-rose-600 text-sm mb-6">
-            Hello! I'm Julien, music nut and AI adfficionado. As a musician, producer, mixing engineer, and DJ, I'm passionate about what technology can bring to
-            musical creation and undertanding. I'm interested in finding out what
-            AI can learn about music and how it can help producers
-            and musicians move forward in the discovery of new ways of making
-            music.
-          </p>
-          <p className="first-letter:text-rose-600 text-sm mb-8">
-            I'm a first year PhD student at Queen Mary University of London at the AI
-            and Music Centre for Doctoral Training under the supervision of Pr.
-            George Fazekas and Elio Quinton, sponsored by universal music group.
-            Before this, I've obtained two Masters degrees, with a focus on
-            Musical acoustics and deep learning in France and Australia, with professional experiences at
-            Sony CSL, Believe, Groover, Artefact and IRCAM.
-          </p>
-          <Infinitescroll></Infinitescroll>
-        </div>
+    <div
+      id="presentation"
+      className="lg:px-14 lg:mt-10 mt-4 w-full flex lg:flex-row flex-col lg:gap-12 gap-8 dark:text-rose-50 justify-between items-start"
+    >
+      {/* Left: name + positioning + CTAs */}
+      <div className="lg:w-3/5 w-full flex flex-col justify-start">
+        <p className="lg:text-xl text-base font-bold font-grande text-black/50 dark:text-white/50 mb-1">Hey, I'm</p>
+        <p className="lg:text-6xl text-4xl font-grande font-bold mb-4">
+          <span className="font-zighead text-rose-700 dark:text-orange-300 lg:text-9xl text-5xl">J</span>ulien{" "}
+          <span className="lg:text-9xl text-5xl text-rose-500 dark:text-orange-200 font-saint">G</span>uinot
+        </p>
 
-        <div className="grow flex-row justify-end lg:pr-10 py-6 lg:flex hidden">
-          <div className="aspect-square w-3/5 flex flex-row p-4 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-2xl rounded-2xl">
-            <div className="h-full w-full overflow-clip rounded-xl">
-              <img
-                src={image}
-                alt="Julien Guinot profile photo"
-                className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
-              ></img>
+        <p className="lg:text-xl text-base font-semibold text-rose-700 dark:text-orange-200 mb-3 lg:w-4/5 leading-snug">
+          AI & music researcher building tools for controllable generation, music retrieval, and creative co-production.
+        </p>
+
+        <p className="lg:text-sm text-xs dark:text-rose-50/70 text-black/60 lg:w-4/5 mb-10 leading-relaxed">
+          Musician, producer, and mixing engineer — I'm fascinated by what happens when machines learn to understand music the way people do.
+        </p>
+
+        {/* CTA hierarchy */}
+        <div className="flex flex-row items-center gap-3 flex-wrap">
+          <button
+            type="button"
+            onClick={() => nav("/academia")}
+            className="h-11 px-6 rounded-xl bg-gradient-to-r from-rose-500 to-orange-400 text-white font-bold text-sm shadow-lg hover:shadow-rose-300/40 hover:from-rose-400 hover:to-orange-300 active:scale-[0.98] transition-all duration-200 flex items-center gap-2 cursor-pointer"
+          >
+            View Research <HiOutlineArrowUpRight size={14} />
+          </button>
+          <button
+            type="button"
+            onClick={() => nav("/music")}
+            className="h-11 px-6 rounded-xl backdrop-blur-md bg-white/30 dark:bg-white/8 text-black dark:text-white font-semibold text-sm shadow-md hover:shadow-lg hover:bg-white/50 dark:hover:bg-white/15 active:scale-[0.98] transition-all duration-200 flex items-center gap-2 cursor-pointer"
+          >
+            Listen to Music <HiOutlineArrowUpRight size={14} />
+          </button>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="h-11 px-4 text-sm text-black/50 dark:text-white/50 hover:text-rose-600 dark:hover:text-orange-300 font-medium transition-colors duration-150 flex items-center gap-1"
+          >
+            Resume <HiOutlineArrowUpRight size={12} />
+          </a>
+          <button
+            type="button"
+            onClick={() => scrollto("contactform")}
+            className="h-11 px-4 text-sm text-black/50 dark:text-white/50 hover:text-rose-600 dark:hover:text-orange-300 font-medium transition-colors duration-150 flex items-center gap-1 cursor-pointer"
+          >
+            Get in touch <HiOutlineArrowUpRight size={12} />
+          </button>
+        </div>
+      </div>
+
+      {/* Right: credibility card — desktop only */}
+      <div className="lg:flex hidden lg:w-2/5 flex-col gap-3 items-stretch justify-start pt-2">
+        <div className="rounded-2xl bg-white/35 dark:bg-black/25 backdrop-blur-sm shadow-lg p-5">
+          <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-3">Currently</p>
+          <p className="font-bold text-sm dark:text-white mb-0.5">PhD Researcher · AI & Music</p>
+          <p className="text-xs text-black/55 dark:text-white/45 leading-snug">
+            Queen Mary University of London<br />× Universal Music Group
+          </p>
+          <div className="h-px bg-black/8 dark:bg-white/10 my-4" />
+          <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-3">Research focus</p>
+          <div className="flex flex-wrap gap-2">
+            {["Self-supervised learning", "Music retrieval", "Generative AI", "Controllable synthesis"].map(tag => (
+              <span
+                key={tag}
+                className="px-2.5 py-1 rounded-full text-xs bg-rose-400/12 dark:bg-orange-400/10 text-rose-700 dark:text-orange-300 font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-2xl bg-white/25 dark:bg-black/15 backdrop-blur-sm shadow-sm p-4 flex gap-3 items-center">
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center gap-2 text-xs text-black/60 dark:text-white/50">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
+              Sony CSL · IRCAM · Believe · Groover · Artefact
+            </div>
+            <div className="flex items-center gap-2 text-xs text-black/60 dark:text-white/50">
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-400 flex-shrink-0" />
+              MSc Engineering · Ecole Centrale de Lyon · U of Adelaide
             </div>
           </div>
         </div>
@@ -182,92 +190,42 @@ const AboutSection = () => {
   );
 };
 
-const Intro = () => {
-  const nav = useNavigate();
-  return (
-    <div
-      id="presentation"
-      className="lg:px-14 lg:mt-10 w-full h-auto flex flex-col dark:text-rose-50 justify-start"
-    >
-      <div className="lg:w-2/3 flex flex-col justify-start mb-12">
-        <p className="lg:text-2xl text-lg font-bold font-grande">Hey! I'm</p>
-        <p className="lg:text-6xl text-4xl font-grande font-bold ">
-          {" "}
-          <span className="font-zighead text-rose-700  dark:text-orange-300 lg:text-9xl text-5xl">
-            J
-          </span>
-          ulien{" "}
-          <span className="lg:text-9xl text-5xl text-rose-500 dark:text-orange-200 font-saint">
-            G
-          </span>
-          uinot
+const AboutSection = () => (
+  <div className="lg:px-14 lg:mt-2 w-full flex flex-col dark:text-rose-50">
+    <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-6">About me</p>
+    <div className="flex flex-row w-full lg:gap-14 gap-0 items-start">
+      {/* Text */}
+      <div className="lg:w-3/5 w-full flex flex-col">
+        <p className="text-sm text-black/80 dark:text-rose-50/85 mb-4 leading-relaxed">
+          I'm Julien — musician, producer, mixing engineer, and DJ. I'm drawn to what happens at the intersection of music and machine intelligence: how AI can help musicians discover new sounds, navigate creative spaces, and understand the music they make.
         </p>
-
-        <p className="lg:text-2xl text-rose-700 dark:text-orange-200 mb-8 font-bold">
-          Music Nut, AI enthusiast, Researcher @QMUL
+        <p className="text-sm text-black/80 dark:text-rose-50/85 mb-8 leading-relaxed">
+          I'm pursuing a PhD at Queen Mary University of London's AI and Music CDT, supervised by Prof. George Fazekas and Elio Quinton, with support from Universal Music Group. Before this, I trained as an engineer in France and Australia, and worked in research and data science at Sony CSL, IRCAM, Believe, Groover, and Artefact.
         </p>
-
-        <p className="lg:text-base text-sm dark:text-rose-50 lg:w-5/6 text-justify">
-          I'm passionate about marrying the technicality and creativity of music
-          and AI. Helping musicians make music and machines understand
-          it drives me. I'm currently a PhD student @Queen Mary University of
-          London, in the AI and Music Doctoral Training Center, under the
-          supervision of Both QMUL and Universal Music Group
-        </p>
+        <Infinitescroll />
       </div>
 
-      <div className="flex flex-row lg:justify-start justify-center">
-        <button
-          type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center shadow-md hover:shadow-lg rounded-xl cursor-pointer"
-          onClick={() => {
-            scrollto("contactform");
-          }}
-        >
-          {" "}
-          <p className="lg:text-md text-sm font-medium text-black dark:text-white">Reach out!</p>{" "}
-          <HiOutlineArrowUpRight
-            className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
-            size={16}
-          ></HiOutlineArrowUpRight>{" "}
-        </button>
-        <button
-          type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center shadow-md hover:shadow-lg rounded-xl cursor-pointer"
-          onClick={() => nav("/music")}
-        >
-          <p className="lg:text-md text-sm font-medium text-black dark:text-white">My Music</p>{" "}
-          <HiOutlineArrowUpRight
-            className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
-            size={16}
-          ></HiOutlineArrowUpRight>
-        </button>
-        <button
-          type="button"
-          className="lg:h-12 lg:mr-16 mr-4 lg:w-32 w-1/2 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center shadow-md hover:shadow-lg rounded-xl cursor-pointer"
-          onClick={() => nav("/academia")}
-        >
-          <p className="lg:text-md text-sm font-medium text-black dark:text-white">Research</p>{" "}
-          <HiOutlineArrowUpRight
-            className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
-            size={16}
-          ></HiOutlineArrowUpRight>
-        </button>
-        <a
-          className="lg:h-12 lg:mr-16 lg:w-32 w-1/2 lg:p-0 p-1 backdrop-blur-md bg-white/20 dark:bg-black/20 pressable hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 flex flex-row justify-evenly items-center shadow-md hover:shadow-lg rounded-xl"
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <p className="lg:text-md text-sm font-medium text-black dark:text-white">Resume</p>{" "}
-          <HiOutlineArrowUpRight
-            className="lg:scale-100 scale-50 lg:flex hidden text-black dark:text-white"
-            size={16}
-          ></HiOutlineArrowUpRight>
-        </a>
+      {/* Photo — desktop */}
+      <div className="grow lg:flex hidden flex-col items-end justify-start lg:pr-6">
+        <div className="relative w-3/5 aspect-square">
+          <div className="w-full h-full p-3 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-2xl rounded-2xl">
+            <div className="h-full w-full overflow-clip rounded-xl">
+              <img
+                src={image}
+                alt="Julien Guinot"
+                className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div>
+          {/* Status chip */}
+          <div className="absolute -bottom-2 -right-2 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md shadow-lg rounded-xl px-3 py-2">
+            <p className="text-xs font-bold text-rose-600 dark:text-orange-300 leading-tight">PhD student · London</p>
+            <p className="text-xs text-black/45 dark:text-white/40 leading-tight">AI & Music · QMUL</p>
+          </div>
+        </div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
-export default AboutPage; 
+export default AboutPage;
