@@ -159,7 +159,7 @@ const Loader = () => {
               colors={GRADIENT_COLORS}
               speed={0.01}
             />
-            <NoiseOverlay opacity={0.1} blendMode="color-burn" />
+            <NoiseOverlay opacity={0.35} blendMode="color-burn" />
             <div className={`absolute inset-0 bg-white transition-opacity duration-1000 pointer-events-none ${gradientVisible ? 'opacity-0' : 'opacity-100'}`} />
           </div>
           <div className="flex flex-col">
