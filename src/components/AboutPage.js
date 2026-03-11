@@ -10,6 +10,7 @@ import { default as Infinitescroll } from "./About/infinitescroll";
 import image from "../content/images/propic.jpg";
 import { useNavigate } from "react-router-dom";
 import ContactForm from "./About/ContactForm";
+import NoiseOverlay from "./subcomponents/NoiseOverlay";
 
 const scrollto = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -52,6 +53,7 @@ const AboutPage = () => {
             colors={GRADIENT_COLORS}
             speed={0.01}
           />
+          <NoiseOverlay opacity={0.07} blendMode="color-burn" />
         </div>
       )}
 

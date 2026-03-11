@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useThemeToggle } from '../hooks/useThemeToggle';
 import { useMeshGradient } from '../hooks/useMeshGradient';
 import AllHeader from "./subcomponents/header";
+import NoiseOverlay from "./subcomponents/NoiseOverlay";
 import { GrDown } from "react-icons/gr";
 import { SiSpotify } from "react-icons/si";
 import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
@@ -32,6 +33,7 @@ const MusicSection = () => {
             colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"]}
             speed={0.008}
           />
+          <NoiseOverlay opacity={0.07} blendMode="color-burn" />
         </div>
       )}
       {/* Dark mode overlay — matches other pages, slightly more transparent */}
