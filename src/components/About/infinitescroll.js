@@ -19,7 +19,9 @@ import {
   SiAdobeillustrator,
   SiAbletonlive,
   SiPostgresql,
+  SiLatex,
 } from "react-icons/si";
+import { BsTerminalFill } from "react-icons/bs";
 import { VscGithubInverted } from "react-icons/vsc";
 import { BsGit } from "react-icons/bs";
 import { BiLogoAws } from "react-icons/bi";
@@ -80,7 +82,18 @@ const InfiniteScroll = () => {
       <BsGit size={32} />
       <p className="font-bold">Git</p>
     </div>,
-    
+    <div className="scrollskill">
+      <BsTerminalFill size={32} />
+      <p className="font-bold">Claude Code</p>
+    </div>,
+    <div className="scrollskill">
+      <SiLightning size={32} />
+      <p className="font-bold">LitData</p>
+    </div>,
+    <div className="scrollskill">
+      <SiLatex size={32} />
+      <p className="font-bold">LaTeX</p>
+    </div>,
   ];
 
   // Web design technical skills
