@@ -6,7 +6,6 @@ import AllHeader from "./subcomponents/header";
 import ContactFooter from "./subcomponents/contactfooter";
 import NoiseOverlay from "./subcomponents/NoiseOverlay";
 import { HiSun, HiMoon } from "react-icons/hi";
-import { VscGithub } from "react-icons/vsc";
 import { SiArxiv, SiGooglescholar } from "react-icons/si";
 import { FaTrophy } from "react-icons/fa";
 import { MdRecordVoiceOver } from "react-icons/md";

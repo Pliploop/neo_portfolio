@@ -102,8 +102,6 @@ const ContactForm = () => {
     );
   }
 
-  const canSubmit = formik.isValid && (formik.values.email || formik.values.message);
-
   return (
     <form className="lg:px-14 mb-20" id="contactform" onSubmit={formik.handleSubmit} noValidate>
       <p className="mb-6 text-sm dark:text-rose-50 text-gray-600 leading-relaxed">

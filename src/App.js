@@ -13,7 +13,6 @@ const MusicSection = React.lazy(() => import('./components/Music'));
 const Blog = React.lazy(() => import('./components/Blog'));
 
 const GRADIENT_COLORS = ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"];
-const GRADIENT_STYLE = { position: 'absolute', inset: 0, width: '100%', height: '100%' };
 const LOADING_GRADIENT_STYLE = { position: 'absolute', inset: 0, width: '50%', height: '50%', top: '25%', left: '25%' };
 
 const LoadingGradient = () => {

@@ -41,8 +41,6 @@ const Separator = () => (
 
 const FonkeySection = () => {
   const [activeTrack, setActiveTrack] = useState(0);
-  const [expanded, setExpanded] = useState(false);
-
   const prev = () => setActiveTrack(i => (i - 1 + FONKEY_TRACKS.length) % FONKEY_TRACKS.length);
   const next = () => setActiveTrack(i => (i + 1) % FONKEY_TRACKS.length);
 

@@ -1,4 +1,3 @@
-import { IoPlaySharp } from "react-icons/io5";
 import {
   AiFillMail,
   AiFillGithub,

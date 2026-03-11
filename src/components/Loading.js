@@ -101,7 +101,7 @@ const Loader = () => {
 
   useEffect(() => {
     replies();
-  }, [replyindex]);
+  }, [replyindex]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function replies() {
     setisLiked(liked[replyindex - 1]);
@@ -121,7 +121,7 @@ const Loader = () => {
 
   useEffect(() => {
     playanimation();
-  }, [paused]);
+  }, [paused]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const cardVariants = {
     hidden: {},
