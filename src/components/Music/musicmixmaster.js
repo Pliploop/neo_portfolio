@@ -6,6 +6,7 @@ import { FaPenNib } from "react-icons/fa";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import Commuz_Titre from "../svg/Commuz_Titre.svg";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ReactPlayer from "react-player";
 import { useSwipeable } from "react-swipeable";
 
@@ -18,13 +19,13 @@ const timelineItems = [
 
 const MusicMixMaster = () => {
   return (
-    <div className="flex lg:flex-col flex-col h-auto gap-20 w-full lg:px-10">
+    <div className="flex lg:flex-col flex-col h-auto gap-20 w-full">
       <div className="flex lg:flex-row flex-col w-full h-auto lg:gap-20 gap-10">
-        <div className="flex flex-col lg:w-full h-full lg:p-10">
-          <div className="flex flex-col justify-start items-center font-inter">
+        <div className="flex flex-col lg:w-full h-full">
+          <div className="flex flex-col justify-start items-center">
 
             {/* Intro text */}
-            <p className="mb-10 z-40 lg:text-base text-sm text-center max-w-2xl">
+            <p className="mb-10 z-40 lg:text-base text-sm text-center max-w-2xl text-black/65 dark:text-white/65">
               During my 4 years of engineering school at Ecole Centrale de Lyon,
               I participated in a student-built student-led musical theatre project:
             </p>
@@ -40,7 +41,7 @@ const MusicMixMaster = () => {
 
             {/* Description card */}
             <div className="rounded-2xl bg-white/30 dark:bg-black/20 backdrop-blur-sm shadow-lg p-6 mb-20 max-w-2xl w-full mt-6">
-              <p className="text-sm italic font-medium leading-relaxed text-gray-800 dark:text-white">
+              <p className="text-sm italic font-medium leading-relaxed text-black/70 dark:text-white/80">
                 Commuz' is a student-led society that creates a new musical theatre piece every year.
                 Everything is done by the students: Scenario, playwriting, Arrangement, Composition,
                 Sound Engineering, Recording, Mixing, Costumes, Props, Choreography… Every year 80
@@ -51,13 +52,13 @@ const MusicMixMaster = () => {
             <div className="flex lg:flex-row flex-col w-full">
               {/* Left text */}
               <div className="lg:w-1/2">
-                <p className="mt-8 font-inter leading-relaxed text-gray-900 dark:text-white text-sm z-40 mb-10 lg:w-5/6 text-justify">
+                <p className="mt-8 leading-relaxed text-black/65 dark:text-white/65 text-sm z-40 mb-10 lg:w-5/6 text-justify">
                   Every year, a new play is born and I took part in each one of my 4 years at ECL.
                   I started as a sound engineer and kept mixing the album every year, which is mostly
                   where I learned to mix. Discover the specifics of each play below, and my featured
                   mixes from the 2022 edition here!
                 </p>
-                <p className="mt-8 font-inter leading-relaxed text-gray-900 dark:text-white font-bold lg:text-sm text-sm z-40 lg:mb-20 mb-10 lg:w-full">
+                <p className="mt-8 leading-relaxed text-black/80 dark:text-white font-bold lg:text-sm text-sm z-40 lg:mb-20 mb-10 lg:w-full">
                   My roles each year of the play were:
                 </p>
               </div>
@@ -100,10 +101,10 @@ const MusicMixMaster = () => {
             </div>
 
             {/* Mobile mix list */}
-            <p className="mt-8 font-inter text-sm z-40 lg:hidden flex">
+            <p className="mt-8  text-sm z-40 lg:hidden flex">
               And my featured mixes from the 2022 play are:
             </p>
-            <p className="mt-0 font-inter font-bold text-sm z-40 lg:hidden flex">
+            <p className="mt-0  font-bold text-sm z-40 lg:hidden flex">
               Feeling Good, Joga, Still Loving You, Le Rituel
             </p>
           </div>
@@ -113,6 +114,33 @@ const MusicMixMaster = () => {
     </div>
   );
 };
+
+const ALBUM_DATA = [
+  {
+    id: 1, year: "2022", title: "En memoria",
+    roles: ["Choir lead", "Mix Engineer", "Mastering Engineer"],
+    description: "My final year. Led the SATB choir, coached actors on stage, arranged vocal harmonies, and handled the full mix and master.",
+    tracks: ["Treasure", "Joga", "Le rituel", "Feeling Good", "September", "La légende"],
+  },
+  {
+    id: 2, year: "2021", title: "Noces D'opium",
+    roles: ["Bass Vocalist", "Mix Engineer"],
+    description: "Set in 1800s China. Joined as the only bass vocalist of the choir — also the year I learned music theory and fell in love with Ableton.",
+    tracks: ["Good Morning", "Eternal Youth", "I love you", "Tango Amoroso"],
+  },
+  {
+    id: 3, year: "2020", title: "Contretemps",
+    roles: ["Graphic Designer", "Community Manager", "Mix Engineer"],
+    description: "Set at Versailles under Louis XIV. Handled social media, the official poster, trailer videos, and defined the artistic identity of the play.",
+    tracks: ["Te Deum", "A contretemps", "La cour dérape"],
+  },
+  {
+    id: 4, year: "2019", title: "Désorientés",
+    roles: ["Sound Engineer"],
+    description: "My first year — recording, live setup, and mixing the CD. My mixes were rudimentary, but this is where the journey began.",
+    tracks: ["Ali Babouche", "Le bazar", "La fête au palais"],
+  },
+];
 
 const MixMasterAlbums = () => {
   const [album, setalbum] = useState(1);
@@ -130,77 +158,87 @@ const MixMasterAlbums = () => {
     onSwipedRight: () => changealbum(false),
   });
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'ArrowRight') changealbum(true);
-    if (e.key === 'ArrowLeft') changealbum(false);
-  };
+  const active = ALBUM_DATA.find(a => a.id === album);
 
   return (
-    <div className="flex lg:flex-row flex-col w-full h-auto lg:h-[700px] gap-20">
+    <div className="flex lg:flex-row flex-col w-full gap-10 lg:gap-16">
+      {/* Left: Spotify embed carousel */}
       <div
-        className="flex lg:w-1/2 lg:h-5/6 flex-row justify-center self-center w-full overflow-x-visible"
+        className="flex lg:w-5/12 flex-row justify-center items-center gap-3 w-full"
         {...handlers}
-        onKeyDown={handleKeyDown}
+        onKeyDown={e => { if (e.key === 'ArrowRight') changealbum(true); if (e.key === 'ArrowLeft') changealbum(false); }}
         tabIndex={0}
         role="region"
         aria-label="Album carousel"
       >
-        <button
-          type="button"
-          className="hidden lg:flex h-12 w-12 backdrop-blur-md bg-white/30 dark:bg-black/30 shadow-md aspect-square z-40 rounded-full mr-5 self-center cursor-pointer hover:shadow-lg hover:scale-110 active:scale-95 group transition-all duration-200"
-          onClick={() => changealbum(false)}
-        >
-          <BiSkipPrevious size={24} className="m-auto text-black dark:text-white group-hover:text-rose-500 transition-colors duration-200" />
+        <button type="button" onClick={() => changealbum(false)}
+          className="hidden lg:flex h-9 w-9 rounded-full bg-white/30 dark:bg-white/8 items-center justify-center hover:bg-white/50 dark:hover:bg-white/15 transition-all duration-150 cursor-pointer flex-shrink-0">
+          <BiSkipPrevious size={18} className="text-black/60 dark:text-white/60" />
         </button>
 
-        <div className="lg:h-full h-[400px] lg:w-1/2 w-3/4 relative overflow-visible">
+        <div className="lg:h-[380px] h-[340px] flex-1 relative overflow-visible">
           {albums.map((a) => (
             <AlbumEmbed key={a.id} link={a.spotifyUrl} currentalbum={album} albumid={a.id} />
           ))}
         </div>
 
-        <button
-          type="button"
-          className="hidden lg:flex h-12 w-12 backdrop-blur-md bg-white/30 dark:bg-black/30 shadow-md aspect-square rounded-full z-40 self-center cursor-pointer hover:shadow-lg hover:scale-110 active:scale-95 group transition-all duration-200 ml-5"
-          onClick={() => changealbum(true)}
-        >
-          <BiSkipNext size={24} className="m-auto text-black dark:text-white group-hover:text-rose-500 transition-colors duration-200" />
+        <button type="button" onClick={() => changealbum(true)}
+          className="hidden lg:flex h-9 w-9 rounded-full bg-white/30 dark:bg-white/8 items-center justify-center hover:bg-white/50 dark:hover:bg-white/15 transition-all duration-150 cursor-pointer flex-shrink-0">
+          <BiSkipNext size={18} className="text-black/60 dark:text-white/60" />
         </button>
       </div>
 
-      <div className="flex flex-col lg:w-1/2 h-full gap-10">
-        {/* Year dots */}
-        <div className="w-full px-5 flex flex-row justify-between items-center">
-          {[
-            { date: "2022", color: "bg-rose-500", albumid: 1 },
-            { date: "2021", color: "bg-red-500",  albumid: 2 },
-            { date: "2020", color: "bg-blue-500", albumid: 3 },
-            { date: "2019", color: "bg-orange-500", albumid: 4 },
-          ].map((item, i, arr) => (
-            <>
-              <AlbumDate key={item.albumid} date={item.date} color={item.color} albumid={item.albumid} currentalbum={album} />
-              {i < arr.length - 1 && <div className="h-px grow bg-black/15 dark:bg-white/15 mx-3" />}
-            </>
+      {/* Right: year tabs + content */}
+      <div className="flex flex-col lg:flex-1 gap-5">
+        {/* Year tab strip */}
+        <div className="flex gap-2">
+          {ALBUM_DATA.map(a => (
+            <button key={a.id} type="button" onClick={() => setalbum(a.id)}
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-150 cursor-pointer ${
+                album === a.id
+                  ? 'bg-rose-500 text-white shadow-sm'
+                  : 'bg-black/6 dark:bg-white/8 text-black/50 dark:text-white/50 hover:bg-black/10 dark:hover:bg-white/14'
+              }`}>
+              {a.year}
+            </button>
           ))}
         </div>
 
-        <AlbumDescriptionEnMem albumid={1} currentalbum={album} />
-        <AlbumDescriptionNocesDo albumid={2} currentalbum={album} />
-        <AlbumDescriptionContre albumid={3} currentalbum={album} />
-        <AlbumDescriptionDesorien albumid={4} currentalbum={album} />
-      </div>
-    </div>
-  );
-};
+        {/* Content — animated on album change */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={album}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="rounded-2xl bg-white/30 dark:bg-black/20 backdrop-blur-sm p-5 flex flex-col gap-4"
+          >
+            {/* Title + roles */}
+            <div>
+              <h3 className="font-bold text-xl text-black/85 dark:text-white mb-2">{active.title}</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {active.roles.map(r => (
+                  <span key={r} className="px-2 py-0.5 rounded-full text-[11px] bg-rose-400/10 dark:bg-orange-400/8 text-rose-700 dark:text-orange-300 font-medium">{r}</span>
+                ))}
+              </div>
+            </div>
 
-const AlbumDate = ({ date, color, albumid, currentalbum }) => {
-  const isActive = albumid === currentalbum;
-  return (
-    <div className="flex flex-col items-center gap-1 relative">
-      <div className={`rounded-full transition-all duration-300 ${isActive ? `${color} h-3 w-3` : "bg-gray-300 dark:bg-white/30 h-2 w-2"}`} />
-      <p className={`absolute top-5 text-sm text-black dark:text-white transition-all duration-300 whitespace-nowrap ${isActive ? "opacity-100" : "opacity-0"}`}>
-        {date}
-      </p>
+            {/* Description */}
+            <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed">{active.description}</p>
+
+            {/* Track list */}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-2">My mixes</p>
+              <div className="flex flex-wrap gap-1.5">
+                {active.tracks.map(t => (
+                  <span key={t} className="px-2.5 py-1 rounded-full text-xs bg-black/5 dark:bg-white/8 text-black/55 dark:text-white/55 font-medium">{t}</span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
@@ -229,89 +267,21 @@ const AlbumEmbed = ({ link, currentalbum, albumid }) => {
 
   return (
     <div
-      className="absolute w-full lg:h-4/5 h-full transition-all duration-500 ease-out rounded-2xl overflow-clip"
+      className="absolute w-full h-full transition-all duration-500 ease-out rounded-2xl overflow-clip"
       style={{
         transform: window.innerWidth >= 1024 ? transform : mobileTransform,
-        opacity,
-        zIndex,
-        filter: blur,
+        opacity, zIndex, filter: blur,
         pointerEvents: albumid === currentalbum ? 'auto' : 'none',
       }}
     >
       <iframe
         src={link}
         className="h-full w-full select-none rounded-2xl shadow-lg"
-        allowFullScreen=""
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-        loading="lazy"
-        title="album"
+        allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+        loading="lazy" title="album"
       />
     </div>
   );
 };
-
-const albumDescClass = (currentalbum, albumid) =>
-  `w-full grow flex flex-col p-3 transition-all duration-150 ${currentalbum === albumid ? "flex opacity-100" : "hidden opacity-0"}`;
-
-const TrackList = ({ tracks, color }) => (
-  <ul className={`flex lg:flex-wrap lg:flex-row flex-col justify-evenly list-disc list-inside items-center ${color} text-sm`}>
-    {tracks.map((t) => <li key={t} className="font-inter font-bold">{t}</li>)}
-  </ul>
-);
-
-const AlbumDescriptionEnMem = ({ albumid, currentalbum }) => (
-  <div className={albumDescClass(currentalbum, albumid)}>
-    <div className="text-3xl font-bold text-rose-500 mb-2">En memoria</div>
-    <div className="text-sm space-y-3">
-      <p className="font-inter">For this final year as a member of the musical, I was choir lead. My responsibilities included:</p>
-      <ul className="list-disc ml-6 space-y-1">
-        <li className="font-inter font-bold">Overseeing the performance of the SATB choir</li>
-        <li className="font-inter font-bold">Vocal coaching for the actors who sang on stage</li>
-        <li className="font-inter font-bold">Arrangement of vocal harmonies for original compositions</li>
-      </ul>
-      <p className="font-inter">As with previous years, I helped with sound setup and mixing the final CD. My mixes for this year:</p>
-    </div>
-    <TrackList tracks={["Treasure", "Joga", "Le rituel", "Feeling Good", "September", "La légende"]} color="text-rose-500" />
-    <span className="mt-6 font-inter text-sm">As per usual, I was also in charge of distributing the album on Spotify and for the first time in charge of mastering the whole album.</span>
-  </div>
-);
-
-const AlbumDescriptionNocesDo = ({ albumid, currentalbum }) => (
-  <div className={albumDescClass(currentalbum, albumid)}>
-    <div className="text-3xl font-inter font-bold text-red-500 mb-2">Noces D'opium</div>
-    <div className="text-sm space-y-3">
-      <p className="font-inter">The third year of the musical was set in 1800s China during the opium wars. I joined the play as only bass vocalist of the choir. This is the year I learned music theory and solfege.</p>
-      <p className="font-inter">Ableton quickly became my favorite DAW while mixing with it for the album. My contributions as mix engineer:</p>
-    </div>
-    <TrackList tracks={["Good Morning", "Eternal Youth", "I love you", "Tango Amoroso"]} color="text-red-500" />
-  </div>
-);
-
-const AlbumDescriptionContre = ({ albumid, currentalbum }) => (
-  <div className={albumDescClass(currentalbum, albumid)}>
-    <div className="text-3xl font-inter font-bold text-blue-500 mb-2">Contretemps</div>
-    <div className="text-sm space-y-3">
-      <p className="font-inter">The second year was set in Versailles at the court of Louis XIV. I was recruited as community manager and graphic designer.</p>
-      <ul className="list-disc ml-6 space-y-1 text-gray-900 dark:text-emerald-200">
-        <li className="font-inter font-bold">Creating social media content: official poster, trailer videos, audition media</li>
-        <li className="font-inter font-bold">Defining and orienting the artistic identity of the play</li>
-      </ul>
-      <p className="font-inter">My contributions as mix engineer:</p>
-    </div>
-    <TrackList tracks={["Te Deum", "A contretemps", "La cour dérape"]} color="text-blue-500" />
-  </div>
-);
-
-const AlbumDescriptionDesorien = ({ albumid, currentalbum }) => (
-  <div className={albumDescClass(currentalbum, albumid)}>
-    <div className="text-3xl font-inter font-bold text-orange-500 mb-2">Désorientés</div>
-    <div className="text-sm space-y-3">
-      <p className="font-inter">This was my first year in the play, joining as sound engineer in charge of recording/live equipment and mixing the CD.</p>
-      <p className="font-inter">I absolutely loved the experience — it prompted me to continue with the play and audition again the next year.</p>
-      <p className="font-inter">My mixes were rudimentary but this is where my journey in mixing began.</p>
-    </div>
-    <TrackList tracks={["Ali Babouche", "Le bazar", "La fête au palais"]} color="text-orange-500" />
-  </div>
-);
 
 export { MusicMixMaster };

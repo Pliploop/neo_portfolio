@@ -1,495 +1,262 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useThemeToggle } from '../hooks/useThemeToggle';
 import { useMeshGradient } from '../hooks/useMeshGradient';
 import AllHeader from "./subcomponents/header";
+import ContactFooter from "./subcomponents/contactfooter";
 import NoiseOverlay from "./subcomponents/NoiseOverlay";
-import { GrDown } from "react-icons/gr";
 import { SiSpotify } from "react-icons/si";
-import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
 import { BiLogoInstagramAlt } from "react-icons/bi";
 import { HiSun, HiMoon } from "react-icons/hi";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import ReactPlayer from "react-player";
 import { MusicMixMaster } from "../components/Music/musicmixmaster";
 import { tracks } from "../data/music";
 import image from "../content/images/logo_countour.png";
+
+const GRADIENT_COLORS = ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"];
+const GRADIENT_STYLE = { position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' };
+
+const FONKEY_TRACKS = [
+  { title: 'Colors',              url: 'https://youtu.be/bPJmExJGmmU?si=fmyTaD-uRQMCqCqc',                    original: 'Black Pumas' },
+  { title: 'Lover Boy',           url: 'https://www.youtube.com/watch?v=MUyIXcaW89s&ab_channel=FonkeyBusiness', original: 'Phum Vifurit' },
+  { title: "Don't Stop the Music",url: 'https://youtu.be/sIvH9gapjvc?si=MeHXO4TSO0XmGfcq',                    original: 'Jamie Cullum' },
+  { title: 'Redbone',             url: 'https://www.youtube.com/watch?v=9fj4GnkUb2o',                          original: 'Childish Gambino' },
+];
+
+// ─── Shared section heading ───────────────────────────────────────────────────
+
+const SectionLabel = ({ label, title }) => (
+  <div className="lg:px-14 mb-8">
+    <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-2">{label}</p>
+    <h2 className="font-bold lg:text-2xl text-xl dark:text-rose-50">{title}</h2>
+  </div>
+);
+
+const Separator = () => (
+  <div className="w-full h-px bg-black/6 dark:bg-white/8 lg:my-14 my-10" />
+);
+
+// ─── Fonkey Business ──────────────────────────────────────────────────────────
+
+const FonkeySection = () => {
+  const [activeTrack, setActiveTrack] = useState(0);
+  const [expanded, setExpanded] = useState(false);
+
+  const prev = () => setActiveTrack(i => (i - 1 + FONKEY_TRACKS.length) % FONKEY_TRACKS.length);
+  const next = () => setActiveTrack(i => (i + 1) % FONKEY_TRACKS.length);
+
+  return (
+    <div className="lg:px-14">
+      {/* Title block */}
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-6 gap-3">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-2">The Band</p>
+          <h2 className="font-grande font-bold lg:text-4xl text-2xl dark:text-rose-50">
+            <span className="font-zighead text-rose-700 dark:text-orange-300 lg:text-6xl text-4xl">F</span>onkey{" "}
+            <span className="font-saint text-rose-400 dark:text-orange-200 lg:text-5xl text-3xl">B</span>usiness
+          </h2>
+        </div>
+        <div className="flex gap-2">
+          {['Funk', 'Soul', 'RnB', 'Live'].map(tag => (
+            <span key={tag} className="px-2.5 py-1 rounded-full text-xs bg-rose-400/10 dark:bg-orange-400/8 text-rose-700 dark:text-orange-300 font-medium">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex lg:flex-row flex-col gap-8">
+        {/* Left: player + tabs */}
+        <div className="lg:flex-1 flex flex-col">
+          {/* Tab bar */}
+          <div className="flex items-center gap-2 mb-3">
+            <button type="button" onClick={prev}
+              className="h-7 w-7 rounded-full bg-white/30 dark:bg-white/8 flex items-center justify-center hover:bg-white/50 dark:hover:bg-white/15 transition-colors duration-150 cursor-pointer">
+              <HiChevronLeft size={14} className="text-black/60 dark:text-white/60" />
+            </button>
+            <div className="flex gap-1 overflow-x-auto scrollbar-hide">
+              {FONKEY_TRACKS.map((t, i) => (
+                <button key={i} type="button" onClick={() => setActiveTrack(i)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all duration-150 cursor-pointer ${
+                    activeTrack === i
+                      ? 'bg-rose-500 text-white shadow-sm'
+                      : 'bg-white/30 dark:bg-white/8 text-black/55 dark:text-white/55 hover:bg-white/50 dark:hover:bg-white/15'
+                  }`}>
+                  {t.title}
+                </button>
+              ))}
+            </div>
+            <button type="button" onClick={next}
+              className="h-7 w-7 rounded-full bg-white/30 dark:bg-white/8 flex items-center justify-center hover:bg-white/50 dark:hover:bg-white/15 transition-colors duration-150 cursor-pointer">
+              <HiChevronRight size={14} className="text-black/60 dark:text-white/60" />
+            </button>
+          </div>
+
+          {/* Video */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTrack}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="w-full aspect-video rounded-2xl overflow-hidden shadow-lg"
+            >
+              <ReactPlayer width="100%" height="100%" url={FONKEY_TRACKS[activeTrack].url} controls />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Credit line */}
+          <p className="mt-2.5 text-xs text-black/35 dark:text-white/30">
+            Cover of <span className="font-medium text-black/50 dark:text-white/45">{FONKEY_TRACKS[activeTrack].original}</span>
+            {" "}· Bass, mixing & mastering by Julien Guinot
+          </p>
+        </div>
+
+        {/* Right: info panel */}
+        <div className="lg:w-72 flex flex-col gap-5">
+          {/* Logo + socials */}
+          <div className="rounded-2xl bg-white/30 dark:bg-black/20 backdrop-blur-sm shadow-sm p-4 flex flex-row items-center gap-4">
+            <img src={image} alt="Fonkey Business" className="w-20 filter grayscale opacity-60 dark:opacity-40 flex-shrink-0" />
+            <div className="flex flex-col gap-2">
+              <p className="text-xs text-black/40 dark:text-white/35 leading-snug">Funk-soul-RnB band. Live studio versions, original covers.</p>
+              <div className="flex gap-3">
+                <a href="https://open.spotify.com/artist/fonkeybusiness" target="_blank" rel="noreferrer"
+                  className="text-black/40 dark:text-white/40 hover:text-rose-500 dark:hover:text-orange-300 transition-colors duration-150">
+                  <SiSpotify size={18} />
+                </a>
+                <a href="https://www.instagram.com/fonkeybusiness" target="_blank" rel="noreferrer"
+                  className="text-black/40 dark:text-white/40 hover:text-rose-500 dark:hover:text-orange-300 transition-colors duration-150">
+                  <BiLogoInstagramAlt size={20} />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* My roles */}
+          <div className="rounded-2xl bg-white/25 dark:bg-black/15 backdrop-blur-sm p-4">
+            <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-3">My roles</p>
+            <div className="flex flex-wrap gap-1.5">
+              {['Bassist', 'Mixing Engineer', 'Mastering Engineer', 'Choir lead'].map(r => (
+                <span key={r} className="px-2 py-0.5 rounded-full text-xs bg-black/5 dark:bg-white/8 text-black/60 dark:text-white/55 font-medium">{r}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Tracklist */}
+          <div className="rounded-2xl bg-white/25 dark:bg-black/15 backdrop-blur-sm p-4">
+            <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-3">Setlist</p>
+            <ul className="flex flex-col gap-1.5">
+              {FONKEY_TRACKS.map((t, i) => (
+                <li key={i}>
+                  <button type="button" onClick={() => setActiveTrack(i)}
+                    className={`w-full text-left flex items-center gap-2 text-xs py-1 transition-colors duration-150 cursor-pointer ${
+                      activeTrack === i ? 'text-rose-600 dark:text-orange-300 font-semibold' : 'text-black/50 dark:text-white/45 hover:text-rose-500 dark:hover:text-orange-300'
+                    }`}>
+                    <span className={`w-1 h-1 rounded-full flex-shrink-0 ${activeTrack === i ? 'bg-rose-500' : 'bg-black/20 dark:bg-white/20'}`} />
+                    {t.title}
+                    <span className="ml-auto text-black/25 dark:text-white/20">{t.original}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ─── Original productions ─────────────────────────────────────────────────────
+
+const TracksSection = () => (
+  <div className="lg:px-14">
+    <SectionLabel label="Solo Work" title="Original Productions" />
+    <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
+      {tracks.map((track, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: i * 0.08, ease: 'easeOut' }}
+          className="flex flex-col gap-3"
+        >
+          <div className="aspect-square rounded-2xl overflow-hidden shadow-md">
+            <iframe
+              width="100%" height="100%"
+              scrolling="no" frameBorder="no" allow="autoplay"
+              title={track.title}
+              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(track.url)}&color=%23111111&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true`}
+            />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-black/80 dark:text-white leading-snug">{track.title}</p>
+            <div className="flex flex-wrap gap-1 mt-1.5">
+              {track.tags.map(tag => (
+                <span key={tag} className="px-2 py-0.5 rounded-full text-[11px] bg-black/5 dark:bg-white/8 text-black/50 dark:text-white/45 font-medium">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+);
+
+// ─── Main page ────────────────────────────────────────────────────────────────
 
 const MusicSection = () => {
   const { isDark, toggle } = useThemeToggle();
   const { MeshGradientRenderer, showGradient } = useMeshGradient();
 
   return (
-    // <div className="dark:bg-black  bg-gradient-to-b   from-emerald-100 to-sky-100 to-35% lg:py-12 lg:px-32 p-6  scrollbar-hide select-none">
-
-    <div className="dark:bg-gray-900 relative bg-cover dark:text-white lg:py-12 lg:px-32 p-6 scrollbar-hide select-none overflow-x-hidden lg:overflow-x-visible w-full">
-      {/* Animated mesh gradient background with fade-in */}
+    <div className="dark:bg-gray-900 relative dark:text-white lg:py-12 lg:px-32 p-6 min-h-screen overflow-x-hidden">
       {MeshGradientRenderer && (
-        <div
-          className={`absolute inset-0 w-full h-full z-0 pointer-events-none transition-opacity duration-1000 ease-in-out ${
-            showGradient ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <MeshGradientRenderer
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-            colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"]}
-            speed={0.008}
-          />
-          <NoiseOverlay opacity={0.55} blendMode="overlay" baseFrequency="0.5" />
+        <div className={`absolute inset-0 w-full h-full z-0 pointer-events-none transition-opacity duration-1000 ease-in-out ${showGradient ? 'opacity-100' : 'opacity-0'}`}>
+          <MeshGradientRenderer style={GRADIENT_STYLE} colors={GRADIENT_COLORS} speed={0.008} />
+          <NoiseOverlay opacity={0.45} blendMode="overlay" baseFrequency="0.5" />
         </div>
       )}
-      {/* Dark mode overlay — matches other pages, slightly more transparent */}
-      <div className="h-full w-screen absolute top-0 right-0 z-0 dark:opacity-50 opacity-0 transition-opacity duration-200 bg-black" />
-      <div className="z-10 relative">
-        <div className="h-full  flex flex-col justify-between align-middle">
-          <AllHeader
-            pagename={"Music"}
-            hoveraccent={"rose-200"}
-            clickaccent={"rose-300"}
-          />
-          <div className="w-full" id="all">
-            <MusicHeader text="My Music" />
-            <MusicNav />
-            {/* <MusicIntro /> */}
-            {/* </div> */}
-            <div className="flex flex-col w-full  mb-20">
-              <div
-                className="absolute show -mt-40 h-10 w-10 invisible"
-                id="featured"
-              />
-              <MusicHeader text={"Featured"} />
-              <MusicFeatured />
-            </div>
-            <div className="flex flex-col w-full  mb-20">
-              <div
-                className="absolute show -mt-40 h-10 w-10 invisible"
-                id="mixmaster"
-              />
-              <MusicHeader text={"Mix & Mastering"} />
-              <MusicMixMaster />
-            </div>
-          </div>
+      <div className="h-full w-full absolute top-0 left-0 z-0 dark:opacity-50 opacity-0 transition-opacity duration-200 bg-black pointer-events-none" />
+
+      <div className="relative z-10">
+        <AllHeader pagename="Music" hoveraccent="rose-200" clickaccent="rose-300" />
+
+        {/* Intro */}
+        <div className="lg:px-14 lg:mt-10 mt-6 mb-14">
+          <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-2">Sound</p>
+          <h2 className="font-grande font-bold lg:text-5xl text-3xl dark:text-rose-50 mb-4">
+            <span className="font-zighead text-rose-700 dark:text-orange-300 lg:text-8xl text-5xl">M</span>y{" "}
+            <span className="font-saint text-rose-400 dark:text-orange-200 lg:text-7xl text-4xl">M</span>usic
+          </h2>
+          <p className="lg:text-base text-sm text-black/60 dark:text-rose-50/65 lg:w-1/2 leading-relaxed">
+            Musician, producer, mixing engineer, and DJ. I make funk, soul, and electronic music — mostly to feel things, sometimes to make others feel things too.
+          </p>
+        </div>
+
+        <FonkeySection />
+        <Separator />
+        <TracksSection />
+        <Separator />
+
+        {/* Mix & Mastering */}
+        <div className="lg:px-14">
+          <SectionLabel label="Mix & Mastering" title="Commuz' Musical Theatre" />
+          <MusicMixMaster />
+        </div>
+
+        <div className="mt-14">
+          <ContactFooter />
         </div>
       </div>
-      
-      {/* Mobile Theme Toggle */}
+
+      {/* Mobile theme toggle */}
       <div className="fixed bottom-6 right-6 z-[100] lg:hidden">
-        <button
-          onClick={toggle}
-          className="h-12 w-12 rounded-full border border-white/30 dark:border-white/20 backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg"
-        >
-          {isDark ? (
-            <HiSun size={24} className="text-yellow-500" />
-          ) : (
-            <HiMoon size={24} className="text-gray-700" />
-          )}
+        <button onClick={toggle}
+          className="h-12 w-12 rounded-full backdrop-blur-md bg-white/40 dark:bg-black/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg">
+          {isDark ? <HiSun size={24} className="text-yellow-500" /> : <HiMoon size={24} className="text-gray-700" />}
         </button>
-      </div>
-    </div>
-  );
-};
-
-const scrollto = (id) => {
-  let element = document.getElementById(id);
-  element.scrollIntoView({ behavior: "smooth" });
-};
-
-const MusicNav = () => {
-  return (
-    <nav className="shadow-lg text-sm lg:text-base dark:text-white backdrop-filter backdrop-blur-2xl bg-white/20 dark:bg-black/20 rounded-xl overflow-hidden sticky grow z-50 lg:top-24 top-20 mb-16 flex flex-row justify-center select-none">
-      <div className="flex flex-row items-center w-full">
-        <div className=" w-full flex  " id="navbar-sticky">
-          <ul className="flex justify-evenly md:font-medium grow">
-            <li className="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black/80 hover:text-rose-300 p-2 text-center">
-              <button
-                type="button"
-                onClick={() => {
-                  scrollto("featured");
-                }}
-              >
-                Featured
-              </button>
-            </li>
-            <li className="  border-black grow cursor-pointer dark:hover:bg-white dark:hover:text-rose-600 active:text-white transition-colors duration-100 hover:bg-black/80 hover:text-rose-300 p-2 text-center">
-              <button
-                type="button"
-                onClick={() => {
-                  scrollto("mixmaster");
-                }}
-              >
-                Mix-mastering
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-const SectionHeader = ({ text }) => {
-  return (
-    <div className="h-auto lg:w-full lg:px-10">
-      <div className="flex flex-row align-middle">
-        <h2 className="font-inter text-2xl lg:text-4xl font-semibold first-letter:text-7xl first-letter:font-zighead first-letter:text-rose-500">
-          {" "}
-          {text}
-        </h2>
-        <div className="mx-6 h-[1px] grow bg-black dark:bg-white self-center"></div>
-      </div>
-    </div>
-  );
-};
-
-const MusicHeader = ({ text }) => {
-  return (
-    <div className="lg:mb-16 mb-10 first-letter:font-saint first-letter:text-3xl first-letter:text-rose-600">
-      <SectionHeader text={text} />
-    </div>
-  );
-};
-
-const MusicFeatured = () => {
-  const [activeCard, setActiveCard] = useState(null);
-  const [activeTabFonkey, setActiveTabFonkey] = useState(0);
-
-  function toggleFonkeyText() {
-    var gradient = document.getElementById("fonkeyreadmoregradient");
-    var text = document.getElementById("fonkeyreadmoretext");
-    var readmore = document.getElementById("fonkeyreadmore");
-    var icon = document.getElementById("fonkeyreadmoreicon");
-
-    if (icon.classList.contains("rotate-0")) {
-      readmore.innerHTML = "read less";
-      icon.classList.add("rotate-180");
-      icon.classList.remove("rotate-0");
-      text.classList.remove("h-44");
-      text.classList.add("h-[400px]");
-      gradient.classList.add("hidden");
-    } else {
-      icon.classList.add("rotate-0");
-      icon.classList.remove("rotate-180");
-      readmore.innerHTML = "read more";
-      text.classList.add("h-44");
-      text.classList.remove("h-[400px]");
-      gradient.classList.remove("hidden");
-    }
-  }
-
-  const geturl = () => {
-    switch (activeTabFonkey) {
-      default:
-        return ""
-      case 0:
-        return "https://youtu.be/bPJmExJGmmU?si=fmyTaD-uRQMCqCqc";
-      case 1:
-        return "https://www.youtube.com/watch?v=MUyIXcaW89s&ab_channel=FonkeyBusiness";
-      case 2:
-        return "https://youtu.be/sIvH9gapjvc?si=MeHXO4TSO0XmGfcq";
-      case 3:
-        return "https://www.youtube.com/watch?v=9fj4GnkUb2o";
-    }
-  };
-
-  const FONKEY_COUNT = 4; // number of Fonkey Business video tabs (cases 0-3 in geturl)
-
-  const nexturl = (skip) => {
-    var tempactive = activeTabFonkey + skip;
-    if (tempactive < 0) { tempactive = FONKEY_COUNT - 1; }
-    if (tempactive >= FONKEY_COUNT) { tempactive = 0; }
-    setActiveTabFonkey(tempactive);
-  };
-
-  return (
-    <div className="flex flex-col gap-14 w-full lg:px-10 justify-center">
-      {/* Fonkey Business Section - Keep Original */}
-      <div className="flex lg:flex-row flex-col w-full h-auto lg:gap-10 hover:border-black transition-all duration-100 rounded-3xl">
-        <div className="lg:h-2/3 grow lg:m-10 mb-0 lg:mr-5 flex flex-col">
-          <div className="shadow-sm backdrop-blur-md bg-white/30 dark:bg-black/30 rounded-t-xl lg:h-10 h-auto flex lg:flex-row flex-col justify-start lg:items-center items-start">
-            {/* Desktop Navigation */}
-            <div className="flex flex-row lg:w-auto w-full h-full items-center dark:text-black lg:flex hidden" role="tablist" aria-label="Fonkey Business videos">
-              <div>
-                <BsArrowLeftShort
-                  size={30}
-                  className="hover:text-gray-600 cursor-pointer pressable"
-                  onClick={() => {
-                    nexturl(-1);
-                  }}
-                />
-              </div>
-              <button
-                type="button"
-                role="tab"
-                id="tab-fonkey-0"
-                aria-selected={activeTabFonkey === 0}
-                aria-controls="panel-fonkey"
-                className={`h-full p-3 lg:grow-0 grow text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-rose-100 transition-colors duration-300 cursor-pointer ${
-                  activeTabFonkey === 0 ? "bg-rose-50/60" : "bg-white/20"
-                }`}
-                onClick={() => {
-                  setActiveTabFonkey(0);
-                }}
-              >
-                Colors
-              </button>
-              <button
-                type="button"
-                role="tab"
-                id="tab-fonkey-1"
-                aria-selected={activeTabFonkey === 1}
-                aria-controls="panel-fonkey"
-                className={`h-full lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-orange-100 transition-colors duration-300 cursor-pointer ${
-                  activeTabFonkey === 1 ? "bg-orange-50/60" : "bg-white/20"
-                }`}
-                onClick={() => {
-                  setActiveTabFonkey(1);
-                }}
-              >
-                Lover Boy
-              </button>
-              <button
-                type="button"
-                role="tab"
-                id="tab-fonkey-2"
-                aria-selected={activeTabFonkey === 2}
-                aria-controls="panel-fonkey"
-                className={`h-full lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-lime-100 transition-colors duration-300 cursor-pointer ${
-                  activeTabFonkey === 2 ? "bg-lime-50/60" : "bg-white/20"
-                }`}
-                onClick={() => {
-                  setActiveTabFonkey(2);
-                }}
-              >
-                Don't stop the music
-              </button>
-              <button
-                type="button"
-                role="tab"
-                id="tab-fonkey-3"
-                aria-selected={activeTabFonkey === 3}
-                aria-controls="panel-fonkey"
-                className={`h-full lg:grow-0 grow p-3 text-sm flex flex-row text-center items-center px-3 hover:bg-black/80 hover:text-rose-100 transition-colors duration-300 cursor-pointer ${
-                activeTabFonkey === 3 ? "bg-rose-50/60" : "bg-white/20"}`}
-                onClick={() => {
-                  setActiveTabFonkey(3);
-                }}
-                >
-                Redbone
-              </button>
-              <div>
-                <BsArrowRightShort
-                  size={30}
-                  className="hover:text-gray-600 cursor-pointer pressable"
-                  onClick={() => {
-                    nexturl(1);
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="flex flex-row w-full h-full items-center dark:text-black lg:hidden flex">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group">
-                <BsArrowLeftShort
-                  size={20}
-                  className="text-black dark:text-white group-hover:text-rose-500 transition-colors duration-200"
-                  onClick={() => {
-                    nexturl(-1);
-                  }}
-                />
-              </div>
-              
-              {/* Current Item Name */}
-              <div className="flex-1 text-center px-4">
-                <span className="text-sm font-medium text-black dark:text-white">
-                  {activeTabFonkey === 0 ? "Colors" : 
-                   activeTabFonkey === 1 ? "Lover Boy" : 
-                   activeTabFonkey === 2 ? "Don't stop the music" : "Redbone"}
-                </span>
-              </div>
-              
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 dark:bg-black/20 hover:bg-white/40 dark:hover:bg-black/40 border border-white/30 dark:border-black/30 hover:border-white/50 dark:hover:border-black/50 transition-all duration-200 hover:scale-110 active:scale-95 group">
-                <BsArrowRightShort
-                  size={20}
-                  className="text-black dark:text-white group-hover:text-rose-500 transition-colors duration-200"
-                  onClick={() => {
-                    nexturl(1);
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            className="overflow-clip aspect-video shadow-lg rounded-b-xl"
-            id="panel-fonkey"
-            role="tabpanel"
-            aria-labelledby={`tab-fonkey-${activeTabFonkey}`}
-            tabIndex={0}
-          >
-            <ReactPlayer
-              width={"100%"}
-              height={"100%"}
-              url={geturl(activeTabFonkey)}
-              controls={true}
-            />
-          </div>
-          <div className="flex flex-row justify-items-start gap-3 flex-wrap mb-0 mt-5">
-            <div className="text-black text-sm flex flex-row items-center justify-center backdrop-blur-md bg-white/50 dark:bg-black/50 px-3 py-1 pressable rounded-full hover:shadow-lg transition-shadow duration-200 cursor-pointer">
-              Performance
-            </div>
-            <div className="text-black text-sm flex flex-row items-center justify-center backdrop-blur-md bg-white/50 dark:bg-black/50 px-3 py-1 pressable rounded-full hover:shadow-lg transition-shadow duration-200 cursor-pointer">
-              Mixing
-            </div>
-            <div className="text-black text-sm flex flex-row items-center justify-center backdrop-blur-md bg-white/50 dark:bg-black/50 px-3 py-1 pressable rounded-full hover:shadow-lg transition-shadow duration-200 cursor-pointer">
-              Mastering
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col lg:w-1/3 h-full">
-          <div className="lg:h-full w-full p-3">
-            <div className="w-full grow flex flex-row lg:justify-start justify-evenly gap-6">
-              <img
-                src={image}
-                alt="Julien Guinot logo"
-                className="w-2/3 mb-6 filter grayscale opacity-75 mt-3"
-              />
-              <div className="flex flex-col justify-start gap-3 py-3 mt-6 overflow-visible">
-                <div className="pressable">
-                  <SiSpotify
-                    size={20}
-                    className="overflow-visible pressable hover:text-blue-500 hover:stroke-[1px] stroke-black hover:block-shadow"
-                  ></SiSpotify>
-                </div>
-                <div className="pressable">
-                  <BiLogoInstagramAlt
-                    size={22}
-                    className="pressable overflow-visible pressable hover:text-rose-500 hover:stroke-[1px] stroke-black hover:block-shadow"
-                  ></BiLogoInstagramAlt>
-                </div>
-              </div>
-            </div>
-            <div
-              className="h-44 lg:h-auto lg:overflow-visible overflow-hidden flex flex-col gap-6 relative transition-all duration-200"
-              id="fonkeyreadmoretext"
-            >
-              <div
-                className="absolute h-full w-full lg:hidden"
-                id="fonkeyreadmoregradient"
-              ></div>
-              <p className="font-inter text-sm">
-                I'm also part of a funk-soul-RnB band for which I am bassist,
-                mixing engineer and mastering engineer. We mostly record live studio versions of covers (so far!).
-              </p>
-              <div>
-                <div className="flex flex-row items-center gap-2 p-2">
-                  Black Pumas - Colors
-                  <SiSpotify
-                    size={20}
-                    className="pressable hover:text-blue-500 hover:stroke-[1px] stroke-black hover:block-shadow"
-                  ></SiSpotify>
-                </div>
-                <div className="flex flex-row items-center gap-2 p-2">
-                  Phum Vifurit - Lover Boy
-                  <SiSpotify
-                    size={20}
-                    className="pressable hover:text-blue-500 hover:stroke-[1px] stroke-black hover:block-shadow"
-                  ></SiSpotify>
-                </div>
-                <div className="flex flex-row items-center gap-2 p-2">
-                  Jamie Cullum - Don't stop the music
-                  <SiSpotify
-                    size={20}
-                    className="pressable hover:text-blue-500 hover:stroke-[1px] stroke-black hover:block-shadow"
-                  ></SiSpotify>
-                </div>
-                <div className="flex flex-row items-center gap-2 p-2">
-                  Childish Gambino - Redbone
-                  <SiSpotify
-                    size={20}
-                    className="pressable hover:text-blue-500 hover:stroke-[1px] stroke-black hover:block-shadow"
-                  ></SiSpotify>
-                </div>
-              </div>
-            </div>
-            <button
-              type="button"
-              className="flex flex-col items-center justify-center mt-5 lg:hidden cursor-pointer"
-              onClick={() => toggleFonkeyText()}
-            >
-              <p className="text-gray-600 dark:text-white font-mono z-40" id="fonkeyreadmore">
-                read more
-              </p>
-              <GrDown
-                className="rotate-0 transition-all duration-300"
-                id="fonkeyreadmoreicon"
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Cards Section */}
-      <div className="w-full h-px border-t border-white/15 dark:border-white/10"></div>
-      <div className="flex flex-row gap-12 w-full justify-between">
-        {tracks.map((track, index) => (
-          <div key={index} className="flex flex-col w-48 transition-all duration-200 hover:translate-y-[-2px]">
-            {/* Card */}
-            <button
-              type="button"
-              className={`aspect-square shadow-md backdrop-blur-md bg-white/30 dark:bg-black/30 cursor-pointer transition-all duration-200 rounded-2xl overflow-hidden ${
-                activeCard === index
-                  ? 'scale-105 shadow-lg'
-                  : 'hover:scale-105 hover:shadow-md'
-              }`}
-              onClick={() => setActiveCard(activeCard === index ? null : index)}
-            >
-              {/* Player - ReactPlayer commented out */}
-              {/* <div className="h-full w-full overflow-clip">
-                <ReactPlayer
-                  width="100%"
-                  height="100%"
-                  url={track.url}
-                  config={{
-                    soundcloud: {
-                      options: {
-                        show_artwork: false,
-                        show_user: false,
-                      },
-                    },
-                  }}
-                />
-              </div> */}
-              
-              {/* SoundCloud Embed */}
-              <div className="h-full w-full overflow-clip">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  scrolling="no"
-                  frameBorder="no"
-                  allow="autoplay"
-                  title={track.title}
-                  src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(track.url)}&color=%23111111&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}
-                ></iframe>
-              </div>
-            </button>
-            
-            {/* Title */}
-            <h3 className="font-inter text-sm font-bold mt-3 text-center">
-              {track.title}
-            </h3>
-            
-            {/* Tags */}
-            <div className="flex flex-wrap gap-1 mt-2 justify-center">
-              {track.tags.map((tag, tagIndex) => (
-                <div 
-                  key={tagIndex}
-                  className="text-xs px-2 py-1 backdrop-blur-md bg-white/50 dark:bg-black/50 text-black dark:text-white hover:shadow-lg transition-shadow duration-200 cursor-pointer rounded-full"
-                >
-                  {tag}
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );
