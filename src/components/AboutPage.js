@@ -206,7 +206,7 @@ const AboutSection = () => (
 
       {/* Right column: photo — desktop only */}
       <div className="lg:flex hidden flex-1 flex-col items-center justify-start pt-2">
-        <div className="relative w-72">
+        <div className="relative w-1/2">
           <div className="w-full aspect-[3/4] p-2 backdrop-blur-md bg-white/20 dark:bg-black/20 shadow-xl rounded-2xl">
             <div className="h-full w-full overflow-clip rounded-xl">
               <img
