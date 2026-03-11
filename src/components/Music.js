@@ -33,7 +33,7 @@ const MusicSection = () => {
             colors={["#FEA4B0", "#FECC96", "#FFFFFF", "#FFFFFF", "#FFF2B8"]}
             speed={0.008}
           />
-          <NoiseOverlay opacity={0.45} blendMode="overlay" baseFrequency="0.5" />
+          <NoiseOverlay opacity={0.55} blendMode="overlay" baseFrequency="0.5" />
         </div>
       )}
       {/* Dark mode overlay — matches other pages, slightly more transparent */}

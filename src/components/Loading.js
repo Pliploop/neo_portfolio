@@ -40,15 +40,11 @@ const Loader = () => {
   const [progressTime, setProgressTime] = useState("0:00");
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [barProgress, setBarProgress] = useState(0);
-  const [gradientVisible, setGradientVisible] = useState(false);
   const barIntervalRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     setTheme('light');
-    // Give WebGL ~200ms to initialize before fading in
-    const t = setTimeout(() => setGradientVisible(true), 200);
-    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -159,8 +155,7 @@ const Loader = () => {
               colors={GRADIENT_COLORS}
               speed={0.01}
             />
-            <NoiseOverlay opacity={0.55} blendMode="overlay" baseFrequency="0.5" />
-            <div className={`absolute inset-0 bg-white transition-opacity duration-1000 pointer-events-none ${gradientVisible ? 'opacity-0' : 'opacity-100'}`} />
+            <NoiseOverlay opacity={0.65} blendMode="overlay" baseFrequency="0.5" />
           </div>
           <div className="flex flex-col">
             <div className="flex flex-row justify-between px-5 py-5  ">
