@@ -32,6 +32,12 @@ const maxreplies = data.length;
 const GRADIENT_COLORS = ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"];
 const GRADIENT_STYLE = { position: 'absolute', inset: 0, width: '100%', height: '100%' };
 
+// Memoized so the WebGL canvas mounts once and is never re-rendered by
+// the parent's setInterval-driven state updates.
+const StableGradient = React.memo(() => (
+  <MeshGradientRenderer style={GRADIENT_STYLE} colors={GRADIENT_COLORS} speed={0.01} />
+));
+
 const Loader = () => {
   const [isLiked, setisLiked] = useState(false);
   const [liked, setLiked] = useState(() => Array(maxreplies).fill(false));
@@ -151,11 +157,7 @@ const Loader = () => {
             className="w-full aspect-square rounded-3xl relative overflow-hidden"
             id="transition"
           >
-            <MeshGradientRenderer
-              style={GRADIENT_STYLE}
-              colors={GRADIENT_COLORS}
-              speed={0.01}
-            />
+            <StableGradient />
             <NoiseOverlay opacity={0.65} blendMode="overlay" baseFrequency="0.5" />
           </div>
           <div className="flex flex-col">
