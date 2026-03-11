@@ -111,7 +111,7 @@ const Intro = () => {
         </p>
 
         <p className="lg:text-xl text-base font-semibold text-rose-700 dark:text-orange-200 mb-3 lg:w-4/5 leading-snug">
-          AI & music researcher building tools for controllable generation, music retrieval, and creative co-production.
+          AI & music researcher building foundation models for controllable retrieval and multimodal music understanding.
         </p>
 
         <p className="lg:text-sm text-xs dark:text-rose-50/70 text-black/60 lg:w-4/5 mb-10 leading-relaxed">
@@ -163,7 +163,7 @@ const Intro = () => {
           <div className="h-px bg-black/8 dark:bg-white/10 my-4" />
           <p className="text-xs font-semibold uppercase tracking-widest text-rose-500 dark:text-orange-400 mb-3">Research focus</p>
           <div className="flex flex-wrap gap-2">
-            {["Self-supervised learning", "Music retrieval", "Generative AI", "Controllable synthesis"].map(tag => (
+            {["Foundation models", "Music retrieval", "Multimodal understanding", "Self-supervised learning"].map(tag => (
               <span
                 key={tag}
                 className="px-2.5 py-1 rounded-full text-xs bg-rose-400/12 dark:bg-orange-400/10 text-rose-700 dark:text-orange-300 font-medium"
