@@ -30,6 +30,7 @@ const data = [
 ];
 const maxreplies = data.length;
 const GRADIENT_COLORS = ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"];
+const GRADIENT_STYLE = { position: 'absolute', inset: 0, width: '100%', height: '100%' };
 
 const Loader = () => {
   const [isLiked, setisLiked] = useState(false);
@@ -151,7 +152,7 @@ const Loader = () => {
             id="transition"
           >
             <MeshGradientRenderer
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+              style={GRADIENT_STYLE}
               colors={GRADIENT_COLORS}
               speed={0.01}
             />
