@@ -21,7 +21,7 @@ const ContactFooter = ({ pagename }) => {
   };
 
   return (
-    <div className="lg:h-10 h-12 w-full flex flex-row justify-center sticky bottom-8 dark:text-white overflow-clip z-[100]">
+    <div className="lg:h-10 h-12 w-full flex flex-row justify-center fixed bottom-8 left-0 right-0 dark:text-white z-[100]">
       <div className="lg:h-10 h-12 w-full lg:w-1/3 shadow-xl backdrop-filter backdrop-blur-lg bg-white/30 dark:bg-black/30 rounded-2xl overflow-hidden flex flex-row justify-center">
         <div className="h-full w-full flex flex-row justify-evenly  items-center">
           <button

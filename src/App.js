@@ -14,14 +14,28 @@ const Blog = React.lazy(() => import('./components/Blog'));
 
 const GRADIENT_COLORS = ["#FEA4B0", "#FECC96", "#FFFFFF", "#FFE8F0", "#FFF2B8"];
 const GRADIENT_STYLE = { position: 'absolute', inset: 0, width: '100%', height: '100%' };
+const LOADING_GRADIENT_STYLE = { position: 'absolute', inset: 0, width: '50%', height: '50%', top: '25%', left: '25%' };
 
 const LoadingGradient = () => {
   const { pathname } = useLocation();
   if (pathname !== '/') return null;
   return (
-    <div id="loading-gradient" style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-      <MeshGradientRenderer colors={GRADIENT_COLORS} style={GRADIENT_STYLE} speed={0.01} />
-      <NoiseOverlay opacity={0.65} blendMode="overlay" baseFrequency="0.5" />
+    <div
+      style={{
+        position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none',
+        maskImage: 'radial-gradient(ellipse 28% 32% at center, black 20%, rgba(0,0,0,0.05) 65%, transparent 90%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 28% 32% at center, black 20%, rgba(0,0,0,0.05) 65%, transparent 90%)',
+      }}
+    >
+      <MeshGradientRenderer colors={GRADIENT_COLORS} style={LOADING_GRADIENT_STYLE} speed={0.04} />
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 0.6 }}
+      >
+        <NoiseOverlay opacity={0.65} blendMode="overlay" baseFrequency="0.85" />
+      </motion.div>
     </div>
   );
 };
@@ -32,7 +46,7 @@ const pageVariants = {
   exit: { opacity: 0, y: -6 },
 };
 
-const pageTransition = { duration: 0.25, ease: 'easeOut' };
+const pageTransition = { duration: 0.35, ease: 'easeInOut' };
 
 const AnimatedRoutes = () => {
   const location = useLocation();

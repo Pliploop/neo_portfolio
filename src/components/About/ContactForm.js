@@ -163,7 +163,7 @@ const ContactForm = () => {
           <button
             type="submit"
             disabled={sendStatus === 'sending'}
-            className="w-full py-3.5 px-6 rounded-2xl font-bold text-white bg-gradient-to-r from-rose-500 to-orange-400 hover:from-rose-400 hover:to-orange-300 shadow-lg hover:shadow-rose-300/40 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2.5 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+            className="self-end h-9 px-5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-rose-500 to-orange-400 hover:from-rose-400 hover:to-orange-300 shadow-md hover:shadow-rose-300/40 active:scale-[0.97] transition-all duration-200 flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
           >
             <AnimatePresence mode="wait">
               {sendStatus === 'sending' ? (

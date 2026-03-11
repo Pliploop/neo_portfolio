@@ -123,19 +123,27 @@ const Loader = () => {
     playanimation();
   }, [paused]);
 
+  const cardVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 12 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  };
+
   return (
     <div
-      className={`h-screen w-screen relative flex bg-white text-black flex-col align-middle justify-center items-center lg:px-0 px-0 py-12 transition-opacity duration-500 overflow-hidden ${
+      className={`h-screen w-screen relative flex text-black flex-col align-middle justify-center items-center lg:px-0 px-0 py-12 transition-opacity duration-500 overflow-hidden ${
         isTransitioning ? 'opacity-0' : 'opacity-100'
       }`}
     >
-      {/* Decorative floating blobs */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-rose-100/60 blur-3xl animate-pulse pointer-events-none" style={{ animationDuration: '4s' }} />
-      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-orange-100/60 blur-3xl animate-pulse pointer-events-none" style={{ animationDuration: '6s', animationDelay: '2s' }} />
-      <div className="absolute top-1/2 right-1/3 w-32 h-32 rounded-full bg-pink-100/40 blur-2xl animate-pulse pointer-events-none" style={{ animationDuration: '5s', animationDelay: '1s' }} />
-      <div
-        className="flex flex-col lg:w-[30%] w-full aspect-[0.75] border-[2px] border-none rounded-3xl  transition-all duration-200"
+      <motion.div
+        className="flex flex-col lg:w-[30%] w-full aspect-[0.75] border-[2px] border-none rounded-3xl transition-all duration-200"
         id="container"
+        variants={cardVariants}
+        initial="hidden"
+        animate="visible"
       >
         <div className="h-12 border-b-[1px]  border-none overflow-hidden rounded-t-3xl flex flex-row justify-start items-center p-3 space-x-3 hidden">
           <div className="h-3 w-3 border-1 rounded-full pressable  border-black bg-green-500"></div>
@@ -143,12 +151,13 @@ const Loader = () => {
           <div className="h-3 w-3 border-1 rounded-full pressable  border-black bg-rose-500"></div>
         </div>
         <div className="flex flex-col p-6">
-          <div
+          <motion.div
             className="w-full aspect-square rounded-3xl"
             id="transition"
+            variants={itemVariants}
           />
           <div className="flex flex-col">
-            <div className="flex flex-row justify-between px-5 py-5  ">
+            <motion.div className="flex flex-row justify-between px-5 py-5" variants={itemVariants}>
               <div className="flex flex-col" id="song">
                 <div className="lg:text-lg text-base font-bold song select-none overflow-hidden">
                   <AnimatePresence mode="wait">
@@ -186,9 +195,9 @@ const Loader = () => {
                 />
               )}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-row h-full align-middle justify-between lg:px-5 space-x-3 lg:mb-2 mb-4">
+            <motion.div className="flex flex-row h-full align-middle justify-between lg:px-5 space-x-3 lg:mb-2 mb-4" variants={itemVariants}>
               <div
                 className="   flex flex-col justify-center   lg:text-base select-none"
                 id="progresstime"
@@ -218,11 +227,12 @@ const Loader = () => {
               <div className="    lg:text-lg select-none" id="totaltime">
                 {minutes}:{seconds}
               </div>
-            </div>
+            </motion.div>
 
-            <div
+            <motion.div
               className="flex flex-row align-middle w-full justify-evenly"
               id="buttons"
+              variants={itemVariants}
             >
               <div className="flex flex-row justify-between w-1/3 align-middle ">
                 <button
@@ -291,10 +301,10 @@ const Loader = () => {
                   <IoIosSkipForward className="pressable" size={20} />
                 </button>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
