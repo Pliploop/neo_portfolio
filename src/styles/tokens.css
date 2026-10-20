@@ -1,0 +1,15 @@
+:root {
+  --paper: 239 235 227;
+  --ink: 20 20 20;
+  --accent: 255 74 28;
+  --accent-ink: 230 59 15;
+  --on-accent: 20 20 20;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: 20 20 20;
+  --ink: 239 235 227;
+  --accent-ink: 255 74 28;
+  color-scheme: dark;
+}

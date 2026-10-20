@@ -1,0 +1,46 @@
+@layer base {
+  html {
+    background: rgb(var(--paper));
+    color: rgb(var(--ink));
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.5;
+    background: rgb(var(--paper));
+    overflow-x: hidden;
+  }
+  ::selection { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
+  :focus-visible { outline: 3px solid rgb(var(--accent)); outline-offset: 3px; }
+  h1, h2, h3 { text-wrap: balance; }
+}
+
+@layer components {
+  .brut {
+    border: 2px solid rgb(var(--ink));
+    box-shadow: 4px 4px 0 0 rgb(var(--ink));
+  }
+  .brut-thick {
+    border: 3px solid rgb(var(--ink));
+    box-shadow: 4px 4px 0 0 rgb(var(--ink));
+  }
+  .brut-press {
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+  .brut-press:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 rgb(var(--ink)); }
+  .brut-press:active { transform: translate(4px, 4px); box-shadow: 0 0 0 0 rgb(var(--ink)); }
+  .display { font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; }
+  .meta { @apply font-mono; font-size: 13px; line-height: 1.5; letter-spacing: 0; }
+  .dropcap { font-weight: 400; letter-spacing: 0; font-size: 1.12em; line-height: 0; }
+  .link {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+  .link:hover { color: rgb(var(--accent-ink)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; scroll-behavior: auto !important; }
+}
