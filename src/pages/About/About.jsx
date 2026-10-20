@@ -5,6 +5,7 @@ import NowBox from './NowBox';
 import SkillsStrip from './SkillsStrip';
 import Timeline from './Timeline';
 import Divider from '../../ui/Divider';
+import Contact from './Contact';
 
 export default function About() {
   return (
@@ -17,7 +18,7 @@ export default function About() {
       <Divider />
       <Timeline />
       <Divider />
-      <section id="contact" />
+      <Contact />
     </>
   );
 }
