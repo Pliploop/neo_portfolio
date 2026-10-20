@@ -50,7 +50,7 @@ export default function Research() {
         <ul aria-label="Publications" className="border-t-2 border-ink">
           {list.map((p) => <PaperRow key={p.title} paper={p} />)}
         </ul>
-        {list.length === 0 ? <p className="meta py-6 text-ink/55">No publications match this filter.</p> : null}
+        {list.length === 0 ? <p className="meta py-6 text-ink/60">No publications match this filter.</p> : null}
       </section>
 
       <section aria-label="Elsewhere" className="mx-auto max-w-6xl px-4 sm:px-8 mt-24 grid sm:grid-cols-2 gap-x-10">

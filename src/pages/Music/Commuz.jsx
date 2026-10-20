@@ -12,7 +12,7 @@ export default function Commuz() {
     <section className="mx-auto max-w-6xl px-4 sm:px-8">
       <h2 className="sr-only">Commuz' musical theatre: mixing and mastering</h2>
       <div aria-hidden="true" className="h-20 sm:h-28 w-full max-w-xl bg-ink" style={titleMask} />
-      <p className="meta mt-4 text-ink/55">[mixing and mastering]</p>
+      <p className="meta mt-4 text-ink/60">[mixing and mastering]</p>
       <div className="mt-8 grid md:grid-cols-2 gap-6 max-w-5xl text-lg">
         {commuz.intro.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}
       </div>
@@ -48,7 +48,7 @@ export default function Commuz() {
           <p className="meta mt-3 text-ink/60">{play.roles.join(' · ')}</p>
           <p className="mt-5 text-lg max-w-[55ch]">{play.description}</p>
           <ol className="mt-6 meta grid grid-cols-2 gap-x-6 gap-y-1 max-w-md">
-            {play.tracks.map((t, i) => <li key={t}><span className="text-ink/45">{String(i + 1).padStart(2, '0')}</span> {t}</li>)}
+            {play.tracks.map((t, i) => <li key={t}><span className="text-ink/60">{String(i + 1).padStart(2, '0')}</span> {t}</li>)}
           </ol>
         </div>
         <Embed key={play.spotify} src={play.spotify} title={`${play.title} album`} height={352} seed={70} label="Load album" />

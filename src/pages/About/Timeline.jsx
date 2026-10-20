@@ -14,7 +14,7 @@ function Row({ item }) {
     <Expandable
       summary={(
         <div className="grid sm:grid-cols-[15rem_1fr] gap-1 sm:gap-6 items-baseline">
-          <span className="meta text-ink/55">{item.dates}</span>
+          <span className="meta text-ink/60">{item.dates}</span>
           <span>
             <span className="font-semibold text-lg">{item.title}</span>{' '}
             <span className="text-ink/60">{item.company.replace(/^@/, '')}</span>

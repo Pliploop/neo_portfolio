@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { useFxCanvas } from './useFxCanvas';
 import { useCssColors } from '../hooks/useCssColors';
 import { useImage } from '../hooks/useImage';
@@ -30,7 +30,7 @@ export default function DitherField({
   const [fgRgb, bgRgb] = useCssColors([fg, bg]);
   const field = useMemo(() => makeBlobs(seed, blobs), [seed, blobs]);
   const img = useImage(image);
-  const gpu = useMemo(() => hasWebGL(), []);
+  const [gpu, setGpu] = useState(hasWebGL);
 
   const draw = (t, size) => {
     const canvas = ref.current;
@@ -50,6 +50,7 @@ export default function DitherField({
       width: w, height: h, mode: isImage ? 'image' : 'blobs', positions, aspect, image: img, cover, fg: fgRgb, bg: bgRgb, contrast,
     });
     if (gl) { ctx.drawImage(gl, 0, 0); return; }
+    if (gpu) setGpu(false);
     const valueAt = isImage
       ? (() => { const luma = imageLuma(img, w, h, cover); return (x, y) => Math.min(1, Math.max(0, (luma(x, y) - 0.5) * contrast + 0.5)); })()
       : (x, y) => fieldAt((x + 0.5) / w, (y + 0.5) / h, aspect, positions);
@@ -60,7 +61,7 @@ export default function DitherField({
     fps,
     animate: !image && gpu,
     active,
-    deps: [fgRgb, bgRgb, img, cell, contrast],
+    deps: [fgRgb, bgRgb, img, cell, contrast, gpu],
   });
 
   return (

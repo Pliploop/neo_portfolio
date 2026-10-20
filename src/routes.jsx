@@ -7,17 +7,27 @@ export const routes = [
   { path: '/music', label: 'Music', load: () => import('./pages/Music/Music.jsx') },
 ];
 
-const loaded = new Map();
-const pending = new Map();
-
-export function preload(path) {
-  const route = routes.find((r) => r.path === path);
-  if (!route) return Promise.resolve();
-  if (!pending.has(path)) {
-    pending.set(path, route.load().then((mod) => { loaded.set(path, mod.default); return mod; }));
+export function makePreloader(table) {
+  const loaded = new Map();
+  const pending = new Map();
+  function preload(path) {
+    const route = table.find((r) => r.path === path);
+    if (!route) return Promise.resolve();
+    if (!pending.has(path)) {
+      const p = route.load().then(
+        (mod) => { loaded.set(path, mod.default); return mod; },
+        (err) => { pending.delete(path); throw err; },
+      );
+      pending.set(path, p);
+    }
+    return pending.get(path);
   }
-  return pending.get(path);
+  return { preload, loaded };
 }
+
+const preloader = makePreloader(routes);
+const { loaded } = preloader;
+export const { preload } = preloader;
 
 const lazies = new Map(routes.map((r) => [r.path, lazy(() => preload(r.path))]));
 

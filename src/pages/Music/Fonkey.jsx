@@ -22,11 +22,11 @@ export default function Fonkey() {
             <button type="button" aria-label="Previous video" className={square} onClick={() => setActive((i) => (i - 1 + n) % n)}><ChevronLeft /></button>
             <button type="button" aria-label="Next video" className={square} onClick={() => setActive((i) => (i + 1) % n)}><ChevronRight /></button>
             <p className="meta ml-2">
-              <span className="text-ink/55">{String(active + 1).padStart(2, '0')}/{String(n).padStart(2, '0')}</span>{' '}
-              {track.title} <span className="text-ink/55">({track.original} cover)</span>
+              <span className="text-ink/60">{String(active + 1).padStart(2, '0')}/{String(n).padStart(2, '0')}</span>{' '}
+              {track.title} <span className="text-ink/60">({track.original} cover)</span>
             </p>
           </div>
-          <p className="meta mt-2 text-ink/55">{fonkey.credit}</p>
+          <p className="meta mt-2 text-ink/60">{fonkey.credit}</p>
         </div>
         <aside className="flex flex-col gap-8">
           <div className="flex items-center gap-4">
@@ -52,7 +52,7 @@ export default function Fonkey() {
                     onClick={() => setActive(i)}
                     className={`w-full flex justify-between gap-3 py-2 border-b-2 border-ink text-left ${i === active ? 'text-accent-ink font-semibold' : 'hover:text-accent-ink'}`}
                   >
-                    <span>{t.title}</span><span className="meta text-ink/55">{t.original}</span>
+                    <span>{t.title}</span><span className="meta text-ink/60">{t.original}</span>
                   </button>
                 </li>
               ))}

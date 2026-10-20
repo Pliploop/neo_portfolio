@@ -15,9 +15,9 @@ export default function Productions() {
             key={p.url}
             summary={(
               <div className="grid grid-cols-[2.5rem_1fr] sm:grid-cols-[3rem_1fr_auto] gap-x-4 items-baseline">
-                <span className="meta text-ink/55">{String(i + 1).padStart(2, '0')}</span>
+                <span className="meta text-ink/60">{String(i + 1).padStart(2, '0')}</span>
                 <span><span className="text-2xl font-extrabold tracking-tight">{p.title}</span> <span className="text-ink/60">{p.kind}</span></span>
-                <span className="meta text-ink/55 col-start-2 sm:col-start-auto">{p.tags.join(' · ')}</span>
+                <span className="meta text-ink/60 col-start-2 sm:col-start-auto">{p.tags.join(' · ')}</span>
               </div>
             )}
           >

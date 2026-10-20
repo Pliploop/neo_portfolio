@@ -54,3 +54,8 @@ for (const path of ['/', '/about', '/academia', '/music']) {
     expect(clipped).toEqual([]);
   });
 }
+
+test('deep link to /about#contact scrolls to the form', async ({ page }) => {
+  await page.goto('/about#contact');
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(500);
+});

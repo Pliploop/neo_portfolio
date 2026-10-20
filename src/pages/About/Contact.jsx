@@ -6,7 +6,7 @@ import { ArrowUpRight } from '../../ui/icons';
 import { validateContact, stripHtml, emailConfig, COOLDOWN_MS } from './contactLogic';
 
 const EMPTY = { name: '', email: '', message: '' };
-const input = 'w-full bg-paper border-2 border-ink rounded-2xl px-4 py-3 shadow-hard-sm focus:shadow-hard focus:outline-none transition-shadow placeholder:text-ink/35';
+const input = 'w-full bg-paper border-2 border-ink rounded-2xl px-4 py-3 shadow-hard-sm focus:shadow-hard focus:outline-none transition-shadow placeholder:text-ink/60';
 
 function Field({ id, label, error, children }) {
   return (

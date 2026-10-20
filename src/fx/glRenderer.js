@@ -40,7 +40,6 @@ void main() {
 }`;
 
 let state;
-const imageTextures = new WeakMap();
 
 function compile(gl, type, src) {
   const sh = gl.createShader(type);
@@ -89,15 +88,15 @@ function init() {
     gl.uniform1i(uniforms.u_bayer, 0);
     gl.uniform1i(uniforms.u_image, 1);
     canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); state = undefined; });
-    return { canvas, gl, uniforms };
+    return { canvas, gl, uniforms, textures: new WeakMap() };
   } catch (err) {
     console.error('[fx] WebGL init failed, using CPU dither', err);
     return null;
   }
 }
 
-function imageTexture(gl, image) {
-  if (imageTextures.has(image)) return imageTextures.get(image);
+function imageTexture({ gl, textures }, image) {
+  if (textures.has(image)) return textures.get(image);
   const tex = gl.createTexture();
   gl.activeTexture(gl.TEXTURE1);
   gl.bindTexture(gl.TEXTURE_2D, tex);
@@ -105,7 +104,7 @@ function imageTexture(gl, image) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  imageTextures.set(image, tex);
+  textures.set(image, tex);
   return tex;
 }
 
@@ -130,7 +129,7 @@ export function renderDither(opts) {
   if (mode === 'image' && image) {
     gl.uniform1i(U.u_mode, 1);
     gl.activeTexture(gl.TEXTURE1);
-    gl.bindTexture(gl.TEXTURE_2D, imageTexture(gl, image));
+    gl.bindTexture(gl.TEXTURE_2D, imageTexture(state, image));
     gl.uniform2f(U.u_imgScale, cover.scale[0], cover.scale[1]);
     gl.uniform2f(U.u_imgOffset, cover.offset[0], cover.offset[1]);
     gl.uniform1f(U.u_contrast, contrast);

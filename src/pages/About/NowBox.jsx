@@ -10,7 +10,7 @@ export default function NowBox() {
         <dl className="grid sm:grid-cols-[9rem_1fr] gap-x-6 gap-y-2.5">
           {about.now.map(([k, v]) => (
             <React.Fragment key={k}>
-              <dt className="meta text-ink/55">{k}</dt>
+              <dt className="meta text-ink/60">{k}</dt>
               <dd className="font-medium">{v}</dd>
             </React.Fragment>
           ))}

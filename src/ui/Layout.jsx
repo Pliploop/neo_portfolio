@@ -4,16 +4,27 @@ import Nav from './Nav';
 import Footer from './Footer';
 import Grain from '../fx/Grain';
 
+const HASH_RETRY_MS = 50;
+const HASH_RETRIES = 60;
+
 export default function Layout({ children }) {
   const { pathname, hash } = useLocation();
   const bare = pathname === '/';
 
   useEffect(() => {
-    if (hash) {
-      document.getElementById(hash.slice(1))?.scrollIntoView();
-      return;
+    if (!hash) {
+      window.scrollTo(0, 0);
+      return undefined;
     }
-    window.scrollTo(0, 0);
+    // Lazy pages mount after this effect, so wait for the target to exist.
+    let tries = 0;
+    const id = setInterval(() => {
+      const el = document.getElementById(hash.slice(1));
+      tries += 1;
+      if (el) el.scrollIntoView();
+      if (el || tries >= HASH_RETRIES) clearInterval(id);
+    }, HASH_RETRY_MS);
+    return () => clearInterval(id);
   }, [pathname, hash]);
 
   return (
