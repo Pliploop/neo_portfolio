@@ -24,5 +24,6 @@ module.exports = {
       },
     },
   },
+  safelist: ['font-zighead', 'font-saint'],
   plugins: [],
 };
