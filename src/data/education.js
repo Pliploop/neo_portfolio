@@ -4,12 +4,12 @@ export const educationData = [
     company: "@Queen Mary University of London (QMUL)",
     dates: "September 2023 - present",
     description: [
-      "I'm currently a PhD student at Queen Mary University of London in collaboration with Universal Music Group. My PhD project focuses on refining self-supervised learning techniques for musical audio, to create interpretable, navigable and explainable learned representations The research questions I'm interested in answering are:",
+      "I'm currently a PhD student at Queen Mary University of London in collaboration with Universal Music Group. My PhD project focuses on refining self-supervised learning techniques for musical audio, to create interpretable, navigable and explainable learned representations. The research questions I'm interested in answering are:",
 
       "How can we leverage domain knowledge to create so far underexplored music-specific tasks to disentangle learned representations?",
       "How can weak supervision from outside modalities further disentangle latent spaces and provide intuitive navigation means for users?",
       "Can human feedback improve the intuitive navigation of latent music representations?",
-      "Through these questions I aim to create navigable, interpretable and multimodal latent spaces to help musicians create musicians and to further our understanding of music as a whole.",
+      "Through these questions I aim to create navigable, interpretable and multimodal latent spaces to help musicians create and to further our understanding of music as a whole.",
     ],
     links:[],
     linktexts:[],
@@ -20,7 +20,7 @@ export const educationData = [
     dates: "June 2021 - December 2022",
     description: [
       "GPA : 5.86/7",
-      "Coursework: Deep Learning, Natural Language Processing, Computer Vision, Acoustics . Signal Processing, Machine Learning, Statistics",
+      "Coursework: Deep Learning, Natural Language Processing, Computer Vision, Acoustics, Signal Processing, Machine Learning, Statistics",
       "Project: Music Information Retrieval– Vocalist classification via spectrogram computer vision.",
     ],
     links: ["https://github.com/Pliploop/Spectrogram_Artist_Recognition"],
@@ -71,7 +71,7 @@ export const experienceData = [
     company: "@Sony CSL Paris",
     dates: "February 2023 - September 2023",
     description: [
-      "Under the superivision of Stefan Lattner, I researched audio-conditioned symbolic music generation for live jamming and producing",
+      "Under the supervision of Stefan Lattner, I researched audio-conditioned symbolic music generation for live jamming and producing",
       "Wrote a yet-to-be-published paper with conclusive results and interesting contributions beyond symbolic music.",
     ],
     links:[],
