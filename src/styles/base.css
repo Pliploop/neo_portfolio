@@ -6,39 +6,67 @@
   }
   body {
     @apply font-sans antialiased;
-    font-size: 17px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.55;
+    font-weight: 400;
     background: rgb(var(--paper));
     overflow-x: hidden;
+    font-feature-settings: 'ss01', 'tnum' 0;
   }
   ::selection { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
-  :focus-visible { outline: 3px solid rgb(var(--accent)); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid rgb(var(--accent-ink)); outline-offset: 3px; border-radius: 2px; }
   h1, h2, h3 { text-wrap: balance; }
 }
 
 @layer components {
-  .brut {
-    border: 2px solid rgb(var(--ink));
-    box-shadow: 4px 4px 0 0 rgb(var(--ink));
-  }
-  .brut-thick {
-    border: 3px solid rgb(var(--ink));
-    box-shadow: 4px 4px 0 0 rgb(var(--ink));
-  }
-  .brut-press {
-    transition: transform 120ms ease, box-shadow 120ms ease;
-  }
-  .brut-press:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 rgb(var(--ink)); }
-  .brut-press:active { transform: translate(4px, 4px); box-shadow: 0 0 0 0 rgb(var(--ink)); }
-  .display { font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; }
-  .meta { @apply font-mono; font-size: 13px; line-height: 1.5; letter-spacing: 0; }
-  .dropcap { font-weight: 400; letter-spacing: 0; font-size: 1.12em; line-height: 0; }
+  /* Display type: medium weight, tight, Swiss. */
+  .display { font-weight: 500; letter-spacing: -0.045em; line-height: 0.92; }
+  .heading { font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; }
+
+  /* Captions and metadata. */
+  .meta { @apply font-mono; font-size: 12px; line-height: 1.5; letter-spacing: 0.01em; }
+
+  .dropcap { font-weight: 400; letter-spacing: 0; font-size: 1.08em; line-height: 0; }
+
+  /* Hairline rules. */
+  .rule { border-color: rgb(var(--ink) / 0.14); }
+
+  /* Links: quiet at rest, a hand-drawn wavy vermilion underline on hover. */
   .link {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.2em;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgb(var(--ink) / 0.3);
+    text-underline-offset: 0.25em;
+    transition: color 160ms ease, text-decoration-color 160ms ease;
   }
-  .link:hover { color: rgb(var(--accent-ink)); }
+  .link:hover {
+    color: rgb(var(--accent-ink));
+    text-decoration-style: wavy;
+    text-decoration-color: rgb(var(--accent));
+  }
+
+  /* Pill controls with a 1px outline. */
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    height: 2.5rem; padding: 0 1.15rem; border-radius: 9999px;
+    border: 1px solid rgb(var(--ink) / 0.8);
+    font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+  }
+  .pill:hover { background: rgb(var(--ink)); color: rgb(var(--paper)); }
+  .pill-solid { background: rgb(var(--ink)); color: rgb(var(--paper)); }
+  .pill-solid:hover { background: rgb(var(--accent-ink)); border-color: rgb(var(--accent-ink)); color: rgb(var(--paper)); }
+  .pill-sm { height: 2rem; padding: 0 0.85rem; font-size: 12px; }
+  .pill[aria-pressed='true'], .pill[aria-selected='true'] { background: rgb(var(--ink)); color: rgb(var(--paper)); }
+
+  /* Round icon buttons. */
+  .dot-btn {
+    display: grid; place-items: center; border-radius: 9999px;
+    border: 1px solid rgb(var(--ink) / 0.2);
+    transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+  }
+  .dot-btn:hover:not(:disabled) { border-color: rgb(var(--ink)); }
+  .dot-btn:disabled { opacity: 0.35; }
 }
 
 @media (prefers-reduced-motion: reduce) {

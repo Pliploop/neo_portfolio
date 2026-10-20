@@ -2,28 +2,34 @@ import React from 'react';
 import AsciiField from '../fx/AsciiField';
 import TLink from './TLink';
 import { ArrowUpRight } from './icons';
+import { Squiggle } from './Doodle';
 import { site } from '../data/site';
 
 export default function Footer() {
   return (
-    <footer className="px-4 sm:px-8 pb-6 mt-28">
-      <div className="mx-auto max-w-6xl brut-thick rounded-card bg-paper overflow-hidden">
-        <div className="h-16 border-b-2 border-ink"><AsciiField mode="wave" fontSize={12} fps={12} /></div>
-        <div className="p-6 sm:p-10 grid gap-10 md:grid-cols-[1fr_auto] items-end">
-          <TLink to="/about#contact" className="display text-[clamp(2.5rem,8vw,6rem)] hover:text-accent-ink">
-            Get in touch
-          </TLink>
-          <ul className="flex flex-col gap-1.5">
+    <footer className="mt-40">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="border-t rule" />
+        <div aria-hidden="true" className="h-3 mt-1.5 w-1/2 opacity-60"><AsciiField mode="wave" fontSize={9} alpha={0.45} fps={10} /></div>
+        <div className="grid grid-cols-12 gap-x-6 gap-y-10 pt-14 pb-10">
+          <div className="col-span-12 md:col-span-8">
+            <p className="meta text-ink/60 mb-5">Contact</p>
+            <TLink to="/about#contact" className="group inline-block display text-[clamp(2.4rem,7vw,5.5rem)] hover:text-accent-ink transition-colors">
+              Get in touch
+              <Squiggle width={120} className="block mt-2 text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </TLink>
+          </div>
+          <ul className="col-span-12 md:col-span-4 md:pt-10 grid grid-cols-2 gap-y-2 gap-x-6">
             {site.footerLinks.map((l) => (
               <li key={l.label}>
-                <a href={l.href} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1">
-                  {l.label} <ArrowUpRight width={12} height={12} />
+                <a href={l.href} target="_blank" rel="noopener noreferrer" className="link inline-flex items-center gap-1 text-[14px]">
+                  {l.label} <ArrowUpRight width={11} height={11} />
                 </a>
               </li>
             ))}
           </ul>
         </div>
-        <div className="border-t-2 border-ink px-6 sm:px-10 py-3 meta flex justify-between">
+        <div className="border-t rule py-5 meta text-ink/60 flex justify-between">
           <span>© {new Date().getFullYear()} {site.name}</span>
           <span>{site.city}</span>
         </div>

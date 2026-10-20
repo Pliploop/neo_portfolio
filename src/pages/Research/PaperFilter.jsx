@@ -10,7 +10,7 @@ export default function PaperFilter({ value, onChange }) {
           type="button"
           aria-pressed={value === f.id}
           onClick={() => onChange(f.id)}
-          className={`meta h-9 px-3.5 rounded-full border-2 border-ink transition-colors ${value === f.id ? 'bg-ink text-paper' : 'hover:bg-ink/10'}`}
+          className="pill pill-sm"
         >
           {f.label}
         </button>

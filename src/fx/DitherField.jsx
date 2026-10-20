@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import { useFxCanvas } from './useFxCanvas';
 import { useCssColors } from '../hooks/useCssColors';
 import { useImage } from '../hooks/useImage';
-import { makeBlobs, blobPositions, fieldAt } from './blobs';
+import { makeBlobs, blobPositions, fieldAt, radialFade } from './blobs';
 import { coverTransform } from './cover';
 import { renderDither, hasWebGL } from './glRenderer';
 import { ditherPixels } from './ditherCpu';
@@ -23,7 +23,7 @@ function imageLuma(image, w, h, cover) {
 }
 
 export default function DitherField({
-  seed = 1, blobs = 5, cell = 4, fg = '--accent', bg = '--paper',
+  seed = 1, blobs = 5, cell = 2, gain = 0.85, fade = false, fg = '--accent', bg = '--paper',
   image = null, contrast = 1, fps = 24, active = true, className = '',
 }) {
   const ref = useRef(null);
@@ -47,13 +47,16 @@ export default function DitherField({
     const cover = isImage ? coverTransform(w, h, img.naturalWidth, img.naturalHeight) : null;
     const positions = isImage ? [] : blobPositions(field, t);
     const gl = gpu && renderDither({
-      width: w, height: h, mode: isImage ? 'image' : 'blobs', positions, aspect, image: img, cover, fg: fgRgb, bg: bgRgb, contrast,
+      width: w, height: h, mode: isImage ? 'image' : 'blobs', positions, aspect, image: img, cover, fg: fgRgb, bg: bgRgb, contrast, gain, fade,
     });
     if (gl) { ctx.drawImage(gl, 0, 0); return; }
     if (gpu) setGpu(false);
     const valueAt = isImage
       ? (() => { const luma = imageLuma(img, w, h, cover); return (x, y) => Math.min(1, Math.max(0, (luma(x, y) - 0.5) * contrast + 0.5)); })()
-      : (x, y) => fieldAt((x + 0.5) / w, (y + 0.5) / h, aspect, positions);
+      : (x, y) => {
+        const nx = (x + 0.5) / w; const ny = (y + 0.5) / h;
+        return gain * fieldAt(nx, ny, aspect, positions) * (fade ? radialFade(nx, ny) : 1);
+      };
     ctx.putImageData(new ImageData(ditherPixels({ width: w, height: h, valueAt, fg: fgRgb, bg: bgRgb }), w, h), 0, 0);
   };
 
@@ -61,7 +64,7 @@ export default function DitherField({
     fps,
     animate: !image && gpu,
     active,
-    deps: [fgRgb, bgRgb, img, cell, contrast, gpu],
+    deps: [fgRgb, bgRgb, img, cell, contrast, gain, fade, gpu],
   });
 
   return (

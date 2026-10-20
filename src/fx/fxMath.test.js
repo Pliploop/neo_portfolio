@@ -131,3 +131,15 @@ describe('dither masks', () => {
     expect(ditherMaskBits(0.5).filter(Boolean)).toHaveLength(32);
   });
 });
+
+describe('radial fade', () => {
+  test('is full at the centre and gone at the edges', async () => {
+    const { radialFade } = await import('./blobs');
+    expect(radialFade(0.5, 0.5)).toBe(1);
+    expect(radialFade(0.5, 0)).toBe(0);
+    expect(radialFade(0, 0)).toBe(0);
+    const mid = radialFade(0.5, 0.2);
+    expect(mid).toBeGreaterThan(0);
+    expect(mid).toBeLessThan(1);
+  });
+});

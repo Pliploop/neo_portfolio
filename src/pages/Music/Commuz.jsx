@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Embed from '../../ui/Embed';
+import Section from '../../ui/Section';
 import { soundcloudEmbed } from '../../ui/embeds';
 import { commuz } from '../../data/music';
 import title from '../../assets/commuz-title.svg';
@@ -9,11 +10,11 @@ export default function Commuz() {
   const play = commuz.plays.find((p) => p.year === year);
   const titleMask = { WebkitMaskImage: `url(${title})`, maskImage: `url(${title})`, WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat' };
   return (
-    <section className="mx-auto max-w-6xl px-4 sm:px-8">
+    <Section index="03" label="Commuz'" className="mt-32">
       <h2 className="sr-only">Commuz' musical theatre: mixing and mastering</h2>
-      <div aria-hidden="true" className="h-20 sm:h-28 w-full max-w-xl bg-ink" style={titleMask} />
-      <p className="meta mt-4 text-ink/60">[mixing and mastering]</p>
-      <div className="mt-8 grid md:grid-cols-2 gap-6 max-w-5xl text-lg">
+      <div aria-hidden="true" className="h-16 sm:h-20 w-full max-w-md bg-ink" style={titleMask} />
+      <p className="meta mt-4 text-ink/60">Mixing and mastering</p>
+      <div className="mt-8 grid md:grid-cols-2 gap-8 text-[15px] leading-relaxed text-ink/80">
         {commuz.intro.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}
       </div>
 
@@ -36,23 +37,23 @@ export default function Commuz() {
             aria-selected={p.year === year}
             aria-controls="commuz-panel"
             onClick={() => setYear(p.year)}
-            className={`brut brut-press h-10 px-4 rounded-xl meta ${p.year === year ? 'bg-ink text-paper' : 'bg-paper'}`}
+            className="pill pill-sm"
           >
             {p.year}
           </button>
         ))}
       </div>
-      <div role="tabpanel" id="commuz-panel" aria-labelledby={`commuz-${year}`} className="mt-8 grid md:grid-cols-[1fr_22rem] gap-10">
+      <div role="tabpanel" id="commuz-panel" aria-labelledby={`commuz-${year}`} className="mt-10 grid lg:grid-cols-[1fr_20rem] gap-10">
         <div>
-          <h3 className="display text-4xl sm:text-5xl">{play.title}</h3>
+          <h3 className="heading text-[2.25rem]">{play.title}</h3>
           <p className="meta mt-3 text-ink/60">{play.roles.join(' · ')}</p>
-          <p className="mt-5 text-lg max-w-[55ch]">{play.description}</p>
+          <p className="mt-5 text-[15px] leading-relaxed text-ink/80 max-w-[52ch]">{play.description}</p>
           <ol className="mt-6 meta grid grid-cols-2 gap-x-6 gap-y-1 max-w-md">
             {play.tracks.map((t, i) => <li key={t}><span className="text-ink/60">{String(i + 1).padStart(2, '0')}</span> {t}</li>)}
           </ol>
         </div>
         <Embed key={play.spotify} src={play.spotify} title={`${play.title} album`} height={352} seed={70} label="Load album" />
       </div>
-    </section>
+    </Section>
   );
 }

@@ -25,3 +25,20 @@ test('DitherField falls back to the CPU path when WebGL is missing', () => {
   expect(putImageData).toHaveBeenCalled();
   HTMLCanvasElement.prototype.getContext = original;
 });
+
+test('gain scales the field: gain 0 draws only the background colour', () => {
+  let pixels;
+  const original = HTMLCanvasElement.prototype.getContext;
+  HTMLCanvasElement.prototype.getContext = function getContext(type) {
+    if (type === '2d') return { putImageData: (img) => { pixels = img.data; }, imageSmoothingEnabled: true };
+    return null;
+  };
+  globalThis.ImageData = class { constructor(data, w, h) { this.data = data; this.width = w; this.height = h; } };
+  document.documentElement.style.setProperty('--accent', '255 74 28');
+  document.documentElement.style.setProperty('--paper', '239 235 227');
+  render(<DitherField seed={3} cell={2} gain={0} />);
+  const reds = [];
+  for (let i = 0; i < pixels.length; i += 4) reds.push(pixels[i]);
+  expect(new Set(reds)).toEqual(new Set([239]));
+  HTMLCanvasElement.prototype.getContext = original;
+});

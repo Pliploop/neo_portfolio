@@ -2,11 +2,12 @@ import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import DropCapHeading from '../../ui/DropCapHeading';
 import Frame from '../../ui/Frame';
+import Section from '../../ui/Section';
 import { ArrowUpRight } from '../../ui/icons';
 import { validateContact, stripHtml, emailConfig, COOLDOWN_MS } from './contactLogic';
 
 const EMPTY = { name: '', email: '', message: '' };
-const input = 'w-full bg-paper border-2 border-ink rounded-2xl px-4 py-3 shadow-hard-sm focus:shadow-hard focus:outline-none transition-shadow placeholder:text-ink/60';
+const input = 'w-full bg-transparent border-0 border-b border-ink/40 rounded-none px-0 py-2.5 text-[16px] focus:border-ink focus:outline-none focus-visible:outline-none transition-colors placeholder:text-ink/60';
 
 function Field({ id, label, error, children }) {
   return (
@@ -57,17 +58,17 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-4 sm:px-8 scroll-mt-28">
-      <DropCapHeading level={2} text="Get in touch" caps={['zighead']} className="text-[clamp(2.4rem,10vw,3.75rem)] mb-8" />
+    <Section id="contact" index="04" label="Contact" className="scroll-mt-28">
+      <DropCapHeading level={2} text="Get in touch" caps={['zighead']} className="heading text-[clamp(2.2rem,5vw,3.25rem)] mb-10" />
       {status.kind === 'success' ? (
         <Frame className="p-8 max-w-2xl" role="status">
-          <p className="display text-3xl">Message sent.</p>
+          <p className="heading text-3xl">Message sent.</p>
           <p className="mt-3 text-ink/70">Thanks. I'll get back to you soon.</p>
           <button type="button" className="meta link mt-5" onClick={() => setStatus({ kind: 'idle', message: '' })}>send another</button>
         </Frame>
       ) : (
-        <form noValidate onSubmit={onSubmit} className="max-w-2xl grid gap-5">
-          <div className="grid sm:grid-cols-2 gap-5">
+        <form noValidate onSubmit={onSubmit} className="max-w-2xl grid gap-8">
+          <div className="grid sm:grid-cols-2 gap-8">
             <Field id="name" label="name (optional)" error={errors.name}>
               <input id="name" name="name" autoComplete="name" className={input} value={values.name} onChange={set('name')} {...aria('name')} />
             </Field>
@@ -80,12 +81,12 @@ export default function Contact() {
           </Field>
           {status.kind === 'error' ? <p role="alert" className="meta text-accent-ink">{status.message}</p> : null}
           <div>
-            <button type="submit" disabled={status.kind === 'sending'} className="brut brut-press h-12 px-6 rounded-full bg-accent text-on-accent font-semibold inline-flex items-center gap-2 disabled:opacity-60">
+            <button type="submit" disabled={status.kind === 'sending'} className="pill pill-solid disabled:opacity-60">
               {status.kind === 'sending' ? 'Sending…' : 'Send'} <ArrowUpRight width={14} height={14} />
             </button>
           </div>
         </form>
       )}
-    </section>
+    </Section>
   );
 }

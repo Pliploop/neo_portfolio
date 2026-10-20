@@ -10,12 +10,14 @@ import { music } from '../../data/music';
 export default function Music() {
   return (
     <>
-      <section className="relative mx-auto max-w-6xl px-4 sm:px-8 min-h-[52svh] flex flex-col justify-end">
-        <div aria-hidden="true" className="absolute right-0 -top-6 w-[70vw] sm:w-[44vw] max-w-[520px] aspect-square blob-3">
-          <DitherField seed={17} fg="--accent" cell={4} />
+      <section className="mx-auto max-w-6xl px-5 sm:px-8 grid grid-cols-12 gap-x-6 gap-y-10 items-end">
+        <div className="col-span-12 md:col-span-8">
+          <DropCapHeading level={1} text="Music" caps={['zighead']} accentWord={0} className="display text-[clamp(3.6rem,12vw,9.5rem)]" />
+          <p className="mt-10 max-w-[40ch] text-[1.2rem] leading-snug tracking-[-0.015em] text-ink/80">{music.intro}</p>
         </div>
-        <DropCapHeading level={1} text="Music" caps={['zighead']} accentWord={0} className="relative text-[clamp(4.5rem,16vw,12rem)]" />
-        <p className="relative mt-8 max-w-[44ch] text-xl font-medium leading-snug">{music.intro}</p>
+        <div aria-hidden="true" className="col-span-7 col-start-4 md:col-span-4 md:col-start-auto aspect-square">
+          <DitherField seed={17} fg="--accent" cell={2} gain={0.9} fade />
+        </div>
       </section>
       <Divider />
       <Fonkey />

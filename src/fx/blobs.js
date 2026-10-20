@@ -32,3 +32,13 @@ export function fieldAt(x, y, aspect, positions) {
   }
   return Math.min(1, v);
 }
+
+const FADE_INNER = 0.18;
+const FADE_OUTER = 0.5;
+
+// 1 at the centre, easing to 0 at the edge circle: lets a field dissolve into the page.
+export function radialFade(x, y) {
+  const d = Math.hypot(x - 0.5, y - 0.5);
+  const t = Math.min(1, Math.max(0, (d - FADE_INNER) / (FADE_OUTER - FADE_INNER)));
+  return 1 - t * t * (3 - 2 * t);
+}

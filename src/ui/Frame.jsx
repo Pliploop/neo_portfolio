@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Frame({ as: Tag = 'div', thick = false, className = '', children, ...rest }) {
+export default function Frame({ as: Tag = 'div', className = '', children, ...rest }) {
   return (
-    <Tag className={`${thick ? 'brut-thick' : 'brut'} rounded-card bg-paper ${className}`} {...rest}>
+    <Tag className={`border rule rounded-soft bg-paper ${className}`} {...rest}>
       {children}
     </Tag>
   );

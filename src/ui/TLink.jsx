@@ -27,7 +27,7 @@ export default function TLink({ to, className = '', children, ...rest }) {
       }}
       {...rest}
     >
-      {children}
+      {typeof children === 'function' ? children({ active }) : children}
     </a>
   );
 }

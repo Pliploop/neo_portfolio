@@ -28,6 +28,30 @@ or deployed until the owner approves.
 - New content. Copy is rewritten, never extended with invented facts.
 - CMS, i18n, analytics.
 
+## Revision 2 (2026-10-21): Swiss restyle
+
+The owner rejected neobrutalism as too blocky and aggressive. Direction now: Swiss, minimal,
+sleek, professional, with fine dithering and subtle "digital naive" and organic touches.
+This revision supersedes the shape language, type weights and texture settings in section 1;
+palette, fonts, pages, architecture and testing are unchanged.
+
+- Grid: 12 columns, flush left. Content sections use a numbered caption column
+  (`01 | About`) and a 9-column content column (`ui/Section.jsx`).
+- Lines: 1px hairlines at ink 14% (`.rule`). No hard shadows, no 2px+ borders, no boxed cards.
+  Radius 20px (`rounded-soft`) only on media frames and the player.
+- Type: Archivo at 400/500. Display 500, tracking -0.045em; headings 500, -0.03em. Body 16-17px.
+  Meta in JetBrains Mono 12px. Drop-caps unchanged (Zighead/Saint), set smaller.
+- Controls: 1px outline pills, solid ink for primary (hover turns vermilion); round 1px icon
+  buttons; nav is a plain top bar with a vermilion dot for the active page.
+- Dither: 2px cells everywhere (enforced by `styleGuard.test.js`), `gain` < 1 and an in-shader
+  radial `fade` so blobs dissolve into the page instead of being cut by a mask.
+- ASCII: 7-9px, low alpha, used as texture (dividers, footer, hovers, player cover).
+- Digital naive: hand-drawn SVG marks in vermilion (`ui/Doodle.jsx`: sparkle, squiggle,
+  asterisk), wavy vermilion underline on link hover.
+- Accessibility: light-mode accent text `rgb(196 48 10)`, muted text ink 60% (both >= 4.5:1).
+- Performance: WebGL contexts are requested with `failIfMajorPerformanceCaveat`, so
+  software-rendered GL (no GPU) gets the static CPU dither instead of a multi-second shader.
+
 ## 1. Visual system
 
 ### Colour tokens (`src/styles/tokens.css`)

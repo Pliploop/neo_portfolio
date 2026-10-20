@@ -4,16 +4,16 @@ export default function Expandable({ summary, children, defaultOpen = false, cla
   const [open, setOpen] = useState(defaultOpen);
   const id = useId();
   return (
-    <div className={`border-b-2 border-ink ${className}`}>
+    <div className={`border-b rule ${className}`}>
       <button
         type="button"
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen((o) => !o)}
-        className="w-full text-left flex items-start gap-4 py-4 group"
+        className="w-full text-left flex items-start gap-4 py-5 group"
       >
         <div className="flex-1 min-w-0 group-hover:text-accent-ink transition-colors">{summary}</div>
-        <span aria-hidden="true" className="meta shrink-0 mt-0.5 w-4 text-center">{open ? '−' : '+'}</span>
+        <span aria-hidden="true" className={`meta shrink-0 mt-0.5 w-4 text-center text-ink/60 transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
       <div
         id={id}

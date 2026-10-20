@@ -10,7 +10,7 @@ export default function PaperRow({ paper }) {
         summary={(
           <div className="grid grid-cols-[3.5rem_1fr] sm:grid-cols-[4rem_1fr_9rem] gap-x-4 items-baseline">
             <span className="meta text-ink/60">{paper.year}</span>
-            <span className="font-semibold leading-snug">{paper.title}</span>
+            <span className="text-[16px] leading-snug tracking-[-0.01em]">{paper.title}</span>
             <span className="meta text-ink/60 hidden sm:block text-right">{paper.venue}</span>
           </div>
         )}

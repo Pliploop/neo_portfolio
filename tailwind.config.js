@@ -17,11 +17,7 @@ module.exports = {
         zighead: ['zighead', 'serif'],
         saint: ['saint', 'serif'],
       },
-      borderRadius: { card: '24px' },
-      boxShadow: {
-        hard: '4px 4px 0 0 rgb(var(--ink))',
-        'hard-sm': '2px 2px 0 0 rgb(var(--ink))',
-      },
+      borderRadius: { soft: '20px' },
     },
   },
   safelist: ['font-zighead', 'font-saint'],

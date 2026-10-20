@@ -25,8 +25,9 @@ beforeEach(() => {
   vi.spyOn(document, 'createElement').mockImplementation((tag) => {
     const el = original(tag);
     if (tag === 'canvas') {
-      el.getContext = (type) => {
+      el.getContext = (type, attrs) => {
         if (type !== 'webgl') return null;
+        contexts.attrs = attrs;
         const gl = fakeGl(el); contexts.push(gl); return gl;
       };
     }
@@ -63,4 +64,10 @@ test('hasWebGL reports false when re-init after loss fails', async () => {
     return el;
   });
   expect(hasWebGL()).toBe(false);
+});
+
+test('refuses software-rendered WebGL so slow devices get the static CPU frame', async () => {
+  const { hasWebGL } = await import('./glRenderer');
+  hasWebGL();
+  expect(contexts.attrs).toMatchObject({ failIfMajorPerformanceCaveat: true });
 });

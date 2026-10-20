@@ -1,10 +1,8 @@
 import React from 'react';
 import { STEPS, formatTime } from './playerState';
 
-const BLOCKS = 24;
-
 export default function ProgressBar({ progress, total }) {
-  const filled = Math.round((progress / STEPS) * BLOCKS);
+  const pct = (progress / STEPS) * 100;
   return (
     <div className="mt-5">
       <div
@@ -13,13 +11,12 @@ export default function ProgressBar({ progress, total }) {
         aria-valuemin={0}
         aria-valuemax={STEPS}
         aria-valuenow={progress}
-        className="flex gap-[3px] h-4 p-[3px] border-2 border-ink rounded-full"
+        className="relative h-px bg-ink/20"
       >
-        {Array.from({ length: BLOCKS }, (_, i) => (
-          <span key={i} className={`flex-1 rounded-[2px] ${i < filled ? 'bg-ink' : ''}`} />
-        ))}
+        <span className="absolute inset-y-0 left-0 bg-ink" style={{ width: `${pct}%` }} />
+        <span className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-2 w-2 rounded-full bg-accent" style={{ left: `${pct}%` }} />
       </div>
-      <div className="meta flex justify-between mt-1.5 text-ink/60">
+      <div className="meta flex justify-between mt-2.5 text-ink/60 tabular-nums">
         <span>{formatTime((progress / STEPS) * total)}</span>
         <span>{formatTime(total)}</span>
       </div>

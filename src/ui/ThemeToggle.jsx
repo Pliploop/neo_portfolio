@@ -8,13 +8,14 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-      className="relative h-9 w-9 shrink-0 rounded-full border-2 border-ink overflow-hidden"
+      className="dot-btn h-8 w-8 shrink-0"
     >
-      <span
-        aria-hidden="true"
-        className="absolute inset-y-0 left-0 w-1/2 bg-ink transition-transform duration-300"
-        style={{ transform: isDark ? 'translateX(100%)' : 'translateX(0)' }}
-      />
+      <span aria-hidden="true" className="relative block h-3.5 w-3.5 rounded-full border border-ink overflow-hidden">
+        <span
+          className="absolute inset-y-0 left-0 w-1/2 bg-ink transition-transform duration-500"
+          style={{ transform: isDark ? 'translateX(100%)' : 'translateX(0)' }}
+        />
+      </span>
     </button>
   );
 }

@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import AsciiField from '../../fx/AsciiField';
 import DropCapHeading from '../../ui/DropCapHeading';
 import Divider from '../../ui/Divider';
+import Section from '../../ui/Section';
 import PaperCard from './PaperCard';
 import PaperRow from './PaperRow';
 import PaperFilter from './PaperFilter';
 import { ArrowUpRight } from '../../ui/icons';
+import { Asterisk } from '../../ui/Doodle';
 import { papers } from '../../data/papers';
 import { filterPapers, featuredPapers } from '../../data/paperUtils';
 import { research } from '../../data/about';
@@ -23,43 +25,51 @@ export default function Research() {
   const list = filterPapers(papers, filter);
   return (
     <>
-      <section className="relative mx-auto max-w-6xl px-4 sm:px-8 pt-6">
-        <div aria-hidden="true" className="absolute inset-x-4 sm:inset-x-8 top-0 h-full max-h-[22rem] opacity-60">
-          <AsciiField seed={21} blobs={5} fontSize={13} alpha={0.35} fps={12} />
+      <section className="relative mx-auto max-w-6xl px-5 sm:px-8 grid grid-cols-12 gap-x-6">
+        <div aria-hidden="true" className="absolute right-5 sm:right-8 top-0 w-[46%] h-56 opacity-70 hidden sm:block">
+          <AsciiField seed={21} blobs={5} fontSize={8} alpha={0.4} fps={12} />
         </div>
-        <DropCapHeading level={1} text="Research" caps={['zighead']} accentWord={0} className="relative text-[clamp(3rem,15vw,11rem)]" />
-        <p className="relative mt-8 max-w-[52ch] text-xl leading-snug font-medium">{research.intro}</p>
-        <p className="relative meta mt-5 text-ink/60">{research.topics.join(' · ')}</p>
-      </section>
-
-      <section aria-labelledby="featured" className="mx-auto max-w-6xl px-4 sm:px-8 mt-20">
-        <h2 id="featured" className="meta mb-5">[featured]</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {featuredPapers(papers).map((p, i) => <PaperCard key={p.title} paper={p} seed={30 + i} />)}
+        <div className="col-span-12 md:col-span-9 relative">
+          <DropCapHeading level={1} text="Research" caps={['zighead']} accentWord={0} className="display text-[clamp(3.2rem,11vw,8.5rem)]" />
+          <p className="mt-10 max-w-[46ch] text-[1.2rem] leading-snug tracking-[-0.015em] text-ink/80">{research.intro}</p>
+          <p className="meta mt-6 text-ink/60 max-w-[70ch]">{research.topics.join('  ·  ')}</p>
         </div>
       </section>
 
       <Divider />
 
-      <section aria-labelledby="all-work" className="mx-auto max-w-6xl px-4 sm:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-5 mb-6">
-          <DropCapHeading level={2} text="Publications" caps={['saint']} className="text-[clamp(2.4rem,10vw,3.75rem)]" />
+      <Section index="01" label="Featured" aria-labelledby="featured">
+        <h2 id="featured" className="sr-only">Featured papers</h2>
+        <div className="grid md:grid-cols-2 gap-x-10 gap-y-14">
+          {featuredPapers(papers).map((p, i) => <PaperCard key={p.title} paper={p} seed={30 + i} />)}
+        </div>
+      </Section>
+
+      <Section index="02" label="Publications" aria-labelledby="all-work" className="mt-32">
+        <div className="flex flex-wrap items-end justify-between gap-5 mb-8">
+          <DropCapHeading level={2} text="Publications" caps={['saint']} className="heading text-[clamp(2.2rem,5vw,3.25rem)]" />
           <PaperFilter value={filter} onChange={setFilter} />
         </div>
         <span id="all-work" className="sr-only">All publications</span>
-        <ul aria-label="Publications" className="border-t-2 border-ink">
+        <ul aria-label="Publications" className="border-t rule">
           {list.map((p) => <PaperRow key={p.title} paper={p} />)}
         </ul>
         {list.length === 0 ? <p className="meta py-6 text-ink/60">No publications match this filter.</p> : null}
-      </section>
+      </Section>
 
-      <section aria-label="Elsewhere" className="mx-auto max-w-6xl px-4 sm:px-8 mt-24 grid sm:grid-cols-2 gap-x-10">
-        {ELSEWHERE.map((l) => (
-          <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between border-b-2 border-ink py-4 text-2xl sm:text-3xl font-extrabold tracking-tight hover:text-accent-ink">
-            {l.label} <ArrowUpRight width={22} height={22} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </a>
-        ))}
-      </section>
+      <Section index="03" label="Elsewhere" aria-label="Elsewhere" className="mt-32">
+        <div className="grid sm:grid-cols-2 gap-x-10">
+          {ELSEWHERE.map((l) => (
+            <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between border-b rule py-4 heading text-[1.6rem] hover:text-accent-ink transition-colors">
+              <span className="inline-flex items-center gap-3">
+                <Asterisk size={12} className="text-accent opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                {l.label}
+              </span>
+              <ArrowUpRight width={18} height={18} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+          ))}
+        </div>
+      </Section>
     </>
   );
 }

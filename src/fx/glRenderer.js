@@ -16,6 +16,8 @@ uniform sampler2D u_image;
 uniform vec2 u_imgScale;
 uniform vec2 u_imgOffset;
 uniform float u_contrast;
+uniform float u_gain;
+uniform float u_fade;
 uniform vec3 u_fg;
 uniform vec3 u_bg;
 void main() {
@@ -29,7 +31,9 @@ void main() {
       vec2 d = vec2((uv.x - b.x) * u_aspect, uv.y - b.y);
       v += exp(-dot(d, d) / (b.z * b.z));
     }
-    v = min(v, 1.0);
+    v = min(v, 1.0) * u_gain;
+    float fd = 1.0 - smoothstep(0.18, 0.5, distance(uv, vec2(0.5)));
+    v *= mix(1.0, fd, u_fade);
   } else {
     vec3 c = texture2D(u_image, uv * u_imgScale + u_imgOffset).rgb;
     v = 1.0 - dot(c, vec3(0.299, 0.587, 0.114));
@@ -65,7 +69,7 @@ function bayerTexture(gl) {
 
 function init() {
   const canvas = document.createElement('canvas');
-  const gl = canvas.getContext('webgl', { antialias: false, premultipliedAlpha: false });
+  const gl = canvas.getContext('webgl', { antialias: false, premultipliedAlpha: false, failIfMajorPerformanceCaveat: true });
   if (!gl) return null;
   try {
     const prog = gl.createProgram();
@@ -82,7 +86,7 @@ function init() {
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
     const u = (name) => gl.getUniformLocation(prog, name);
     const uniforms = Object.fromEntries(['u_res', 'u_blobs', 'u_count', 'u_aspect', 'u_mode', 'u_bayer', 'u_image',
-      'u_imgScale', 'u_imgOffset', 'u_contrast', 'u_fg', 'u_bg'].map((n) => [n, u(n)]));
+      'u_imgScale', 'u_imgOffset', 'u_contrast', 'u_gain', 'u_fade', 'u_fg', 'u_bg'].map((n) => [n, u(n)]));
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, bayerTexture(gl));
     gl.uniform1i(uniforms.u_bayer, 0);
@@ -116,7 +120,7 @@ export function hasWebGL() {
 export function renderDither(opts) {
   if (!hasWebGL()) return null;
   const { canvas, gl, uniforms: U } = state;
-  const { width, height, mode, positions = [], aspect, image, cover, fg, bg, contrast = 1 } = opts;
+  const { width, height, mode, positions = [], aspect, image, cover, fg, bg, contrast = 1, gain = 1, fade = false } = opts;
   if (canvas.width !== width || canvas.height !== height) {
     canvas.width = width;
     canvas.height = height;
@@ -135,6 +139,8 @@ export function renderDither(opts) {
     gl.uniform1f(U.u_contrast, contrast);
   } else {
     gl.uniform1i(U.u_mode, 0);
+    gl.uniform1f(U.u_gain, gain);
+    gl.uniform1f(U.u_fade, fade ? 1 : 0);
     const flat = new Float32Array(MAX_BLOBS * 4);
     positions.slice(0, MAX_BLOBS).forEach((p, i) => flat.set([p.x, p.y, p.r, 0], i * 4));
     gl.uniform4fv(U.u_blobs, flat);

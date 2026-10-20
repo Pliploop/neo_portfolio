@@ -2,7 +2,7 @@ import React from 'react';
 
 const base = {
   width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
-  strokeWidth: 2.5, strokeLinecap: 'square', strokeLinejoin: 'miter', 'aria-hidden': true, focusable: false,
+  strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true, focusable: false,
 };
 
 const make = (paths) => function Icon(props) {
