@@ -14,7 +14,7 @@ export default function DropCapHeading({ level = 2, text, caps = ['zighead'], ac
               {cap ? <span className={`dropcap font-${cap} ${tone}`}>{word[0]}</span> : word[0]}
               {word.slice(1)}
             </span>
-            {!stack && i < words.length - 1 ? ' ' : null}
+            {i < words.length - 1 ? ' ' : null}
           </React.Fragment>
         );
       })}

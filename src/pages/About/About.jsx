@@ -1,5 +1,23 @@
 import React from 'react';
+import Hero from './Hero';
+import Bio from './Bio';
+import NowBox from './NowBox';
+import SkillsStrip from './SkillsStrip';
+import Timeline from './Timeline';
+import Divider from '../../ui/Divider';
 
 export default function About() {
-  return <section className="px-4"><h1 className="display text-6xl">About</h1></section>;
+  return (
+    <>
+      <Hero />
+      <Divider />
+      <Bio />
+      <NowBox />
+      <SkillsStrip />
+      <Divider />
+      <Timeline />
+      <Divider />
+      <section id="contact" />
+    </>
+  );
 }

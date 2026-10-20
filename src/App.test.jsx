@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { AppRoutes } from './App';
@@ -12,15 +12,16 @@ async function renderAt(path) {
 
 test('about page renders nav with current page marked', async () => {
   await renderAt('/about');
-  expect(screen.getByRole('heading', { level: 1, name: 'About' })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
-  expect(screen.queryByRole('link', { name: 'Projects' })).toBeNull();
+  expect(screen.getByRole('heading', { level: 1, name: 'Julien Guinot' })).toBeInTheDocument();
+  const nav = within(screen.getByRole('navigation', { name: 'Main' }));
+  expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
+  expect(nav.queryByRole('link', { name: 'Projects' })).toBeNull();
 });
 
 test('nav link navigates without full reload', async () => {
   await renderAt('/about');
   await act(async () => { await preload('/academia'); });
-  await userEvent.click(screen.getByRole('link', { name: 'Research' }));
+  await userEvent.click(within(screen.getByRole('navigation', { name: 'Main' })).getByRole('link', { name: 'Research' }));
   expect(await screen.findByRole('heading', { level: 1, name: 'Research' })).toBeInTheDocument();
 });
 
@@ -33,5 +34,5 @@ test('player route hides nav and footer', async () => {
 test('unknown route falls back to about', async () => {
   await act(async () => { await preload('/about'); });
   render(<MemoryRouter initialEntries={['/nope']}><AppRoutes /></MemoryRouter>);
-  expect(await screen.findByRole('heading', { level: 1, name: 'About' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { level: 1, name: 'Julien Guinot' })).toBeInTheDocument();
 });

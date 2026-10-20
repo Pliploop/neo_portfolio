@@ -42,3 +42,8 @@ test('soundcloud helper encodes the track url', () => {
   expect(src).toContain('url=https%3A%2F%2Fsoundcloud.com%2Fjujgui%2Faztecs');
   expect(src).toContain('auto_play=true');
 });
+
+test('stacked DropCapHeading keeps a space between words', () => {
+  render(<DropCapHeading level={1} text="Julien Guinot" caps={['zighead', 'saint']} stack />);
+  expect(screen.getByRole('heading', { level: 1, name: 'Julien Guinot' })).toBeInTheDocument();
+});
