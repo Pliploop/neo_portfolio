@@ -27,7 +27,7 @@ export default function Research() {
         <div aria-hidden="true" className="absolute inset-x-4 sm:inset-x-8 top-0 h-full max-h-[22rem] opacity-60">
           <AsciiField seed={21} blobs={5} fontSize={13} alpha={0.35} fps={12} />
         </div>
-        <DropCapHeading level={1} text="Research" caps={['zighead']} accentWord={0} className="relative text-[clamp(4rem,14vw,11rem)]" />
+        <DropCapHeading level={1} text="Research" caps={['zighead']} accentWord={0} className="relative text-[clamp(3rem,15vw,11rem)]" />
         <p className="relative mt-8 max-w-[52ch] text-xl leading-snug font-medium">{research.intro}</p>
         <p className="relative meta mt-5 text-ink/60">{research.topics.join(' · ')}</p>
       </section>
@@ -43,7 +43,7 @@ export default function Research() {
 
       <section aria-labelledby="all-work" className="mx-auto max-w-6xl px-4 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-5 mb-6">
-          <DropCapHeading level={2} text="Publications" caps={['saint']} className="text-5xl sm:text-6xl" />
+          <DropCapHeading level={2} text="Publications" caps={['saint']} className="text-[clamp(2.4rem,10vw,3.75rem)]" />
           <PaperFilter value={filter} onChange={setFilter} />
         </div>
         <span id="all-work" className="sr-only">All publications</span>

@@ -58,7 +58,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="mx-auto max-w-6xl px-4 sm:px-8 scroll-mt-28">
-      <DropCapHeading level={2} text="Get in touch" caps={['zighead']} className="text-5xl sm:text-6xl mb-8" />
+      <DropCapHeading level={2} text="Get in touch" caps={['zighead']} className="text-[clamp(2.4rem,10vw,3.75rem)] mb-8" />
       {status.kind === 'success' ? (
         <Frame className="p-8 max-w-2xl" role="status">
           <p className="display text-3xl">Message sent.</p>

@@ -14,7 +14,7 @@ export default function Fonkey() {
   const track = fonkey.tracks[active];
   return (
     <section className="mx-auto max-w-6xl px-4 sm:px-8">
-      <DropCapHeading level={2} text={fonkey.name} caps={['zighead', 'saint']} className="text-5xl sm:text-7xl mb-10" />
+      <DropCapHeading level={2} text={fonkey.name} caps={['zighead', 'saint']} className="text-[clamp(2.4rem,11vw,4.5rem)] mb-10" />
       <div className="grid md:grid-cols-[1fr_17rem] gap-10">
         <div>
           <Embed key={track.url} src={youtubeEmbed(track.url)} title={`${track.title} by Fonkey Business`} href={track.url} seed={40 + active} />

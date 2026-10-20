@@ -8,7 +8,7 @@ export default function Bio() {
   return (
     <section id="bio" className="mx-auto max-w-6xl px-4 sm:px-8 grid md:grid-cols-[1.25fr_1fr] gap-12 items-start">
       <div>
-        <DropCapHeading level={2} text="About me" caps={['zighead', 'saint']} className="text-5xl sm:text-6xl mb-8" />
+        <DropCapHeading level={2} text="About me" caps={['zighead', 'saint']} className="text-[clamp(2.4rem,10vw,3.75rem)] mb-8" />
         <div className="space-y-5 text-lg max-w-[58ch]">
           {about.bio.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
         </div>

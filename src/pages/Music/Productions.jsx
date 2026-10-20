@@ -8,7 +8,7 @@ import { productions } from '../../data/music';
 export default function Productions() {
   return (
     <section className="mx-auto max-w-6xl px-4 sm:px-8">
-      <DropCapHeading level={2} text="Original productions" caps={['saint']} className="text-5xl sm:text-6xl mb-8" />
+      <DropCapHeading level={2} text="Original productions" caps={['saint']} className="text-[clamp(2.4rem,10vw,3.75rem)] mb-8" />
       <div className="border-t-2 border-ink">
         {productions.map((p, i) => (
           <Expandable
