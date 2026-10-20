@@ -1,0 +1,27 @@
+import React from 'react';
+import { render } from '@testing-library/react';
+import DitherField from './DitherField';
+import { renderDither } from './glRenderer';
+
+test('renderDither returns null when WebGL is unavailable', () => {
+  expect(renderDither({ width: 10, height: 10, mode: 'blobs', positions: [], aspect: 1, fg: [0, 0, 0], bg: [255, 255, 255] })).toBeNull();
+});
+
+test('DitherField renders a decorative canvas without throwing when no context exists', () => {
+  const { container } = render(<DitherField seed={3} />);
+  const canvas = container.querySelector('canvas');
+  expect(canvas).toHaveAttribute('aria-hidden', 'true');
+});
+
+test('DitherField falls back to the CPU path when WebGL is missing', () => {
+  const putImageData = vi.fn();
+  const original = HTMLCanvasElement.prototype.getContext;
+  HTMLCanvasElement.prototype.getContext = function getContext(type) {
+    if (type === '2d') return { putImageData, imageSmoothingEnabled: true };
+    return null;
+  };
+  globalThis.ImageData = class { constructor(data, w, h) { this.data = data; this.width = w; this.height = h; } };
+  render(<DitherField seed={3} cell={4} />);
+  expect(putImageData).toHaveBeenCalled();
+  HTMLCanvasElement.prototype.getContext = original;
+});
