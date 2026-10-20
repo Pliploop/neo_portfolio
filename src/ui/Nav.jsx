@@ -1,6 +1,7 @@
 import React from 'react';
 import TLink from './TLink';
 import ThemeToggle from './ThemeToggle';
+import MotionToggle from './MotionToggle';
 import { routes } from '../routes';
 
 const items = routes.filter((r) => r.label);
@@ -32,7 +33,10 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-        <ThemeToggle />
+        <div className="flex items-center gap-1.5">
+          <MotionToggle />
+          <ThemeToggle />
+        </div>
       </nav>
       <div className="border-b rule" />
     </header>

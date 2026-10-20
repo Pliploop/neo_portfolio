@@ -27,5 +27,7 @@
 .marquee:hover { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee { animation: none; }
+  .marquee { animation-duration: 150s; }
 }
+
+.motion-paused .marquee { animation-play-state: paused; }

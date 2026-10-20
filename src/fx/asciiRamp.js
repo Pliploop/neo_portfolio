@@ -1,4 +1,4 @@
-import { blobPositions, fieldAt } from './blobs';
+import { blobPositions, fieldAt, radialFade } from './blobs';
 
 export const RAMP = ' .:-=+*#%@';
 // Occasional stray glyphs: the "digital naive" flicker.
@@ -26,15 +26,17 @@ function shimmerChar(v, x, y, step, jitter, ramp) {
   return rampChar(v + (n - 0.5) * jitter, ramp);
 }
 
-export function asciiFrame({ cols, rows, t, blobs, cellAspect = 0.55, ramp = RAMP, jitter = 0 }) {
-  const positions = blobPositions(blobs, t);
+export function asciiFrame({ cols, rows, t, blobs, cellAspect = 0.55, ramp = RAMP, jitter = 0, fade = false, speed = 1, gain = 1 }) {
+  const positions = blobPositions(blobs, t * speed);
   const aspect = (cols * cellAspect) / rows;
   const step = Math.floor(t * SHIMMER_RATE);
   const lines = new Array(rows);
   for (let y = 0; y < rows; y++) {
     let line = '';
     for (let x = 0; x < cols; x++) {
-      const v = fieldAt((x + 0.5) / cols, (y + 0.5) / rows, aspect, positions);
+      const nx = (x + 0.5) / cols;
+      const ny = (y + 0.5) / rows;
+      const v = gain * fieldAt(nx, ny, aspect, positions) * (fade ? radialFade(nx, ny) : 1);
       line += shimmerChar(v, x, y, step, jitter, ramp);
     }
     lines[y] = line;

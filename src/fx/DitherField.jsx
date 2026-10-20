@@ -2,28 +2,18 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useFxCanvas } from './useFxCanvas';
 import { useCssColors } from '../hooks/useCssColors';
 import { useImage } from '../hooks/useImage';
-import { makeBlobs, blobPositions, fieldAt, radialFade } from './blobs';
+import { makeBlobs, blobPositions } from './blobs';
 import { coverTransform } from './cover';
 import { renderDither, hasWebGL, PENDING } from './glRenderer';
 import { ditherPixels } from './ditherCpu';
-
-function imageLuma(image, w, h, cover) {
-  const c = document.createElement('canvas');
-  c.width = w; c.height = h;
-  const ctx = c.getContext('2d');
-  if (!ctx) return () => 0;
-  const sx = cover.offset[0] * image.naturalWidth;
-  const sy = cover.offset[1] * image.naturalHeight;
-  ctx.drawImage(image, sx, sy, cover.scale[0] * image.naturalWidth, cover.scale[1] * image.naturalHeight, 0, 0, w, h);
-  const d = ctx.getImageData(0, 0, w, h).data;
-  return (x, y) => {
-    const i = (y * w + x) * 4;
-    return 1 - (0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]) / 255;
-  };
-}
+import { imageLuma, blobValue, imageValue } from './cpuField';
 
 const NOISE_RATE = 10; // edge shimmer re-rolls per second
 const PENDING_RETRY_MS = 60;
+const CPU_FPS = 10;
+const CPU_FRAME_BUDGET_MS = 12;
+const CPU_SLOW_FRAMES = 3;
+const CPU_START_DELAY_MS = 1200; // keep CPU animation out of the page-load window
 
 export default function DitherField({
   seed = 1, blobs = 5, cell = 2, gain = 0.85, fade = false, speed = 1, noise = 0.12, fg = '--accent', bg = '--paper',
@@ -34,8 +24,29 @@ export default function DitherField({
   const field = useMemo(() => makeBlobs(seed, blobs), [seed, blobs]);
   const img = useImage(image);
   const [gpu, setGpu] = useState(hasWebGL);
+  const [cpuTooSlow, setCpuTooSlow] = useState(false);
+  const [cpuReady, setCpuReady] = useState(false);
   const [retry, setRetry] = useState(0);
   const retryTimer = useRef(null);
+  const slowFrames = useRef(0);
+  const lumaCache = useRef({ key: null, fn: null });
+
+  const lumaFor = (w, h, cover) => {
+    const key = `${img.src}|${w}x${h}`;
+    if (lumaCache.current.key !== key) lumaCache.current = { key, fn: imageLuma(img, w, h, cover) };
+    return lumaCache.current.fn;
+  };
+
+  const drawCpu = (ctx, { w, h, aspect, positions, cover, t }) => {
+    const start = performance.now();
+    const valueAt = image
+      ? imageValue({ luma: lumaFor(w, h, cover), w, h, contrast, t })
+      : blobValue({ w, h, aspect, positions, gain, fade });
+    ctx.putImageData(new ImageData(ditherPixels({ width: w, height: h, valueAt, fg: fgRgb, bg: bgRgb }), w, h), 0, 0);
+    // Weak devices protect themselves: a few slow frames in a row and the field goes still.
+    slowFrames.current = performance.now() - start > CPU_FRAME_BUDGET_MS ? slowFrames.current + 1 : 0;
+    if (slowFrames.current >= CPU_SLOW_FRAMES) setCpuTooSlow(true);
+  };
 
   const draw = (t, size) => {
     const canvas = ref.current;
@@ -46,13 +57,14 @@ export default function DitherField({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     ctx.imageSmoothingEnabled = false;
+    if (image && !img) return;
     const aspect = w / h;
-    const isImage = Boolean(image);
-    if (isImage && !img) return;
-    const cover = isImage ? coverTransform(w, h, img.naturalWidth, img.naturalHeight) : null;
-    const positions = isImage ? [] : blobPositions(field, t * speed);
+    const cover = image ? coverTransform(w, h, img.naturalWidth, img.naturalHeight) : null;
+    const positions = image ? [] : blobPositions(field, t * speed);
     const gl = gpu && renderDither({
-      width: w, height: h, mode: isImage ? 'image' : 'blobs', positions, aspect, image: img, cover, fg: fgRgb, bg: bgRgb, contrast, gain, fade, noise: isImage ? 0 : noise, step: Math.floor(t * NOISE_RATE),
+      width: w, height: h, mode: image ? 'image' : 'blobs', positions, aspect, image: img, cover,
+      fg: fgRgb, bg: bgRgb, contrast, gain, fade, noise: image ? noise * 0.5 : noise,
+      step: Math.floor(t * NOISE_RATE), time: t,
     });
     if (gl === PENDING) {
       // Shader still compiling in the background: redraw shortly (static fields have no loop).
@@ -63,23 +75,27 @@ export default function DitherField({
     }
     if (gl) { ctx.drawImage(gl, 0, 0); return; }
     if (gpu) setGpu(false);
-    const valueAt = isImage
-      ? (() => { const luma = imageLuma(img, w, h, cover); return (x, y) => Math.min(1, Math.max(0, (luma(x, y) - 0.5) * contrast + 0.5)); })()
-      : (x, y) => {
-        const nx = (x + 0.5) / w; const ny = (y + 0.5) / h;
-        return gain * fieldAt(nx, ny, aspect, positions) * (fade ? radialFade(nx, ny) : 1);
-      };
-    ctx.putImageData(new ImageData(ditherPixels({ width: w, height: h, valueAt, fg: fgRgb, bg: bgRgb }), w, h), 0, 0);
+    drawCpu(ctx, { w, h, aspect, positions, cover, t });
   };
 
   useFxCanvas(ref, draw, {
-    fps,
-    animate: !image && gpu,
+    fps: gpu ? fps : Math.min(fps, CPU_FPS),
+    animate: gpu || (cpuReady && !cpuTooSlow),
     active,
-    deps: [fgRgb, bgRgb, img, cell, contrast, gain, fade, speed, noise, gpu, retry],
+    deps: [fgRgb, bgRgb, img, cell, contrast, gain, fade, speed, noise, gpu, cpuReady, cpuTooSlow, retry],
   });
 
   useEffect(() => () => clearTimeout(retryTimer.current), []);
+
+  useEffect(() => {
+    if (gpu) return undefined;
+    const start = () => setCpuReady(true);
+    const id = setTimeout(() => {
+      if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(start, { timeout: 1000 });
+      else start();
+    }, CPU_START_DELAY_MS);
+    return () => clearTimeout(id);
+  }, [gpu]);
 
   return (
     <canvas

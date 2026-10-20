@@ -20,6 +20,7 @@ uniform float u_gain;
 uniform float u_fade;
 uniform float u_noise;
 uniform float u_step;
+uniform float u_time;
 uniform vec3 u_fg;
 uniform vec3 u_bg;
 void main() {
@@ -41,7 +42,7 @@ void main() {
   } else {
     vec3 c = texture2D(u_image, uv * u_imgScale + u_imgOffset).rgb;
     v = 1.0 - dot(c, vec3(0.299, 0.587, 0.114));
-    v = clamp((v - 0.5) * u_contrast + 0.5, 0.0, 1.0);
+    v = clamp((v - 0.5) * u_contrast + 0.5 + 0.07 * sin(uv.y * 9.0 - u_time * 1.3 + uv.x * 3.0), 0.0, 1.0);
   }
   float th = texture2D(u_bayer, gl_FragCoord.xy / 8.0).r;
   gl_FragColor = vec4(v > th ? u_fg : u_bg, 1.0);
@@ -108,7 +109,7 @@ function finish(st) {
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   const u = (name) => gl.getUniformLocation(prog, name);
   st.uniforms = Object.fromEntries(['u_res', 'u_blobs', 'u_count', 'u_aspect', 'u_mode', 'u_bayer', 'u_image',
-    'u_imgScale', 'u_imgOffset', 'u_contrast', 'u_gain', 'u_fade', 'u_noise', 'u_step', 'u_fg', 'u_bg'].map((n) => [n, u(n)]));
+    'u_imgScale', 'u_imgOffset', 'u_contrast', 'u_gain', 'u_fade', 'u_noise', 'u_step', 'u_time', 'u_fg', 'u_bg'].map((n) => [n, u(n)]));
   gl.activeTexture(gl.TEXTURE0);
   gl.bindTexture(gl.TEXTURE_2D, bayerTexture(gl));
   gl.uniform1i(st.uniforms.u_bayer, 0);
@@ -145,7 +146,7 @@ export function renderDither(opts) {
     return null;
   }
   const { canvas, gl, uniforms: U } = state;
-  const { width, height, mode, positions = [], aspect, image, cover, fg, bg, contrast = 1, gain = 1, fade = false, noise = 0, step = 0 } = opts;
+  const { width, height, mode, positions = [], aspect, image, cover, fg, bg, contrast = 1, gain = 1, fade = false, noise = 0, step = 0, time = 0 } = opts;
   if (canvas.width !== width || canvas.height !== height) {
     canvas.width = width;
     canvas.height = height;
@@ -155,6 +156,9 @@ export function renderDither(opts) {
   gl.uniform1f(U.u_aspect, aspect);
   gl.uniform3f(U.u_fg, fg[0] / 255, fg[1] / 255, fg[2] / 255);
   gl.uniform3f(U.u_bg, bg[0] / 255, bg[1] / 255, bg[2] / 255);
+  gl.uniform1f(U.u_noise, noise);
+  gl.uniform1f(U.u_step, step);
+  gl.uniform1f(U.u_time, time);
   if (mode === 'image' && image) {
     gl.uniform1i(U.u_mode, 1);
     gl.activeTexture(gl.TEXTURE1);
@@ -166,8 +170,6 @@ export function renderDither(opts) {
     gl.uniform1i(U.u_mode, 0);
     gl.uniform1f(U.u_gain, gain);
     gl.uniform1f(U.u_fade, fade ? 1 : 0);
-    gl.uniform1f(U.u_noise, noise);
-    gl.uniform1f(U.u_step, step);
     const flat = new Float32Array(MAX_BLOBS * 4);
     positions.slice(0, MAX_BLOBS).forEach((p, i) => flat.set([p.x, p.y, p.r, 0], i * 4));
     gl.uniform4fv(U.u_blobs, flat);

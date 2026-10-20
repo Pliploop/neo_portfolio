@@ -2,6 +2,10 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import DitherField from './DitherField';
 import { renderDither } from './glRenderer';
+import { __resetMotion } from '../hooks/useMotion';
+
+function pauseMotion() { localStorage.setItem('motion', 'paused'); __resetMotion(); }
+afterEach(() => { localStorage.clear(); __resetMotion(); });
 
 test('renderDither returns null when WebGL is unavailable', () => {
   expect(renderDither({ width: 10, height: 10, mode: 'blobs', positions: [], aspect: 1, fg: [0, 0, 0], bg: [255, 255, 255] })).toBeNull();
@@ -21,6 +25,7 @@ test('DitherField falls back to the CPU path when WebGL is missing', () => {
     return null;
   };
   globalThis.ImageData = class { constructor(data, w, h) { this.data = data; this.width = w; this.height = h; } };
+  pauseMotion();
   render(<DitherField seed={3} cell={4} />);
   expect(putImageData).toHaveBeenCalled();
   HTMLCanvasElement.prototype.getContext = original;
@@ -36,6 +41,7 @@ test('gain scales the field: gain 0 draws only the background colour', () => {
   globalThis.ImageData = class { constructor(data, w, h) { this.data = data; this.width = w; this.height = h; } };
   document.documentElement.style.setProperty('--accent', '255 74 28');
   document.documentElement.style.setProperty('--paper', '239 235 227');
+  pauseMotion();
   render(<DitherField seed={3} cell={2} gain={0} />);
   const reds = [];
   for (let i = 0; i < pixels.length; i += 4) reds.push(pixels[i]);

@@ -191,3 +191,18 @@ describe('breathing blobs', () => {
     }
   });
 });
+
+describe('ascii over dither', () => {
+  test('fade empties the corners like the dither fade does', () => {
+    const big = [{ ax: 0, ay: 0, fx: 0, fy: 0, phase: 0, radius: 2 }];
+    const plain = asciiFrame({ cols: 20, rows: 10, t: 0, blobs: big });
+    const faded = asciiFrame({ cols: 20, rows: 10, t: 0, blobs: big, fade: true });
+    expect(plain[0][0]).not.toBe(' ');
+    expect(faded[0][0]).toBe(' ');
+  });
+
+  test('speed scales time like the dither speed does', () => {
+    const blobs = makeBlobs(9, 3);
+    expect(asciiFrame({ cols: 20, rows: 8, t: 2, blobs, speed: 2 })).toEqual(asciiFrame({ cols: 20, rows: 8, t: 4, blobs }));
+  });
+});

@@ -4,6 +4,7 @@ import { useReducedMotion } from './useReducedMotion';
 import { useCssColors } from './useCssColors';
 import { useFxCanvas } from '../fx/useFxCanvas';
 import * as loop from '../fx/fxLoop';
+import { __resetMotion } from './useMotion';
 
 afterEach(() => { globalThis.__setReducedMotion(false); vi.restoreAllMocks(); });
 
@@ -39,13 +40,27 @@ test('useFxCanvas subscribes when animating and in view', () => {
   expect(spy).toHaveBeenCalledWith(expect.any(Function), 12);
 });
 
-test('useFxCanvas draws one static frame under reduced motion', () => {
+test('useFxCanvas keeps animating under reduced motion, slower (calm mode)', () => {
   globalThis.__setReducedMotion(true);
+  let frame;
+  const spy = vi.spyOn(loop, 'subscribe').mockImplementation((fn) => { frame = fn; return () => {}; });
+  const draw = vi.fn();
+  render(<Probe draw={draw} opts={{ fps: 20 }} />);
+  expect(spy).toHaveBeenCalledWith(expect.any(Function), 10);
+  frame(10);
+  expect(draw).toHaveBeenLastCalledWith(4, { width: 320, height: 160 });
+});
+
+test('useFxCanvas draws one static frame when the visitor paused motion', () => {
+  localStorage.setItem('motion', 'paused');
+  __resetMotion();
   const spy = vi.spyOn(loop, 'subscribe');
   const draw = vi.fn();
   render(<Probe draw={draw} opts={{}} />);
   expect(spy).not.toHaveBeenCalled();
   expect(draw).toHaveBeenCalledWith(0, { width: 320, height: 160 });
+  localStorage.clear();
+  __resetMotion();
 });
 
 test('useFxCanvas draws once and does not loop when inactive', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import DitherField from '../../fx/DitherField';
+import DitherBlob from '../../fx/DitherBlob';
 import DropCapHeading from '../../ui/DropCapHeading';
 import Button from '../../ui/Button';
 import { ArrowUpRight, ArrowDown } from '../../ui/icons';
@@ -22,7 +22,7 @@ export default function Hero() {
         </div>
       </div>
       <div aria-hidden="true" className="col-span-8 col-start-3 md:col-span-4 md:col-start-auto aspect-square self-center">
-        <DitherField seed={11} fg="--accent" cell={2} gain={0.9} fade speed={2.2} />
+        <DitherBlob seed={11} />
       </div>
     </section>
   );

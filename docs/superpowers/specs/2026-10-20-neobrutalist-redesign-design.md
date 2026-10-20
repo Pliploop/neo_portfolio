@@ -28,6 +28,17 @@ or deployed until the owner approves.
 - New content. Copy is rewritten, never extended with invented facts.
 - CMS, i18n, analytics.
 
+## Revision 4 (2026-10-21): motion everywhere
+
+- OS "reduce motion" no longer freezes effects: it switches to calm mode (40% speed, half fps).
+  A nav button pauses all decorative motion (persisted as `motion` in localStorage, class
+  `motion-paused` on `<html>`), which covers WCAG 2.2.2.
+- The CPU dither fallback animates at 10 fps, starts ~1.2s after load, and goes still after
+  3 consecutive frames over 12ms.
+- The portrait animates: a slow luminance wave plus light shimmer through its dither.
+- `fx/DitherBlob.jsx`: hero blobs (About, Music) and the player cover carry an animated ASCII
+  layer tracing the same field, drawn in the paper colour.
+
 ## Revision 3 (2026-10-21): blue palette, motion, section headings
 
 - Palette: cream paper `244 239 227`, navy ink `24 34 68`, cobalt accent `38 66 214`.

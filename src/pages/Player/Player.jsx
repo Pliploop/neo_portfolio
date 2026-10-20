@@ -49,6 +49,9 @@ export default function Player() {
         <div className="relative aspect-square rounded-[20px] overflow-hidden">
           <div className={`absolute inset-0 transition-opacity duration-1000 ${started ? 'opacity-0' : 'opacity-100'}`}>
             <DitherField seed={7} fg="--accent" cell={2} gain={0.8} speed={1.8} active={!started} />
+            <div className="absolute inset-0">
+              <AsciiField seed={7} blobs={5} fontSize={8} color="--paper" alpha={0.85} fps={14} gain={0.7} speed={1.8} active={!started} />
+            </div>
           </div>
           <div className={`absolute inset-0 transition-opacity duration-1000 ${started ? 'opacity-100' : 'opacity-0'}`}>
             <AsciiField seed={7} blobs={5} fontSize={7} alpha={0.85} fps={18} active={started} />

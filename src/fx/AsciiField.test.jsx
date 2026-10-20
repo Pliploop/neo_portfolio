@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import AsciiField from './AsciiField';
 import Grain from './Grain';
+import { __resetMotion } from '../hooks/useMotion';
 
 function fake2d() {
   return {
@@ -11,7 +12,8 @@ function fake2d() {
 }
 
 test('draws one fillText per row', () => {
-  globalThis.__setReducedMotion(true);
+  localStorage.setItem('motion', 'paused');
+  __resetMotion();
   const ctx = fake2d();
   const original = HTMLCanvasElement.prototype.getContext;
   HTMLCanvasElement.prototype.getContext = () => ctx;
@@ -19,7 +21,8 @@ test('draws one fillText per row', () => {
   const rows = Math.floor(160 / (10 * 1.15));
   expect(ctx.fillText).toHaveBeenCalledTimes(rows);
   HTMLCanvasElement.prototype.getContext = original;
-  globalThis.__setReducedMotion(false);
+  localStorage.clear();
+  __resetMotion();
 });
 
 test('ascii canvas is decorative', () => {
