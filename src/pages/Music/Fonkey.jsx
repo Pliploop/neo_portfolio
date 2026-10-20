@@ -23,11 +23,11 @@ export default function Fonkey() {
             <button type="button" aria-label="Previous video" className={round} onClick={() => setActive((i) => (i - 1 + n) % n)}><ChevronLeft width={15} height={15} /></button>
             <button type="button" aria-label="Next video" className={round} onClick={() => setActive((i) => (i + 1) % n)}><ChevronRight width={15} height={15} /></button>
             <p className="meta ml-2 text-ink/80">
-              <span className="text-ink/60">{String(active + 1).padStart(2, '0')}/{String(n).padStart(2, '0')}</span>{' '}
-              {track.title} <span className="text-ink/60">({track.original} cover)</span>
+              <span className="text-ink/70">{String(active + 1).padStart(2, '0')}/{String(n).padStart(2, '0')}</span>{' '}
+              {track.title} <span className="text-ink/70">({track.original} cover)</span>
             </p>
           </div>
-          <p className="meta mt-2 text-ink/60">{fonkey.credit}</p>
+          <p className="meta mt-2 text-ink/70">{fonkey.credit}</p>
         </div>
         <aside className="flex flex-col gap-8">
           <div className="flex items-center gap-4">
@@ -39,11 +39,11 @@ export default function Fonkey() {
             <a href={fonkey.instagram} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1">Instagram <ArrowUpRight width={12} height={12} /></a>
           </div>
           <div>
-            <h3 className="meta text-ink/60 mb-2">Roles</h3>
+            <h3 className="meta text-ink/70 mb-2">Roles</h3>
             <ul className="text-[14px] space-y-0.5">{fonkey.roles.map((r) => <li key={r}>{r}</li>)}</ul>
           </div>
           <div>
-            <h3 className="meta text-ink/60 mb-2">Setlist</h3>
+            <h3 className="meta text-ink/70 mb-2">Setlist</h3>
             <ul className="border-t rule">
               {fonkey.tracks.map((t, i) => (
                 <li key={t.url}>
@@ -51,9 +51,9 @@ export default function Fonkey() {
                     type="button"
                     aria-pressed={i === active}
                     onClick={() => setActive(i)}
-                    className={`w-full flex justify-between gap-3 py-2.5 border-b rule text-left text-[14px] transition-colors ${i === active ? 'text-ink' : 'text-ink/60 hover:text-ink'}`}
+                    className={`w-full flex justify-between gap-3 py-2.5 border-b rule text-left text-[14px] transition-colors ${i === active ? 'text-ink' : 'text-ink/70 hover:text-ink'}`}
                   >
-                    <span className="inline-flex items-center gap-2">{i === active ? <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent" /> : null}{t.title}</span><span className="meta text-ink/60">{t.original}</span>
+                    <span className="inline-flex items-center gap-2">{i === active ? <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent" /> : null}{t.title}</span><span className="meta text-ink/70">{t.original}</span>
                   </button>
                 </li>
               ))}

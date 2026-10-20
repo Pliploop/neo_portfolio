@@ -13,7 +13,7 @@ export default function Expandable({ summary, children, defaultOpen = false, cla
         className="w-full text-left flex items-start gap-4 py-5 group"
       >
         <div className="flex-1 min-w-0 group-hover:text-accent-ink transition-colors">{summary}</div>
-        <span aria-hidden="true" className={`meta shrink-0 mt-0.5 w-4 text-center text-ink/60 transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
+        <span aria-hidden="true" className={`meta shrink-0 mt-0.5 w-4 text-center text-ink/70 transition-transform duration-300 ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
       <div
         id={id}

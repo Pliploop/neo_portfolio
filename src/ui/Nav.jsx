@@ -19,7 +19,7 @@ export default function Nav() {
               <TLink
                 to={item.path}
                 className={({ active }) => `relative text-[14px] tracking-[-0.01em] transition-colors ${
-                  active ? 'text-ink' : 'text-ink/60 hover:text-ink'
+                  active ? 'text-ink' : 'text-ink/70 hover:text-ink'
                 }`}
               >
                 {({ active }) => (

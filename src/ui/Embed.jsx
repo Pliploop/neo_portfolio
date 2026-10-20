@@ -25,7 +25,7 @@ export default function Embed({
         )}
       </div>
       {href ? (
-        <a href={href} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1 mt-2 text-ink/60">
+        <a href={href} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1 mt-2 text-ink/70">
           open <ArrowUpRight width={11} height={11} />
         </a>
       ) : null}

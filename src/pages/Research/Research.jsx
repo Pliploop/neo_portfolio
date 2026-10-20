@@ -32,7 +32,7 @@ export default function Research() {
         <div className="col-span-12 md:col-span-9 relative">
           <DropCapHeading level={1} text="Research" caps={['zighead']} accentWord={0} className="display text-[clamp(3.2rem,11vw,8.5rem)]" />
           <p className="mt-10 max-w-[46ch] text-[1.2rem] leading-snug tracking-[-0.015em] text-ink/80">{research.intro}</p>
-          <p className="meta mt-6 text-ink/60 max-w-[70ch]">{research.topics.join('  ·  ')}</p>
+          <p className="meta mt-6 text-ink/70 max-w-[70ch]">{research.topics.join('  ·  ')}</p>
         </div>
       </section>
 
@@ -54,7 +54,7 @@ export default function Research() {
         <ul aria-label="Publications" className="border-t rule">
           {list.map((p) => <PaperRow key={p.title} paper={p} />)}
         </ul>
-        {list.length === 0 ? <p className="meta py-6 text-ink/60">No publications match this filter.</p> : null}
+        {list.length === 0 ? <p className="meta py-6 text-ink/70">No publications match this filter.</p> : null}
       </Section>
 
       <Section index="03" label="Elsewhere" aria-label="Elsewhere" className="mt-32">

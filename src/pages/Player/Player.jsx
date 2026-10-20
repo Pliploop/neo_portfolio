@@ -58,7 +58,7 @@ export default function Player() {
         <div className="px-3 pt-5 pb-3">
           <div className="flex items-baseline justify-between gap-3">
             <DropCapHeading level={1} text="Julien Guinot" caps={['zighead', 'saint']} accentWord={0} className="heading text-[1.75rem]" />
-            <span className="meta text-ink/60 shrink-0">{String(state.index + 1).padStart(2, '0')}/{String(state.count).padStart(2, '0')}</span>
+            <span className="meta text-ink/70 shrink-0">{String(state.index + 1).padStart(2, '0')}/{String(state.count).padStart(2, '0')}</span>
           </div>
           <p className="meta mt-2 min-h-[3em] text-ink/70" aria-live="polite">{playerLines[state.index]}</p>
           <ProgressBar progress={state.progress} total={total} />
@@ -83,7 +83,7 @@ export default function Player() {
           </div>
         </div>
       </article>
-      <TLink to="/about" className="meta mt-8 link text-ink/60">skip intro</TLink>
+      <TLink to="/about" className="meta mt-8 link text-ink/70">skip intro</TLink>
     </div>
   );
 }

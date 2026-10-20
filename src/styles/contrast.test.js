@@ -34,6 +34,15 @@ describe.each([['light', light], ['dark', dark]])('%s theme contrast', (_, t) =>
     expect(ratio(t['accent-ink'], t.paper)).toBeGreaterThanOrEqual(4.5);
   });
 
+  test('text on an accent fill meets 4.5:1', () => {
+    expect(ratio(t['on-accent'], t.accent)).toBeGreaterThanOrEqual(4.5);
+  });
+
+  test('ink is a blue, not a neutral', () => {
+    const [r, , b] = t.ink[0] > 128 ? t.paper : t.ink;
+    expect(b - r).toBeGreaterThan(20);
+  });
+
   test('every muted ink opacity used for text meets 4.5:1', () => {
     TEXT_OPACITIES.forEach((o) => {
       expect({ o, r: ratio(blend(t.ink, t.paper, o / 100), t.paper) >= 4.5 }).toEqual({ o, r: true });

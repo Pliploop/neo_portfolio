@@ -7,7 +7,7 @@ import { badgesFor } from '../../data/paperUtils';
 export function Badges({ paper }) {
   return (
     <p className="meta flex flex-wrap gap-x-3">
-      {badgesFor(paper).map((b) => <span key={b.label} className={b.accent ? 'text-accent-ink' : 'text-ink/60'}>{b.label}</span>)}
+      {badgesFor(paper).map((b) => <span key={b.label} className={b.accent ? 'text-accent-ink' : 'text-ink/70'}>{b.label}</span>)}
     </p>
   );
 }

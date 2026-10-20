@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section className="mx-auto max-w-6xl px-5 sm:px-8 grid grid-cols-12 gap-x-6 gap-y-10 items-end min-h-[68svh] pb-4">
       <div className="col-span-12 md:col-span-8 relative">
-        <p className="meta text-ink/60 mb-8 flex items-center gap-2">
+        <p className="meta text-ink/70 mb-8 flex items-center gap-2">
           <Sparkle size={13} className="text-accent" /> AI and music, London
         </p>
         <DropCapHeading level={1} text="Julien Guinot" caps={['zighead', 'saint']} accentWord={0} stack className="display text-[clamp(3.6rem,11vw,9rem)]" />

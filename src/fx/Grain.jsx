@@ -15,7 +15,7 @@ function makeGrainUrl() {
   return c.toDataURL('image/png');
 }
 
-export default function Grain({ opacity = 0.035 }) {
+export default function Grain({ opacity = 0.014 }) {
   const [url, setUrl] = useState(null);
   useEffect(() => { setUrl(makeGrainUrl()); }, []);
   if (!url) return null;

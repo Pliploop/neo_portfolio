@@ -1,15 +1,18 @@
+/* Cream paper, navy ink, one cobalt accent. Dark mode: navy paper, cream ink, light cobalt. */
 :root {
-  --paper: 239 235 227;
-  --ink: 20 20 20;
-  --accent: 255 74 28;
-  --accent-ink: 196 48 10;
-  --on-accent: 20 20 20;
+  --paper: 244 239 227;
+  --ink: 24 34 68;
+  --accent: 38 66 214;
+  --accent-ink: 38 66 214;
+  --on-accent: 244 239 227;
   color-scheme: light;
 }
 
 .dark {
-  --paper: 20 20 20;
-  --ink: 239 235 227;
-  --accent-ink: 255 74 28;
+  --paper: 14 21 46;
+  --ink: 238 233 220;
+  --accent: 128 150 255;
+  --accent-ink: 128 150 255;
+  --on-accent: 14 21 46;
   color-scheme: dark;
 }

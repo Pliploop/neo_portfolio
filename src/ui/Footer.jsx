@@ -13,7 +13,7 @@ export default function Footer() {
         <div aria-hidden="true" className="h-3 mt-1.5 w-1/2 opacity-60"><AsciiField mode="wave" fontSize={9} alpha={0.45} fps={10} /></div>
         <div className="grid grid-cols-12 gap-x-6 gap-y-10 pt-14 pb-10">
           <div className="col-span-12 md:col-span-8">
-            <p className="meta text-ink/60 mb-5">Contact</p>
+            <p className="meta text-ink/70 mb-5">Contact</p>
             <TLink to="/about#contact" className="group inline-block display text-[clamp(2.4rem,7vw,5.5rem)] hover:text-accent-ink transition-colors">
               Get in touch
               <Squiggle width={120} className="block mt-2 text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -29,7 +29,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="border-t rule py-5 meta text-ink/60 flex justify-between">
+        <div className="border-t rule py-5 meta text-ink/70 flex justify-between">
           <span>© {new Date().getFullYear()} {site.name}</span>
           <span>{site.city}</span>
         </div>
