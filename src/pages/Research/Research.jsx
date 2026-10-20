@@ -6,6 +6,8 @@ import Section, { SECTION_HEADING } from '../../ui/Section';
 import PaperCard from './PaperCard';
 import PaperRow from './PaperRow';
 import PaperFilter from './PaperFilter';
+import ProjectCard from './ProjectCard';
+import { projects } from '../../data/projects';
 import { ArrowUpRight } from '../../ui/icons';
 import { Asterisk } from '../../ui/Doodle';
 import { papers } from '../../data/papers';
@@ -41,6 +43,12 @@ export default function Research() {
       <Section title={<DropCapHeading level={2} text="Selected work" caps={['zighead']} className={SECTION_HEADING} />}>
         <div className="grid lg:grid-cols-2 gap-x-10 gap-y-14">
           {featuredPapers(papers).map((p, i) => <PaperCard key={p.title} paper={p} seed={30 + i} />)}
+        </div>
+      </Section>
+
+      <Section className="mt-32" title={<DropCapHeading level={2} text="Projects" caps={['zighead']} className={SECTION_HEADING} />}>
+        <div className="grid gap-y-12">
+          {projects.map((p) => <ProjectCard key={p.href} project={p} />)}
         </div>
       </Section>
 

@@ -1,5 +1,21 @@
 export const papers = [
   {
+    title: "Steering dense music retrieval with open-vocabulary concept discovery",
+    authors: ["Julien Guinot", "Alain Riou", "Elio Quinton", "György Fazekas"],
+    affiliations: ["Queen Mary University of London", "Universal Music Group"],
+    affiliations_indices: ["1,2", "2", "2", "1"],
+    venue: "ISMIR 2026",
+    year: 2026,
+    abstract: "Controllable music retrieval lets users find music that is, for example, more ambient, less distorted, or without guitar while preserving the other semantic content of an original seed query. Sparse autoencoders (SAEs) are a promising interface for this kind of concept-level control, but a key problem remains: given a free-form text concept, which sparse features should be edited? In shared multimodal embedding spaces, standard attribution methods often select neurons that match the concept's wording but not the audio examples that express it. This leads to weak or unstable edits: relevant features are missed when concepts are distributed across neurons, while others are selected due to text alignment rather than audio-side structure. We address this with a lightweight, training-free method that recovers a sparse set of audio features whose decoded representation reconstructs the target concept while remaining consistent with audio-space geometry. This reframes concept attribution as a sparse inversion problem rather than a text-side neuron-ranking heuristic. The method requires neither paired audio-text supervision nor SAE retraining. We evaluate this approach in steerable music retrieval and show that the recovered supports align more closely with concept-bearing audio examples and achieve a stronger trade-off between edit strength and preservation than alignment baselines, enabling more precise concept amplification and suppression with reduced drift on preservation metrics.",
+    summary: "Training-free, open-vocabulary concept control for music retrieval: sparse inversion finds the autoencoder features a free-form concept maps to, so they can be amplified or suppressed before search.",
+    arxiv: "https://arxiv.org/abs/2608.08757",
+    github: "https://github.com/Pliploop/sparse-steer-retrieval",
+    project: "https://pliploop.github.io/sparse-steer-retrieval/",
+    demo: "https://huggingface.co/spaces/Pliploop/steerable-retrieval",
+    awards: null,
+    featured: true,
+  },
+  {
     title: "SLAP: Siamese Language-Audio Pretraining Without Negative Samples for Music Understanding",
     authors: ["Julien Guinot", "Alain Riou", "Elio Quinton", "György Fazekas"],
     affiliations: ["Queen Mary University of London", "Universal Music Group"],
@@ -27,7 +43,7 @@ export const papers = [
     github: "https://github.com/Pliploop/GDRetriever",
     presentationType: "oral,poster",
     awards: null,
-    featured: true,
+    featured: false,
   },
   {
     title: "Towards a Unified Representation Evaluation Framework Beyond Downstream Tasks",

@@ -26,7 +26,7 @@ test('timeline switches tabs and expands rows', async () => {
   await userEvent.click(within(tabs).getByRole('tab', { name: 'Experience' }));
   expect(within(tabs).getByRole('tab', { name: 'Experience' })).toHaveAttribute('aria-selected', 'true');
   const firstRole = experienceData[0].title;
-  const row = screen.getByRole('button', { name: new RegExp(firstRole.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) });
+  const [row] = screen.getAllByRole('button', { name: new RegExp(firstRole.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) });
   await userEvent.click(row);
   expect(row).toHaveAttribute('aria-expanded', 'true');
 });
@@ -34,4 +34,13 @@ test('timeline switches tabs and expands rows', async () => {
 test('portrait has alt text', () => {
   renderAbout();
   expect(screen.getByAltText('Julien Guinot')).toBeInTheDocument();
+});
+
+test('every education and experience row shows a dithered logo', async () => {
+  renderAbout();
+  const { educationData, experienceData } = await import('../../data/education');
+  expect(screen.getAllByTestId('org-logo')).toHaveLength(educationData.length);
+  await userEvent.click(screen.getByRole('tab', { name: 'Experience' }));
+  expect(screen.getAllByTestId('org-logo')).toHaveLength(experienceData.length);
+  screen.getAllByTestId('org-logo').forEach((el) => expect(el.querySelector('canvas')).toHaveAttribute('aria-hidden', 'true'));
 });

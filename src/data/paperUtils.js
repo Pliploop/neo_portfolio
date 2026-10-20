@@ -1,5 +1,6 @@
 export const PAPER_FILTERS = [
   { id: 'all', label: 'All' },
+  { id: '2026', label: '2026' },
   { id: '2025', label: '2025' },
   { id: '2024', label: '2024' },
   { id: 'oral', label: 'Oral' },
@@ -9,6 +10,7 @@ export const PAPER_FILTERS = [
 
 const PREDICATES = {
   all: () => true,
+  2026: (p) => p.year === 2026,
   2025: (p) => p.year === 2025,
   2024: (p) => p.year === 2024,
   oral: (p) => Boolean(p.presentationType?.includes('oral')),
@@ -22,7 +24,9 @@ export function featuredPapers(papers) {
 
 export function filterPapers(papers, filterId) {
   const test = PREDICATES[filterId] ?? PREDICATES.all;
-  return papers.filter((p) => !p.featured && test(p));
+  // "All" leaves out featured papers (shown above the list); specific filters search everything.
+  if (!PREDICATES[filterId] || filterId === 'all') return papers.filter((p) => !p.featured);
+  return papers.filter(test);
 }
 
 export function badgesFor(paper) {

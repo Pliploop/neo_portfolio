@@ -2,6 +2,7 @@ export const educationData = [
   {
     title: "PhD student - AI and music",
     company: "@Queen Mary University of London (QMUL)",
+    logo: "qmul",
     dates: "September 2023 - present",
     description: [
       "I'm currently a PhD student at Queen Mary University of London in collaboration with Universal Music Group. My PhD project focuses on refining self-supervised learning techniques for musical audio, to create interpretable, navigable and explainable learned representations. The research questions I'm interested in answering are:",
@@ -17,6 +18,7 @@ export const educationData = [
   {
     title: "MSc Engineering - Acoustics, Data Science",
     company: "@University of Adelaide",
+    logo: "adelaide",
     dates: "June 2021 - December 2022",
     description: [
       "GPA : 5.86/7",
@@ -29,6 +31,7 @@ export const educationData = [
   {
     title: "MSc Engineering, Diplôme d'ingénieur",
     company: "@Ecole Centrale de Lyon",
+    logo: "ecl",
     dates: "September 2020 - December 2022",
     description: [
       "GPA : 3.6/4",
@@ -42,6 +45,7 @@ export const educationData = [
   {
     title: "BSc Engineering, Diplôme d'ingénieur",
     company: "@Ecole Centrale de Lyon",
+    logo: "ecl",
     dates: "September 2018 - September 2020",
     description: [
       "GPA : 3.6/4",
@@ -55,8 +59,31 @@ export const educationData = [
 
 export const experienceData = [
   {
+    title: "Research Intern",
+    company: "@Spotify",
+    logo: "spotify",
+    dates: "May 2026 - September 2026",
+    description: [
+      "Worked on semantic models for multi-scale music understanding.",
+    ],
+    links: ["https://openreview.net/forum?id=tYgUr4YPdl"],
+    linktexts: ["MultiJEPA (ICLR 2027 submission)"],
+  },
+  {
+    title: "Research Intern",
+    company: "@Splice (formerly Kits.ai)",
+    logo: "splice",
+    dates: "April 2025 - September 2025",
+    description: [
+      "Worked on semantic vocal generation.",
+    ],
+    links: [],
+    linktexts: [],
+  },
+  {
     title: "PhD student",
     company: "@Universal Music Group",
+    logo: "umg",
     dates: "September 2023 - Present",
     description: [
       "Pursuing my PhD under the cosupervision of Queen Mary University of London and Elio Quinton from Universal Music Group",
@@ -69,6 +96,7 @@ export const experienceData = [
   {
     title: "Research Scientist Intern",
     company: "@Sony CSL Paris",
+    logo: "sonycsl",
     dates: "February 2023 - September 2023",
     description: [
       "Under the supervision of Stefan Lattner, I researched audio-conditioned symbolic music generation for live jamming and producing",
@@ -80,6 +108,7 @@ export const experienceData = [
   {
     title: "Data Scientist",
     company: "@Believe",
+    logo: "believe",
     dates: "October 2022 - January 2023",
     description: [
       "Built a bad revenue copyright strike identification pipeline from user consumption metrics",
@@ -91,6 +120,7 @@ export const experienceData = [
   {
     title: "Data Scientist / MIR R&D Intern",
     company: "@Groover",
+    logo: "groover",
     dates: "March 2022 - September 2022",
     description: [
       "Masters' thesis : Automatic Music Tagging at scale towards better musical recommendations",
@@ -104,6 +134,7 @@ export const experienceData = [
   {
     title: "Data Science Consultant Intern",
     company: "@Artefact",
+    logo: "artefact",
     dates: "March 2021 - September 2021",
     links:[],
     linktexts:[],
@@ -117,6 +148,7 @@ export const experienceData = [
   {
     title: "Musical Acoustics Research Intern",
     company: "@IRCAM",
+    logo: "ircam",
     dates: "March 2020 - June 2020",
     links:[],
     linktexts:[],
@@ -129,7 +161,7 @@ export const experienceData = [
   // Add more experience entries if needed
 ];
 
-export const jobtitles = ["UMG", "SonyCSL", "Believe", "Groover", "Artefact", "IRCAM"];
+export const jobtitles = ["Spotify", "Splice", "UMG", "SonyCSL", "Believe", "Groover", "Artefact", "IRCAM"];
 export const educationtitles = [
   "Queen Mary U of London (PhD)",
   "University of Adelaide (MSc)",

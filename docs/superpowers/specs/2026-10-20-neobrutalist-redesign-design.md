@@ -28,6 +28,19 @@ or deployed until the owner approves.
 - New content. Copy is rewritten, never extended with invented facts.
 - CMS, i18n, analytics.
 
+## Revision 5 (2026-10-21): new content
+
+- Paper: "Steering dense music retrieval with open-vocabulary concept discovery" (ISMIR 2026,
+  arXiv 2608.08757), featured with arXiv, code, project page and demo links. Featured papers are
+  now this one and SLAP; GD-Retriever moves to the list. Year filters include featured papers.
+- Projects section on Research (`data/projects.js`): Sparse Steerable Retrieval and Music Lenses,
+  each with an animated dither+ASCII thumbnail.
+- Experience: Spotify (May-Sep 2026, semantic models for multi-scale music understanding, links
+  the MultiJEPA ICLR 2027 submission) and Splice, formerly Kits.ai (Apr-Sep 2025, semantic vocal
+  generation). Role titles recorded as "Research Intern" pending the owner's confirmation.
+- Organisation logos (`src/assets/logos`, normalised 3:2 greyscale) dithered in ink with the
+  portrait's slow wave, shown in every education and experience row.
+
 ## Revision 4 (2026-10-21): motion everywhere
 
 - OS "reduce motion" no longer freezes effects: it switches to calm mode (40% speed, half fps).

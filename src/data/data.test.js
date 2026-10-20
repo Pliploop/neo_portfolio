@@ -56,3 +56,39 @@ test('commuz plays each have a spotify album', () => {
   expect(commuz.plays).toHaveLength(4);
   commuz.plays.forEach((p) => expect(p.spotify).toMatch(/^https:\/\/open\.spotify\.com\/embed\/album\//));
 });
+
+describe('2025-2026 additions', () => {
+  test('Spotify and Splice internships lead the experience list', async () => {
+    const { experienceData: exp } = await import('./education');
+    expect(exp[0]).toMatchObject({ company: '@Spotify', dates: 'May 2026 - September 2026' });
+    expect(exp[1]).toMatchObject({ company: '@Splice (formerly Kits.ai)', dates: 'April 2025 - September 2025' });
+    expect(exp[0].links).toContain('https://openreview.net/forum?id=tYgUr4YPdl');
+  });
+
+  test('every education and experience entry has a logo', async () => {
+    const { educationData: edu, experienceData: exp } = await import('./education');
+    const { logoFor } = await import('./logos');
+    [...edu, ...exp].forEach((item) => expect({ c: item.company, ok: Boolean(logoFor(item.logo)) }).toEqual({ c: item.company, ok: true }));
+  });
+
+  test('the steerable retrieval paper is featured with its project links', () => {
+    const p = papers.find((x) => x.arxiv === 'https://arxiv.org/abs/2608.08757');
+    expect(p).toMatchObject({ venue: 'ISMIR 2026', year: 2026, featured: true });
+    expect(p.project).toBe('https://pliploop.github.io/sparse-steer-retrieval/');
+    expect(filterPapers(papers, '2026').every((x) => x.year === 2026)).toBe(true);
+  });
+
+  test('projects list the steerable retrieval site and Music Lenses', async () => {
+    const { projects } = await import('./projects');
+    expect(projects.map((p) => p.href)).toEqual([
+      'https://pliploop.github.io/sparse-steer-retrieval/',
+      'https://pliploop.github.io/sparse-steer-retrieval/lenses/',
+    ]);
+  });
+});
+
+test('specific filters include featured papers, so no year filter is empty', () => {
+  expect(filterPapers(papers, '2026').map((p) => p.venue)).toContain('ISMIR 2026');
+  expect(filterPapers(papers, 'award').some((p) => p.featured)).toBe(true);
+  filterPapers(papers, 'all').forEach((p) => expect(p.featured).toBeFalsy());
+});

@@ -52,3 +52,18 @@ test('featured cards show their awards as a badge', () => {
     p.awards.forEach((a) => expect(screen.getAllByTestId('award').some((el) => el.textContent.includes(a))).toBe(true));
   });
 });
+
+test('featured cards link to the project page and demo when they exist', () => {
+  renderPage();
+  expect(screen.getAllByRole('link', { name: /project/i }).map((a) => a.getAttribute('href')))
+    .toContain('https://pliploop.github.io/sparse-steer-retrieval/');
+  expect(screen.getAllByRole('link', { name: /demo/i }).map((a) => a.getAttribute('href')))
+    .toContain('https://huggingface.co/spaces/Pliploop/steerable-retrieval');
+});
+
+test('a projects section lists the project sites', () => {
+  renderPage();
+  expect(screen.getByRole('heading', { level: 2, name: 'Projects' })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /music lenses/i })).toHaveAttribute('href', 'https://pliploop.github.io/sparse-steer-retrieval/lenses/');
+  expect(screen.getByRole('link', { name: /^sparse steerable retrieval/i })).toHaveAttribute('href', 'https://pliploop.github.io/sparse-steer-retrieval/');
+});

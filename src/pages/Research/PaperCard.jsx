@@ -15,9 +15,11 @@ export function Badges({ paper }) {
 
 export function PaperLinks({ paper }) {
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-wrap gap-x-4 gap-y-1">
       {paper.arxiv ? <a href={paper.arxiv} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1">arXiv <ArrowUpRight width={12} height={12} /></a> : null}
       {paper.github ? <a href={paper.github} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1">GitHub <ArrowUpRight width={12} height={12} /></a> : null}
+      {paper.project ? <a href={paper.project} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1">Project <ArrowUpRight width={12} height={12} /></a> : null}
+      {paper.demo ? <a href={paper.demo} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1">Demo <ArrowUpRight width={12} height={12} /></a> : null}
     </div>
   );
 }

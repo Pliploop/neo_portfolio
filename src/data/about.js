@@ -14,13 +14,14 @@ export const about = {
   tagline: 'PhD researcher at QMUL and Universal Music Group, working on music representation learning. Also a musician, producer and mixing engineer.',
   bio: [
     "I'm a musician, producer, mixing engineer and DJ. My research looks at how machine learning can help musicians find sounds, move through creative options and understand the music they make.",
-    "I'm doing a PhD in the AI and Music CDT at Queen Mary University of London, supervised by Prof. George Fazekas and Elio Quinton and supported by Universal Music Group. I trained as an engineer in France and Australia, then worked in research and data science at Sony CSL, IRCAM, Believe, Groover and Artefact.",
+    "I'm doing a PhD in the AI and Music CDT at Queen Mary University of London, supervised by Prof. George Fazekas and Elio Quinton and supported by Universal Music Group. I trained as an engineer in France and Australia, then worked in research and data science at Sony CSL, IRCAM, Believe, Groover and Artefact. During the PhD I interned at Splice in 2025 and at Spotify in 2026.",
   ],
   now: [
     ['role', 'PhD researcher, AI and Music'],
     ['where', 'Queen Mary University of London × Universal Music Group'],
     ['supervisors', 'Prof. George Fazekas, Elio Quinton'],
     ['focus', 'Foundation models, music retrieval, multimodal understanding, self-supervised learning'],
+    ['internships', 'Spotify (2026), Splice (2025)'],
     ['before', 'Sony CSL, IRCAM, Believe, Groover, Artefact'],
     ['studied', 'École Centrale de Lyon, University of Adelaide'],
   ],
