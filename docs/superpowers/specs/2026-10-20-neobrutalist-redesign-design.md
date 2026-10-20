@@ -28,6 +28,19 @@ or deployed until the owner approves.
 - New content. Copy is rewritten, never extended with invented facts.
 - CMS, i18n, analytics.
 
+## Revision 3 (2026-10-21): blue palette, motion, section headings
+
+- Palette: cream paper `244 239 227`, navy ink `24 34 68`, cobalt accent `38 66 214`.
+  Dark: navy paper `14 21 46`, cream ink, light cobalt `128 150 255`. Muted text is ink 70%.
+- Background grain cut to 1.4% opacity.
+- Sections: no numbered mono captions. Heading sits in a sticky left column (4/12), content in
+  8/12 (`ui/Section.jsx`). Mono is kept for data only (dates, venues, times, ASCII).
+- Awards: sparkle badge (`pages/Research/Award.jsx`) on featured cards and in list-row summaries.
+- ASCII: per-cell hash noise re-rolled 8x/s plus rare stray glyphs (`jitter`), on by default.
+- Dither blobs: `speed` multiplier, breathing radii (±18%), edge shimmer noise in the shader.
+- Shaders compile via `KHR_parallel_shader_compile`; fields skip drawing (static ones retry)
+  until the program is ready, so the first paint never blocks on the GPU driver.
+
 ## Revision 2 (2026-10-21): Swiss restyle
 
 The owner rejected neobrutalism as too blocky and aggressive. Direction now: Swiss, minimal,

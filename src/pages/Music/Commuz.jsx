@@ -10,11 +10,17 @@ export default function Commuz() {
   const play = commuz.plays.find((p) => p.year === year);
   const titleMask = { WebkitMaskImage: `url(${title})`, maskImage: `url(${title})`, WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat' };
   return (
-    <Section index="03" label="Commuz'" className="mt-32">
-      <h2 className="sr-only">Commuz' musical theatre: mixing and mastering</h2>
-      <div aria-hidden="true" className="h-16 sm:h-20 w-full max-w-md bg-ink" style={titleMask} />
-      <p className="meta mt-4 text-ink/70">Mixing and mastering</p>
-      <div className="mt-8 grid md:grid-cols-2 gap-8 text-[15px] leading-relaxed text-ink/80">
+    <Section
+      className="mt-32"
+      title={(
+        <div>
+          <h2 className="sr-only">Commuz' musical theatre: mixing and mastering</h2>
+          <div aria-hidden="true" className="h-14 sm:h-16 w-full max-w-[16rem] bg-ink" style={titleMask} />
+          <p className="text-[13px] text-ink/70 mt-4">Mixing and mastering</p>
+        </div>
+      )}
+    >
+      <div className="grid xl:grid-cols-2 gap-8 text-[15px] leading-relaxed text-ink/80">
         {commuz.intro.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}
       </div>
 
@@ -43,7 +49,7 @@ export default function Commuz() {
           </button>
         ))}
       </div>
-      <div role="tabpanel" id="commuz-panel" aria-labelledby={`commuz-${year}`} className="mt-10 grid lg:grid-cols-[1fr_20rem] gap-10">
+      <div role="tabpanel" id="commuz-panel" aria-labelledby={`commuz-${year}`} className="mt-10 grid xl:grid-cols-[1fr_18rem] gap-10">
         <div>
           <h3 className="heading text-[2.25rem]">{play.title}</h3>
           <p className="meta mt-3 text-ink/70">{play.roles.join(' · ')}</p>

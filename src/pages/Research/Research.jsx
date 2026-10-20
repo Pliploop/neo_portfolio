@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AsciiField from '../../fx/AsciiField';
 import DropCapHeading from '../../ui/DropCapHeading';
 import Divider from '../../ui/Divider';
-import Section from '../../ui/Section';
+import Section, { SECTION_HEADING } from '../../ui/Section';
 import PaperCard from './PaperCard';
 import PaperRow from './PaperRow';
 import PaperFilter from './PaperFilter';
@@ -38,16 +38,14 @@ export default function Research() {
 
       <Divider />
 
-      <Section index="01" label="Featured" aria-labelledby="featured">
-        <h2 id="featured" className="sr-only">Featured papers</h2>
-        <div className="grid md:grid-cols-2 gap-x-10 gap-y-14">
+      <Section title={<DropCapHeading level={2} text="Selected work" caps={['zighead']} className={SECTION_HEADING} />}>
+        <div className="grid lg:grid-cols-2 gap-x-10 gap-y-14">
           {featuredPapers(papers).map((p, i) => <PaperCard key={p.title} paper={p} seed={30 + i} />)}
         </div>
       </Section>
 
-      <Section index="02" label="Publications" aria-labelledby="all-work" className="mt-32">
-        <div className="flex flex-wrap items-end justify-between gap-5 mb-8">
-          <DropCapHeading level={2} text="Publications" caps={['saint']} className="heading text-[clamp(2.2rem,5vw,3.25rem)]" />
+      <Section className="mt-32" title={<DropCapHeading level={2} text="Publications" caps={['saint']} className={SECTION_HEADING} />}>
+        <div className="mb-6">
           <PaperFilter value={filter} onChange={setFilter} />
         </div>
         <span id="all-work" className="sr-only">All publications</span>
@@ -57,7 +55,7 @@ export default function Research() {
         {list.length === 0 ? <p className="meta py-6 text-ink/70">No publications match this filter.</p> : null}
       </Section>
 
-      <Section index="03" label="Elsewhere" aria-label="Elsewhere" className="mt-32">
+      <Section className="mt-32" title={<DropCapHeading level={2} text="Elsewhere" caps={['zighead']} className={SECTION_HEADING} />}>
         <div className="grid sm:grid-cols-2 gap-x-10">
           {ELSEWHERE.map((l) => (
             <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between border-b rule py-4 heading text-[1.6rem] hover:text-accent-ink transition-colors">

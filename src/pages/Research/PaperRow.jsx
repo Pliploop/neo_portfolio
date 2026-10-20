@@ -2,6 +2,7 @@ import React from 'react';
 import Expandable from '../../ui/Expandable';
 import Authors from './Authors';
 import { Badges, PaperLinks } from './PaperCard';
+import { Awards } from './Award';
 
 export default function PaperRow({ paper }) {
   return (
@@ -10,7 +11,7 @@ export default function PaperRow({ paper }) {
         summary={(
           <div className="grid grid-cols-[3.5rem_1fr] sm:grid-cols-[4rem_1fr_9rem] gap-x-4 items-baseline">
             <span className="meta text-ink/70">{paper.year}</span>
-            <span className="text-[16px] leading-snug tracking-[-0.01em]">{paper.title}</span>
+            <span className="text-[16px] leading-snug tracking-[-0.01em]">{paper.title}<Awards paper={paper} className="ml-2.5 align-[2px]" /></span>
             <span className="meta text-ink/70 hidden sm:block text-right">{paper.venue}</span>
           </div>
         )}

@@ -48,7 +48,7 @@ export default function Player() {
       <article aria-label="Intro player" className="w-full max-w-[340px] border rule rounded-[28px] bg-paper p-2.5">
         <div className="relative aspect-square rounded-[20px] overflow-hidden">
           <div className={`absolute inset-0 transition-opacity duration-1000 ${started ? 'opacity-0' : 'opacity-100'}`}>
-            <DitherField seed={7} fg="--accent" cell={2} gain={0.8} active={!started} />
+            <DitherField seed={7} fg="--accent" cell={2} gain={0.8} speed={1.8} active={!started} />
           </div>
           <div className={`absolute inset-0 transition-opacity duration-1000 ${started ? 'opacity-100' : 'opacity-0'}`}>
             <AsciiField seed={7} blobs={5} fontSize={7} alpha={0.85} fps={18} active={started} />

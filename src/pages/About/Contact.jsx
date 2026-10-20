@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import DropCapHeading from '../../ui/DropCapHeading';
 import Frame from '../../ui/Frame';
-import Section from '../../ui/Section';
+import Section, { SECTION_HEADING } from '../../ui/Section';
 import { ArrowUpRight } from '../../ui/icons';
 import { validateContact, stripHtml, emailConfig, COOLDOWN_MS } from './contactLogic';
 
@@ -12,7 +12,7 @@ const input = 'w-full bg-transparent border-0 border-b border-ink/40 rounded-non
 function Field({ id, label, error, children }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="meta">{label}</label>
+      <label htmlFor={id} className="text-[13px] text-ink/70">{label}</label>
       {children}
       {error ? <p id={`${id}-error`} className="meta text-accent-ink">{error}</p> : null}
     </div>
@@ -58,8 +58,7 @@ export default function Contact() {
   };
 
   return (
-    <Section id="contact" index="04" label="Contact" className="scroll-mt-28">
-      <DropCapHeading level={2} text="Get in touch" caps={['zighead']} className="heading text-[clamp(2.2rem,5vw,3.25rem)] mb-10" />
+    <Section id="contact" className="scroll-mt-28" title={<DropCapHeading level={2} text="Get in touch" caps={['zighead']} className={SECTION_HEADING} />}>
       {status.kind === 'success' ? (
         <Frame className="p-8 max-w-2xl" role="status">
           <p className="heading text-3xl">Message sent.</p>

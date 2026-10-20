@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DropCapHeading from '../../ui/DropCapHeading';
-import Section from '../../ui/Section';
+import Section, { SECTION_HEADING } from '../../ui/Section';
 import Embed from '../../ui/Embed';
 import { youtubeEmbed } from '../../ui/embeds';
 import { ChevronLeft, ChevronRight, ArrowUpRight } from '../../ui/icons';
@@ -14,9 +14,8 @@ export default function Fonkey() {
   const n = fonkey.tracks.length;
   const track = fonkey.tracks[active];
   return (
-    <Section index="01" label="Band">
-      <DropCapHeading level={2} text={fonkey.name} caps={['zighead', 'saint']} className="heading text-[clamp(2.2rem,5vw,3.25rem)] mb-10" />
-      <div className="grid lg:grid-cols-[1fr_15rem] gap-10">
+    <Section title={<DropCapHeading level={2} text={fonkey.name} caps={['zighead', 'saint']} className={SECTION_HEADING} />}>
+      <div className="grid xl:grid-cols-[1fr_14rem] gap-10">
         <div>
           <Embed key={track.url} src={youtubeEmbed(track.url)} title={`${track.title} by Fonkey Business`} href={track.url} seed={40 + active} />
           <div className="mt-4 flex items-center gap-3">
@@ -39,11 +38,11 @@ export default function Fonkey() {
             <a href={fonkey.instagram} target="_blank" rel="noopener noreferrer" className="meta link inline-flex items-center gap-1">Instagram <ArrowUpRight width={12} height={12} /></a>
           </div>
           <div>
-            <h3 className="meta text-ink/70 mb-2">Roles</h3>
+            <h3 className="text-[13px] text-ink/70 mb-2">Roles</h3>
             <ul className="text-[14px] space-y-0.5">{fonkey.roles.map((r) => <li key={r}>{r}</li>)}</ul>
           </div>
           <div>
-            <h3 className="meta text-ink/70 mb-2">Setlist</h3>
+            <h3 className="text-[13px] text-ink/70 mb-2">Setlist</h3>
             <ul className="border-t rule">
               {fonkey.tracks.map((t, i) => (
                 <li key={t.url}>

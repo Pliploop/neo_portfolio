@@ -8,7 +8,7 @@ const LINE = 1.15;
 
 export default function AsciiField({
   seed = 3, blobs = 4, mode = 'blobs', fontSize = 12, color = '--ink',
-  alpha = 1, fps = 15, active = true, ramp = RAMP, className = '',
+  alpha = 1, fps = 15, active = true, ramp = RAMP, jitter = 0.22, className = '',
 }) {
   const ref = useRef(null);
   const [rgb] = useCssColors([color]);
@@ -30,14 +30,14 @@ export default function AsciiField({
     const cols = Math.max(1, Math.floor(size.width / charW));
     const rows = Math.max(1, Math.floor(size.height / lineH));
     const lines = mode === 'wave'
-      ? waveFrame({ cols, rows, t, ramp })
-      : asciiFrame({ cols, rows, t, blobs: field, cellAspect: charW / lineH, ramp });
+      ? waveFrame({ cols, rows, t, ramp, jitter })
+      : asciiFrame({ cols, rows, t, blobs: field, cellAspect: charW / lineH, ramp, jitter });
     ctx.clearRect(0, 0, size.width, size.height);
     ctx.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
     for (let y = 0; y < lines.length; y++) ctx.fillText(lines[y], 0, y * lineH);
   };
 
-  useFxCanvas(ref, draw, { fps, active, deps: [rgb, fontSize, mode, alpha] });
+  useFxCanvas(ref, draw, { fps, active, deps: [rgb, fontSize, mode, alpha, jitter] });
 
   return <canvas ref={ref} aria-hidden="true" className={`block w-full h-full ${className}`} />;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import DropCapHeading from '../../ui/DropCapHeading';
-import Section from '../../ui/Section';
+import Section, { SECTION_HEADING } from '../../ui/Section';
 import Expandable from '../../ui/Expandable';
 import Embed from '../../ui/Embed';
 import { soundcloudEmbed } from '../../ui/embeds';
@@ -8,8 +8,7 @@ import { productions } from '../../data/music';
 
 export default function Productions() {
   return (
-    <Section index="02" label="Productions" className="mt-32">
-      <DropCapHeading level={2} text="Original productions" caps={['saint']} className="heading text-[clamp(2.2rem,5vw,3.25rem)] mb-8" />
+    <Section className="mt-32" title={<DropCapHeading level={2} text="Original productions" caps={['saint']} className={SECTION_HEADING} />}>
       <div className="border-t rule">
         {productions.map((p, i) => (
           <Expandable

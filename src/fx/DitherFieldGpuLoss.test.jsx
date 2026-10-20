@@ -3,7 +3,7 @@ import { render, act } from '@testing-library/react';
 import DitherField from './DitherField';
 import * as loop from './fxLoop';
 
-vi.mock('./glRenderer', () => ({ hasWebGL: () => true, renderDither: () => null }));
+vi.mock('./glRenderer', () => ({ PENDING: 'pending', hasWebGL: () => true, renderDither: () => null }));
 
 test('stops animating and draws a static CPU frame when the GPU stops rendering', async () => {
   const putImageData = vi.fn();

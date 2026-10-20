@@ -18,6 +18,8 @@ uniform vec2 u_imgOffset;
 uniform float u_contrast;
 uniform float u_gain;
 uniform float u_fade;
+uniform float u_noise;
+uniform float u_step;
 uniform vec3 u_fg;
 uniform vec3 u_bg;
 void main() {
@@ -34,6 +36,8 @@ void main() {
     v = min(v, 1.0) * u_gain;
     float fd = 1.0 - smoothstep(0.18, 0.5, distance(uv, vec2(0.5)));
     v *= mix(1.0, fd, u_fade);
+    float n = fract(sin(dot(gl_FragCoord.xy + u_step * 17.0, vec2(12.9898, 78.233))) * 43758.5453);
+    v += (n - 0.5) * u_noise * step(0.02, v);
   } else {
     vec3 c = texture2D(u_image, uv * u_imgScale + u_imgOffset).rgb;
     v = 1.0 - dot(c, vec3(0.299, 0.587, 0.114));
@@ -45,11 +49,12 @@ void main() {
 
 let state;
 
-function compile(gl, type, src) {
+export const PENDING = 'pending';
+
+function shader(gl, type, src) {
   const sh = gl.createShader(type);
   gl.shaderSource(sh, src);
   gl.compileShader(sh);
-  if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(sh));
   return sh;
 }
 
@@ -67,36 +72,49 @@ function bayerTexture(gl) {
   return tex;
 }
 
+// Starts compiling without waiting on it: status checks are deferred to finish(),
+// so with KHR_parallel_shader_compile the main thread never blocks on the driver.
 function init() {
   const canvas = document.createElement('canvas');
   const gl = canvas.getContext('webgl', { antialias: false, premultipliedAlpha: false, failIfMajorPerformanceCaveat: true });
   if (!gl) return null;
-  try {
-    const prog = gl.createProgram();
-    gl.attachShader(prog, compile(gl, gl.VERTEX_SHADER, VERT));
-    gl.attachShader(prog, compile(gl, gl.FRAGMENT_SHADER, FRAG));
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
-    gl.useProgram(prog);
-    const buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(prog, 'a_pos');
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const u = (name) => gl.getUniformLocation(prog, name);
-    const uniforms = Object.fromEntries(['u_res', 'u_blobs', 'u_count', 'u_aspect', 'u_mode', 'u_bayer', 'u_image',
-      'u_imgScale', 'u_imgOffset', 'u_contrast', 'u_gain', 'u_fade', 'u_fg', 'u_bg'].map((n) => [n, u(n)]));
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, bayerTexture(gl));
-    gl.uniform1i(uniforms.u_bayer, 0);
-    gl.uniform1i(uniforms.u_image, 1);
-    canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); state = undefined; });
-    return { canvas, gl, uniforms, textures: new WeakMap() };
-  } catch (err) {
-    console.error('[fx] WebGL init failed, using CPU dither', err);
-    return null;
+  const vs = shader(gl, gl.VERTEX_SHADER, VERT);
+  const fs = shader(gl, gl.FRAGMENT_SHADER, FRAG);
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+  canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); state = undefined; });
+  return {
+    canvas, gl, prog, shaders: [vs, fs], textures: new WeakMap(), ready: false,
+    parallel: gl.getExtension('KHR_parallel_shader_compile'),
+  };
+}
+
+function finish(st) {
+  if (st.ready) return true;
+  const { gl, prog, parallel } = st;
+  if (parallel && !gl.getProgramParameter(prog, parallel.COMPLETION_STATUS_KHR)) return false;
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+    const logs = st.shaders.map((sh) => gl.getShaderInfoLog(sh)).filter(Boolean).join('\n');
+    throw new Error(gl.getProgramInfoLog(prog) || logs || 'link failed');
   }
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const u = (name) => gl.getUniformLocation(prog, name);
+  st.uniforms = Object.fromEntries(['u_res', 'u_blobs', 'u_count', 'u_aspect', 'u_mode', 'u_bayer', 'u_image',
+    'u_imgScale', 'u_imgOffset', 'u_contrast', 'u_gain', 'u_fade', 'u_noise', 'u_step', 'u_fg', 'u_bg'].map((n) => [n, u(n)]));
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, bayerTexture(gl));
+  gl.uniform1i(st.uniforms.u_bayer, 0);
+  gl.uniform1i(st.uniforms.u_image, 1);
+  st.ready = true;
+  return true;
 }
 
 function imageTexture({ gl, textures }, image) {
@@ -119,8 +137,15 @@ export function hasWebGL() {
 
 export function renderDither(opts) {
   if (!hasWebGL()) return null;
+  try {
+    if (!finish(state)) return PENDING;
+  } catch (err) {
+    console.error('[fx] WebGL program failed, using CPU dither', err);
+    state = null;
+    return null;
+  }
   const { canvas, gl, uniforms: U } = state;
-  const { width, height, mode, positions = [], aspect, image, cover, fg, bg, contrast = 1, gain = 1, fade = false } = opts;
+  const { width, height, mode, positions = [], aspect, image, cover, fg, bg, contrast = 1, gain = 1, fade = false, noise = 0, step = 0 } = opts;
   if (canvas.width !== width || canvas.height !== height) {
     canvas.width = width;
     canvas.height = height;
@@ -141,6 +166,8 @@ export function renderDither(opts) {
     gl.uniform1i(U.u_mode, 0);
     gl.uniform1f(U.u_gain, gain);
     gl.uniform1f(U.u_fade, fade ? 1 : 0);
+    gl.uniform1f(U.u_noise, noise);
+    gl.uniform1f(U.u_step, step);
     const flat = new Float32Array(MAX_BLOBS * 4);
     positions.slice(0, MAX_BLOBS).forEach((p, i) => flat.set([p.x, p.y, p.r, 0], i * 4));
     gl.uniform4fv(U.u_blobs, flat);

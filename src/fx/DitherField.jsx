@@ -1,10 +1,10 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useFxCanvas } from './useFxCanvas';
 import { useCssColors } from '../hooks/useCssColors';
 import { useImage } from '../hooks/useImage';
 import { makeBlobs, blobPositions, fieldAt, radialFade } from './blobs';
 import { coverTransform } from './cover';
-import { renderDither, hasWebGL } from './glRenderer';
+import { renderDither, hasWebGL, PENDING } from './glRenderer';
 import { ditherPixels } from './ditherCpu';
 
 function imageLuma(image, w, h, cover) {
@@ -22,8 +22,11 @@ function imageLuma(image, w, h, cover) {
   };
 }
 
+const NOISE_RATE = 10; // edge shimmer re-rolls per second
+const PENDING_RETRY_MS = 60;
+
 export default function DitherField({
-  seed = 1, blobs = 5, cell = 2, gain = 0.85, fade = false, fg = '--accent', bg = '--paper',
+  seed = 1, blobs = 5, cell = 2, gain = 0.85, fade = false, speed = 1, noise = 0.12, fg = '--accent', bg = '--paper',
   image = null, contrast = 1, fps = 24, active = true, className = '',
 }) {
   const ref = useRef(null);
@@ -31,6 +34,8 @@ export default function DitherField({
   const field = useMemo(() => makeBlobs(seed, blobs), [seed, blobs]);
   const img = useImage(image);
   const [gpu, setGpu] = useState(hasWebGL);
+  const [retry, setRetry] = useState(0);
+  const retryTimer = useRef(null);
 
   const draw = (t, size) => {
     const canvas = ref.current;
@@ -45,10 +50,17 @@ export default function DitherField({
     const isImage = Boolean(image);
     if (isImage && !img) return;
     const cover = isImage ? coverTransform(w, h, img.naturalWidth, img.naturalHeight) : null;
-    const positions = isImage ? [] : blobPositions(field, t);
+    const positions = isImage ? [] : blobPositions(field, t * speed);
     const gl = gpu && renderDither({
-      width: w, height: h, mode: isImage ? 'image' : 'blobs', positions, aspect, image: img, cover, fg: fgRgb, bg: bgRgb, contrast, gain, fade,
+      width: w, height: h, mode: isImage ? 'image' : 'blobs', positions, aspect, image: img, cover, fg: fgRgb, bg: bgRgb, contrast, gain, fade, noise: isImage ? 0 : noise, step: Math.floor(t * NOISE_RATE),
     });
+    if (gl === PENDING) {
+      // Shader still compiling in the background: redraw shortly (static fields have no loop).
+      if (!retryTimer.current) {
+        retryTimer.current = setTimeout(() => { retryTimer.current = null; setRetry((n) => n + 1); }, PENDING_RETRY_MS);
+      }
+      return;
+    }
     if (gl) { ctx.drawImage(gl, 0, 0); return; }
     if (gpu) setGpu(false);
     const valueAt = isImage
@@ -64,8 +76,10 @@ export default function DitherField({
     fps,
     animate: !image && gpu,
     active,
-    deps: [fgRgb, bgRgb, img, cell, contrast, gain, fade, gpu],
+    deps: [fgRgb, bgRgb, img, cell, contrast, gain, fade, speed, noise, gpu, retry],
   });
+
+  useEffect(() => () => clearTimeout(retryTimer.current), []);
 
   return (
     <canvas

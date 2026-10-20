@@ -11,9 +11,7 @@ export default function Hero() {
   return (
     <section className="mx-auto max-w-6xl px-5 sm:px-8 grid grid-cols-12 gap-x-6 gap-y-10 items-end min-h-[68svh] pb-4">
       <div className="col-span-12 md:col-span-8 relative">
-        <p className="meta text-ink/70 mb-8 flex items-center gap-2">
-          <Sparkle size={13} className="text-accent" /> AI and music, London
-        </p>
+        <Sparkle size={18} className="text-accent mb-6" />
         <DropCapHeading level={1} text="Julien Guinot" caps={['zighead', 'saint']} accentWord={0} stack className="display text-[clamp(3.6rem,11vw,9rem)]" />
         <p className="mt-10 max-w-[36ch] text-[1.2rem] sm:text-[1.35rem] leading-snug tracking-[-0.015em] text-ink/80">{about.tagline}</p>
         <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -24,7 +22,7 @@ export default function Hero() {
         </div>
       </div>
       <div aria-hidden="true" className="col-span-8 col-start-3 md:col-span-4 md:col-start-auto aspect-square self-center">
-        <DitherField seed={11} fg="--accent" cell={2} gain={0.9} fade />
+        <DitherField seed={11} fg="--accent" cell={2} gain={0.9} fade speed={2.2} />
       </div>
     </section>
   );

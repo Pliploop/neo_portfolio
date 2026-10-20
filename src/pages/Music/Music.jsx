@@ -16,7 +16,7 @@ export default function Music() {
           <p className="mt-10 max-w-[40ch] text-[1.2rem] leading-snug tracking-[-0.015em] text-ink/80">{music.intro}</p>
         </div>
         <div aria-hidden="true" className="col-span-7 col-start-4 md:col-span-4 md:col-start-auto aspect-square">
-          <DitherField seed={17} fg="--accent" cell={2} gain={0.9} fade />
+          <DitherField seed={17} fg="--accent" cell={2} gain={0.9} fade speed={2.2} />
         </div>
       </section>
       <Divider />

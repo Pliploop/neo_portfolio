@@ -1,6 +1,7 @@
 import { mulberry32 } from './random';
 
 const TAU = Math.PI * 2;
+const BREATH = 0.18;
 
 export function makeBlobs(seed, count = 5) {
   const rand = mulberry32(seed);
@@ -18,7 +19,7 @@ export function blobPositions(blobs, t) {
   return blobs.map((b) => ({
     x: 0.5 + b.ax * Math.sin(TAU * b.fx * t + b.phase),
     y: 0.5 + b.ay * Math.cos(TAU * b.fy * t + b.phase * 1.7),
-    r: b.radius,
+    r: b.radius * (1 + BREATH * Math.sin(TAU * (b.fx + b.fy) * 0.9 * t + b.phase * 2.3)),
   }));
 }
 

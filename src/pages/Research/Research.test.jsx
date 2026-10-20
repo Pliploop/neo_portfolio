@@ -37,3 +37,18 @@ test('abstract toggle on featured card', async () => {
   await userEvent.click(first);
   expect(first).toHaveAttribute('aria-expanded', 'true');
 });
+
+test('awards are visible on the paper rows without expanding them', () => {
+  renderPage();
+  filterPapers(papers, 'all').filter((p) => p.awards?.length).forEach((p) => {
+    const row = screen.getByRole('button', { name: new RegExp(p.title.slice(0, 30).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) });
+    p.awards.forEach((a) => expect(within(row).getByText(a)).toBeInTheDocument());
+  });
+});
+
+test('featured cards show their awards as a badge', () => {
+  renderPage();
+  featuredPapers(papers).filter((p) => p.awards?.length).forEach((p) => {
+    p.awards.forEach((a) => expect(screen.getAllByTestId('award').some((el) => el.textContent.includes(a))).toBe(true));
+  });
+});

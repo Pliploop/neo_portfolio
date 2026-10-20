@@ -7,6 +7,7 @@ function fakeGl(canvas) {
     TEXTURE_MIN_FILTER: 15, TEXTURE_MAG_FILTER: 16, TEXTURE_WRAP_S: 17, TEXTURE_WRAP_T: 18, NEAREST: 19, LINEAR: 20,
     REPEAT: 21, CLAMP_TO_EDGE: 22, TRIANGLE_STRIP: 23,
     createShader: () => ({}), shaderSource() {}, compileShader() {}, getShaderParameter: () => true,
+    getExtension: () => null, getShaderInfoLog: () => '', getProgramInfoLog: () => '',
     createProgram: () => ({}), attachShader() {}, linkProgram() {}, getProgramParameter: () => true, useProgram() {},
     createBuffer: () => ({}), bindBuffer() {}, bufferData() {}, getAttribLocation: () => 0,
     enableVertexAttribArray() {}, vertexAttribPointer() {}, getUniformLocation: (_, n) => n,
@@ -70,4 +71,28 @@ test('refuses software-rendered WebGL so slow devices get the static CPU frame',
   const { hasWebGL } = await import('./glRenderer');
   hasWebGL();
   expect(contexts.attrs).toMatchObject({ failIfMajorPerformanceCaveat: true });
+});
+
+test('with parallel shader compile, rendering waits for the program instead of blocking', async () => {
+  const COMPLETION = 0x91b1;
+  let done = false;
+  document.createElement.mockImplementation((tag) => {
+    const el = document.implementation.createHTMLDocument('').createElement(tag);
+    if (tag === 'canvas') {
+      el.getContext = (type) => {
+        if (type !== 'webgl') return null;
+        const gl = fakeGl(el);
+        gl.getExtension = (name) => (name === 'KHR_parallel_shader_compile' ? { COMPLETION_STATUS_KHR: COMPLETION } : null);
+        gl.getProgramParameter = (_, p) => (p === COMPLETION ? done : true);
+        contexts.push(gl);
+        return gl;
+      };
+    }
+    return el;
+  });
+  const { renderDither, PENDING, hasWebGL } = await import('./glRenderer');
+  expect(hasWebGL()).toBe(true);
+  expect(renderDither(opts({}))).toBe(PENDING);
+  done = true;
+  expect(renderDither(opts({}))).toBe(contexts[0].canvas);
 });

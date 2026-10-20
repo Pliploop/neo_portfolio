@@ -143,3 +143,51 @@ describe('radial fade', () => {
     expect(mid).toBeLessThan(1);
   });
 });
+
+describe('ascii shimmer', () => {
+  const still = [{ ax: 0, ay: 0, fx: 0, fy: 0, phase: 0, radius: 0.3 }];
+
+  test('cellNoise is deterministic and in [0,1)', async () => {
+    const { cellNoise } = await import('./asciiRamp');
+    expect(cellNoise(3, 4, 7)).toBe(cellNoise(3, 4, 7));
+    for (let i = 0; i < 200; i++) {
+      const n = cellNoise(i, i * 3, i * 7);
+      expect(n).toBeGreaterThanOrEqual(0);
+      expect(n).toBeLessThan(1);
+    }
+  });
+
+  test('without jitter a still field does not change over time', () => {
+    const a = asciiFrame({ cols: 30, rows: 10, t: 0, blobs: still });
+    const b = asciiFrame({ cols: 30, rows: 10, t: 3, blobs: still });
+    expect(a).toEqual(b);
+  });
+
+  test('with jitter the characters shimmer even when the field is still', () => {
+    const a = asciiFrame({ cols: 30, rows: 10, t: 0, blobs: still, jitter: 0.25 });
+    const b = asciiFrame({ cols: 30, rows: 10, t: 3, blobs: still, jitter: 0.25 });
+    expect(a).not.toEqual(b);
+  });
+
+  test('wave frames shimmer with jitter', () => {
+    const a = waveFrame({ cols: 40, rows: 1, t: 0, jitter: 0.3 });
+    const b = waveFrame({ cols: 40, rows: 1, t: 0.001, jitter: 0.3 });
+    const c = waveFrame({ cols: 40, rows: 1, t: 0.5, jitter: 0.3 });
+    expect(a).toEqual(b);
+    expect(a).not.toEqual(c);
+  });
+});
+
+describe('breathing blobs', () => {
+  test('radii pulse over time within ±20% of the base radius', () => {
+    const blobs = makeBlobs(5, 4);
+    const radii = (t) => blobPositions(blobs, t).map((p) => p.r);
+    expect(radii(0)).not.toEqual(radii(4));
+    for (let t = 0; t < 40; t += 0.9) {
+      radii(t).forEach((r, i) => {
+        expect(r).toBeGreaterThanOrEqual(blobs[i].radius * 0.8);
+        expect(r).toBeLessThanOrEqual(blobs[i].radius * 1.2);
+      });
+    }
+  });
+});
