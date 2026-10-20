@@ -1,9 +1,9 @@
 @import './tokens.css';
 @import './fonts.css';
+@import './base.css';
 @import './blobs.css';
+@import './transitions.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import './base.css';

@@ -1,0 +1,31 @@
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: dither-in 360ms linear both;
+  -webkit-mask-size: 32px 32px; mask-size: 32px 32px;
+  -webkit-mask-repeat: repeat; mask-repeat: repeat;
+}
+
+@keyframes dither-in {
+  0%   { -webkit-mask-image: var(--dither-1); mask-image: var(--dither-1); }
+  25%  { -webkit-mask-image: var(--dither-2); mask-image: var(--dither-2); }
+  50%  { -webkit-mask-image: var(--dither-3); mask-image: var(--dither-3); }
+  75%  { -webkit-mask-image: var(--dither-4); mask-image: var(--dither-4); }
+  100% { -webkit-mask-image: none; mask-image: none; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee { animation: marquee 60s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+}
