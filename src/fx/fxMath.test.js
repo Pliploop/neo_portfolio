@@ -5,7 +5,7 @@ import { RAMP, rampChar, asciiFrame, waveFrame } from './asciiRamp';
 import { parseRgbVar } from './color';
 import { coverTransform } from './cover';
 import { ditherPixels } from './ditherCpu';
-import { grainBits } from './grain';
+import { grainBits } from './grainBits';
 import { ditherMaskBits } from './ditherMasks';
 
 describe('random', () => {
