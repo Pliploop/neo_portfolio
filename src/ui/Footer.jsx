@@ -3,6 +3,7 @@ import AsciiField from '../fx/AsciiField';
 import TLink from './TLink';
 import { ArrowUpRight } from './icons';
 import { Squiggle } from './Doodle';
+import Twinkle from './Twinkle';
 import { site } from '../data/site';
 
 export default function Footer() {
@@ -15,6 +16,7 @@ export default function Footer() {
           <div className="col-span-12 md:col-span-8">
             <TLink to="/about#contact" className="group inline-block display text-[clamp(2.4rem,7vw,5.5rem)] hover:text-accent-ink transition-colors">
               Get in touch
+              <Twinkle size="md" className="ml-3 align-top" />
               <Squiggle width={120} className="block mt-2 text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </TLink>
           </div>

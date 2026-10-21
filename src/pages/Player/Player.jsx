@@ -6,7 +6,7 @@ import TLink from '../../ui/TLink';
 import ProgressBar from './ProgressBar';
 import { Play, Pause, SkipBack, SkipForward, Heart } from '../../ui/icons';
 import { useTransitionNavigate } from '../../ui/navigation';
-import { Sparkle } from '../../ui/Doodle';
+import Twinkle from '../../ui/Twinkle';
 import { playerLines } from '../../data/about';
 import { initialPlayerState, playerReducer, randomBetween, STEPS } from './playerState';
 
@@ -56,7 +56,8 @@ export default function Player() {
           <div className={`absolute inset-0 transition-opacity duration-1000 ${started ? 'opacity-100' : 'opacity-0'}`}>
             <AsciiField seed={7} blobs={5} fontSize={7} alpha={0.85} fps={18} active={started} />
           </div>
-          <Sparkle size={16} className="absolute top-3 right-3 text-paper mix-blend-difference" />
+          <Twinkle size="md" className="absolute top-3 right-3" />
+          <Twinkle className="absolute bottom-4 left-4" />
         </div>
         <div className="px-3 pt-5 pb-3">
           <div className="flex items-baseline justify-between gap-3">

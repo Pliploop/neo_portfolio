@@ -2,13 +2,12 @@ import React, { useId, useState } from 'react';
 import AsciiField from '../../fx/AsciiField';
 import Authors from './Authors';
 import { ArrowUpRight } from '../../ui/icons';
-import { badgesFor } from '../../data/paperUtils';
-import { Awards } from './Award';
+import { Awards, Tags } from './Award';
 
 export function Badges({ paper }) {
   return (
     <p className="meta flex flex-wrap gap-x-3">
-      {badgesFor(paper).filter((b) => !b.accent).map((b) => <span key={b.label} className="text-ink/70">{b.label}</span>)}
+      <span className="text-ink/70">{paper.venue}</span>
     </p>
   );
 }
@@ -39,6 +38,7 @@ export default function PaperCard({ paper, seed }) {
       </div>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <Badges paper={paper} />
+        <Tags paper={paper} />
         <Awards paper={paper} />
       </div>
       <h3 className="heading text-[1.45rem] sm:text-[1.6rem] max-w-[24ch]">{paper.title}</h3>

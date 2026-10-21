@@ -10,6 +10,7 @@ import ProjectCard from './ProjectCard';
 import { projects } from '../../data/projects';
 import { ArrowUpRight } from '../../ui/icons';
 import { Asterisk } from '../../ui/Doodle';
+import Twinkle from '../../ui/Twinkle';
 import { papers } from '../../data/papers';
 import { filterPapers, featuredPapers } from '../../data/paperUtils';
 import { research } from '../../data/about';
@@ -32,7 +33,10 @@ export default function Research() {
           <AsciiField seed={21} blobs={5} fontSize={8} alpha={0.4} fps={12} />
         </div>
         <div className="col-span-12 md:col-span-9 relative">
-          <DropCapHeading level={1} text="Research" caps={['zighead']} accentWord={0} className="display text-[clamp(3.2rem,11vw,8.5rem)]" />
+          <div className="flex items-start gap-3">
+            <DropCapHeading level={1} text="Research" caps={['zighead']} accentWord={0} className="display text-[clamp(3.2rem,11vw,8.5rem)]" />
+            <Twinkle size="md" className="mt-2" />
+          </div>
           <p className="mt-10 max-w-[46ch] text-[1.2rem] leading-snug tracking-[-0.015em] text-ink/80">{research.intro}</p>
           <p className="meta mt-6 text-ink/70 max-w-[70ch]">{research.topics.join('  ·  ')}</p>
         </div>

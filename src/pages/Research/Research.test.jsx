@@ -67,3 +67,13 @@ test('a projects section lists the project sites', () => {
   expect(screen.getByRole('link', { name: /music lenses/i })).toHaveAttribute('href', 'https://pliploop.github.io/sparse-steer-retrieval/lenses/');
   expect(screen.getByRole('link', { name: /^sparse steerable retrieval/i })).toHaveAttribute('href', 'https://pliploop.github.io/sparse-steer-retrieval/');
 });
+
+test('oral and poster badges are visible pills on rows and cards', () => {
+  renderPage();
+  filterPapers(papers, 'all').filter((p) => p.presentationType).forEach((p) => {
+    const row = screen.getByRole('button', { name: new RegExp(p.title.slice(0, 30).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) });
+    if (p.presentationType.includes('oral')) expect(within(row).getByTestId('tag-oral')).toHaveTextContent('Oral');
+    if (p.presentationType.includes('poster')) expect(within(row).getByTestId('tag-poster')).toHaveTextContent('Poster');
+  });
+  expect(screen.getAllByTestId('tag-oral').length).toBeGreaterThanOrEqual(featuredPapers(papers).filter((p) => p.presentationType?.includes('oral')).length);
+});
