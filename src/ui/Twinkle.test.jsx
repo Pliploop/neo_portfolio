@@ -6,16 +6,15 @@ import { __resetMotion } from '../hooks/useMotion';
 
 afterEach(() => { vi.restoreAllMocks(); localStorage.clear(); __resetMotion(); });
 
-test('is a star-shaped mask over an animated ASCII field, with a star outline', () => {
+test('is an ASCII-only star: one animated canvas, no outline, no mask', () => {
   const spy = vi.spyOn(loop, 'subscribe').mockImplementation(() => () => {});
   const { container } = render(<Twinkle size="md" />);
   const star = container.querySelector('[data-twinkle]');
   expect(star).toHaveAttribute('aria-hidden', 'true');
   expect(star.style.width).toBe(`${STAR_SIZES.md}px`);
-  const fill = star.querySelector('[data-star-fill]');
-  expect(fill.style.maskImage || fill.style.webkitMaskImage).toContain('svg');
-  expect(fill.querySelector('canvas')).toBeInTheDocument();
-  expect(star.querySelector('svg path')).toBeInTheDocument();
+  expect(star.querySelectorAll('canvas')).toHaveLength(1);
+  expect(star.querySelector('svg')).toBeNull();
+  expect(star.querySelector('[style*="mask"]')).toBeNull();
   expect(spy).toHaveBeenCalled();
 });
 

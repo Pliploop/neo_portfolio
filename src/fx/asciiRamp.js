@@ -60,3 +60,38 @@ export function waveFrame({ cols, rows, t, ramp = RAMP, jitter = 0 }) {
   }
   return lines;
 }
+
+// Four-point sparkle as a density field: a superellipse with exponent < 1 pinches a circle into
+// a star. It breathes and wobbles over time so ASCII stars move like the blobs.
+const STAR_EXP = 0.62;
+const STAR_RADIUS = 0.48;
+const STAR_BREATH = 0.1;
+const STAR_WOBBLE = 0.18;
+
+export function starAt(x, y, t, phase = 0) {
+  const r = STAR_RADIUS * (1 + STAR_BREATH * Math.sin(t * 1.8 + phase));
+  const a = STAR_WOBBLE * Math.sin(t * 0.7 + phase * 1.3);
+  const dx = x - 0.5;
+  const dy = y - 0.5;
+  const ux = dx * Math.cos(a) - dy * Math.sin(a);
+  const uy = dx * Math.sin(a) + dy * Math.cos(a);
+  const d = (Math.abs(ux) ** STAR_EXP + Math.abs(uy) ** STAR_EXP) ** (1 / STAR_EXP);
+  const v = Math.max(0, 1 - d / r);
+  return Math.min(1, 1.4 * v ** 0.6);
+}
+
+export function starFrame({ cols, rows, t, ramp = RAMP, jitter = 0, mouse = null, phase = 0 }) {
+  const step = Math.floor(t * SHIMMER_RATE);
+  const lines = new Array(rows);
+  for (let y = 0; y < rows; y++) {
+    let line = '';
+    for (let x = 0; x < cols; x++) {
+      const r = repel((x + 0.5) / cols, (y + 0.5) / rows, 1, mouse);
+      const v = r.k * starAt(r.x, r.y, t, phase);
+      // Outside the star stays blank: noise only shimmers characters that are already there.
+      line += v > 0.02 ? shimmerChar(v, x, y, step, jitter, ramp) : ' ';
+    }
+    lines[y] = line;
+  }
+  return lines;
+}

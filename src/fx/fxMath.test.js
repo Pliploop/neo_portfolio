@@ -222,3 +222,28 @@ test('cpu dither can leave the background transparent', () => {
   const px = ditherPixels({ width: 2, height: 1, valueAt: (x) => (x === 0 ? 1 : 0), fg: [1, 2, 3], bg: [9, 9, 9], bgAlpha: 0 });
   expect(Array.from(px)).toEqual([1, 2, 3, 255, 9, 9, 9, 0]);
 });
+
+describe('ascii star', () => {
+  test('dense at the centre, blank in the corners, longer along the axes than the diagonals', async () => {
+    const { starFrame, starAt } = await import('./asciiRamp');
+    const lines = starFrame({ cols: 21, rows: 21, t: 0, cellAspect: 1 });
+    expect(lines).toHaveLength(21);
+    expect(RAMP.indexOf(lines[10][10])).toBeGreaterThan(RAMP.length - 3);
+    expect(lines[0][0]).toBe(' ');
+    expect(lines[20][20]).toBe(' ');
+    // a point on an arm is brighter than a point at the same distance on the diagonal
+    expect(starAt(0.5, 0.2, 0)).toBeGreaterThan(starAt(0.5 - 0.212, 0.5 - 0.212, 0));
+  });
+
+  test('breathes over time', async () => {
+    const { starFrame } = await import('./asciiRamp');
+    expect(starFrame({ cols: 21, rows: 21, t: 0, cellAspect: 1 })).not.toEqual(starFrame({ cols: 21, rows: 21, t: 1.1, cellAspect: 1 }));
+  });
+
+  test('parts around the pointer like the blobs', async () => {
+    const { starFrame } = await import('./asciiRamp');
+    const calm = starFrame({ cols: 21, rows: 21, t: 0, cellAspect: 1 });
+    const fled = starFrame({ cols: 21, rows: 21, t: 0, cellAspect: 1, mouse: { x: 0.5, y: 0.5, s: 1 } });
+    expect(RAMP.indexOf(fled[10][10])).toBeLessThan(RAMP.indexOf(calm[10][10]));
+  });
+});
