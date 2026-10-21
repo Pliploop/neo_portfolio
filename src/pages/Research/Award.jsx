@@ -3,8 +3,8 @@ import Twinkle from '../../ui/Twinkle';
 
 export default function Award({ label }) {
   return (
-    <span data-testid="award" className="inline-flex items-center gap-1.5 h-6 pl-2 pr-2.5 rounded-full border border-accent/40 text-accent-ink text-[12px] font-medium tracking-[-0.005em] whitespace-nowrap">
-      <Twinkle size="xs" className="w-2.5 text-center" />
+    <span data-testid="award" className="inline-flex items-center gap-1.5 h-6 pl-1.5 pr-2.5 rounded-full border border-accent/40 text-accent-ink text-[12px] font-medium tracking-[-0.005em] whitespace-nowrap">
+      <Twinkle size="xs" />
       {label}
     </span>
   );

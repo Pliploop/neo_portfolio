@@ -1,35 +1,37 @@
-import React, { useEffect, useMemo, useRef } from 'react';
-import { addTwinkle, twinkleFrame, TWINKLE_PEAK, TWINKLE_STEPS } from '../fx/twinkle';
-import { useMotion } from '../hooks/useMotion';
-import { useInView } from '../hooks/useInView';
+import React from 'react';
+import AsciiField from '../fx/AsciiField';
 
-const CALM_SPEED = 0.4;
+// The hand-drawn sparkle, filled with a live ASCII field and traced with a thin outline.
+// Plump four-point sparkle: gently concave sides leave room for the ASCII texture.
+const STAR_PATH = 'M12 1C13.9 7.4 16.6 10.1 23 12C16.6 13.9 13.9 16.6 12 23C10.1 16.6 7.4 13.9 1 12C7.4 10.1 10.1 7.4 12 1Z';
+const STAR_MASK = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='${STAR_PATH}'/></svg>")`;
 
-// Small animated ASCII star. size "sm" is one glyph, "md" a 3x3 cross.
-export default function Twinkle({ size = 'sm', phase, speed = 1, className = '' }) {
-  const ref = useRef(null);
-  const { paused, calm } = useMotion();
-  const inView = useInView(ref);
-  const offset = useMemo(() => phase ?? Math.floor(Math.random() * TWINKLE_STEPS), [phase]);
+export const STAR_SIZES = { xs: 15, sm: 26, md: 40, lg: 56 };
+// No blank glyph: every cell inside the star carries a character.
+const STAR_RAMP = '*#%@&8$';
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    if (paused || !inView) {
-      el.textContent = twinkleFrame(size, TWINKLE_PEAK);
-      return undefined;
-    }
-    return addTwinkle({ el, size, phase: offset, speed: calm ? speed * CALM_SPEED : speed });
-  }, [paused, calm, inView, size, offset, speed]);
+const maskStyle = {
+  WebkitMaskImage: STAR_MASK, maskImage: STAR_MASK,
+  WebkitMaskSize: '100% 100%', maskSize: '100% 100%',
+  WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat',
+};
 
+export default function Twinkle({ size = 'sm', className = '' }) {
+  const px = STAR_SIZES[size] ?? STAR_SIZES.sm;
+  const fontSize = Math.max(3, Math.round(px / 10));
   return (
     <span
-      ref={ref}
       data-twinkle
       aria-hidden="true"
-      className={`inline-block font-mono whitespace-pre text-accent select-none pointer-events-none ${size === 'md' ? 'text-[11px] leading-[0.95]' : 'text-[13px] leading-none'} ${className}`}
+      className={`inline-grid shrink-0 align-middle text-accent pointer-events-none ${className}`}
+      style={{ width: `${px}px`, height: `${px}px` }}
     >
-      {twinkleFrame(size, TWINKLE_PEAK)}
+      <span data-star-fill className="col-start-1 row-start-1 w-full h-full" style={maskStyle}>
+        <AsciiField mode="wave" fontSize={fontSize} color="--accent" alpha={1} jitter={0.7} ramp={STAR_RAMP} fps={12} />
+      </span>
+      <svg viewBox="0 0 24 24" className="col-start-1 row-start-1 w-full h-full" fill="none" stroke="currentColor" strokeWidth={px < 20 ? 1.3 : 0.8} strokeLinejoin="round">
+        <path d={STAR_PATH} />
+      </svg>
     </span>
   );
 }

@@ -1,20 +1,27 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Twinkle from './Twinkle';
+import Twinkle, { STAR_SIZES } from './Twinkle';
 import * as loop from '../fx/fxLoop';
-import { twinkleFrame, TWINKLE_PEAK } from '../fx/twinkle';
 import { __resetMotion } from '../hooks/useMotion';
 
 afterEach(() => { vi.restoreAllMocks(); localStorage.clear(); __resetMotion(); });
 
-test('is decorative, starts on its brightest frame and joins the shared loop', () => {
+test('is a star-shaped mask over an animated ASCII field, with a star outline', () => {
   const spy = vi.spyOn(loop, 'subscribe').mockImplementation(() => () => {});
-  const { container } = render(<><Twinkle size="md" /><Twinkle /></>);
-  const [a, b] = container.querySelectorAll('[data-twinkle]');
-  expect(a).toHaveAttribute('aria-hidden', 'true');
-  expect(a.textContent).toBe(twinkleFrame('md', TWINKLE_PEAK));
-  expect(b.textContent).toBe(twinkleFrame('sm', TWINKLE_PEAK));
-  expect(spy).toHaveBeenCalledTimes(1);
+  const { container } = render(<Twinkle size="md" />);
+  const star = container.querySelector('[data-twinkle]');
+  expect(star).toHaveAttribute('aria-hidden', 'true');
+  expect(star.style.width).toBe(`${STAR_SIZES.md}px`);
+  const fill = star.querySelector('[data-star-fill]');
+  expect(fill.style.maskImage || fill.style.webkitMaskImage).toContain('svg');
+  expect(fill.querySelector('canvas')).toBeInTheDocument();
+  expect(star.querySelector('svg path')).toBeInTheDocument();
+  expect(spy).toHaveBeenCalled();
+});
+
+test('sizes grow from badge to hero', () => {
+  expect(STAR_SIZES.xs).toBeLessThan(STAR_SIZES.sm);
+  expect(STAR_SIZES.sm).toBeLessThan(STAR_SIZES.md);
 });
 
 test('stays still when motion is paused', () => {
@@ -23,4 +30,12 @@ test('stays still when motion is paused', () => {
   const spy = vi.spyOn(loop, 'subscribe');
   render(<Twinkle />);
   expect(spy).not.toHaveBeenCalled();
+});
+
+test('can be absolutely positioned by its parent (no competing position class)', () => {
+  vi.spyOn(loop, 'subscribe').mockImplementation(() => () => {});
+  const { container } = render(<Twinkle className="absolute top-2 right-2" />);
+  const cls = container.querySelector('[data-twinkle]').className.split(/\s+/);
+  expect(cls).toContain('absolute');
+  expect(cls).not.toContain('relative');
 });
