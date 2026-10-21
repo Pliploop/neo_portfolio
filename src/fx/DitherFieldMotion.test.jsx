@@ -53,3 +53,19 @@ test('the portrait (image mode) animates on the GPU', async () => {
   expect(spy).toHaveBeenCalled();
   globalThis.Image = OriginalImage;
 });
+
+test('hovering a field pushes the dither away from the pointer, easing in over frames', async () => {
+  hasWebGL.mockReturnValue(true);
+  renderDither.mockReturnValue({});
+  let frame;
+  vi.spyOn(loop, 'subscribe').mockImplementation((fn) => { frame = fn; return () => {}; });
+  const { container } = render(<DitherField seed={4} />);
+  container.querySelector('canvas').getBoundingClientRect = () => ({ left: 0, top: 0, width: 320, height: 160, right: 320, bottom: 160 });
+  window.dispatchEvent(new MouseEvent('pointermove', { clientX: 160, clientY: 40 }));
+  await act(async () => { frame(1); });
+  const first = renderDither.mock.calls.at(-1)[0].mouse;
+  await act(async () => { for (let i = 2; i < 20; i++) frame(i); });
+  const later = renderDither.mock.calls.at(-1)[0].mouse;
+  expect(first).toMatchObject({ x: 0.5, y: 0.25 });
+  expect(later.s).toBeGreaterThan(first.s);
+});

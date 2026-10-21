@@ -206,3 +206,19 @@ describe('ascii over dither', () => {
     expect(asciiFrame({ cols: 20, rows: 8, t: 2, blobs, speed: 2 })).toEqual(asciiFrame({ cols: 20, rows: 8, t: 4, blobs }));
   });
 });
+
+describe('ascii flees the pointer', () => {
+  test('characters under the pointer thin out', () => {
+    const big = [{ ax: 0, ay: 0, fx: 0, fy: 0, phase: 0, radius: 0.6 }];
+    const idx = (c) => RAMP.indexOf(c);
+    const calm = asciiFrame({ cols: 21, rows: 11, t: 0, blobs: big });
+    const fled = asciiFrame({ cols: 21, rows: 11, t: 0, blobs: big, mouse: { x: 0.5, y: 0.5, s: 1 } });
+    expect(idx(fled[5][10])).toBeLessThan(idx(calm[5][10]));
+    expect(fled[0]).toEqual(calm[0]);
+  });
+});
+
+test('cpu dither can leave the background transparent', () => {
+  const px = ditherPixels({ width: 2, height: 1, valueAt: (x) => (x === 0 ? 1 : 0), fg: [1, 2, 3], bg: [9, 9, 9], bgAlpha: 0 });
+  expect(Array.from(px)).toEqual([1, 2, 3, 255, 9, 9, 9, 0]);
+});

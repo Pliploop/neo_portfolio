@@ -6,7 +6,9 @@ import { makeBlobs, blobPositions } from './blobs';
 import { coverTransform } from './cover';
 import { renderDither, hasWebGL, PENDING } from './glRenderer';
 import { ditherPixels } from './ditherCpu';
-import { imageLuma, blobValue, imageValue } from './cpuField';
+import { imageLuma, blobValue, imageValue, WAVE_AMP } from './cpuField';
+import { usePointerField } from '../hooks/usePointerField';
+import { nextMouse } from './pointerStrength';
 
 const NOISE_RATE = 10; // edge shimmer re-rolls per second
 const PENDING_RETRY_MS = 60;
@@ -17,7 +19,7 @@ const CPU_START_DELAY_MS = 1200; // keep CPU animation out of the page-load wind
 
 export default function DitherField({
   seed = 1, blobs = 5, cell = 2, gain = 0.85, fade = false, speed = 1, noise = 0.12, fg = '--accent', bg = '--paper',
-  image = null, contrast = 1, fps = 24, active = true, className = '',
+  image = null, contrast = 1, wave = WAVE_AMP, transparent = false, fps = 24, active = true, className = '',
 }) {
   const ref = useRef(null);
   const [fgRgb, bgRgb] = useCssColors([fg, bg]);
@@ -30,6 +32,7 @@ export default function DitherField({
   const retryTimer = useRef(null);
   const slowFrames = useRef(0);
   const lumaCache = useRef({ key: null, fn: null });
+  const pointer = usePointerField(ref);
 
   const lumaFor = (w, h, cover) => {
     const key = `${img.src}|${w}x${h}`;
@@ -37,12 +40,12 @@ export default function DitherField({
     return lumaCache.current.fn;
   };
 
-  const drawCpu = (ctx, { w, h, aspect, positions, cover, t }) => {
+  const drawCpu = (ctx, { w, h, aspect, positions, cover, t, mouse }) => {
     const start = performance.now();
     const valueAt = image
-      ? imageValue({ luma: lumaFor(w, h, cover), w, h, contrast, t })
-      : blobValue({ w, h, aspect, positions, gain, fade });
-    ctx.putImageData(new ImageData(ditherPixels({ width: w, height: h, valueAt, fg: fgRgb, bg: bgRgb }), w, h), 0, 0);
+      ? imageValue({ luma: lumaFor(w, h, cover), w, h, contrast, t, wave, mouse })
+      : blobValue({ w, h, aspect, positions, gain, fade, mouse });
+    ctx.putImageData(new ImageData(ditherPixels({ width: w, height: h, valueAt, fg: fgRgb, bg: bgRgb, bgAlpha: transparent ? 0 : 255 }), w, h), 0, 0);
     // Weak devices protect themselves: a few slow frames in a row and the field goes still.
     slowFrames.current = performance.now() - start > CPU_FRAME_BUDGET_MS ? slowFrames.current + 1 : 0;
     if (slowFrames.current >= CPU_SLOW_FRAMES) setCpuTooSlow(true);
@@ -61,10 +64,11 @@ export default function DitherField({
     const aspect = w / h;
     const cover = image ? coverTransform(w, h, img.naturalWidth, img.naturalHeight) : null;
     const positions = image ? [] : blobPositions(field, t * speed);
+    const mouse = nextMouse(pointer);
     const gl = gpu && renderDither({
       width: w, height: h, mode: image ? 'image' : 'blobs', positions, aspect, image: img, cover,
       fg: fgRgb, bg: bgRgb, contrast, gain, fade, noise: image ? noise * 0.5 : noise,
-      step: Math.floor(t * NOISE_RATE), time: t,
+      step: Math.floor(t * NOISE_RATE), time: t, wave, mouse, transparent,
     });
     if (gl === PENDING) {
       // Shader still compiling in the background: redraw shortly (static fields have no loop).
@@ -73,16 +77,20 @@ export default function DitherField({
       }
       return;
     }
-    if (gl) { ctx.drawImage(gl, 0, 0); return; }
+    if (gl) {
+      if (transparent) ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(gl, 0, 0);
+      return;
+    }
     if (gpu) setGpu(false);
-    drawCpu(ctx, { w, h, aspect, positions, cover, t });
+    drawCpu(ctx, { w, h, aspect, positions, cover, t, mouse });
   };
 
   useFxCanvas(ref, draw, {
     fps: gpu ? fps : Math.min(fps, CPU_FPS),
     animate: gpu || (cpuReady && !cpuTooSlow),
     active,
-    deps: [fgRgb, bgRgb, img, cell, contrast, gain, fade, speed, noise, gpu, cpuReady, cpuTooSlow, retry],
+    deps: [fgRgb, bgRgb, img, cell, contrast, wave, transparent, gain, fade, speed, noise, gpu, cpuReady, cpuTooSlow, retry],
   });
 
   useEffect(() => () => clearTimeout(retryTimer.current), []);

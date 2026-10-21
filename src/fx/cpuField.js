@@ -1,4 +1,5 @@
 import { fieldAt, radialFade } from './blobs';
+import { repel } from './repel';
 
 // Slow luminance wave that runs through the dithered portrait.
 export const WAVE_AMP = 0.07;
@@ -21,16 +22,20 @@ export function imageLuma(image, w, h, cover) {
   };
 }
 
-export function blobValue({ w, h, aspect, positions, gain, fade }) {
+export function blobValue({ w, h, aspect, positions, gain, fade, mouse = null }) {
   return (x, y) => {
-    const nx = (x + 0.5) / w; const ny = (y + 0.5) / h;
-    return gain * fieldAt(nx, ny, aspect, positions) * (fade ? radialFade(nx, ny) : 1);
+    const r = repel((x + 0.5) / w, (y + 0.5) / h, aspect, mouse);
+    return gain * r.k * fieldAt(r.x, r.y, aspect, positions) * (fade ? radialFade(r.x, r.y) : 1);
   };
 }
 
-export function imageValue({ luma, w, h, contrast, t }) {
+export function imageValue({ luma, w, h, contrast, t, wave = WAVE_AMP, mouse = null }) {
   return (x, y) => {
-    const v = (luma(x, y) - 0.5) * contrast + 0.5 + imageWave((x + 0.5) / w, (y + 0.5) / h, t);
+    const nx = (x + 0.5) / w; const ny = (y + 0.5) / h;
+    const r = repel(nx, ny, w / h, mouse);
+    const sx = Math.min(w - 1, Math.max(0, Math.floor(r.x * w)));
+    const sy = Math.min(h - 1, Math.max(0, Math.floor(r.y * h)));
+    const v = ((luma(sx, sy) - 0.5) * contrast + 0.5) * r.k + (wave / WAVE_AMP) * imageWave(nx, ny, t);
     return Math.min(1, Math.max(0, v));
   };
 }

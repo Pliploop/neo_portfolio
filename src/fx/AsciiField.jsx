@@ -3,6 +3,8 @@ import { useFxCanvas } from './useFxCanvas';
 import { useCssColors } from '../hooks/useCssColors';
 import { makeBlobs } from './blobs';
 import { asciiFrame, waveFrame, RAMP } from './asciiRamp';
+import { usePointerField } from '../hooks/usePointerField';
+import { nextMouse } from './pointerStrength';
 
 const LINE = 1.15;
 
@@ -13,6 +15,7 @@ export default function AsciiField({
   const ref = useRef(null);
   const [rgb] = useCssColors([color]);
   const field = useMemo(() => makeBlobs(seed, blobs), [seed, blobs]);
+  const pointer = usePointerField(ref);
 
   const draw = (t, size) => {
     const canvas = ref.current;
@@ -31,7 +34,7 @@ export default function AsciiField({
     const rows = Math.max(1, Math.floor(size.height / lineH));
     const lines = mode === 'wave'
       ? waveFrame({ cols, rows, t, ramp, jitter })
-      : asciiFrame({ cols, rows, t, blobs: field, cellAspect: charW / lineH, ramp, jitter, fade, speed, gain });
+      : asciiFrame({ cols, rows, t, blobs: field, cellAspect: charW / lineH, ramp, jitter, fade, speed, gain, mouse: nextMouse(pointer) });
     ctx.clearRect(0, 0, size.width, size.height);
     ctx.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
     for (let y = 0; y < lines.length; y++) ctx.fillText(lines[y], 0, y * lineH);

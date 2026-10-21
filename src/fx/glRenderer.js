@@ -1,4 +1,5 @@
 import { bayerMatrix } from './bayer';
+import { REPEL } from './repel';
 
 const MAX_BLOBS = 6;
 
@@ -21,31 +22,43 @@ uniform float u_fade;
 uniform float u_noise;
 uniform float u_step;
 uniform float u_time;
+uniform float u_wave;
+uniform vec3 u_mouse;
 uniform vec3 u_fg;
 uniform vec3 u_bg;
+uniform float u_bgAlpha;
 void main() {
   vec2 uv = gl_FragCoord.xy / u_res;
   uv.y = 1.0 - uv.y;
+  // Pointer repulsion: same maths as repel.js.
+  vec2 suv = uv;
+  float hole = 1.0;
+  if (u_mouse.z > 0.0) {
+    vec2 dm = vec2((uv.x - u_mouse.x) * u_aspect, uv.y - u_mouse.y);
+    float f = u_mouse.z * exp(-dot(dm, dm) / ${(REPEL.radius ** 2).toFixed(4)});
+    suv = uv - (uv - u_mouse.xy) * f * ${REPEL.push.toFixed(4)};
+    hole = 1.0 - f * ${REPEL.hole.toFixed(4)};
+  }
   float v = 0.0;
   if (u_mode == 0) {
     for (int i = 0; i < ${MAX_BLOBS}; i++) {
       if (i >= u_count) break;
       vec4 b = u_blobs[i];
-      vec2 d = vec2((uv.x - b.x) * u_aspect, uv.y - b.y);
+      vec2 d = vec2((suv.x - b.x) * u_aspect, suv.y - b.y);
       v += exp(-dot(d, d) / (b.z * b.z));
     }
-    v = min(v, 1.0) * u_gain;
-    float fd = 1.0 - smoothstep(0.18, 0.5, distance(uv, vec2(0.5)));
+    v = min(v, 1.0) * u_gain * hole;
+    float fd = 1.0 - smoothstep(0.18, 0.5, distance(suv, vec2(0.5)));
     v *= mix(1.0, fd, u_fade);
-    float n = fract(sin(dot(gl_FragCoord.xy + u_step * 17.0, vec2(12.9898, 78.233))) * 43758.5453);
-    v += (n - 0.5) * u_noise * step(0.02, v);
   } else {
-    vec3 c = texture2D(u_image, uv * u_imgScale + u_imgOffset).rgb;
+    vec3 c = texture2D(u_image, suv * u_imgScale + u_imgOffset).rgb;
     v = 1.0 - dot(c, vec3(0.299, 0.587, 0.114));
-    v = clamp((v - 0.5) * u_contrast + 0.5 + 0.07 * sin(uv.y * 9.0 - u_time * 1.3 + uv.x * 3.0), 0.0, 1.0);
+    v = clamp(((v - 0.5) * u_contrast + 0.5) * hole + u_wave * sin(uv.y * 9.0 - u_time * 1.3 + uv.x * 3.0), 0.0, 1.0);
   }
+  float n = fract(sin(dot(gl_FragCoord.xy + u_step * 17.0, vec2(12.9898, 78.233))) * 43758.5453);
+  v += (n - 0.5) * u_noise * step(0.02, v);
   float th = texture2D(u_bayer, gl_FragCoord.xy / 8.0).r;
-  gl_FragColor = vec4(v > th ? u_fg : u_bg, 1.0);
+  gl_FragColor = v > th ? vec4(u_fg, 1.0) : vec4(u_bg, u_bgAlpha);
 }`;
 
 let state;
@@ -109,7 +122,7 @@ function finish(st) {
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   const u = (name) => gl.getUniformLocation(prog, name);
   st.uniforms = Object.fromEntries(['u_res', 'u_blobs', 'u_count', 'u_aspect', 'u_mode', 'u_bayer', 'u_image',
-    'u_imgScale', 'u_imgOffset', 'u_contrast', 'u_gain', 'u_fade', 'u_noise', 'u_step', 'u_time', 'u_fg', 'u_bg'].map((n) => [n, u(n)]));
+    'u_imgScale', 'u_imgOffset', 'u_contrast', 'u_gain', 'u_fade', 'u_noise', 'u_step', 'u_time', 'u_wave', 'u_mouse', 'u_fg', 'u_bg', 'u_bgAlpha'].map((n) => [n, u(n)]));
   gl.activeTexture(gl.TEXTURE0);
   gl.bindTexture(gl.TEXTURE_2D, bayerTexture(gl));
   gl.uniform1i(st.uniforms.u_bayer, 0);
@@ -146,7 +159,7 @@ export function renderDither(opts) {
     return null;
   }
   const { canvas, gl, uniforms: U } = state;
-  const { width, height, mode, positions = [], aspect, image, cover, fg, bg, contrast = 1, gain = 1, fade = false, noise = 0, step = 0, time = 0 } = opts;
+  const { width, height, mode, positions = [], aspect, image, cover, fg, bg, contrast = 1, gain = 1, fade = false, noise = 0, step = 0, time = 0, wave = 0.07, mouse = null, transparent = false } = opts;
   if (canvas.width !== width || canvas.height !== height) {
     canvas.width = width;
     canvas.height = height;
@@ -159,6 +172,9 @@ export function renderDither(opts) {
   gl.uniform1f(U.u_noise, noise);
   gl.uniform1f(U.u_step, step);
   gl.uniform1f(U.u_time, time);
+  gl.uniform1f(U.u_wave, wave);
+  gl.uniform1f(U.u_bgAlpha, transparent ? 0 : 1);
+  gl.uniform3f(U.u_mouse, mouse ? mouse.x : 0, mouse ? mouse.y : 0, mouse ? mouse.s : 0);
   if (mode === 'image' && image) {
     gl.uniform1i(U.u_mode, 1);
     gl.activeTexture(gl.TEXTURE1);

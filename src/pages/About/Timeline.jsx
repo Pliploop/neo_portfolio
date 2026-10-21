@@ -5,6 +5,7 @@ import Expandable from '../../ui/Expandable';
 import { educationData, experienceData } from '../../data/education';
 import { ArrowUpRight } from '../../ui/icons';
 import DitherField from '../../fx/DitherField';
+import AsciiField from '../../fx/AsciiField';
 import { logoFor } from '../../data/logos';
 
 const TABS = [
@@ -12,12 +13,25 @@ const TABS = [
   { id: 'experience', label: 'Experience', items: experienceData },
 ];
 
-// Organisation mark, dithered in ink with the same slow wave as the portrait.
+// Organisation mark, dithered in ink over a faint animated ASCII halo; both part around the pointer.
+const LOGO_WAVE = 0.14;
+
+function haloSeed(key = '') {
+  return [...key].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 997, 7);
+}
+
 function OrgLogo({ logo }) {
   const src = logoFor(logo);
   return (
-    <span data-testid="org-logo" aria-hidden="true" className="block w-16 h-11 shrink-0">
-      {src ? <DitherField image={src} fg="--ink" bg="--paper" cell={1} contrast={1.6} fps={12} /> : null}
+    <span data-testid="org-logo" aria-hidden="true" className="relative block w-16 h-11 shrink-0">
+      <span className="absolute -inset-x-2 -inset-y-1.5 opacity-70">
+        <AsciiField seed={haloSeed(logo)} blobs={3} fontSize={6} color="--accent" alpha={0.7} gain={0.9} fade speed={1.4} fps={12} />
+      </span>
+      {src ? (
+        <span className="absolute inset-0">
+          <DitherField image={src} fg="--ink" bg="--paper" transparent cell={1} contrast={1.6} wave={LOGO_WAVE} fps={12} />
+        </span>
+      ) : null}
     </span>
   );
 }

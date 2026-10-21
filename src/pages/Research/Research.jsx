@@ -46,12 +46,6 @@ export default function Research() {
         </div>
       </Section>
 
-      <Section className="mt-32" title={<DropCapHeading level={2} text="Projects" caps={['zighead']} className={SECTION_HEADING} />}>
-        <div className="grid gap-y-12">
-          {projects.map((p) => <ProjectCard key={p.href} project={p} />)}
-        </div>
-      </Section>
-
       <Section className="mt-32" title={<DropCapHeading level={2} text="Publications" caps={['saint']} className={SECTION_HEADING} />}>
         <div className="mb-6">
           <PaperFilter value={filter} onChange={setFilter} />
@@ -61,6 +55,12 @@ export default function Research() {
           {list.map((p) => <PaperRow key={p.title} paper={p} />)}
         </ul>
         {list.length === 0 ? <p className="meta py-6 text-ink/70">No publications match this filter.</p> : null}
+      </Section>
+
+      <Section className="mt-32" title={<DropCapHeading level={2} text="Projects" caps={['zighead']} className={SECTION_HEADING} />}>
+        <div className="grid gap-y-12">
+          {projects.map((p) => <ProjectCard key={p.href} project={p} />)}
+        </div>
       </Section>
 
       <Section className="mt-32" title={<DropCapHeading level={2} text="Elsewhere" caps={['zighead']} className={SECTION_HEADING} />}>
