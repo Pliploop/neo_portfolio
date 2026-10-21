@@ -27,7 +27,7 @@ test('theme survives reload', async ({ page }) => {
 
 test('publication filter', async ({ page }) => {
   await page.goto('/academia');
-  await page.getByRole('button', { name: 'Journal' }).click();
+  await page.getByRole('group', { name: 'Filter publications' }).getByRole('button', { name: 'Journal', exact: true }).click();
   await expect(page.getByRole('list', { name: 'Publications' })).toContainText('TASLP');
 });
 
